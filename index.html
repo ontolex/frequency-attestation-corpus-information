@@ -143,35 +143,61 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 
 	  </section>
 	  
-	  <!-- lexicog:
-	  
-	  section> 
-	  <h3> Aim and scope </h3>
+	  <section> 
+	  <h3> Aim and Scope </h3>
 
 	  <p>
-		The main goal of this module is to complement the <em>lemon</em> core module, OntoLex, and to overcome its limitations when modelling lexicographic information as linked data in a way that is <i>agnostic to the underlying lexicographic view</i> and minimises information loss.
+		The goal of this module is to complement <em>lemon</em> core elements with a vocabulary layer to represent lexicographical and semantic information derived from or defined with reference to corpora in a way that (a) <i>generalizes</i> over use cases from digital lexicography, natural language processing, artificial intelligence, computational philology and corpus linguistics, that (b) facilitates <i>exchange, storage and re-usability</i> of such data along with lexical information, 
+		and that (c) <i>minimizes information loss</i>.
 	  </p>
 
-	<p> The scope of the model is two-fold:
+	<p> The scope of the model is three-fold:
 		<ol>
-			<li> Modelling <em>existing</em> lexicographic resources as linked data, to allow their later publication and inter-operation by following Semantic Web standards, and
-			<li> providing a conceptual / abstract model of language and linguistic objects in lexicography that will allow to build linked data-based lexicographic resources from scratch.
+			<li> extending the <em>OntoLex-lexicog</em> model with corpus information to support existing challenges in corpus-driven lexicography,</li>
+			<li> modelling <em>existing</em> lexical and distributional-semantic resources (corpus-based dictionaries, collocation dictionaries, embeddings) as linked data, to allow their conjoint publication and inter-operation by Semantic Web standards, and
+			<li> providing a conceptual / abstract model of relevant concepts in distributional semantics that facilitates building linked data-based applications that consume and combine both types of information.
 		</ol>
-
-Modelling existing dictionaries as linked data can be done by first extracting the features they have in common and modelling them in a way that is decoupled from specific linguistic views. Although the primary goal might be to model existing resources, the module should remain highly re-usable across dictionaries and useful for new linked data-based lexicographic works built from scratch (see the notion of <em>linked data-native dictionaries</em> at [<cite><a href="#bib-gracia-native">12</a></cite>]). Naturally, we assume that <em>many specific ingredients from specific dictionaries and views will still need ad-hoc constructs</em>. Still, having a small set of common entities defined in the module will help to overcome the limitations that have been detected in the experiences of instantiating <em>lemon</em> with lexicographic data, and can greatly benefit interoperability.
-
+	
 	<div class="note"><p>
-	In terms of applying the module, we propose the following best practice or "rule of thumb" when representing a dictionary as linked data:
+		<em>Corpus</em> as used throughout this document is understood in its traditional, broader sense as a structured data collection -- or material suitable for being included into such a collection. 
+		We do not intend to limit the use of the term to corpora in a linguistic or NLP sense. Language resources of any kind (web documents, dictionaries, plain text, unannotated corpora, etc.) are considered "corpus data" and a collection of such information as a "corpus" in this sense. Any information drawn from or pertaining to such information is considered "corpus-based".
+	</p>
+	</div>
+	
+	<div class="note"><p>
+		Note that we consider all <em>lemon</em> core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of 
+		ontolex:Form (for word frequency and plain word/phrase embeddings),
+		ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), 
+		ontolex:LexicalSense (for sense frequency and sense embeddings), and
+		ontolex:LexicalConcept (for concept frequency and concept embeddings).
+		This concept used to exist in <em>Monnet-lemon</em>, but has been abandoned in the 2016 edition of <em>lemon</em>.
+		If this concept is not provided by a future revision of the <em>lemon</em> core vocabulary, it will be introduced by this module.
+		Note that the introduction of ontolex:Element has no effect on <em>lemon</em> core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
+		
+	    <figure>
+        <img src="img/ontolex-element.png" 
+			 title="ontolex:Element" 
+			 alt="ontolex-element.png" width="80%"><figcaption>ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept</figcaption>
+    </figure>
+
+		
+	</p>
+	</div>
+
+	<!--
+	lexicog:
+	<div class="note"><p>
+	In terms of applying the module, we propose the following best practice or "rule of thumb" ... :
 		<ol>
 			<li> As long as the entities in OntoLex and the other  <em>lemon</em> modules, together with those of catalogues of linguistic categories (e.g. LexInfo), suffice to represent the information encoded in the lexicographic resource (e.g., lexical entry, part of speech, translation, ...), the OntoLex lexicography module should not be instantiated.
 			<li> In case that there is some lexicographic information that cannot be modelled by using either OntoLex or any of the other <em>lemon</em> modules (e.g., to denote sense ordering), then the model should be instantiated but avoiding duplicities and keeping extra information to the minimum.
 		</ol>
 	The reason behind this is that this module adds some complexity by providing additional description capabilities to the purely lexical description accounted by OntoLex. If this information is not needed for a specific conversion, i.e, if the lexicographical view is not key, reusing <em>lemon</em> would allow to keep the representation simpler but still sufficient.
 
-	</p></div>
+	</p></div-->
 
 
-	  </section-->
+	  </section>
 
 	  <section>
 	  <h3> Namespaces </h3>
