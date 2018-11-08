@@ -285,8 +285,7 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 	In order to avoid confusion with lexinfo:Frequency, this is defined with reference to a particular dataset, a corpus.
 	</p>
 	
-	<p>
-    <div class='entity'>
+	<p><div class='entity'>
        <h3>frequency (ObjectProperty)</h3>
 
            <div>
@@ -296,47 +295,76 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
     			<p>The property <strong>frequency</strong> assigns a particular ontolex:Element a frac:CorpusFrequency.</p>
     		</div>
     		<div class='description'>
-    			<p><strong>rdfs:</strong> rdf:value exactly 1 xsd:int, dct:source exactly 1</p>
+    			<p><strong>rdfs:range</strong> ontolex:Element</p>
+    			<p><strong>rdfs:domain</strong> frac:CorpusFrequency</p>
     		</div>
-    </div>
+    </div></p>
 	
-	<p>
-    <div class='entity'>
+	<p><div class='entity'>
        <h3>CorpusFrequency (Class)</h3>
 
            <div>
            <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#CorpusFrequency" class="uri">http://www.w3.org/nl/lemon/frac#CorpusFrequency</a></p>
     		</div>
     		<div class='comment'>
-    			<p><strong>Corpus frequency</strong> provides the absolute number of attestations of a particular ontolex:Element (see frac:frequency) in a particular language resource (dct:source).</p>
+    			<p><strong>Corpus frequency</strong> provides the absolute number of attestations (rdf:value) of a particular ontolex:Element (see frac:frequency) in a particular language resource (dct:source).</p>
     		</div>
     		<div class='description'>
     			<p><strong>SubClassOf:</strong> rdf:value exactly 1 xsd:int, dct:source exactly 1</p>
     		</div>
-    </div>
+    </div></p>
 
+	<p>
+	The following example illustrates word and form frequencies for the Sumerian word <i>a</i> (n.) "water" from the <a href="http://oracc.museum.upenn.edu/epsd2/sux">Electronic Penn Sumerian Dictionary</a> and the frequencies of the underlying corpus.
+	</p>
+	
 	  <div class='beispiel'>
 		<!--p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p-->
 		<div>
 		<pre><code>
-      :person_n a ontolex:LexicalEntry .
-      :animal_n a ontolex:LexicalEntry .
-      :good_adj a ontolex:LexicalEntry.
-      :good_adv a ontolex:LexicalEntry .
-      :good_n a ontolex:LexicalEntry .
-      :good_adj_n_adv a lexicog:SuperEntry.
+# word frequency, over all form variants
+epsd:a_water_n a ontolex:LexicalEntry;
+ frac:frequency [ 
+  a frac:CorpusFrequency;
+  rdf:value "4683"^^xsd:int;
+  dct:source &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] .
 
-      :myDictionary a lexicog:LexicographicResource ;
-	       dct:language &quot;en&quot; ;
-	       lexicog:entry :person_n, :animal_n ;
-               lexicog:superEntry :good_adj_n_adv .
+# form frequency for individual orthographical variants
+epsd:a_water_n ontolex:canonicalForm [
+ ontolex:writtenRep "𒀀"@sux-Xsux, "a"@sux-Latn;
+ frac:frequency [
+  a frac:CorpusFrequency;
+  rdf:value "4656"^^xsd:int;
+  dct:source &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] ] .
 
-      :myLexicon a lime:Lexicon;
-         lime:entry :person_n, :animal_n, :good_n, :good_adj, :good_adv .
+epsd:a_water_n ontolex:otherForm [
+ ontolex:writtenRep "𒀉"@sux-Xsux, "a2"@sux-Latn;
+ frac:frequency [
+  a frac:CorpusFrequency;
+  rdf:value "1"^^xsd:int;
+  dct:source &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] ] .
 
+epsd:a_water_n ontolex:otherForm [
+ ontolex:writtenRep "𒂊"@sux-Xsux, "e"@sux-Latn;
+ frac:frequency [
+  a frac:CorpusFrequency;
+  rdf:value "24"^^xsd:int;
+  dct:source &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] ].
     </code></pre>
 		</div>
 	  </div>
+	  
+	  <p>
+	  The example shows orthographic variation (in the original writing system, Sumerian Cuneiform sux-Xsux, and its Latin transcription sux-Latn). It is slightly simplified insofar as the ePSD2 provides individual counts for different periods and that only three of six orthographical variants are given. Note that these are orthographical variants, not morphological variants (which are not given in the dictionary).
+	  </p>
+	  
+	  <div class="note">
+	  <p>It is necessary to provide the link to the underlying corpus <em>for every frequency assessment</em> because the same element may receive different counts over different corpora.
+	  <br/>
+	  SUGEGSTION: We can declare this globally by means of a corpus-specific subclass of CorpusFrequency which provides a fixed value for dct:source. 
+	  </p>
+	  </div>
+	  
 	 </section>
 
 	  <!--section>
