@@ -273,31 +273,50 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 	</div>
 	</section>
 
-	  <!--section>
-	  <h3>Lexicographic Resource</h3>
-
-	  
-    There are certain situations (see [<cite><a href="#bib-bosque-module">10</a></cite>]) in which there is no one-to-one mapping between the entries in a dictionary, or lexicographical resource in general, and the lexical entries in a <i>lemon</i> lexicon (<tt>lime:Lexicon</tt>).
-
-    For instance, some dictionary entries contain information about their translations and synonyms, but it may be the case that these latter do not have their own dictionary entry in the source dictionary. Still, such translations and synonyms can be treated as "first class citizens" in the graph by representing them as <tt>ontolex:LexicalEntr[ies]</tt>. In such situations, there is a disparity between the created <i>lime</i> lexicon and the original dictionary, as the linked data representation would include entries not encoded in the original resource as dictionary entries. For this reason, this is class is intended to represent the original lexicographic resource.
-
+	<section>
+	<h2>Frequency</h2>
+	
+	<p> Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics.
+	At its core, this means that lexicographers use corpus frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). 
+	As a qualitative assessment, frequency can be expressed with <a href="http://www.lexinfo.net/ontology/2.0/lexinfo#frequency">lexinfo:frequency</a>, "[t]he relative commonness with which a term occurs". However, this is an object property with possible values lexinfo:commonlyUsed, lexinfo:infrequentlyUsed, lexinfo:rarelyUsed, while absolute counts over a particular resource (corpus) require novel vocabulary elements.
+	</p>
+	<p>
+	Absolute frequencies are used in computational lexicography (e.g., the <a href="http://oracc.museum.upenn.edu/epsd2/">Electronic Penn Sumerian Dictionary</a>), and they are an essential piece of information for NLP and corpus linguistics.
+	In order to avoid confusion with lexinfo:Frequency, this is defined with reference to a particular dataset, a corpus.
+	</p>
+	
+	<p>
     <div class='entity'>
-       <h3>Lexicographic Resource (Class)</h3>
+       <h3>frequency (ObjectProperty)</h3>
+
            <div>
-           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#LexicographicResource" class="uri">http://www.w3.org/nl/lemon/lexicog#LexicographicResource</a></p>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#frequency" class="uri">http://www.w3.org/nl/lemon/frac#frequency</a></p>
     		</div>
     		<div class='comment'>
-    			<p>A <strong>lexicographic resource</strong> represents a collection of lexicographic entries (either ontolex:LexicalEntries or lexicog:SuperEntries) according to the lexicographic criteria followed in the development of the resource. </p>
+    			<p>The property <strong>frequency</strong> assigns a particular ontolex:Element a frac:CorpusFrequency.</p>
     		</div>
     		<div class='description'>
-    			<p><strong>SubClassOf:</strong> void:Dataset, dct:language min 1 xsd:language</p>
+    			<p><strong>rdfs:</strong> rdf:value exactly 1 xsd:int, dct:source exactly 1</p>
+    		</div>
+    </div>
+	
+	<p>
+    <div class='entity'>
+       <h3>CorpusFrequency (Class)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#CorpusFrequency" class="uri">http://www.w3.org/nl/lemon/frac#CorpusFrequency</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p><strong>Corpus frequency</strong> provides the absolute number of attestations of a particular ontolex:Element (see frac:frequency) in a particular language resource (dct:source).</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>SubClassOf:</strong> rdf:value exactly 1 xsd:int, dct:source exactly 1</p>
     		</div>
     </div>
 
-	  <p>A simple example of a lexicographic resource in English that collects several lexical entries is given below. While in this example <tt>:person_n</tt> and <tt>:animal_n</tt> are lexical entries compliant to the <tt>ontolex:LexicalEntry</tt> definition, a dictionary may provide only one single dictionary entry for the word <i>good</i>, compressing its noun, adjective and (colloquial) adverb definitions under one same structure. While the generated <tt>lime:Lexicon</tt> will contain entries with one single part of speech, following the <i>lemon</i> model, the <tt>lexicog:LexicographicResource</tt> instance will gather entities <i>as they were presented in the original lexicographic resource</i> in order to keep track of the of original representation in its RDF version:</p>
-
 	  <div class='beispiel'>
-		<p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p>
+		<!--p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p-->
 		<div>
 		<pre><code>
       :person_n a ontolex:LexicalEntry .
@@ -320,7 +339,7 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 	  </div>
 	 </section>
 
-	  <section>
+	  <!--section>
 	  <h3>Super Entry</h3>
 
 
