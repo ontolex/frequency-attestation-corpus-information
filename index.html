@@ -100,7 +100,7 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
     </section>
 
     <section id='sotd'>
-      <p>This document is a working draft for a module for frequency, attestations and corpus data of the OntoLex specifications.
+      <p>This document is a working draft for a module for frequency, attestation and corpus data of the OntoLex specifications.
        It is not a W3C Standard nor is it on the W3C Standards Track.</p>
       <p>There are a number of ways that one may participate in the development of this report:</p>
       <ul>
@@ -155,7 +155,7 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 		<ol>
 			<li> extending the <em>OntoLex-lexicog</em> model with corpus information to support existing challenges in corpus-driven lexicography,</li>
 			<li> modelling <em>existing</em> lexical and distributional-semantic resources (corpus-based dictionaries, collocation dictionaries, embeddings) as linked data, to allow their conjoint publication and inter-operation by Semantic Web standards, and
-			<li> providing a conceptual / abstract model of relevant concepts in distributional semantics that facilitates building linked data-based applications that consume and combine both types of information.
+			<li> providing a conceptual / abstract model of relevant concepts in distributional semantics that facilitates building linked data-based applications that consume and combine both lexical and distributional information.
 		</ol>
 	
 	<div class="note"><p>
@@ -253,20 +253,27 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 
 
    </section>
+</section>
 
+    <section>
+      <h2>Overview</h2>
 
-    <!--section>
-      <h2>Lexicography Module (<i>lexicog</i>)</h2>
-
-	  The following diagram depicts the OntoLex Lexicography module (<i>lexicog</i>). Boxes represent classes of the model. Arrows with filled heads represent object properties. Note that the module provides elements to account for structures common in lexicographic resources (shaded in blue) as well as some to capture annotations and additional information describing lexical elements as found in dictionaries (shaded in orange).
+	  The following diagram depicts the OntoLex module for frequency, attestation and corpus information (<i>fraq</i>). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. 
+	  Vocabulary elements introduced by this module are shaded grey (classes) or set in <i>italics</i>.
 
     <figure>
-        <img src="img/ontolex-lexicography-2018-10.png" title="ontolex-lexicography-2018-10.png" alt="ontolex-lexicography-2018-10.png" ><figcaption>Lemon_Lexicography_Module.png</figcaption>
+        <img src="img/ontolex-frac-2018-11.png" title="ontolex-frac-2018-11.png" alt="ontolex-frac-2018-11.png" width="80%"><figcaption>Module for Frequency, Attestation and Corpus Information (<i>frac</i>), overview</figcaption>
     </figure>
+	
+	<div class="note"><p>TODO: add attestation component from Fahad and Katrien</p></div>
+	
+	<div class="note"><p>DISCUSSION:
+		Looks more complicated than it is. Shall we drop inferrable information ? (rdf:rest, rdf:first are available vocabulary elements because ContextualRelation is a subclass of rdf:List, subclasses of ontolex:Element should be dropped once ontolex:Element is introduced.)
+	</p>
+	</div>
+	</section>
 
-
-
-	  <section>
+	  <!--section>
 	  <h3>Lexicographic Resource</h3>
 
 	  
