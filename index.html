@@ -164,26 +164,6 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 	</p>
 	</div>
 	
-	<div class="note"><p>
-		Note that we consider all <em>lemon</em> core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of 
-		ontolex:Form (for word frequency and plain word/phrase embeddings),
-		ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), 
-		ontolex:LexicalSense (for sense frequency and sense embeddings), and
-		ontolex:LexicalConcept (for concept frequency and concept embeddings).
-		This concept used to exist in <em>Monnet-lemon</em>, but has been abandoned in the 2016 edition of <em>lemon</em>.
-		If this concept is not provided by a future revision of the <em>lemon</em> core vocabulary, it will be introduced by this module.
-		Note that the introduction of ontolex:Element has no effect on <em>lemon</em> core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
-		
-	    <figure>
-        <img src="img/ontolex-element.png" 
-			 title="ontolex:Element" 
-			 alt="ontolex-element.png" width="80%"><figcaption>ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept</figcaption>
-    </figure>
-
-		
-	</p>
-	</div>
-
 	<!--
 	lexicog:
 	<div class="note"><p>
@@ -247,6 +227,28 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 
 
 	  </section>
+	  <section> 
+	  <h3> ontolex:Element </h3>
+
+	  	<p>
+		We consider all <em>lemon</em> core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of 
+		ontolex:Form (for word frequency and plain word/phrase embeddings),
+		ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), 
+		ontolex:LexicalSense (for sense frequency and sense embeddings), and
+		ontolex:LexicalConcept (for concept frequency and concept embeddings).
+				
+	    <figure>
+        <img src="img/ontolex-element.png" 
+			 title="ontolex:Element" 
+			 alt="ontolex-element.png" width="80%"><figcaption>ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept</figcaption>
+		</figure>
+
+		<div class="note"><p>
+		Such a top-level concept used to exist in <em>Monnet-lemon</em>, but has been abandoned in the 2016 edition of <em>lemon</em>.
+		If this concept is not provided by a future revision of the <em>lemon</em> core vocabulary, it will be introduced by this module.
+		Note that the introduction of ontolex:Element has no effect on <em>lemon</em> core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.</p></div>
+		
+	</p>
 
 
 
