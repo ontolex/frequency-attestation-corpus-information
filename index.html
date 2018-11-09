@@ -58,7 +58,7 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
           specStatus: "CG-DRAFT",
           doRDFa: "1.1",
           shortName:  "ontolex-frac",
-		  publishDate:  "2018-11-08",
+		  publishDate:  "2018-11-09",
           editors: [
                 {   name:       "Christian Chiarcos",
                     url:        "http://acoli.informatik.uni-frankfurt.de/",
@@ -411,15 +411,51 @@ epsd:a_water_n frac:frequency [
 		<p>input from Katrien, Fahad, and Jesse</p></div></div>
 	 </section>
 	 
+	 <section>
+	 <h3>Embeddings</h3>
 	 
+	 <p>In distributional semantics, the contexts in which a word is attested are taken to define its meaning. Contextual similarity is thus a correlate of semantic similarity. Different representations of context are possible, the most prominent model to date is the form of a vector.
+	 A word vector can be created, for example, by means of a reference list of vocabulary items, where every reference word is associated with a fixed position, e.g., <i>ship</i> with position 1, <i>ocean</i> with 2, <i>sky</i> with 3, etc. 
+	 Given a corpus (and a selection criterion for collocates, e.g., within the same sentence), every word in the corpus can be described by the frequency that a reference word occurred as a collocate in the corpus.
+	 Assume we want to define the meaning of <i>frak</i>, with (exactly) the following attestations in our sample corpus (random samples from <a href="https://en.wikiquote.org/wiki/Battlestar_Galactica_(2003)">wikiquote</a>):
+	 
+	 <ul>
+	 <li><i>It's in the frakking ship!</i></li>
+	 <li><i>Have you lost your frakkin' mind?</i></li>
+	 <li><i>Oh, for frak's sake, let me see if I can make heads or tails of it.</i></li>
+	 <li><i>It's a frakking Cylon.</i></li>
+	 <li><i>Our job isn't to be careful, it's to shoot Cylons out of the frakking sky!</i></li>
+	 </ul>
+	 
+	 With the following list of reference words: <tt>(ship, ocean, lose, find, brain, mind, head, sky, Cylon, ...)</tt>, we obtain the vector <tt>(1,0,1,0,0,1,1,1,2,...)</tt> for the lemma (lexical entry) <i>frak</i>. For practical applications, these vectors are projected into lower-dimensional spaces, e.g., by means of statistical (Schütze 1993) or neural methods (Socher et al. 2011). 
+	 <!-- Socher, R., Huang, E. H., Pennin, J., Manning, C. D., & Ng, A. Y. (2011). Dynamic pooling and unfolding recursive autoencoders for paraphrase detection. In Advances in neural information processing systems (pp. 801-809). --> 
+	 The process of mapping a word to a numerical vector and its result are referred to as "word embedding". Aside from collocation counts, other methods for creating word embeddings do exist, but they are defined relative to a corpus.
+	 </p>
+	 
+	 <p>Embeddings have become a dominating paradigm in natural language processing and machine learning, but, if compiled from large corpora, they require long training periods and thus tend to be re-used. 
+	 However, embedding distributions often use tool-specific binary formats (cf. <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> [TOCHECK!]), and thus a portability problem arises. 
+	 CSV and related formats (cf. <a href="https://github.com/baojie/senna/tree/master/embeddings">SENNA embeddings</a>) are a better alternative, but their application to sense and concept embeddings (as provided, for example, by Rothe and Schütze 2017) 
+	 <!-- Rothe, S., & Schütze, H. (2017). Autoextend: Combining word embeddings with semantic resources. Computational Linguistics, 43(3), 593-617. -->
+	 is problematic if their distribution is detached from the definition of the underlying sense and concept definitions.
+	 With frac, Ontolex-lemon provides a vocabulary for the conjoint publication and sharing of embeddings and lexical information at all levels: non-lemmatized words (ontolex:Form), lemmatized words (ontolex:LexicalEntry), phrases (ontolex:MultiWordExpression), lexical senses (ontolex:LexicalSense) and lexical concepts (ontolex:LexicalConcept).</p>
 
+	 <div class="note">
+	 <p>We focus on <em>publishing and sharing</em> embeddings, not on their processing by means of Semantic Web formalisms, and thus, embeddings are represented as untyped or string literals with whitespace-separated numbers. If necessary, more elaborate representations, e.g., using rdf:List, may subsequently be generated from these literals.</p>
+	 </div>
 
-	<section>
+	 
+	 
+	 
+	</section>
+	 
+	</section>
+
+	<!--section>
 	  <h2>Usage guidelines</h2>
 
 	  TBC
 
-	</section>
+	</section-->
 
 	<h2>Acknowledgements</h2>
 
