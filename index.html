@@ -313,10 +313,19 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
     			<p><strong>Corpus frequency</strong> provides the absolute number of attestations (rdf:value) of a particular ontolex:Element (see frac:frequency) in a particular language resource (dct:source).</p>
     		</div>
     		<div class='description'>
-    			<p><strong>SubClassOf:</strong> rdf:value exactly 1 xsd:int, dct:source exactly 1</p>
+    			<p><strong>SubClassOf:</strong> rdf:value exactly 1 xsd:int, dct:source min 1</p>
     		</div>
     </div></p>
 
+	<div class="note">
+	<p>If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple <tt>dct:source</tt> statements should be provided, to each resource individually. The cardinality of <tt>dct:source</tt> is thus 1 or higher.
+	</p>
+	</div>
+	
+	<div class="Note">
+	<p>QUESTION: better alternative to dct:source?</p>
+	</div>
+	
 	<p>
 	The following example illustrates word and form frequencies for the Sumerian word <i>a</i> (n.) "water" from the <a href="http://oracc.museum.upenn.edu/epsd2/sux">Electronic Penn Sumerian Dictionary</a> and the frequencies of the underlying corpus.
 	</p>
@@ -429,11 +438,11 @@ epsd:a_water_n frac:frequency [
 	 
 	 With the following list of reference words: <tt>(ship, ocean, lose, find, brain, mind, head, sky, Cylon, ...)</tt>, we obtain the vector <tt>(1,0,1,0,0,1,1,1,2,...)</tt> for the lemma (lexical entry) <i>frak</i>. For practical applications, these vectors are projected into lower-dimensional spaces, e.g., by means of statistical (Schütze 1993) or neural methods (Socher et al. 2011). 
 	 <!-- Socher, R., Huang, E. H., Pennin, J., Manning, C. D., & Ng, A. Y. (2011). Dynamic pooling and unfolding recursive autoencoders for paraphrase detection. In Advances in neural information processing systems (pp. 801-809). --> 
-	 The process of mapping a word to a numerical vector and its result are referred to as "word embedding". Aside from collocation counts, other methods for creating word embeddings do exist, but they are defined relative to a corpus.
+	 The process of mapping a word to a numerical vector and its result are referred to as "word embedding". Aside from collocation counts, other methods for creating word embeddings do exist, but they are always defined relative to a corpus.
 	 </p>
 	 
 	 <p>Embeddings have become a dominating paradigm in natural language processing and machine learning, but, if compiled from large corpora, they require long training periods and thus tend to be re-used. 
-	 However, embedding distributions often use tool-specific binary formats (cf. <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> [TOCHECK!]), and thus a portability problem arises. 
+	 However, embedding distributions often use tool-specific binary formats (cf. <a href="https://radimrehurek.com/gensim/models/word2vec.html">Gensim</a>), and thus a portability problem arises. 
 	 CSV and related formats (cf. <a href="https://github.com/baojie/senna/tree/master/embeddings">SENNA embeddings</a>) are a better alternative, but their application to sense and concept embeddings (as provided, for example, by Rothe and Schütze 2017) 
 	 <!-- Rothe, S., & Schütze, H. (2017). Autoextend: Combining word embeddings with semantic resources. Computational Linguistics, 43(3), 593-617. -->
 	 is problematic if their distribution is detached from the definition of the underlying sense and concept definitions.
@@ -442,8 +451,83 @@ epsd:a_water_n frac:frequency [
 	 <div class="note">
 	 <p>We focus on <em>publishing and sharing</em> embeddings, not on their processing by means of Semantic Web formalisms, and thus, embeddings are represented as untyped or string literals with whitespace-separated numbers. If necessary, more elaborate representations, e.g., using rdf:List, may subsequently be generated from these literals.</p>
 	 </div>
-
 	 
+	 <p>Lexicalized embeddings provide their data via <tt>rdf:value</tt>, and should be published together with their metadata, most importantly
+		<ul>
+		<li>procedure/method (<tt>dct:description</tt> with free text, e.g., "CBOW", "SKIP-GRAM", "collocation counts")</li>
+		<li>corpus (<tt>dct:source</tt>)</li>
+		<li>dimensionality (<tt>dct:extent</tt>)</li>
+		</ul>
+	 </p>
+
+	<p><div class='entity'>
+       <h3>embedding (ObjectProperty)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#embedding" class="uri">http://www.w3.org/nl/lemon/frac#embedding</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>The property <strong>embedding</strong> assigns a particular ontolex:Element a frac:Embedding.</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>rdfs:range</strong> ontolex:Element</p>
+    			<p><strong>rdfs:domain</strong> frac:CorpusFrequency</p>
+    		</div>
+    </div></p>
+	
+	<p><div class='entity'>
+       <h3>Embedding (Class)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#Embedding" class="uri">http://www.w3.org/nl/lemon/frac#Embedding</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>An <strong>Embedding</strong> provides a numerical vector (the string of <tt>rdf:value</tt>) for a given ontolex:Element (see <tt>frac:embedding</tt>). It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>dct:source</tt>), and its dimensionality (length of the vector, <tt>dct:extent</tt>).</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>SubClassOf:</strong> rdf:value exactly 1 xsd:string, dct:source min 1, dct:description min 1</p>
+    		</div>
+    </div></p>
+
+	<div class="note">
+	 <p>Question: Rename "Embedding" (the concept, not the property) to "Vector" ?</p>
+	 </div>
+	 
+	 <div note="note">
+	 <p>For embeddings, we recommend using whitespace-separated numbers as their <tt>rdf:value</tt>. In particular, commas as separators are discouraged because they might be confused with the decimal point, depending on the locale of the user. We recommend the following regular expression for parsing embedding values (example in Perl):</p>
+	 <p>
+	 <code>split(/[^0-9\.,\-]+/, $value)</code></p>
+	 <p>This means that doubles should be provided in the conventional format, not using the exponent notation.
+	 </p>
+	 </div>
+
+	 <p>
+	 The
+	 <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> 6B (Wikipedia 2014+Gigaword 5) embedding for <i>frak</i> is given below:
+	 </p>
+	 <p><tt>frak 0.015246 -0.30472 0.68107 -0.59727 -0.95368 -1.0931 0.58783 -0.19128 0.49108 0.61215 -0.14967 0.68197 0.22723 0.38514 -0.54721 -0.71187 0.21832 0.59857 0.1076 -0.23619 -0.86604 -0.91168 0.26087 -0.42067 0.60649 0.80644 -1.0477 0.67461 0.34154 -0.072511 -1.01 0.35331 -0.35636 0.9764 -0.62665 -0.29075 0.50797 -1.3538 0.18744 0.27852 -0.22557 -1.187 -0.11523 -0.078265 0.29849 0.22993 -0.12354 0.2829 1.0697 0.015366</tt></p>
+	 
+	 <p>
+	 As a lemma (LexicalEntry) embedding, this can be represented as follows:
+	 </p>
+	 
+	  <div class='beispiel'>
+		<div>
+			<pre>
+				<code>
+:frak a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
+  frac:embedding [ 
+    a frac:Embedding;
+	rdf:value "0.015246 -0.30472 0.68107 ...";
+	dct:source 
+	  &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
+	  &lt;https://catalog.ldc.upenn.edu/LDC2011T07>;
+	dct:extent 50^^^xsd:int;
+	dct:description "Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/"@en. ].</code>
+	</pre>
+	</div>
+	</div>
 	 
 	 
 	</section>
