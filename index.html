@@ -221,7 +221,7 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 		@prefix provo: &lt;http://www.w3.org/ns/prov#&gt;.
 		@prefix rdfs: &lt;http://www.w3.org/2000/01/rdf-schema#&gt;.
 		@prefix oa: &lt;http://www.w3.org/ns/oa#&gt;.
-		</code>
+		@prefix aat: &lt;http://vocab.getty.edu/aat/>.</code>
   	   </pre>
 	  </p>
 
@@ -274,7 +274,10 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 	</section>
 
 	<section>
-	<h2>Frequency</h2>
+	<h2>Definitions</h2>
+
+	<section>
+	<h3>Frequency</h3>
 	
 	<p> Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics.
 	At its core, this means that lexicographers use corpus frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). 
@@ -349,8 +352,7 @@ epsd:a_water_n ontolex:otherForm [
  frac:frequency [
   a frac:CorpusFrequency;
   rdf:value "24"^^xsd:int;
-  dct:source &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] ].
-    </code></pre>
+  dct:source &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] ].</code></pre>
 		</div>
 	  </div>
 	  
@@ -359,483 +361,57 @@ epsd:a_water_n ontolex:otherForm [
 	  </p>
 	  
 	  <div class="note">
-	  <p>It is necessary to provide the link to the underlying corpus <em>for every frequency assessment</em> because the same element may receive different counts over different corpora.
-	  <br/>
-	  SUGEGSTION: We can declare this globally by means of a corpus-specific subclass of CorpusFrequency which provides a fixed value for dct:source. 
-	  </p>
-	  </div>
-	  
+	  <p>It is necessary to provide the link to the underlying corpus <em>for every frequency assessment</em> because the same element may receive different counts over different corpora. For data modelling, it is recommended to define a corpus- or collection-specific subclass of frac:CorpusFrequency with a fixed dct:source value. This leads to more compact data and avoids potential difficulties with the Open World Assumption (interpretability of incomplete data).
+
+	  <div class='beispiel'>
+		<div>
+			<pre>
+				<code>
+# Corpus Frequency in the EPSD corpus
+:EPSDFrequency rdfs:subClassOf frac:CorpusFrequency.
+:EPSDFrequency rdfs:subClassOf
+ [ a owl:Restriction ;
+   owl:onProperty dct:source ;
+   owl:hasValue &lt;http://oracc.museum.upenn.edu/epsd2/pager> ] .
+
+# frequency assessment
+epsd:a_water_n frac:frequency [ 
+  a :EPSDFrequency;
+  rdf:value "4683"^^xsd:int ].</code>
+	</pre>
+	</div>
+	</div>
+	</div>
+	
+    <div class="note">
+	<p>frac:CorpusFrequency can be extended with additional filter conditions to define sub-corpora. For example, we can restrict the subcorpus to a particular time period, e.g., the Neo-Sumerian Ur III period:
+	
+	<div class="beispiel">
+		<div>
+			<pre>
+				<code>
+# EPSD frequency for the Ur-III period (aat:300019910)
+:EPSDFrequency_UrIII rdfs:subClassOf :EPSDFrequency;
+:EPSDFrequency rdfs:subClassOf
+ [ a owl:Restriction ;
+   owl:onProperty dct:temporal ;
+   owl:hasValue aat:300019910 ] .
+
+# frequency assessment for sub-corpus
+epsd:a_water_n frac:frequency [ 
+  a :EPSDFrequency_UrIII;
+  rdf:value "2299"^^xsd:int ].
+  </code></pre></div></div>
 	 </section>
-
-	  <!--section>
-	  <h3>Super Entry</h3>
-
-
-    <p>The lack of a one-to-one mapping from a dictionary entry to a <tt>ontolex:LexicalEntry</tt> referred above often translates into a situation in which a structure in the original resource needs to be split into several <tt>ontolex:LexicalEntr[ies]</tt> for the resulting resource to be OntoLex-compliant. For example, we find this scenario in dictionaries that do not make a dictionary entry split in terms of the part-of-speech of a word. In these resources, the senses of a (polysemous) word are bundled together under the same dictionary entry even though they depend on different parts-of-speech. In these cases, these may be given as annotations just before the sense, e.g. <i>(n.)</i>, especially in non-digitally born resources. We can find this configuration also in dictionary entries that take different parts of speech depending on its syntactic behavior (e.g. adjective and adverb) without meaning change. </p>
-
-    <p>In addition to bundling together lexical entries with different parts of speech, an entry in a lexicographic resource can also be composed of other (sub-)structures arranged in a particular order or hierarchy, such as senses, nested entries, etc. </p>
-
-    <p><tt>lexicog:SuperEntry</tt> is introduced to represent the entry as it is encoded in a lexicographic resource, e.g. a dictionary entry, thereby reflecting the arrangement decided upon by lexicographers (supported by the occurrences of the word in the corpus used for dictionary compilation). This class is thus intended to be the counterpart of a dictionary entry in the linked data representation of a dictionary.</p>
-
-
-    <div class='entity'>
-    <h3>Super Entry (Class)</h3>
-    <div>
-      <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#SuperEntry" class="uri">http://www.w3.org/nl/lemon/lexicog#SuperEntry</a></p>
-    </div>
-    <div class='comment'>
-      <p>A <strong>super entry</strong> is a structural element that represents a lexicographic article or record as it is arranged in a source lexicographic resource (not converted to RDF). As such, it supports the description of lexical entries according to the lexicographic micro-structure, decided upon during a lexicographic resource compilation process. It is a collection of lexicog:SuperEntryComponents, arranged or not in a specific order. </p>
-    </div>
-    <div class='description'>
-      <p><strong>SubClassOf:</strong> rdfs:Container</p>
-    </div>
-    </div>
-	  </section>
-
-    <section>
-    <h3>supEntry [to-discuss@Leiden]</h2>
-     <div class='entity'>
-      <h3>supEntry (Object Property)</h3>
-      <div>
-        <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#supEntry" class="uri">http://www.w3.org/nl/lemon/lexicog#supEntry</a></p>
-      </div>
-      <div class='comment'>
-        <p>The property <strong>supEntry</strong> TO CONTINUE</p>
-      </div>
-      <div class='description'>
-        <p><strong>SubClassOf:</strong> TO CONTINUE</p>
-      </div>
-      </div>
-
-    </section>
-
-    <section>
-    <h3>entry [to-discuss@Leiden]</h3>
-     <div class='entity'>
-      <h3>describes (Object Property)</h3>
-      <div>
-        <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#subComponent" class="uri">http://www.w3.org/nl/lemon/lexicog#subComponent</a></p>
-      </div>
-      <div class='comment'>
-        <p>The property <strong>describes</strong> TO CONTINUE</p>
-      </div>
-      <div class='description'>
-        <p><strong>SubClassOf:</strong> TO CONTINUE</p>
-      </div>
-      </div>
-      </section>
-
-    <section>
-      <h3>SuperEntryComponent</h3>
-
-      <p>SuperEntry is intended to fulfill a structural function so as to serve as counterpart of a lexicographic record in a resource, which may or may not be straightly mapped into <tt>ontolex:LexicalEntries</tt>. However, these lexicographic records often contain sub-structures to refer to senses, sense groups, or nested entries. In an analogy to <a href="https://www.w3.org/ns/csvw"> W3C's CSVW vocabulary </a>, where a <tt>csvw:Table</tt> consists of <tt>csvw:Row(s)</tt> and <tt>csvw:Column(s)</tt>, we can state that <tt>lexicog:SuperEntry</tt> also contains structural components, namely, <tt>lexicog:SuperEntryComponents</tt>. These components can refer to <tt>ontolex:LexicalSenses</tt> or <tt>ontolex:LexicalEntries</tt>, depending on the arrangement in the lexicographic resource. Components can in turn be arranged in a specific order and/or hierarchy, if desired, or just declared to be part of a <tt>lexicog:SuperEntry</tt>. <p>
-
-        <div class='entity'>
-      <h3>Super Entry Component (Class)</h3>
-      <div>
-        <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#SuperEntryComponent" class="uri">http://www.w3.org/nl/lemon/lexicog#SuperEntryComponent</a></p>
-      </div>
-      <div class='comment'>
-        <p>A <strong>super entry component</strong> is a structural element that represents the (sub-)structures of lexicographic articles providing information about senses or sub-entries. If desired, SuperEntryComponents can be arranged in a specific ordered and/or a hierarchy. </p>
-      </div>
-      <div class='description'>
-        <p><strong>SubClassOf:</strong> rdfs:Container</p>
-      </div>
-      </div>
-
-      <p>Coming back to the previous example, a lexicographic record for the word <i>animal</i> can group (under the same dictionary entry) descriptions for the lexical entries <i>animal</i> (n.), and <i>animal</i> (adj.), which both share phonetic representation and etymology. The following example is extracted from the American Heritage Dictionary [<cite><a href="#american-heritage-dictionary">16</a></cite>]:<p>
-
-
-<blockquote cite="https://www.ahdictionary.com/word/search.html?q=animal">
-<strong>an·i·mal</strong>
- <p>n.
- <p>
-1. Any of numerous multicellular eukaryotic organisms of the kingdom Metazoa (or Animalia) [...]  </p>
-<p>
-2. An animal organism other than a human, especially a mammal.
-</p>
-[...]
-<p>
-<p>
-adj.
-<p>
-1. Relating to, characteristic of, or derived from an animal or animals, especially when not human: animal cells; animal welfare.</p>
-<p>
-2. Relating to the physical as distinct from the rational or spiritual nature of people: animal instincts and desires.</p>
-<p>
-</blockquote>
-
-Here we can detect two different <tt>ontolex:LexicalEntries</tt> grouped together in the same lexicographic record, each with a sense ordering.  If this exact lexicographic record were to be recreated with the <i>lexicog</i> vocabulary, we would have the following RDF triples:
-
- <div class='beispiel'>
-		<p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p>
-		<div>
-		<pre><code>
-      :animal_n a ontolex:LexicalEntry .
-      :animal_adj ontolex:LexicalEntry.
-      :animal_n_adj a lexicog:SuperEntry.
-
-      :myDictionary a lexicog:LexicographicResource ;
-	 dct:language &quot;en&quot; ;
-         lexicog:superEntry :animal_n_adj.
-      :myLexicon a lime:Lexicon;
-         lime:entry :animal_n, :animal_adj.
-
-      :animal_n_adj a lexicog:SuperEntry ;
-         rdfs:member :animal_n_comp; :animal_adj_comp.
-
-      :animal_n_comp a lexicog:SuperEntryComponent;
-         lexicog:describes :animal_n .
-      :animal_adj_comp a lexicog:SuperEntryComponent;
-         lexicog:describes :animal_adj.
-
-    </code></pre>
-		</div>
-	  </div>
-
-<div class="note"><p>
-	Note that this only states that there is a structure (SuperEntry) which contains sub-structures (components) which describe lexical elements, in this case, lexical entries.  If a dictionary describes <i>animal </i>(adj.) and <i>animal</i> (n.) in different records or if this exact arrangement is not to be transfered to the RDF representation, this approach would not be necessary.
-</p></div>
-
-This same approach can be applied to capture the sense order in the previous example:
-
-<div class='beispiel'>
-		<p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p>
-		<div>
-		<pre><code>
-
-      :myDictionary a lexicog:LexicographicResource ;
-	 dct:language "en";
-         lexicog:superEntry :animal_n_adj.
-      :myLexicon a lime:Lexicon;
-         lime:entry :animal_n, :animal_adj.
-
-      :animal_n a ontolex:LexicalEntry ;
-         ontolex:sense :animal_n_sense_1, :animal_n_sense_2 .
-
-      :animal_n_sense_1 a ontolex:LexicalSense ;
-         ontolex:isLexicalizedSenseOf :animal_n_1_lc .
-      :animal_n_sense_2 a ontolex:LexicalSense;
-         ontolex:isLexicalizedSenseOf :animal_n_2_lc .
-
-      :animal_n_1_lc  a ontolex:LexicalConcept:
-	skos:definition "Any of numerous multicellular eukaryotic organisms of the kingdom Metazoa (or Animalia)"@en.
-      :animal_n_2_lc  a ontolex:LexicalConcept:
-	skos:definition "An animal organism other than a human, especially a mammal."@en.
-
-      :animal_n_adj a lexicog:SuperEntry;
-         rdfs:member :animal_n_comp; :animal_adj_comp.
-
-      :animal_n_comp a lexicog:SuperEntryComponent;
-	 lexicog:describes :animal_n ;
-         rdf:_1: :animal_n_sense_1_comp;
-	 rdf:_2  :animal_n_sense_2_comp.
-
-      :animal_n_sense_1_comp a lexicog:SuperEntryComponent ;
-	 lexicog:describes :animal_n_sense_1.
-      :animal_n_sense_2_comp a lexicog:SuperEntryComponent ;
-	 lexicog:describes :animal_n_sense_2.
-
-    </code></pre>
-		</div>
-	  </div>
-
-In the dictionary entry, other dictionaries provide an ordered list of senses without any explicit sub-entry division per part-of-speech beyond an annotation at the sense level. E.g. the Spanish dictionary <i>Diccionario de la Lengua Epañola</i> lists all the senses of the word <i>blanco</i>, 'white' (adj.), 'gap, target, (mus.) half note'(n.). under the same dictionary entry, in an ordered list. In these cases, <tt>lexicog:SuperEntryComponents</tt> can be used to describe <tt>ontolex:LexicalSenses</tt>, and then in turn be arranged in the order given in the lexicographical article:
-
-<div class='beispiel'>
-		<p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p>
-		<div>
-		<pre><code>
-
-      :blanco_n a ontolex:LexicalEntry .
-      :blanco_adj ontolex:LexicalEntry.
-      :blanco_n_adj a lexicog:SuperEntry.
-
-      :blanco_n_adj a lexicog:SuperEntry ;
-          rdfs:_1 :blanco_adj_1_comp;
-          rdfs:_2 :blanco_adj_2_comp;
-          [...]
-          rdfs:_10 :blanco_n_10_comp .
-
-      :blanco_adj_1_comp a lexicog:SuperEntryComponent;
-         lexicog:describes :blanco_adj_sense_1.
-      :blanco_n_10_comp a lexicog:SuperEntryComponent;
-         lexicog:describes :blanco_n_sense_10.
-
-      :blanco_adj ontolex:sense  :blanco_adj_sense_1 .
-      :blanco_n ontolex:sense :blanco_n_sense_10.
-
-    </code></pre>
-		</div>
-	  </div>
-    </section>
-
-    <section>
-    	  <h3>subcomponent [to-discuss@Leiden]</h3>
-    	   <div class='entity'>
-          <h3>subcomponent (Object Property)</h3>
-          <div>
-            <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#subComponent" class="uri">http://www.w3.org/nl/lemon/lexicog#subComponent</a></p>
-          </div>
-          <div class='comment'>
-            <p>The property <strong>subComponent</strong> TO CONTINUE</p>
-          </div>
-          <div class='description'>
-            <p><strong>SubClassOf:</strong> TO CONTINUE</p>
-          </div>
-          </div>
-
-    	</section>
-
-
-    <section>
-    <h3>describes</h3>
-
-    Since <tt>lexicog:SuperEntryComponents</tt> fulfill a structural function to reflect the arrangment of the descriptions provided in a lexicographic resource (order, hierarchy, grouping, etc.), they do not encode lexical content themselves. This is accounted for by OntoLex elements, which are <i>decribed</i> by the components. This is grounded on the idea that a lexicographic resource describes the lexicon of a language (set of languages, dialect, field of study, etc.) following different criteria, e.g. the intended use of the resource, lexicographic tradition, etc. which can affect the description of the lexical content, leading to, for instance, two different resources describing the same lexicon differently.
-
-    The property <tt>lexicog:describes</tt> allows to link components to the Ontolex core elements that encode lexical data:
-
-<div id="describes" class="entity">
-<h3 id="subterm-object-property">Describes (Object Property)<a class="self-link" aria-label="§" href="#describes-object-property"></a></h3>
-<div>
-<p><strong>URI:</strong> <a href="http://www.w3.org/ns/lemon/lexicog#describes" class="uri">http://www.w3.org/ns/lemon/lexicog#describes</a></p>
-</div>
-<div class="comment">
-<p>The property <strong>describes</strong> relates a BLA BLA </p>
-</div>
-<div class="description">
-<p><strong>Domain</strong>: SuperEntryComponent</p>
-<p><strong>Range</strong>: LexicalEntry and LexicalSense</p>
-</div>
-</div>
-
-</section>
-
-<section>
-    <h3>FormRestriction</h3>
-
-    There are numerous cases in which a lexicographic record specifies the grammatical features the lemma shows when used in some of its senses. For example, in English, the lemmas <i>good</i>, <i>manner</i>,  <i>air</i> or <i>wood</i> have senses which are usually (or only) attested when the word is used in plural, often indicated with the lemma in plural form, or with an usage note in the dictionary entry. [<cite><a href="#OED-dict-air">17</a></cite>]
-
-
-<blockquote cite="https://en.oxforddictionaries.com/definition/air">
-<strong>air</strong>
- <p>n. [...]
- <p>
-2. An impression of a quality or manner given by someone or something. [...]
-</p>
-<p style="margin-left: 40px">
-   2.1 <strong>(airs)</strong> An annoyingly affected and condescending manner.
-</p>
-[...]
-
-</blockquote>
-
-
-<p>
-    While there are plural nouns which only occur in plural form (e.g. <i>ammends</i>, <i>scissors</i>), the so-called <i>pluralia tantum</i>, and they are usually defined in their own dictionary entry, there is also some variance across lexicographic resources in cases in which the noun also occurs in singular form. For instance, see <i>glassses</i> in the Oxford Dictionaries, in an entry separate from <i>glass</i>, as opposed to its treatment as a sub-sense of a sense of the lemma <i>glass</i> in the Merriam Webster Dictionary, with the annotation  "<i><strong>glasses</strong> plural</i>"). [TO-DO: INSERT LINKS]
-
-</p>
-
-<p>
-There are dictionaries which provide grammatical annotations indicating varying gender in the senses of the same dictionary entry. For example, in Spanish, the lemma <i>policía</i> can be used in feminine or masculine if denoting a police officer, but only in feminine when denoting the police force or administration. Depending on the criteria followed for headword selection during the compilation of the resource, e.g. etymology, in these cases we may find two independent entries or one single entry with senses with different gender restrictions.
-
-</p>
-
-The <tt>lexicog:FormRestriction</tt> class is intended to provide a way to specify, from an external catalogue of linguitic data categories, the required (set of) grammatical features of a lemma when used in a specific <tt>ontolex:LexicalSense</tt>.
-
-
-     <div class='entity'>
-      <h3>FormRestriction (class)</h3>
-      <div>
-        <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#FormRestriction" class="uri">http://www.w3.org/nl/lemon/lexicog#FormRestriction</a></p>
-      </div>
-      <div class='comment'>
-        <p>The class <strong>FormRestriction</strong> represents (a set of) grammatical features of a lemma when used in a specific <tt>ontolex:LexicalSense</tt></p>.
-      </div>
-      <div class='description'>
-        <p><strong>SubClassOf:</strong> TO CONTINUE</p>
-      </div>
-      </div>
-
-
-The following example is the RDF representation of the above mentioned sense of "air". For the sake of simplicity, we do not account for sense hierarchy in this example (see section [POINTER TO SUBCOMPONENT PROPERTY SECTION FOR SENSE HIERARCHY INFO], and hence we do not instantiate lexicog:SuperEntry or lexicog:SuperEntryComponents here.
-
-<div class='beispiel'>
-		<p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p>
-		<div>
-		<pre><code>
-
-:air_n a ontolex:LexicalEntry;
-   ontolex:sense :air_n_sense_2, :air_n_sense_2-1;
-   ontolex:canonicalForm :air_n_form .
-
-:air_n_form a ontolex:Form;
-   ontolex:writtenRep "air"@en;
-   lexinfo:number lexinfo:singular.
-
-
-:air_n_sense_2 a ontolex:LexicalSense;
-   ontolex:isLexicalizedSenseOf :air_n_sense_2_lc .
-:air_n_sense_2-1 a ontolex:LexicalSense;
-   ontolex:isLexicalizedSenseOf :air_n_sense_2-1_lc ;
-   lexicog:restrictedTo :air_n_formRes.
-
-:air_n_formRes a lexicog:FormRestriction ;
-   lexinfo:number lexinfo:plural .
-
-:air_n_sense_2_lc a ontolex:LexicalConcept;
-   skos:definition "An impression of a quality or manner given by someone or something"@en.
-
-:air_n_sense_2-1_lc a ontolex:LexicalConcept;
-   skos:definition "An annoyingly affected and condescending manner"@en.
-
-
-    </code></pre>
-		</div>
-	  </div>
-  </section>
-
-  <section>
-  <h3>restrictedTo</h3>
-
-The <tt>lexicog:restrictedTo</tt> allows to relate an <tt>ontolex:LexicalSense</tt> to its <tt>lexicog:FormRestriction</tt>, if any:
-
-<div id="restrictedTo" class="entity">
-<h3 id="restrictedTo-object-property">RestrictedTo (Object Property)<a class="self-link" aria-label="§" href="#restrictedTo-object-property"></a></h3>
-<div>
-<p><strong>URI:</strong> <a href="http://www.w3.org/ns/lemon/lexicog#restrictedTo" class="uri">http://www.w3.org/ns/lemon/lexicog#restrictedTo</a></p>
-</div>
-<div class="comment">
-<p>The property <strong>restrictedTo</strong> relates a LexicalSense with a FormRestriction when a lexicographic resource provides information about the specific morphological features of the lemma in that sense.</p>
-</div>
-<div class="description">
-<p><strong>Domain</strong>: LexicalSense</p>
-<p><strong>Range</strong>: FormRestriction</p>
-</div>
-</div>
-
-</section>
-
-
-  <section>
-  <h3>UsageExample</h3>
-
-There are occasions in lexicographic recodrs also include example of use of an entry in each of its senses. While these examples can be captured as <tt>skos:examples</tt> of <tt>ontolex:LexicalConcept(s)</tt>, sometimes there is more information about the example beyond the text itself. For instance, a bilingual dictionary such as Word Reference can include, for a sense, a usage example and a translation of the usage example in the target language:
-
-
-<blockquote cite="https://www.wordreference.com/es/translation.asp?tranword=monastery">
- <p> <strong>monastery</strong> n (monk's residence) [English]  monasterio nm [Spanish]
- <p style="margin-left: 40px">
-<i>We visited a Buddhist monastery deep in a jungle.</i>
-</p>
-<p style="margin-left: 40px">
-<i>Visitamos un monasterio budista en medio de la selva.</i>
-</p>
-<p> <strong>monastery</strong> n (community of monks) [English]	congregación nf [Spanish]
-<p style="margin-left: 40px">
-<i>Most English monasteries were dissolved by King Henry VIII.</i>
-</p>
-<p style="margin-left: 40px">
-<i>La mayoría de los monasterios ingleses fueron disueltos por el rey Henry VIII.</i>
-</p>
-
-</blockquote>
-
-The class <tt>lexicog:example</tt> is intentended to represent a single example as a resouce in order to be able to link it to any other information related to it provided in the lexicographic resource, from translations to usage notes:
-
-<div class='beispiel'>
-		<p><a href='Examples/example1.png' class='tn'/><img src='Examples/example1.png'/></a></p>
-		<div>
-		<pre><code>
-
-##Entries
-:monastery_n a ontolex:LexicalEntry;
-   ontolex:sense :monastery_sense_1, :monastery_sense 2.
-:monasterio_n a ontolex:LexicalEntry;
-      ontolex:sense :monasterio_monastery-sense.
-:congregación_n a ontolex:LexicalEntry;
-      ontolex:sense :congregación_monastery-sense.
-
-##Senses
-:monastery_n_sense_1 a ontolex:LexicalSense;
-   ontolex:isLexicalizedSenseOf :monastery_n_sense_1_lc ;
-   lexicog:example :monastery_n_sense_1_ex.
-:monastery_n_sense_2 a ontolex:LexicalSense;
-   ontolex:isLexicalizedSenseOf :monastery_n_sense_2_lc ;
-   lexicog:example :monastery_n_sense_2_ex.
-
-:monasterio_monastery-sense a ontolex:LexicalSense;
-   ontolex:isLexicalizedSenseOf :monastery_n_sense_1_lc .
-:congregación_monastery-sense a ontolex:LexicalSense;
-  ontolex:isLexicalizedSenseOf :monastery_n_sense_2_lc .
-
-## Concepts
-:monastery_n_sense_1_lc a ontolex:LexicalConcept;
-  skos:definition "monk's residence"@en.
-:monastery_n_sense_2_lc a ontolex:LexicalConcept;
-     skos:definition "community of monks"@en.
-
-## Translations
-:monastery_n_sense_1-monasterio_monastery-sense-tr a vartrans:Translation;
-   vartrans:source :monastery_n_sense_1;
-   vartrans:target :monasterio_monastery-sense.
-:monastery_n_sense_2-congregación_monastery-sense-tr a vartrans:Translation;
-  vartrans:source :monastery_n_sense_2;
-  vartrans:target :congregación_monastery-sense.
-
-## Examples
-:monastery_n_sense_1_ex a lexicog:UsageExample;
-   rdf:value "We visited a Buddhist monastery deep in a jungle."@en;
-   rdf:value "Visitamos un monasterio budista en medio de la selva."@es.
-:monastery_n_sense_2_ex a lexicog:UsageExample;
-  rdf:value "Most English monasteries were dissolved by King Henry VIII."@en;
-  rdf:value "La mayoría de los monasterios ingleses fueron disueltos por el rey Henry VIII."@es.
-
-    </code></pre>
-		</div>
-	  </div>
-
-    <div class='entity'>
-     <h3>UsageExample (class)</h3>
-     <div>
-       <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/lexicog#UsageExample" class="uri">http://www.w3.org/nl/lemon/lexicog#UsageExample</a></p>
-     </div>
-     <div class='comment'>
-       <p>The class <strong>UsageExample</strong> represents a textual example of the usage of a sense in a given lexicographic record.</p>
-     </div>
-     <div class='description'>
-       <p><strong>SubClassOf:</strong> TO CONTINUE</p>
-     </div>
-     </div>
-  </section>
-
-  <section>
-  <h3>example</h3>
-
-Im those cases in which it is necessary to instantiate a <tt>lexicog:UsageExample</tt> because there is further information about an example beyond the text itself (otherwise, <tt>skos:example</tt> would suffice), the <tt>lexicog:example</tt> property allows to link an <tt>ontolex:LexicalSense</tt> to a <tt>lexicog:UsageExample</tt> element.
-
-<div id="example" class="entity">
-<h3 id="example-object-property">example (Object Property)<a class="self-link" aria-label="§" href="#example-object-property"></a></h3>
-<div>
-<p><strong>URI:</strong> <a href="http://www.w3.org/ns/lemon/lexicog#example" class="uri">http://www.w3.org/ns/lemon/lexicog#example</a></p>
-</div>
-<div class="comment">
-<p>The property <strong>example</strong> relates an ontolex:LexicalSense with a lexicog:UsageExample</p>
-</div>
-<div class="description">
-<p><strong>Domain</strong>: LexicalSense</p>
-<p><strong>Range</strong>: UsageExample</p>
-</div>
-</div>
-
-</section>
-
-
-</section>
-
-</section>
-
-	</section>
+	 
+	 
+	 <section>
+	 <h3>Attestation</h3>
+	 <div class="note">
+		<p>input from Katrien, Fahad, and Jesse</p></div></div>
+	 </section>
+	 
+	 
 
 
 	<section>
@@ -851,6 +427,8 @@ Im those cases in which it is necessary to instantiate a <tt>lexicog:UsageExampl
 
 
    <h2>References</h2>
+   
+   <div class="note"><p>from lexicog, to be updated</p></div>
 
 <dt id="bib-mccrae-lemon">[1]</dt>
 <dd>J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. Gómez-Pérez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, <a href="http://dx.doi.org/10.1007/s10579-012-9182-3"> <cite>"Interchanging lexical resources on the Semantic Web" </cite></a>.  Language Resources and Evaluation, vol. 46, 2012.
