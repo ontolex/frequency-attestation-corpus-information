@@ -502,7 +502,7 @@ epsd:a_water_n frac:frequency [
 	 </div>
 
 	 <p>
-	 The
+	 The 50-dimensional
 	 <a href="https://nlp.stanford.edu/projects/glove/">GloVe</a> 6B (Wikipedia 2014+Gigaword 5) embedding for <i>frak</i> is given below:
 	 </p>
 	 <p><tt>frak 0.015246 -0.30472 0.68107 -0.59727 -0.95368 -1.0931 0.58783 -0.19128 0.49108 0.61215 -0.14967 0.68197 0.22723 0.38514 -0.54721 -0.71187 0.21832 0.59857 0.1076 -0.23619 -0.86604 -0.91168 0.26087 -0.42067 0.60649 0.80644 -1.0477 0.67461 0.34154 -0.072511 -1.01 0.35331 -0.35636 0.9764 -0.62665 -0.29075 0.50797 -1.3538 0.18744 0.27852 -0.22557 -1.187 -0.11523 -0.078265 0.29849 0.22993 -0.12354 0.2829 1.0697 0.015366</tt></p>
@@ -524,22 +524,209 @@ epsd:a_water_n frac:frequency [
 	  &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
 	  &lt;https://catalog.ldc.upenn.edu/LDC2011T07>;
 	dct:extent 50^^^xsd:int;
-	dct:description "Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/"@en. ].</code>
+	dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].</code>
 	</pre>
 	</div>
 	</div>
-	 
+	
+	<div class="note">
+		<p>As with <tt>frac:Frequency</tt>, we recommend defining resource-specific subclasses of <tt>frac:Embedding</tt> in order to reduce redundancy in the data:</p>
+		
+		<div class="beispiel">
+		<div>
+		<pre>
+		<code>
+# resource-specific embedding class
+:GloVe6BEmbedding_50d rdfs:subClassOf frac:Embedding;
+  rdfs:subClassOf 
+    [ a owl:Restriction;
+	  owl:onProperty dct:source;
+	  owl:hasValue 
+		  &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
+		  &lt;https://catalog.ldc.upenn.edu/LDC2011T07> ],
+	[ a owl:Restriction;
+	  owl:onProperty dct:extent;
+	  owl:hasValue 50^^^xsd:int ],
+	[ a owl:Restriction;
+	  owl:onProperty dct:description;
+	  owl:hasValue "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
+
+# embedding assignment
+:frak a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
+  frac:embedding [ 
+    a :GloVe6BEmbedding_50d;
+	rdf:value "0.015246 -0.30472 0.68107 ..." ].</code></pre>
+	</div></div></div>
 	 
 	</section>
-	 
+	
+	<section><h2>Collocations</h2>
+	
+	<div class="note"><p>CC: this is a part I am less certain about, mostly because of the rdf:List modelling (which is inspired by lexicog). Alternative suggestions welcome.</p></div>
+	
+	<p>Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology. ... (MORE MOTIVATION AND EXAMPLES)</p>
+	
+	<p>Collocations are usually defined on surface-oriented criteria, i.e., as a relation between forms or lemmas (lexical entries), not between senses, but they can be analyzed on the level of word senses (the sense that gave rise to the idiom or collocation). Indeed, collocations often contain a variable part, which can be represented by a <tt>ontolex:LexicalConcept</tt>.</p>
+	
+	<p>Collocations can involve two or more words, they are thus modelled as an <tt>rdf:List</tt> of <tt>ontolex:Element</tt>s.
+	Collocations may have a fixed or a variable word order. By default, we assume variable word order, where a fixed word order is required, the collocation must be assigned <tt>lexinfo:termType lexinfo:idiom</tt>.</p>
+	
+	<p>Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>dct:source</tt>). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract <tt>frac:ContextualRelation</tt> class.</p>
+	
+	<p><div class='entity'>
+       <h3>ContextualRelation (Class)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#ContextualRelation" class="uri">http://www.w3.org/nl/lemon/frac#ContextualRelation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p><strong>ContextualRelation</strong> provides a relation between two or more lexical elements, characterized by a <tt>dct:description</tt> of the nature of relation, a corpus (<tt>dct:source</tt>) from which this relation was inferred, and a weight or probability assessment (<tt>rdf:value</tt>).</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>SubClassOf:</strong> rdf:List; rdf:value exactly 1 xsd:double, dct:source min 1, dct:description min 1 xsd:string</p>
+    		</div>
+    </div></p>
+	
+	<p>We distinguish two primary contextual relations: syntagmatic (between co-occurring elements) and paradigmatic (between elements that can be substituted for each other). Syntagmatic contextual relations are formalized with <tt>frac:Collocation</tt>.</p>
+	
+	<p><div class="entity">
+		<h3>Collocation (Class)</h3>
+		<div>
+		<p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#Collocation" class="uri">http://www.w3.org/nl/lemon/frac#Collocation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>A <strong>Collocation</strong> is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>ontolex:Element</tt>s based on their co-occurrence within the same utterance and characterized by their collocation weight (<tt>rdf:value</tt>) in one or multiple source corpora (<tt>dct:source</tt>).
+    		</div>
+    		<div class='description'>
+    			<p><strong>SubClassOf:</strong> <tt>frac:ContextualRelation</tt></p>
+				<p><strong>rdf:first:</strong> only <tt>ontolex:Element</tt></p>
+				<p><strong>rdf:rest*/rdf:first:</strong> only <tt>ontolex:Element</tt>
+			</div>
+		</div>
+	</div></p>
+	
+	<p>
+	Collocations are lists of ontolex:Elements, and formalized as <tt>rdf:List</tt>. Collocation elements can thus be directly accessed by <tt>rdf:first</tt>, <tt>rdf:_1</tt>, <tt>rdf:_2</tt>, etc. The property <tt>rdf:rest</tt> returns a <tt>rdf:List</tt> of <tt>ontolex:Element</tt>s, but not a <tt>frac:Collocation</tt>.</p>
+	
+	<p>By default, <tt>frac:Collocation</tt> is insensitive to word order. If a collocation is word order sensitive, it should be characterized by an appropriate <tt>dct:description</tt>, as well as by having <tt>lexinfo:termType lexinfo:idiom</tt>.</p>
+
+	<div class="note">
+	<p><tt>lexinfo:idiom</tt> is ``[a] group of words in a fixed order that have a particular meaning that is different from the meanings of each word understood on its own.'' In application to automatically generated collocations, the criterion of having `a particular meaning' is necessarily replaced by `a particular distribution pattern', as reflected by the collocation weight (<tt>rdf:value</tt>). <i>Idioms</i> in the narrower sense of lexicalized multi-word expressions should not be modelled as <tt>frac:Collocation</tt>s, but as <tt>ontolex:MultiWordExpression</tt>s.
+	[TO BE DISCUSSED]
+	</p>
+	</div>
+	
+	<p>TODO: Example http://corpora.uni-leipzig.de/de/res?corpusId=deu_newscrawl_2011&word=Wasser</p> 
+		
+	<div class="note">
+	<p>
+	As with frequency and embeddings, a resource-specific collocation type can be defined, analoguously.
+	</p>
+	</div>
+	
+	</section>
+	
+	<section>
+	<h2>Similarity</h2>
+	
+	<p>Similarity is a paradigmatic contextual relation between elements that can replace each other in the same context. In distributional semantics, a quantitative assessment of the similarity of two forms, lexemes, phrases, word senses or concepts is thus grounded in numerical representations of their respective contexts, i.e., their embeddings.
+	In a broader sense of `embedding', also bags of words fall under the scope of <tt>frac:Embedding</tt>, see the usage note below.
+	</p>
+	
+	<p>Similarity is characterized by a similarity score (<tt>rdf:value</tt>), e.g., the number of shared dimensions/collocates (in a bag-of-word model) or the cosine distance between two word vectors (for fixed-size embeddings), the corpora which we used to generate this score (<tt>dct:source</tt>), and the method used for calculating the score (<tt>dct:description</tt>).</p>
+	
+	<p>Similarity is symmetric. The order of similes is irrelevant.</p>
+	
+	<p>Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled as a subclass of <tt>frac:ContextualRelation</tt> (and thus, as an <tt>rdf:List</tt>. Quantitative similarity relations are different from collocations in that they provide a different score for every pair of similes. However, one possible application of <tt>frac:Similarity</tt> is to represent synonym groups (as derived from a particular corpus), which may contain more than two similes.
+	</p>
+	
+	<p><div class="entity">
+		<h3>Similarity (Class)</h3>
+		<div>
+		<p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#Similarity" class="uri">http://www.w3.org/nl/lemon/frac#Similarity</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p><strong>Similarity</strong> is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Embedding</tt>s, and is characterized by a similarity score (<tt>rdf:value</tt>) in one or multiple source corpora (<tt>dct:source</tt>) and a <tt>dct:description</tt> that explains the method of comparison.
+    		</div>
+    		<div class='description'>
+    			<p><strong>SubClassOf:</strong> <tt>frac:ContextualRelation</tt></p>
+				<p><strong>rdf:first:</strong> only <tt>frac:Embedding</tt></p>
+				<p><strong>rdf:rest*/rdf:first:</strong> only <tt>frac:Embedding</tt>
+			</div>
+		</div>
+	</div></p>
+
+	<div class="note">
+		  <p><tt>Similarity</tt> is defined as a property of embeddings, not between <tt>ontolex:Element</tt>s. 
+	  This excludes at least two important use cases: </p>
+	  <ul>
+	  <li>manual similarity assessments as used for evaluating similarity assessments, and as created, for example, as part of psycholinguistic association or priming experiments (also cf. WordNet synsets, which provide, however, detailed lexicographic information in addition to similarity, and which thus to be represented as <tt>ontolex:LexicalConcept</tt>),</li>
+	  <li>similarity assessments obtained by other means than embeddings, e.g., by means of a traditional bag of words.
+	  </li>
+	  </ul>
+	  </p>
+	  <p>
+	  In both (and similar) cases, the recommendation is to make use of (a resource-specific subclass of) <tt>frac:Embedding</tt>, nevertheless, and to document the specifics of the similarity relation in the <tt>dct:description</tt> of these embeddings. For the first use case, this approach can be justified by assuming that embeddings are correlated with a psycholinguistically `real' phenomenon. For the second use case, any bag of words can be interpreted as an infinite-size binary vector for which an embedding provides a fixed-size approximation.
+	  </p>
+	  </div>
+	  
+  	<div class="note">
+	<p>
+	As with frequency and embeddings, a resource-specific similarity type can be defined, analoguously. In particular, this is required if directed (asymmetric) similarity assessments are to be provided.
+	</p>
+	</div>
 	</section>
 
-	<!--section>
+	</section>
+
+	<section>
+		<h2>Corpus Annotation</h2>
+	</section
+	
+	<section>
 	  <h2>Usage guidelines</h2>
 
-	  TBC
+	  <section>
+	  <h3>Resource-specific subclasses of frac concepts</h3>
+		<p>As corpus-derived information requires provenance and other metadata, the frac module uses reification (class-based modelling) for concepts such as frequency or embeddings. In a data set, this information will be recurring, and for redundancy reduction, we recommend to provide resource-specific subclasses of frac concepts that provide metadata by means of <tt>owl:Restriction</tt>s that provide the value for the respective properties. This was illustrated above for the relevant frac classes.</p>
+		
+		<p>
+		As a rule of best practice, we recommend for such cases to provide (a copy of) the OWL definitions of resource-specific classes <em>in the same graph (and file) as the data</em>.
+		Within the graph containing the data, the following SPARQL 1.1 query <em>must</em> return the full frac definition of all instances of, say, <tt>:EPSDFrequency</tt> (see examples above):
+		</p>
+		
+		<p><div class="beispiel"><div><pre><code>
+CONSTRUCT {
+	?data a ?class, ?sourceClass; ?property ?value.
+} WHERE {
+  ?data a ?sourceClass.	                  # e.g., [] a :EPSDFrequency
+  ?sourceClass (rdfs:subClassOf|owl:equivalentClass)* ?class.
+  FILTER(strstarts(str(?class),'http://www.w3.org/ns/lemon/frac#'))
+    # ?class: all superclasses of ?sourceClass which are in the <em>frac</em> namespace
+  { # return all value restrictions
+	  ?class (rdfs:subClassOf|owl:equivalentClass)* ?restriction.
+	  ?restriction a owl:Restriction.
+	  ?restriction owl:onProperty ?property.
+	  ?restriction owl:hasValue ?value.
+  } UNION {
+    # return all directly expressed values
+	  ?data ?property ?value.
+	  FILTER(?property in (dct:source,rdf:value))
+	  # TODO: update list of properties
+  }
+}</code></pre></div></div></p>
 
-	</section-->
+	<p>This query can be used as a test for <em>frac</em> compliancy, and for property `inference'. Note that it does not support <tt>owl:intersection</tt> nor <tt>owl:join</tt>, nor <tt>owl:sameAs</tt>.</p>
+  
+	<div class="note">
+	<p>We use the OWL2/DL vocabulary for modelling restrictions. However, <em>lemon</em> is partially compatible with OWL2/DL only in that several modules use <tt>rdf:List</tt> -- which is a reserved construct in OWL2. Therefore, the primary means of accessing and manipulation <em>lemon</em> and <em>ontolex-frac</em> data is by means of SPARQL, resp., RDF- (rather than OWL-) technology. In particular, we do not guarantee nor require that OWL2/DL inferences can be used for validating or querying <em>lemon</em> and <em>ontolex-frac</em> data.
+	</p>
+	</div>
+		
+	  </section>
+
+	</section>
 
 	<h2>Acknowledgements</h2>
 
