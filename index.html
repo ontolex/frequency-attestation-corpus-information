@@ -681,7 +681,77 @@ epsd:a_water_n frac:frequency [
 	</section>
 
 	<section>
-		<h2>Corpus Annotation</h2>
+	<h2>Corpus Annotation (non-normative)</h2>
+	
+	<div class="note"><p>The Ontolex Module for Frequency, Attestation and Corpus Information does not specify a vocabulary for annotating corpora or other data with lexical information, as this is being provided by the <a href="https://www.w3.org/TR/annotation-vocab/">Web Annotation Vocabulary</a>. The following description is non-normative as Web Annotation is defined in a separate W3C recommendation. The definitions below are reproduced, and refined only insofar as domain and range declarations have been refined to our usecase.</p>
+	</div>
+	
+	<p>In Web Annotation terminology, the annotated element is the `target', the content of the annotation is the `body', and the process and provenance of the annotation is expressed by properties of <tt>oa:Annotation</tt>.</p>
+	
+	<div class="entity">
+		<h3>oa:Annotation (Class)</h3>
+		<div>
+		<p><strong>IRI:</strong> <a href="http://www.w3.org/ns/oa#Annotation" class="uri">http://www.w3.org/ns/oa#Annotation</a></p>
+    		</div>
+    		<div class='description'>
+				<p><strong>Required Predicates:</strong> <a href="#hastarget">oa:hasTarget</a>, <a href="#rdf-type">rdf:type</a>, <a href="#hasbody">oa:hasBody</a></p>
+            <p><strong>Recommended Predicates:</strong> <a href="#motivatedby">oa:motivatedBy</a>, <a href="#dcterms-creator">dcterms:creator</a>, <a href="#dcterms-created">dcterms:created</a></p>
+            <p><strong>Other Predicates:</strong> <a href="#styledby">oa:styledBy</a>, <a href="#dcterms-issued">dcterms:issued</a>, <a href="#as-generator">as:generator</a> </p>
+			</div>
+		</div>
+        <div class="diagram_img">
+          <img src="https://www.w3.org/TR/annotation-vocab/images/examples/annotation.png" alt="oa:Annotation with properties" longdesc="#example_anno">
+        </div>
+	</div>	
+
+	<div class="entity">
+		<h3>oa:hasBody (Object Property)</h3>
+		<div>
+		<p><strong>IRI:</strong> <a href="http://www.w3.org/ns/oa#hasBody" class="uri">http://www.w3.org/ns/oa#hasBody</a></p>
+		</div>
+		<div class="comment">The object of the relationship is a resource that is a body of the Annotation. In the context of <em>lemon</em>, the body is an <tt>ontolex:Element</tt></div>
+		<div class="description">
+			<p><strong>Domain:</strong> oa:Annotation</p>
+			<p><strong>Range:</strong> ontolex:Element</p>
+		</div>
+		<div class="diagram_img">
+		<img src="https://www.w3.org/TR/annotation-vocab/images/examples/hasBody.png" alt="oa:hasBody"/>
+		</div>
+	</div>
+	
+	<div class="entity">
+		<h3>oa:hasTarget (Object Property)</h3>
+		<div>
+		<p><strong>IRI:</strong> <a href="http://www.w3.org/ns/oa#hasTarget" class="uri">http://www.w3.org/ns/oa#hasTarget</a></p>
+		</div>
+		<div class="comment">The relationship between an Annotation and its Target.</div>
+		<div class="description">
+			<p><strong>Domain:</strong> oa:Annotation</p>
+		</div>
+	</div>
+	
+	<p>The Web Annotation Vocabulary provides different ways to define targets. This includes:
+	
+	<ul>
+	<li> plain URI: The target can be a URI defined within the corpus (e.g., if corpus data is provided as native RDF, or by means of the <tt>@about</tt> attribute in an <a href="https://www.w3.org/TR/rdfa-primer/">HTML/XML+RDFa</a> document, or by means of <tt>@xml:id</tt> in a <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.html">TEI/XML</a> document).</li>
+	<li> string URI: String URIs provide the possibility to point directly to a text fragment in a web document, using the URI schemas as provided by <a href="https://tools.ietf.org/html/rfc5147">RFC5147</a> (text files only) or <a href="http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html#introduction">NIF</a> (all text-based formats).</li>
+	<li> <a href="https://www.w3.org/TR/annotation-vocab/#textpositionselector">oa:TextPositionSelector</a>: a range of text defined by the start and end positions of the selection in the stream</li>
+	<li><a href="https://www.w3.org/TR/annotation-vocab/#datapositionselector">oa:DataPositionSelector</a>: a range of data by recording the start and end positions of the selection in the stream</li>
+	<li><a href="https://www.w3.org/TR/annotation-vocab/#textquoteselector">oa:TextQuoteSelector</a>: The TextQuoteSelector describes a range of text by copying it. The TextQuoteSelector can include some of the text immediately before (a prefix) and after (a suffix) it to distinguish between multiple copies of the same sequence of characters. If this does suffice for disambiguation, all matching text fragments in the document are being annotated.</li>
+	<li><a href="https://www.w3.org/TR/annotation-vocab/#xpathselector">
+	oa:XPathSelector</a>: select elements and content within a resource that supports the Document Object Model via a specified XPath value.</li>
+	<li> <a href="https://www.w3.org/TR/annotation-vocab/#rangeselector">oa:RangeSelector</a>: identify the beginning and the end of the selection by using other Selectors.</li>
+	</ul>
+	</p>
+	
+	<div class="note">
+	<p><tt>oa:Annotation</tt> explicitly allows <i>n:m</i> relations between <tt>ontolex:Element</tt>s and elements in the annotated elements. It is thus sufficient for every <tt>ontolex:Element</tt> to appear in one <tt>oa:hasBody</tt> statement in order to produce a full annotation of the corpus.
+	</div>
+	
+	<div class="note">
+	<p>As for frequency, embeddings, etc., resource-specific annotation classes can be defined by <tt>owl:Restriction</tt> so that modelling effort and verbosity are reduced. These should follow the same conventions.</p>
+	</div>
+	
 	</section
 	
 	<section>
@@ -735,7 +805,7 @@ CONSTRUCT {
 
    <h2>References</h2>
    
-   <div class="note"><p>from lexicog, to be updated</p></div>
+   <div class="note"><p>from lexicog, to be revised</p></div>
 
 <dt id="bib-mccrae-lemon">[1]</dt>
 <dd>J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. Gómez-Pérez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, <a href="http://dx.doi.org/10.1007/s10579-012-9182-3"> <cite>"Interchanging lexical resources on the Semantic Web" </cite></a>.  Language Resources and Evaluation, vol. 46, 2012.
