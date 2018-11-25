@@ -400,11 +400,12 @@ epsd:a_water_n frac:frequency [
 			<pre>
 				<code>
 # EPSD frequency for the Ur-III period (aat:300019910)
-:EPSDFrequency_UrIII rdfs:subClassOf :EPSDFrequency;
-:EPSDFrequency rdfs:subClassOf
- [ a owl:Restriction ;
-   owl:onProperty dct:temporal ;
-   owl:hasValue aat:300019910 ] .
+:EPSDFrequency_UrIII 
+ rdfs:subClassOf :EPSDFrequency;
+ rdfs:subClassOf
+   [ a owl:Restriction ;
+     owl:onProperty dct:temporal ;
+     owl:hasValue aat:300019910 ] .
 
 # frequency assessment for sub-corpus
 epsd:a_water_n frac:frequency [ 
@@ -781,8 +782,8 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 	
 	<p>Similarity is symmetric. The order of similes is irrelevant.</p>
 	
-	<p>Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled as a subclass of <tt>frac:ContextualRelation</tt> (and thus, as an <tt>rdf:List</tt>). Quantitative similarity relations are different from collocations in that they provide a different score for every pair of similes. However, another possible application of <tt>frac:Similarity</tt> is to represent synonym groups obtained from clustering quantitatively obtained synonym candidates according to their distributional semantics in a particular corpus. In that case, the similarity score would be the minimal similarity between all cluster members (unless a different method is defined).
-	</p>
+	<p>Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled as a subclass of <tt>frac:ContextualRelation</tt> (and thus, as an <tt>rdf:List</tt>).</p>
+
 	
 	<p><div class="entity">
 		<h3>Similarity (Class)</h3>
@@ -800,6 +801,21 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 		</div>
 	</p>
 
+		<p>
+	<tt>frac:Similarity</tt> applies to two different use cases: The specific similarity between (exactly) two words, and similarity clusters (synonym groups obtained from clustering quantitatively obtained synonym candidates according to their distributional semantics in a particular corpus) that can contain an arbitrary number of words. 
+	Both differ in the semantics of <tt>rdf:value</tt>: 
+	Quantitatively obtained similarity <i>relations</i> normally provide a different score for every pair of similes. 
+	Within a similarity <i>cluster</i>, a generalization over these pair-wise scores must be provided. 
+	This could be the minimal similarity between all cluster members or a score produced by the clustering algorithm (e.g., depth or size of cluster).
+	This must be explained in <tt>dct:description</tt>.
+	</p>
+	
+	<div class="note">
+		<p>
+	Similarity clusters are typical outcomes of <a href="https://www.cs.york.ac.uk/semeval2010_WSI/datasets.html">Word Sense Induction</a> techniques or <a href="http://www.aclweb.org/anthology/D10-1056">unsupervised POS tagging</a>. Classical sample data are Brown clusters, e.g., <a href="https://github.com/Derekkk/Brown-Word-Clustering-and-word-similarity/blob/master/results-brown.txt">here</a> or <a href="https://s3-eu-west-1.amazonaws.com/downloads.gate.ac.uk/resources/derczynski-chester-boegh-brownpaths.tar.bz2">here</a>.
+		</p>
+	</div>
+	
 	<div class="note">
 		  <p><tt>Similarity</tt> is defined as a property of embeddings, not between <tt>ontolex:Element</tt>s. 
 	  This excludes at least two important use cases: </p>
