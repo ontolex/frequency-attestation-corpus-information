@@ -781,7 +781,7 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 	
 	<p>Similarity is symmetric. The order of similes is irrelevant.</p>
 	
-	<p>Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled as a subclass of <tt>frac:ContextualRelation</tt> (and thus, as an <tt>rdf:List</tt>. Quantitative similarity relations are different from collocations in that they provide a different score for every pair of similes. However, one possible application of <tt>frac:Similarity</tt> is to represent synonym groups (as derived from a particular corpus), which may contain more than two similes.
+	<p>Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled as a subclass of <tt>frac:ContextualRelation</tt> (and thus, as an <tt>rdf:List</tt>). Quantitative similarity relations are different from collocations in that they provide a different score for every pair of similes. However, another possible application of <tt>frac:Similarity</tt> is to represent synonym groups obtained from clustering quantitatively obtained synonym candidates according to their distributional semantics in a particular corpus. In that case, the similarity score would be the minimal similarity between all cluster members (unless a different method is defined).
 	</p>
 	
 	<p><div class="entity">
@@ -810,7 +810,7 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 	  </ul>
 	  </p>
 	  <p>
-	  In both (and similar) cases, the recommendation is to make use of (a resource-specific subclass of) <tt>frac:Embedding</tt>, nevertheless, and to document the specifics of the similarity relation in the <tt>dct:description</tt> of these embeddings. For the first use case, this approach can be justified by assuming that embeddings are correlated with a psycholinguistically `real' phenomenon. For the second use case, any bag of words can be interpreted as an infinite-size binary vector for which an embedding provides a fixed-size approximation.
+	  In both (and similar) cases, the recommendation is to make use of (a resource-specific subclass of) <tt>frac:Embedding</tt>, nevertheless, and to document the specifics of the similarity relation and/or the embeddings in the <tt>dct:description</tt> of these embeddings. For the first use case, this approach can be justified by assuming that embeddings are correlated with a psycholinguistically `real' phenomenon. For the second use case, any bag of words can be interpreted as an infinite-size binary vector for which an embedding provides a fixed-size approximation.
 	  </p>
 	  </div>
 	  
