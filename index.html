@@ -262,13 +262,14 @@ img.example { max-width:100%; margin-left:auto;margin-right:auto;display:block;}
 	  Vocabulary elements introduced by this module are shaded grey (classes) or set in <i>italics</i>.
 
     <figure>
-        <img src="img/ontolex-frac-2018-11.png" title="ontolex-frac-2018-11.png" alt="ontolex-frac-2018-11.png" width="80%"><figcaption>Module for Frequency, Attestation and Corpus Information (<i>frac</i>), overview</figcaption>
+        <!--img src="img/ontolex-frac-2018-11.png" title="ontolex-frac-2018-11.png" alt="ontolex-frac-2018-11.png" width="80%"><figcaption>Module for Frequency, Attestation and Corpus Information (<i>frac</i>), overview</figcaption-->
+		<img src="img/ontolex-frac-2019-03.png" title="ontolex-frac-2019-03.png" alt="ontolex-frac-2019-03.png" width="80%"><figcaption>Module for Frequency, Attestation and Corpus Information (<i>frac</i>), overview</figcaption>
     </figure>
-	
-	<div class="note"><p>TODO: add attestation component from Fahad and Katrien</p></div>
 	
 	<div class="note"><p>DISCUSSION:
 		Looks more complicated than it is. Shall we drop inferrable information ? (rdf:rest, rdf:first are available vocabulary elements because ContextualRelation is a subclass of rdf:List, subclasses of ontolex:Element should be dropped once ontolex:Element is introduced.)
+		
+		Keep rdf:List elements only if preserved in other ontolex modules.
 	</p>
 	</div>
 	</section>
@@ -419,8 +420,116 @@ epsd:a_water_n frac:frequency [
 	 <section>
 	 <h3>Attestation</h3>
 	 <div class="note">
-		<p>input from Katrien, Fahad, and Jesse</p>
+		<p>This is an attempt for a consensus model based on Depuydt and de Does (2018) and Khan and Boschetti (2018). We do focus on data structures, the following aspects are not covered: Datatype properties regarding confidence (assumed to be in lexinfo), bibliographical details (subject to other vocabularies), and details of resource linking (subject to other vocabularies).</p>
+		
+	    <figure>
+        <img src="img/attestations-lexcit.png" 
+			 title="Depuydt and de Does (2018)" 
+			 alt="img/attestations-lexcit.png" width="80%"/><figcaption>Attestation module following Depuydt and de Does (2018)</figcaption>
+		</figure>
+
+	    <figure>
+        <img src="img/attestations-khan-boschetti.png" 
+			 title="Khan and Boschetti (2018)" 
+			 alt="img/attestations-khan-boschetti.png" width="80%"/><figcaption>Attestation module following Khan and Boschetti (2018)</figcaption>
+		</figure>
 	 </div>
+	 
+	 <p>"Lexicographers use examples to support their analysis of the headword. The examples can either be
+	authentic (exact quotations), adapted (modified versions of authentic examples) or invented examples. 
+	Authentic examples are attributed quotations (citations), which not only elucidate
+	meaning and illustrate features of the headword (spelling, syntax, collocation, register etc.), but also
+	function as attestations and are used provide evidence of the existence of a headword.
+	We therefore call these examples “attestations”." (Depuydt and de Does 2018)
+	</p>
+	
+		<p><div class='entity'>
+       <h3>attestation (ObjectProperty)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#attestation" class="uri">http://www.w3.org/nl/lemon/frac#attestation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>The property <strong>attestation</strong> assigns a particular ontolex:Element a frac:Attestation.</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>rdfs:range</strong> ontolex:Element</p>
+    			<p><strong>rdfs:domain</strong> frac:Attestation</p>
+    		</div>
+    </div></p>
+	
+	<p><div class='entity'>
+       <h3>Attestation (Class)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#Attestation" class="uri">http://www.w3.org/nl/lemon/frac#Attestation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>An <strong>Attestation</strong> is normally an exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense or lexeme in authentic data.
+				Attestations should be accompanied by a <tt>Citation</tt> or the URI of a digital edition of the respective locus (<tt>dct:source</tt>). This URI can be externally defined (e.g., as a <tt>oa:Annotation</tt> or as a NIF URI), and can refer either to the entire work or to the exact location of the attestation within this source. 
+    		</div>
+    		<div class='description'>
+    			<p><strong>SubClassOf:</strong> rdf:quotation exactly 1 xsd:string</p>
+    		</div>
+    </div></p>
+
+	<p><div class='entity'>
+       <h3>citation (ObjectProperty)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#citation" class="uri">http://www.w3.org/nl/lemon/frac#citation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>The property <strong>citation</strong> assigns a particular ontolex:Element a frac:Citation.</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>rdfs:range</strong> ontolex:Element</p>
+    			<p><strong>rdfs:domain</strong> frac:Citation</p>
+    		</div>
+    </div></p>
+
+	<p><div class='entity'>
+       <h3>Citation (Class)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#Citation" class="uri">http://www.w3.org/nl/lemon/frac#Citation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>A <strong>Citation</strong> is a bibliographical reference to a source for the definition or illustration of a particular sense, form or lexeme. A citation <i>can</i> provide an attestation, but can also stand on its own.
+    		</div>
+    </div></p>
+	
+	<div class="note"><p>Details of bibliographical references are beyond the scope of the current proposal. Several designated vocabularies exist, e.g., FaBiO and CiTO,
+		<!-- Peroni, S., & Shotton, D. (2012). FaBiO and CiTO: Ontologies for describing bibliographic resources and citations. Web Semantics: Science, Services and Agents on the World Wide Web, 17: 33{43. DOI: 10.1016/j.websem.2012.08.001 -->
+		Bibo, 
+		<!-- D'Arcus, B., & Giasson, F. (2009). Bibliographic Ontology Specication. Specication Document, 4 November 2009. Retrieved April 9, 2014, from http://bibliontology.com/ -->
+		the Open Citation Corpus,
+	<!-- Shotton, D. (2013). Publishing: Open citations. Nature, 502(7471): 295{297. DOI:
+10.1038/502295a-->
+SpringerNature SciGraph
+	<!-- https://scigraph.springernature.com/explorer -->
+	 BiRO or C4O
+	<!-- Di Iorio, A., Nuzzolese, A. G., Peroni, S., Shotton, D. M., & Vitali, F. (2014, May). Describing bibliographic references in RDF. In SePublica. -->
+	</p>
+	</div>
+	
+	<p><div class='entity'>
+       <h3>makeAttestation (ObjectProperty)</h3>
+
+           <div>
+           <p><strong>URI:</strong> <a href="http://www.w3.org/nl/lemon/frac#makeAttestation" class="uri">http://www.w3.org/nl/lemon/frac#makeAttestation</a></p>
+    		</div>
+    		<div class='comment'>
+    			<p>The property <strong>makeAttestation</strong> assigns a particular Citation a frac:Attestation.</p>
+    		</div>
+    		<div class='description'>
+    			<p><strong>rdfs:range</strong> frac:Citation</p>
+    			<p><strong>rdfs:domain</strong> frac:Attestation</p>
+    		</div>
+    </div></p>
+	
+	<div class="note"><p>CC: Naming follows K and B, I'm not too happy with the name, though, because it's too close to <tt>attestation</tt>, it will likely be confused.</p></div>
+	
 	 </section>
 	 
 	 <section>
@@ -474,7 +583,7 @@ epsd:a_water_n frac:frequency [
     		</div>
     		<div class='description'>
     			<p><strong>rdfs:range</strong> ontolex:Element</p>
-    			<p><strong>rdfs:domain</strong> frac:CorpusFrequency</p>
+    			<p><strong>rdfs:domain</strong> frac:Embedding</p>
     		</div>
     </div></p>
 	
