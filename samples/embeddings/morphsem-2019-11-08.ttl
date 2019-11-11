@@ -1,0 +1,100 @@
+# RDF representation, Thierry Declerck (TD)
+
+# baseURI: http://tutorial-topbraid.com/morphsem
+# imports: http://purl.org/dc/elements/1.1/
+# imports: http://purl.org/dc/terms/
+# imports: http://www.lexinfo.net/ontology/2.0/lexinfo
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/lemon/decomp
+# imports: http://www.w3.org/ns/lemon/ontolex
+
+@prefix : <http://tutorial-topbraid.com/morphsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp/#> .
+@prefix lemon: <http://lemon-model.net/lemon#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+lemon:hasSimilarity_value
+  rdf:type owl:DatatypeProperty ;
+  rdfs:comment "gives a real number as value" ;
+  rdfs:domain :Embedding_Similarities ;
+  rdfs:label "Similarity value(@en}" ;
+  rdfs:range xsd:decimal ;
+.
+<http://tutorial-topbraid.com/morphsem>
+  rdf:type owl:Ontology ;
+  owl:imports <http://purl.org/dc/elements/1.1/> ;
+  owl:imports <http://purl.org/dc/terms/> ;
+  owl:imports <http://www.lexinfo.net/ontology/2.0/lexinfo> ;
+  owl:imports <http://www.w3.org/2004/02/skos/core> ;
+  owl:imports <http://www.w3.org/ns/lemon/decomp> ;
+  owl:imports <http://www.w3.org/ns/lemon/ontolex> ;
+  owl:versionInfo "Created with TopBraid Composer" ;
+.
+:Embedding_Algorithm
+  rdf:type owl:Class ;
+  rdfs:comment "Listing the distinct approaches" ;
+  rdfs:label "Embedding algorithm" ;
+.
+:Embedding_Algorithm_W2V
+  rdf:type :Embedding_Algorithm ;
+  rdfs:comment "the Word2Vec algorithm" ;
+  rdfs:label "Word2Vec" ;
+.
+:Embedding_Similarities
+  rdf:type owl:Class ;
+  rdfs:comment "Represent similarities are given by embedding algorithms" ;
+  rdfs:label "Embedding similarities(@en}" ;
+.
+:Embedding_W2C_1
+  rdf:type :Embedding_Similarities ;
+  lemon:hasSimilarity_value 0.89 ;
+  :ObjectProperty_hasEmbeddingAlgorithm :Embedding_Algorithm_W2V ;
+  rdfs:comment "Represent similarities are given by word2vec" ;
+  rdfs:label "Word2Vec Embedding similarities(@en}" ;
+.
+:Form_card
+  rdf:type ontolex:Form ;
+  :ObjectProperty_hasEmbeddingSimilarityWith :Embedding_W2C_1 ;
+  :ObjectProperty_hasEmbeddingSimilarityWith [
+      :hasEmbeddingAlgorithm :Embedding_Algorithm_W2V ;
+      rdf:value "0.89" ;
+      ontolex:canonicalForm :Form_cards ;
+      ontolex:writtenRep "cards"@en ;
+    ] ;
+  lexinfo:number lexinfo:singular ;
+  ontolex:writtenRep "card"@en ;
+.
+:Form_cards
+  rdf:type ontolex:Form ;
+  lexinfo:number lexinfo:plural ;
+  ontolex:writtenRep "cards"@en ;
+.
+:LexicalSense_card
+  rdf:type ontolex:LexicalSense ;
+  rdfs:comment "portable physical object used for identification, authentication, data storage, or financial transaction (taken from wikidata)  {@en} " ;
+  ontolex:isSenseOf :card ;
+  ontolex:reference <https://www.wikidata.org/wiki/Q42965339> ;
+.
+:ObjectProperty_hasEmbeddingAlgorithm
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain :Embedding_Similarities ;
+  rdfs:range :Embedding_Algorithm ;
+.
+:ObjectProperty_hasEmbeddingSimilarityWith
+  rdf:type owl:ObjectProperty ;
+  rdfs:domain ontolex:Form ;
+  rdfs:range :Embedding_Similarities ;
+  rdfs:range ontolex:Form ;
+.
+:card
+  rdf:type ontolex:Word ;
+  lexinfo:partOfSpeech lexinfo:noun ;
+  ontolex:canonicalForm :Form_card ;
+  ontolex:otherForm :Form_cards ;
+  ontolex:reference <https://www.wikidata.org/wiki/Q1420> ;
+  ontolex:sense :LexicalSense_card ;
