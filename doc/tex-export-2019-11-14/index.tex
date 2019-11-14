@@ -1,0 +1,1153 @@
+% This file was converted to LaTeX by Writer2LaTeX ver. 1.4
+% see http://writer2latex.sourceforge.net for more info
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T3,T1]{fontenc}
+\usepackage[english,ngerman]{babel}
+\usepackage[noenc]{tipa}
+\usepackage{tipx}
+\usepackage[geometry,weather,misc,clock]{ifsym}
+\usepackage{pifont}
+\usepackage{eurosym}
+\usepackage{amsmath}
+\usepackage{wasysym}
+\usepackage{amssymb,amsfonts,textcomp}
+\usepackage{color}
+\usepackage{array}
+\usepackage{hhline}
+\usepackage{hyperref}
+\hypersetup{pdftex, colorlinks=true, linkcolor=blue, citecolor=blue, filecolor=blue, urlcolor=blue, pdftitle=The Ontolex Module for Frequency; Attestation and Corpus Information, pdfauthor=Christian Chiarcos, pdfsubject=, pdfkeywords=}
+\usepackage[pdftex]{graphicx}
+% Text styles
+\newcommand\textstyleEmphasis[1]{\textit{#1}}
+\newcommand\textstyleInternetlink[1]{\textcolor[rgb]{0.0,0.0,0.5019608}{#1}}
+\newcommand\textstyleCitation[1]{\textit{#1}}
+\newcommand\textstyleSourceText[1]{\textrm{#1}}
+\newcommand\textstyleStrongEmphasis[1]{\textbf{#1}}
+\newcommand\textstyleTeletype[1]{\textrm{#1}}
+% Outline numbering
+\setcounter{secnumdepth}{0}
+% List styles
+\newcommand\liststyleWWNumi{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+\newcommand\liststyleWWNumii{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+\newcommand\liststyleWWNumiii{%
+\renewcommand\theenumi{\arabic{enumi}}
+\renewcommand\theenumii{\arabic{enumii}}
+\renewcommand\theenumiii{\arabic{enumiii}}
+\renewcommand\theenumiv{\arabic{enumiv}}
+\renewcommand\labelenumi{\theenumi.}
+\renewcommand\labelenumii{\theenumii.}
+\renewcommand\labelenumiii{\theenumiii.}
+\renewcommand\labelenumiv{\theenumiv.}
+}
+\newcommand\liststyleWWNumiv{%
+\renewcommand\theenumi{\arabic{enumi}}
+\renewcommand\theenumii{\arabic{enumii}}
+\renewcommand\theenumiii{\arabic{enumiii}}
+\renewcommand\theenumiv{\arabic{enumiv}}
+\renewcommand\labelenumi{\theenumi.}
+\renewcommand\labelenumii{\theenumii.}
+\renewcommand\labelenumiii{\theenumiii.}
+\renewcommand\labelenumiv{\theenumiv.}
+}
+\newcommand\liststyleWWNumv{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+\newcommand\liststyleWWNumvi{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+\newcommand\liststyleWWNumvii{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+\newcommand\liststyleWWNumviii{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+\newcommand\liststyleWWNumix{%
+\renewcommand\labelitemi{[F0B7?]}
+\renewcommand\labelitemii{[F0B7?]}
+\renewcommand\labelitemiii{[F0B7?]}
+\renewcommand\labelitemiv{[F0B7?]}
+}
+% Page layout (geometry)
+\setlength\voffset{-1in}
+\setlength\hoffset{-1in}
+\setlength\topmargin{1cm}
+\setlength\oddsidemargin{2cm}
+\setlength\textheight{27.7cm}
+\setlength\textwidth{18.001cm}
+\setlength\footskip{0.0cm}
+\setlength\headheight{0cm}
+\setlength\headsep{0cm}
+% Footnote rule
+\setlength{\skip\footins}{0.119cm}
+\renewcommand\footnoterule{\vspace*{-0.018cm}\setlength\leftskip{0pt}\setlength\rightskip{0pt plus 1fil}\noindent\textcolor{black}{\rule{0.0\columnwidth}{0.018cm}}\vspace*{0.101cm}}
+% Pages styles
+\makeatletter
+\newcommand\ps@Standard{
+  \renewcommand\@oddhead{}
+  \renewcommand\@evenhead{}
+  \renewcommand\@oddfoot{}
+  \renewcommand\@evenfoot{}
+  \renewcommand\thepage{\arabic{page}}
+}
+\makeatother
+\pagestyle{Standard}
+\title{The Ontolex Module for Frequency, Attestation and Corpus Information}
+\author{Christian Chiarcos}
+\date{2019-11-14}
+\begin{document}
+\clearpage\setcounter{page}{1}\pagestyle{Standard}
+
+%
+%
+%
+%14. November 2019 12:58
+Skript%
+%
+%
+%30. November 0002 00:00
+SkriptSkriptSkriptSkriptSkriptSkriptThis document describes the \textstyleEmphasis{module for frequency, attestation and corpus information} of the Lexicon Model for Ontologies (\textstyleEmphasis{lemon}) as a result of the work of the Ontology Lexica community group (OntoLex). The module is targeted at complementing dictionaries and other linguistic resources containing lexicographic data with a vocabulary to express
+
+\liststyleWWNumi
+\begin{itemize}
+\item corpus-derived statistics (frequency and cooccurrence information, collocations), 
+\item pointers from lexical resources to corpora and other collections of text (attestations), 
+\item the annotation of corpora and other language resources with lexical information (lemmatization against a dictionary), and 
+\item distributional semantics (collocation vectors, word embeddings, sense embeddings, concept embeddings). 
+\end{itemize}
+The module tackles use cases in corpus-based lexicography, corpus linguistics and natural language processing, and operates in combination with the \textstyleEmphasis{lemon} core module, referred to as \textstyleEmphasis{OntoLex}, as well as with other \textstyleEmphasis{lemon} modules. 
+
+This document is a working draft for a module for frequency, attestation and corpus data of the OntoLex specifications. It is not a W3C Standard nor is it on the W3C Standards Track.
+
+There are a number of ways that one may participate in the development of this report:
+
+\liststyleWWNumii
+\begin{itemize}
+\item Mailing list: \href{http://lists.w3.org/Archives/Public/public-ontolex/}{\textstyleInternetlink{public-ontolex@w3.org}} 
+\item Wiki: \href{https://www.w3.org/community/ontolex/wiki/Main_Page}{\textstyleInternetlink{Main page}} 
+\item More information about meetings of the ONTOLEX group can be obtained \href{https://www.w3.org/community/ontolex/wiki/Main_Page#Meetings}{\textstyleInternetlink{here}} 
+\item \href{https://github.com/acoli-repo/ontolex-frac}{\textstyleInternetlink{Source code}} for this document can be found on Github. 
+\end{itemize}
+Disclaimer: This draft follows closely the structure and design of \href{https://jogracia.github.io/ontolex-lexicog/}{\textstyleInternetlink{The Ontolex Lexicography Module. Draft Community Group Report 28 October 2018}}, edited by Julia Bosque-Gil and Jorge Gracia. In particular, motivational and introductory text are partially adapted without being marked as quotes. This is to be replaced by original text before publication. 
+
+\subsection{Introduction}
+\subsubsection{Background and Motivation }
+The \href{https://www.w3.org/2016/05/ontolex/}{\textstyleEmphasis{lemon}}\href{https://www.w3.org/2016/05/ontolex/}{\textstyleInternetlink{ model}} provides a \href{https://www.w3.org/2016/05/ontolex/#core}{\textstyleInternetlink{core}} vocabulary (OntoLex) to represent \textstyleEmphasis{linguistic information} associated to ontology and vocabulary elements. The model follows the principle of \textstyleEmphasis{semantics by reference} in the sense that the semantics of a \href{https://www.w3.org/2016/05/ontolex/#LexicalEntry}{\textstyleInternetlink{lexical entry}} is expressed by reference to an individual, class or property defined in an ontology. 
+
+The current version of \textstyleEmphasis{lemon} (as an outcome of the OntoLex group, sometimes referred as OntoLex-lemon in the literature) as well as its previous version (\href{https://lemon-model.net/}{\textstyleInternetlink{lemon}} [\hyperlink{biblemonpaper}{\textstyleCitation{1}}]) have been increasingly used in the context of dictionaries and lexicographical data to convert existent lexicographic information into the standards and formats of the Semantic Web. In consequence, a designated \textstyleEmphasis{lemon} \href{../../}{\textstyleInternetlink{module for lexicography}} (\textstyleEmphasis{lexicog}) has been designed, with applications in monolingual [\hyperlink{bibklimekkdict}{\textstyleCitation{2}}], bilingual [\hyperlink{bibgraciaapertium}{\textstyleCitation{3}}], and multilingual [\hyperlink{bibbosquekdict}{\textstyleCitation{4}}] dictionaries, as well as diachronic [\hyperlink{bibkahndiachronic}{\textstyleCitation{5}}], dialectal [\hyperlink{bibdeclerckdialectal}{\textstyleCitation{6}}], and etymological ones [\hyperlink{bibabromeitetymological}{\textstyleCitation{7}}], among others. This module is partially motivated by requirements of corpus-based lexicography (frequency and collocation information) and digital philology (linking lexical resources with corpus data).
+
+A second motivation for a \textstyleEmphasis{lemon} model for corpus-based information comes from natural language processing. With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics (KEYNESS-REFERENCE???), collocation vectors (Schütze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (??? and Schütze, 2017). With the proposed module, \textstyleEmphasis{lemon} can serve as a community standard to encode, store and exchange vector representations (embeddings) along with the lexical concepts, senses, lemmas or words that they represent. The processing of word embeddings is beyond the scope of this module. Embeddings are thus represented as literals ({\textquotedbl}BLOB{\textquotedbl}).
+
+The added value of using linked data technologies to represent such information is an increased level of interoperability and integration between different types of lexical resources, the textual data they pertain to, as well as distributional representations of words, lexical senses and lexical concepts. Creating a \textstyleEmphasis{lemon} module in the OntoLex CG is a suitable means for establishing a vocabulary on a broad consensus that takes into account all use cases identified above in an adequate fashion.%
+%
+%
+%14. November 2019 12:58
+ The OntoLex community is the natural forum to accomplish this for several reasons: 
+
+\liststyleWWNumiii
+\begin{enumerate}
+\item The extended use of \textstyleEmphasis{lemon} to support digital lexicography, 
+\item the improved application and applicabiltiy of \textstyleEmphasis{lemon} in natural language processing, 
+\item the coming together of the lexicography, AI and human language technology communities, resp. resources, and 
+\item the possibility of reusing already available mechanisms in \textstyleEmphasis{lemon}, preventing researchers from {\textquotedbl}re-inventing the wheel{\textquotedbl}, 
+\end{enumerate}
+\subsubsection{Aim and Scope }
+The goal of this module is to complement \textstyleEmphasis{lemon} core elements with a vocabulary layer to represent lexicographical and semantic information derived from or defined with reference to corpora and external resources in a way that (a) \textit{generalizes} over use cases from digital lexicography, natural language processing, artificial intelligence, computational philology and corpus linguistics, that (b) facilitates \textit{exchange, storage and re-usability} of such data along with lexical information, and that (c) \textit{minimizes information loss}. 
+
+The scope of the model is three-fold: 
+
+\liststyleWWNumiv
+\begin{enumerate}
+\item extending the \textstyleEmphasis{OntoLex-lexicog} model with corpus information to support existing challenges in corpus-driven lexicography, 
+\item modelling \textstyleEmphasis{existing} lexical and distributional-semantic resources (corpus-based dictionaries, collocation dictionaries, embeddings) as linked data, to allow their conjoint publication and inter-operation by Semantic Web standards, and 
+\item providing a conceptual / abstract model of relevant concepts in \textstyleEmphasis{distributional semantics} that facilitates building linked data-based applications that consume and combine both lexical and distributional information. 
+\end{enumerate}
+\textstyleEmphasis{Corpus} as used throughout this document is understood in its traditional, broader sense as a structured data collection -{}- or material suitable for being included into such a collection, such as manuscripts or other works. We do not intend to limit the use of the term to corpora in a linguistic or NLP sense. Language resources of any kind (web documents, dictionaries, plain text, unannotated corpora, etc.) are considered {\textquotedbl}corpus data{\textquotedbl} and a collection of such information as a {\textquotedbl}corpus{\textquotedbl} in this sense. Any information drawn from or pertaining to such information is considered {\textquotedbl}corpus-based{\textquotedbl}. 
+
+\subsubsection[Namespaces ]{%
+%
+%
+%14. November 2019 12:58
+Namespaces }
+This is a list of relevant namespaces that will be used in the rest of this document: 
+
+OntoLex module for frequency, attestation and corpus information 
+
+
+\bigskip
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix frac: {\textless}http://www.w3.org/ns/lemon/frac\#{\textgreater} .}
+
+
+\bigskip
+
+
+\bigskip
+
+OntoLex (core) model and other \textstyleEmphasis{lemon} modules: 
+
+
+\bigskip
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix ontolex: {\textless}http://www.w3.org/ns/lemon/ontolex\#{\textgreater} .}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix synsem: {\textless}http://www.w3.org/ns/lemon/synsem\#{\textgreater} .}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix decomp: {\textless}http://www.w3.org/ns/lemon/decomp\#{\textgreater} .}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix vartrans: {\textless}http://www.w3.org/ns/lemon/vartrans\#{\textgreater} .}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix lime: {\textless}http://www.w3.org/ns/lemon/lime\#{\textgreater} .}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix lexicog: {\textless}http://www.w3.org/ns/lemon/lexicog\#{\textgreater} .}
+
+
+\bigskip
+
+
+\bigskip
+
+Other models [TO REVIEW]: 
+
+
+\bigskip
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix rdf: {\textless}http://www.w3.org/1999/02/22-rdf-syntax-ns\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix owl: {\textless}http://www.w3.org/2002/07/owl\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix xsd: {\textless}http://www.w3.org/2001/XMLSchema\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix skos: {\textless}http://www.w3.org/2004/02/skos\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix dbr: {\textless}http://dbpedia.org/resource/{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix dbo: {\textless}http://dbpedia.org/ontology/{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix void: {\textless}http://rdfs.org/ns/void\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix lexinfo: {\textless}http://www.lexinfo.net/ontology/2.0/lexinfo\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix dct: {\textless}http://purl.org/dc/terms/{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix provo: {\textless}http://www.w3.org/ns/prov\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix rdfs: {\textless}http://www.w3.org/2000/01/rdf-schema\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix oa: {\textless}http://www.w3.org/ns/oa\#{\textgreater}.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ @prefix aat: {\textless}http://vocab.getty.edu/aat/{\textgreater}.}
+
+
+\bigskip
+
+\subsubsection{ontolex:Element }
+We consider all \textstyleEmphasis{lemon} core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of ontolex:Form (for word frequency and plain word/phrase embeddings), ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), ontolex:LexicalSense (for sense frequency and sense embeddings), and ontolex:LexicalConcept (for concept frequency and concept embeddings).  \includegraphics{index-img/index-img001.png} ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept 
+
+Such a top-level concept used to exist in \textstyleEmphasis{Monnet-lemon}, but has been abandoned in the 2016 edition of \textstyleEmphasis{lemon}. If this concept is not provided by a future revision of the \textstyleEmphasis{lemon} core vocabulary, it will be introduced by this module. Note that the introduction of ontolex:Element has no effect on \textstyleEmphasis{lemon} core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
+
+\subsection{Overview}
+The following diagram depicts the OntoLex module for frequency, attestation and corpus information (\textit{fraq}). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in \textit{italics}.%
+%
+%
+%30. November 0002 00:00
+  \includegraphics{index-img/index-img002.png} Module for Frequency, Attestation and Corpus Information (\textit{frac}), overview 
+
+DISCUSSION: Looks more complicated than it is. Shall we drop inferrable information ? (rdf:rest, rdf:first are available vocabulary elements because ContextualRelation is a subclass of rdf:List, subclasses of ontolex:Element should be dropped once ontolex:Element is introduced.) Keep rdf:List elements only if preserved in other ontolex modules. 
+
+\subsection{Definitions}
+\subsubsection{Frequency}
+Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics. At its core, this means that lexicographers use corpus frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). As a qualitative assessment, frequency can be expressed with \href{http://www.lexinfo.net/ontology/2.0/lexinfo#frequency}{\textstyleInternetlink{lexinfo:frequency}}, {\textquotedbl}[t]he relative commonness with which a term occurs{\textquotedbl}. However, this is an object property with possible values lexinfo:commonlyUsed, lexinfo:infrequentlyUsed, lexinfo:rarelyUsed, while absolute counts over a particular resource (corpus) require novel vocabulary elements. 
+
+Absolute frequencies are used in computational lexicography (e.g., the \href{http://oracc.museum.upenn.edu/epsd2/}{\textstyleInternetlink{Electronic Penn Sumerian Dictionary}}), and they are an essential piece of information for NLP and corpus linguistics. In order to avoid confusion with lexinfo:Frequency, this is defined with reference to a particular dataset, a corpus. 
+
+\subsubsection[frequency (ObjectProperty)]{frequency (ObjectProperty)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#frequency}
+
+The property \textstyleStrongEmphasis{frequency} assigns a particular ontolex:Element a frac:CorpusFrequency.
+
+\textstyleStrongEmphasis{rdfs:range} ontolex:Element
+
+\textstyleStrongEmphasis{rdfs:domain} frac:CorpusFrequency
+
+\subsubsection[CorpusFrequency (Class)]{CorpusFrequency (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#CorpusFrequency}
+
+\textstyleStrongEmphasis{Corpus frequency} provides the absolute number of attestations (rdf:value) of a particular ontolex:Element (see frac:frequency) in a particular language resource (dct:source).
+
+\textstyleStrongEmphasis{SubClassOf:} rdf:value exactly 1 xsd:int, dct:source min 1
+
+If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple \textstyleTeletype{dct:source} statements should be provided, to each resource individually. The cardinality of \textstyleTeletype{dct:source} is thus 1 or higher. 
+
+QUESTION: better alternative to dct:source?
+
+The following example illustrates word and form frequencies for the Sumerian word \textit{a} (n.) {\textquotedbl}water{\textquotedbl} from the \href{http://oracc.museum.upenn.edu/epsd2/sux}{\textstyleInternetlink{Electronic Penn Sumerian Dictionary}} and the frequencies of the underlying corpus. 
+
+%
+%
+%
+%14. November 2019 12:58
+
+
+\textstyleSourceText{\# word frequency, over all form variants}
+
+\textstyleSourceText{epsd:a\_water\_n a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ frac:frequency [ }
+
+\textstyleSourceText{\ \ a frac:CorpusFrequency;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}4683{\textquotedbl}\^{}\^{}xsd:int;}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://oracc.museum.upenn.edu/epsd2/pager{\textgreater} ] .}
+
+
+\bigskip
+
+\textstyleSourceText{\# form frequency for individual orthographical variants}
+
+\textstyleSourceText{epsd:a\_water\_n ontolex:canonicalForm [}
+
+\textstyleSourceText{\ ontolex:writtenRep {\textquotedbl}?{\textquotedbl}@sux-Xsux, {\textquotedbl}a{\textquotedbl}@sux-Latn;}
+
+\textstyleSourceText{\ frac:frequency [}
+
+\textstyleSourceText{\ \ a frac:CorpusFrequency;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}4656{\textquotedbl}\^{}\^{}xsd:int;}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://oracc.museum.upenn.edu/epsd2/pager{\textgreater} ] ] .}
+
+
+\bigskip
+
+\textstyleSourceText{epsd:a\_water\_n ontolex:otherForm [}
+
+\textstyleSourceText{\ ontolex:writtenRep {\textquotedbl}?{\textquotedbl}@sux-Xsux, {\textquotedbl}a2{\textquotedbl}@sux-Latn;}
+
+\textstyleSourceText{\ frac:frequency [}
+
+\textstyleSourceText{\ \ a frac:CorpusFrequency;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}1{\textquotedbl}\^{}\^{}xsd:int;}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://oracc.museum.upenn.edu/epsd2/pager{\textgreater} ] ] .}
+
+
+\bigskip
+
+\textstyleSourceText{epsd:a\_water\_n ontolex:otherForm [}
+
+\textstyleSourceText{\ ontolex:writtenRep {\textquotedbl}?{\textquotedbl}@sux-Xsux, {\textquotedbl}e{\textquotedbl}@sux-Latn;}
+
+\textstyleSourceText{\ frac:frequency [}
+
+\textstyleSourceText{\ \ a frac:CorpusFrequency;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}24{\textquotedbl}\^{}\^{}xsd:int;}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://oracc.museum.upenn.edu/epsd2/pager{\textgreater} ] ].}
+
+The example shows orthographic variation (in the original writing system, Sumerian Cuneiform sux-Xsux, and its Latin transcription sux-Latn). It is slightly simplified insofar as the ePSD2 provides individual counts for different periods and that only three of six orthographical variants are given. Note that these are orthographical variants, not morphological variants (which are not given in the dictionary). 
+
+It is necessary to provide the link to the underlying corpus \textstyleEmphasis{for every frequency assessment} because the same element may receive different counts over different corpora. For data modelling, it is recommended to define a corpus- or collection-specific subclass of frac:CorpusFrequency with a fixed dct:source value. This leads to more compact data and avoids potential difficulties with the Open World Assumption (interpretability of incomplete data). 
+
+
+\bigskip
+
+\textstyleSourceText{\# Corpus Frequency in the EPSD corpus}
+
+\textstyleSourceText{:EPSDFrequency rdfs:subClassOf frac:CorpusFrequency.}
+
+\textstyleSourceText{:EPSDFrequency rdfs:subClassOf}
+
+\textstyleSourceText{\ [ a owl:Restriction ;}
+
+\textstyleSourceText{\ \ \ owl:onProperty dct:source ;}
+
+\textstyleSourceText{\ \ \ owl:hasValue {\textless}http://oracc.museum.upenn.edu/epsd2/pager{\textgreater} ] .}
+
+
+\bigskip
+
+\textstyleSourceText{\# frequency assessment}
+
+\textstyleSourceText{epsd:a\_water\_n frac:frequency [ }
+
+\textstyleSourceText{\ \ a :EPSDFrequency;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}4683{\textquotedbl}\^{}\^{}xsd:int ].}
+
+
+\bigskip
+
+frac:CorpusFrequency can be extended with additional filter conditions to define sub-corpora. For example, we can restrict the subcorpus to a particular time period, e.g., the Neo-Sumerian Ur III period: 
+
+
+\bigskip
+
+\textstyleSourceText{\# EPSD frequency for the Ur-III period (aat:300019910)}
+
+\textstyleSourceText{:EPSDFrequency\_UrIII }
+
+\textstyleSourceText{\ rdfs:subClassOf :EPSDFrequency;}
+
+\textstyleSourceText{\ rdfs:subClassOf}
+
+\textstyleSourceText{\ \ \ [ a owl:Restriction ;}
+
+\textstyleSourceText{\ \ \ \ \ owl:onProperty dct:temporal ;}
+
+\textstyleSourceText{\ \ \ \ \ owl:hasValue aat:300019910 ] .}
+
+
+\bigskip
+
+\textstyleSourceText{\# frequency assessment for sub-corpus}
+
+\textstyleSourceText{epsd:a\_water\_n frac:frequency [ }
+
+\textstyleSourceText{\ \ a :EPSDFrequency\_UrIII;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}2299{\textquotedbl}\^{}\^{}xsd:int ].}
+
+
+\bigskip
+
+\subsubsection{Attestation}
+This is an attempt for a consensus model based on Depuydt and de Does (2018) and Khan and Boschetti (2018). We do focus on data structures, the following aspects are not covered: Datatype properties regarding confidence (assumed to be in lexinfo), bibliographical details (subject to other vocabularies), and details of resource linking (subject to other vocabularies).
+
+ \includegraphics{index-img/index-img003.png} Attestation module following Depuydt and de Does (2018)  \includegraphics{index-img/index-img004.png} Attestation module following Khan and Boschetti (2018) 
+
+{\textquotedbl}Lexicographers use examples to support their analysis of the headword. The examples can either be authentic (exact quotations), adapted (modified versions of authentic examples) or invented examples. Authentic examples are attributed quotations (citations), which not only elucidate meaning and illustrate features of the headword (spelling, syntax, collocation, register etc.), but also function as attestations and are used provide evidence of the existence of a headword. We therefore call these examples “attestations”.{\textquotedbl} (Depuydt and de Does 2018) 
+
+\subsubsection[attestation (ObjectProperty)]{attestation (ObjectProperty)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#attestation}
+
+The property \textstyleStrongEmphasis{attestation} assigns a particular ontolex:Element a frac:Attestation.
+
+\textstyleStrongEmphasis{rdfs:range} ontolex:Element
+
+\textstyleStrongEmphasis{rdfs:domain} frac:Attestation
+
+\subsubsection[Attestation (Class)]{Attestation (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#Attestation}
+
+An \textstyleStrongEmphasis{Attestation} is normally an exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense or lexeme in authentic data. Attestations should be accompanied by a \textstyleTeletype{Citation} or the URI of a digital edition of the respective locus (\textstyleTeletype{dct:source}). This URI can be externally defined (e.g., as a \textstyleTeletype{oa:Annotation} or as a NIF URI), and can refer either to the entire work or to the exact location of the attestation within this source. 
+
+\textstyleStrongEmphasis{SubClassOf:} rdf:quotation exactly 1 xsd:string
+
+\subsubsection[citation (ObjectProperty)]{citation (ObjectProperty)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#citation}
+
+The property \textstyleStrongEmphasis{citation} assigns a particular ontolex:Element a frac:Citation.
+
+\textstyleStrongEmphasis{rdfs:range} ontolex:Element
+
+\textstyleStrongEmphasis{rdfs:domain} frac:Citation
+
+\subsubsection[Citation (Class)]{Citation (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#Citation}
+
+A \textstyleStrongEmphasis{Citation} is a bibliographical reference to a source for the definition or illustration of a particular sense, form or lexeme. A citation \textit{can} provide an attestation, but can also stand on its own. 
+
+Details of bibliographical references are beyond the scope of the current proposal. Several designated vocabularies exist, e.g., FaBiO and CiTO,%
+%
+%
+%14. November 2019 12:58
+ Bibo,%
+%
+%
+%30. November 0002 00:00
+ the Open Citation Corpus,%
+%
+%
+%14. November 2019 12:58
+ SpringerNature SciGraph%
+%
+%
+%14. November 2019 12:58
+ BiRO or C4O%
+%
+%
+%30. November 0002 00:00
+ 
+
+\subsubsection[makeAttestation (ObjectProperty)]{makeAttestation (ObjectProperty)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#makeAttestation}
+
+The property \textstyleStrongEmphasis{makeAttestation} assigns a particular Citation a frac:Attestation.
+
+\textstyleStrongEmphasis{rdfs:range} frac:Citation
+
+\textstyleStrongEmphasis{rdfs:domain} frac:Attestation
+
+CC: Naming follows K and B, I'm not too happy with the name, though, because it's too close to \textstyleTeletype{attestation}, it will likely be confused.
+
+\subsubsection{Embeddings}
+In distributional semantics, the contexts in which a word is attested are taken to define its meaning. Contextual similarity is thus a correlate of semantic similarity. Different representations of context are possible, the most prominent model to date is the form of a vector. A word vector can be created, for example, by means of a reference list of vocabulary items, where every reference word is associated with a fixed position, e.g., \textit{ship} with position 1, \textit{ocean} with 2, \textit{sky} with 3, etc. Given a corpus (and a selection criterion for collocates, e.g., within the same sentence), every word in the corpus can be described by the frequency that a reference word occurred as a collocate in the corpus. Assume we want to define the meaning of \textit{frak}, with (exactly) the following attestations in our sample corpus (random samples from \href{https://en.wikiquote.org/wiki/Battlestar_Galactica_(2003)}{\textstyleInternetlink{wikiquote}}): 
+
+\liststyleWWNumv
+\begin{itemize}
+\item \textit{It's in the frakking ship!} 
+\item \textit{Have you lost your frakkin' mind?} 
+\item \textit{Oh, for frak's sake, let me see if I can make heads or tails of it.} 
+\item \textit{It's a frakking Cylon.} 
+\item \textit{Our job isn't to be careful, it's to shoot Cylons out of the frakking sky!} 
+\end{itemize}
+With the following list of reference words: \textstyleTeletype{(ship, ocean, lose, find, brain, mind, head, sky, Cylon, ...)}, we obtain the vector \textstyleTeletype{(1,0,1,0,0,1,1,1,2,...)} for the lemma (lexical entry) \textit{frak}. For practical applications, these vectors are projected into lower-dimensional spaces, e.g., by means of statistical (Schütze 1993) or neural methods (Socher et al. 2011).%
+%
+%
+%14. November 2019 12:58
+ The process of mapping a word to a numerical vector and its result are referred to as {\textquotedbl}word embedding{\textquotedbl}. Aside from collocation counts, other methods for creating word embeddings do exist, but they are always defined relative to a corpus. 
+
+Embeddings have become a dominating paradigm in natural language processing and machine learning, but, if compiled from large corpora, they require long training periods and thus tend to be re-used. However, embedding distributions often use tool-specific binary formats (cf. \href{https://radimrehurek.com/gensim/models/word2vec.html}{\textstyleInternetlink{Gensim}}), and thus a portability problem arises. CSV and related formats (cf. \href{https://github.com/baojie/senna/tree/master/embeddings}{\textstyleInternetlink{SENNA embeddings}}) are a better alternative, but their application to sense and concept embeddings (as provided, for example, by Rothe and Schütze 2017)%
+%
+%
+%14. November 2019 12:58
+ is problematic if their distribution is detached from the definition of the underlying sense and concept definitions. With frac, Ontolex-lemon provides a vocabulary for the conjoint publication and sharing of embeddings and lexical information at all levels: non-lemmatized words (ontolex:Form), lemmatized words (ontolex:LexicalEntry), phrases (ontolex:MultiWordExpression), lexical senses (ontolex:LexicalSense) and lexical concepts (ontolex:LexicalConcept).
+
+We focus on \textstyleEmphasis{publishing and sharing} embeddings, not on their processing by means of Semantic Web formalisms, and thus, embeddings are represented as untyped or string literals with whitespace-separated numbers. If necessary, more elaborate representations, e.g., using rdf:List, may subsequently be generated from these literals.
+
+Lexicalized embeddings provide their data via \textstyleTeletype{rdf:value}, and should be published together with their metadata, most importantly 
+
+\liststyleWWNumvi
+\begin{itemize}
+\item procedure/method (\textstyleTeletype{dct:description} with free text, e.g., {\textquotedbl}CBOW{\textquotedbl}, {\textquotedbl}SKIP-GRAM{\textquotedbl}, {\textquotedbl}collocation counts{\textquotedbl}) 
+\item corpus (\textstyleTeletype{dct:source}) 
+\item dimensionality (\textstyleTeletype{dct:extent}) 
+\end{itemize}
+\subsubsection[embedding (ObjectProperty)]{embedding (ObjectProperty)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#embedding}
+
+The property \textstyleStrongEmphasis{embedding} assigns a particular ontolex:Element a frac:Embedding.
+
+\textstyleStrongEmphasis{rdfs:range} ontolex:Element
+
+\textstyleStrongEmphasis{rdfs:domain} frac:Embedding
+
+\subsubsection[Embedding (Class)]{Embedding (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#Embedding}
+
+An \textstyleStrongEmphasis{Embedding} provides a numerical vector (the string of \textstyleTeletype{rdf:value}) for a given ontolex:Element (see \textstyleTeletype{frac:embedding}). It is defined by the methodology used for creating it (\textstyleTeletype{dct:description}), the URI of the corpus or language resource from which it was created (\textstyleTeletype{dct:source}), and its dimensionality (length of the vector, \textstyleTeletype{dct:extent}).
+
+\textstyleStrongEmphasis{SubClassOf:} rdf:value exactly 1 xsd:string, dct:source min 1, dct:description min 1
+
+Question: Rename {\textquotedbl}Embedding{\textquotedbl} (the concept, not the property) to {\textquotedbl}Vector{\textquotedbl} ?
+
+For embeddings, we recommend using whitespace-separated numbers as their \textstyleTeletype{rdf:value}. In particular, commas as separators are discouraged because they might be confused with the decimal point, depending on the locale of the user. We recommend the following regular expression for parsing embedding values (example in Perl):
+
+\textstyleSourceText{split(/[\^{}0-9{\textbackslash}.,{\textbackslash}-]+/, \$value)}
+
+This means that doubles should be provided in the conventional format, not using the exponent notation. 
+
+The 50-dimensional \href{https://nlp.stanford.edu/projects/glove/}{\textstyleInternetlink{GloVe}} 6B (Wikipedia 2014+Gigaword 5) embedding for \textit{frak} is given below: 
+
+\textstyleTeletype{frak 0.015246 -0.30472 0.68107 -0.59727 -0.95368 -1.0931 0.58783 -0.19128 0.49108 0.61215 -0.14967 0.68197 0.22723 0.38514 -0.54721 -0.71187 0.21832 0.59857 0.1076 -0.23619 -0.86604 -0.91168 0.26087 -0.42067 0.60649 0.80644 -1.0477 0.67461 0.34154 -0.072511 -1.01 0.35331 -0.35636 0.9764 -0.62665 -0.29075 0.50797 -1.3538 0.18744 0.27852 -0.22557 -1.187 -0.11523 -0.078265 0.29849 0.22993 -0.12354 0.2829 1.0697 0.015366}
+
+As a lemma (LexicalEntry) embedding, this can be represented as follows: 
+
+
+\bigskip
+
+\textstyleSourceText{:frak a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}frak{\textquotedbl}@en;}
+
+\textstyleSourceText{\ \ frac:embedding [ }
+
+\textstyleSourceText{\ \ \ \ a frac:Embedding;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ rdf:value {\textquotedbl}0.015246 -0.30472 0.68107 ...{\textquotedbl};}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ dct:source }
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ {\textless}http://dumps.wikimedia.org/enwiki/20140102/{\textgreater},}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ {\textless}https://catalog.ldc.upenn.edu/LDC2011T07{\textgreater};}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ dct:extent 50\^{}\^{}\^{}xsd:int;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ dct:description {\textquotedbl}GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased{\textquotedbl}@en. ].}
+
+
+\bigskip
+
+As with \textstyleTeletype{frac:Frequency}, we recommend defining resource-specific subclasses of \textstyleTeletype{frac:Embedding} in order to reduce redundancy in the data:
+
+
+\bigskip
+
+\textstyleSourceText{\# resource-specific embedding class}
+
+\textstyleSourceText{:GloVe6BEmbedding\_50d rdfs:subClassOf frac:Embedding;}
+
+\textstyleSourceText{\ \ rdfs:subClassOf }
+
+\textstyleSourceText{\ \ \ \ [ a owl:Restriction;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ owl:onProperty dct:source;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ owl:hasValue }
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\textless}http://dumps.wikimedia.org/enwiki/20140102/{\textgreater},}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ {\textless}https://catalog.ldc.upenn.edu/LDC2011T07{\textgreater} ],}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ [ a owl:Restriction;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ owl:onProperty dct:extent;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ owl:hasValue 50\^{}\^{}\^{}xsd:int ],}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ [ a owl:Restriction;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ owl:onProperty dct:description;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ owl:hasValue {\textquotedbl}GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased{\textquotedbl}@en. ].}
+
+
+\bigskip
+
+\textstyleSourceText{\# embedding assignment}
+
+\textstyleSourceText{:frak a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}frak{\textquotedbl}@en;}
+
+\textstyleSourceText{\ \ frac:embedding [ }
+
+\textstyleSourceText{\ \ \ \ a :GloVe6BEmbedding\_50d;}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ rdf:value {\textquotedbl}0.015246 -0.30472 0.68107 ...{\textquotedbl} ].}
+
+Examples for non-word embeddings: 
+
+\liststyleWWNumvii
+\begin{itemize}
+\item \href{http://www.cis.lmu.de/~sascha/AutoExtend/}{\textstyleInternetlink{AutoExtend}}: (a method to build) synset and lexeme embeddings, data \href{http://www.cis.lmu.de/~sascha/AutoExtend/embeddings.zip}{\textstyleInternetlink{here}} 
+\item \href{https://github.com/uhh-lt/sensegram}{\textstyleInternetlink{SenseGram}}: sense embeddings, data \href{http://ltdata1.informatik.uni-hamburg.de/sensegram/}{\textstyleInternetlink{here}} 
+\item \href{http://tudarmstadt-lt.github.io/vec2synset/}{\textstyleInternetlink{Vec2Synset}}: (a method to build) WordNet synset (= LexicalConcept) embeddings 
+\item \href{https://minimaxir.com/2017/04/char-embeddings/}{\textstyleInternetlink{Character embeddings}} are probably beyond the scope of OntoLex, unless characters are regarded LexicalEntries. (Which they could, for languages such as Chinese or Sumerian certainly, but also for Western languages -{}- given the fact that character-level pseudo entries are sometimes used in dictionaries to describe the phonology and orthography of a language. This is the case, for example, for Grimm's \href{http://woerterbuchnetz.de/cgi-bin/WBNetz/wbgui_py?sigle=DWB}{\textstyleInternetlink{Deutsches Wörterbuch}}.) 
+\end{itemize}
+\subsection{Collocations}
+CC: this is a part I am less certain about, mostly because of the rdf:List modelling (which is inspired by lexicog). Alternative suggestions welcome.
+
+Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology. ... (MORE MOTIVATION AND EXAMPLES)
+
+Collocations are usually defined on surface-oriented criteria, i.e., as a relation between forms or lemmas (lexical entries), not between senses, but they can be analyzed on the level of word senses (the sense that gave rise to the idiom or collocation). Indeed, collocations often contain a variable part, which can be represented by a \textstyleTeletype{ontolex:LexicalConcept}.
+
+Collocations can involve two or more words, they are thus modelled as an \textstyleTeletype{rdf:List} of \textstyleTeletype{ontolex:Element}s. Collocations may have a fixed or a variable word order. By default, we assume variable word order, where a fixed word order is required, the collocation must be assigned \textstyleTeletype{lexinfo:termType lexinfo:idiom}.
+
+Collocations obtained by quantitative methods are characterized by their method of creation (\textstyleTeletype{dct:description}), their collocation strength (\textstyleTeletype{rdf:value}), and the corpus used to create them (\textstyleTeletype{dct:source}). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract \textstyleTeletype{frac:ContextualRelation} class.
+
+\subsubsection[ContextualRelation (Class)]{ContextualRelation (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#ContextualRelation}
+
+\textstyleStrongEmphasis{ContextualRelation} provides a relation between two or more lexical elements, characterized by a \textstyleTeletype{dct:description} of the nature of relation, a corpus (\textstyleTeletype{dct:source}) from which this relation was inferred, and a weight or probability assessment (\textstyleTeletype{rdf:value}).
+
+\textstyleStrongEmphasis{SubClassOf:} rdf:List; rdf:value exactly 1 xsd:double, dct:source min 1, dct:description min 1 xsd:string
+
+We distinguish two primary contextual relations: syntagmatic (between co-occurring elements) and paradigmatic (between elements that can be substituted for each other). Syntagmatic contextual relations are formalized with \textstyleTeletype{frac:Collocation}.
+
+\subsubsection[Collocation (Class)]{Collocation (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#Collocation}
+
+A \textstyleStrongEmphasis{Collocation} is a \textstyleTeletype{frac:ContextualRelation} that holds between two or more \textstyleTeletype{ontolex:Element}s based on their co-occurrence within the same utterance and characterized by their collocation weight (\textstyleTeletype{rdf:value}) in one or multiple source corpora (\textstyleTeletype{dct:source}). 
+
+\textstyleStrongEmphasis{SubClassOf:} \textstyleTeletype{frac:ContextualRelation}
+
+\textstyleStrongEmphasis{rdf:first:} only \textstyleTeletype{ontolex:Element}
+
+\textstyleStrongEmphasis{rdf:rest*/rdf:first:} only \textstyleTeletype{ontolex:Element} 
+
+Collocations are lists of ontolex:Elements, and formalized as \textstyleTeletype{rdf:List}. Collocation elements can thus be directly accessed by \textstyleTeletype{rdf:first}, \textstyleTeletype{rdf:\_1}, \textstyleTeletype{rdf:\_2}, etc. The property \textstyleTeletype{rdf:rest} returns a \textstyleTeletype{rdf:List} of \textstyleTeletype{ontolex:Element}s, but not a \textstyleTeletype{frac:Collocation}.
+
+By default, \textstyleTeletype{frac:Collocation} is insensitive to word order. If a collocation is word order sensitive, it should be characterized by an appropriate \textstyleTeletype{dct:description}, as well as by having \textstyleTeletype{lexinfo:termType lexinfo:idiom}.
+
+\textstyleTeletype{lexinfo:idiom} is {\textasciigrave}{\textasciigrave}[a] group of words in a fixed order that have a particular meaning that is different from the meanings of each word understood on its own.'{}' In application to automatically generated collocations, the criterion of having {\textasciigrave}a particular meaning' is necessarily replaced by {\textasciigrave}a particular distribution pattern', as reflected by the collocation weight (\textstyleTeletype{rdf:value}). \textit{Idioms} in the narrower sense of lexicalized multi-word expressions should not be modelled as \textstyleTeletype{frac:Collocation}s, but as \textstyleTeletype{ontolex:MultiWordExpression}s. [TO BE DISCUSSED] 
+
+The most elementary level of a collocation is an n-gram, as provided, for example, by \href{http://storage.googleapis.com/books/ngrams/books/datasetsv2.html}{\textstyleInternetlink{Google Books}}, which provide n-gram frequencies per publication year as tab-separated values. For 2008, the 2012 edition provides the following statistics for the bigram \textit{kill} + \textit{switch}. 
+
+
+\bigskip
+
+\textstyleSourceText{\# form-form bigrams}
+
+\textstyleSourceText{kill \ \ \ switch \ 2008 \ \ \ 199 \ \ \ \ 121}
+
+
+\bigskip
+
+\textstyleSourceText{\# form-lexeme bigrams}
+
+\textstyleSourceText{kill \ \ \ switch\_NOUN \ \ \ \ 2008 \ \ \ 187 \ \ \ \ 115}
+
+\textstyleSourceText{kill \ \ \ switch\_VERB \ \ \ \ 2008 \ \ \ 8 \ \ \ \ \ \ 8}
+
+
+\bigskip
+
+\textstyleSourceText{\# lexeme-form bigrams}
+
+\textstyleSourceText{kill\_ADJ \ \ \ \ \ \ \ switch \ 2008 \ \ \ 70 \ \ \ \ \ 48}
+
+\textstyleSourceText{kill\_NOUN \ \ \ \ \ \ switch \ 2008 \ \ \ 89 \ \ \ \ \ 64}
+
+\textstyleSourceText{kill\_VERB \ \ \ \ \ \ switch \ 2008 \ \ \ 40 \ \ \ \ \ 30}
+
+
+\bigskip
+
+\textstyleSourceText{\# lexeme-lexeme bigrams}
+
+\textstyleSourceText{kill\_VERB \ \ \ \ \ \ switch\_VERB \ \ \ \ 2008 \ \ \ 2 \ \ \ \ \ \ 2}
+
+\textstyleSourceText{kill\_NOUN \ \ \ \ \ \ switch\_NOUN \ \ \ \ 2008 \ \ \ 83 \ \ \ \ \ 61}
+
+\textstyleSourceText{kill\_VERB \ \ \ \ \ \ switch\_NOUN \ \ \ \ 2008 \ \ \ 35 \ \ \ \ \ 26}
+
+\textstyleSourceText{kill\_ADJ \ \ \ \ \ \ \ switch\_NOUN \ \ \ \ 2008 \ \ \ 69 \ \ \ \ \ 48}
+
+\textstyleSourceText{kill\_NOUN \ \ \ \ \ \ switch\_VERB \ \ \ \ 2008 \ \ \ 6 \ \ \ \ \ \ 6}
+
+In this example, forms are string values (cf. \textstyleTeletype{ontolex:LexicalForm}), lexemes are string values with parts-of-speech (cf. \textstyleTeletype{ontolex:LexicalEntry}). A partial ontolex-frac representation is given below: 
+
+
+\bigskip
+
+\textstyleSourceText{\# kill (verb)}
+
+\textstyleSourceText{:kill\_v a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ lexinfo:partOfSpeech lexinfo:verb;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm :kill\_cf.}
+
+
+\bigskip
+
+\textstyleSourceText{\# kill (canonical form)}
+
+\textstyleSourceText{:kill\_cf ontolex:writtenRep {\textquotedbl}kill{\textquotedbl}@en.}
+
+
+\bigskip
+
+\textstyleSourceText{\# switch (noun)}
+
+\textstyleSourceText{:switch\_n a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ lexinfo:partOfSpeech lexinfo:noun;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm :switch\_cf.}
+
+
+\bigskip
+
+\textstyleSourceText{\# switch (canonical form)}
+
+\textstyleSourceText{:switch\_cf ontolex:writtenRep {\textquotedbl}switch{\textquotedbl}@en.}
+
+
+\bigskip
+
+\textstyleSourceText{\# form-form bigrams}
+
+\textstyleSourceText{(:kill\_cf :switch\_cf) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}199{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}2-grams, English Version 20120701, word frequency{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}https://books.google.com/ngrams{\textgreater};}
+
+\textstyleSourceText{\ \ dct:temporal {\textquotedbl}2008{\textquotedbl}\^{}\^{}xsd:date;}
+
+\textstyleSourceText{\ \ lexinfo:termType lexinfo:idiom.}
+
+
+\bigskip
+
+\textstyleSourceText{(:kill\_cf :switch\_cf) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}121{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}2-grams, English Version 20120701, document frequency{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}https://books.google.com/ngrams{\textgreater};}
+
+\textstyleSourceText{\ \ dct:temporal {\textquotedbl}2008{\textquotedbl}\^{}\^{}xsd:date;}
+
+\textstyleSourceText{\ \ lexinfo:termType lexinfo:idiom.}
+
+
+\bigskip
+
+\textstyleSourceText{\# form-lexeme bigrams}
+
+\textstyleSourceText{(:kill\_cf :switch\_n) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}187{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}2-grams, English Version 20120701, word frequency{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}https://books.google.com/ngrams{\textgreater};}
+
+\textstyleSourceText{\ \ dct:temporal {\textquotedbl}2008{\textquotedbl}\^{}\^{}xsd:date;}
+
+\textstyleSourceText{\ \ lexinfo:termType lexinfo:idiom.}
+
+
+\bigskip
+
+\textstyleSourceText{(:kill\_cf :switch\_n) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}115{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}2-grams, English Version 20120701, document frequency{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}https://books.google.com/ngrams{\textgreater};}
+
+\textstyleSourceText{\ \ dct:temporal {\textquotedbl}2008{\textquotedbl}\^{}\^{}xsd:date;}
+
+\textstyleSourceText{\ \ lexinfo:termType lexinfo:idiom.}
+
+Question: can canonical forms be shared across different lexical entries? For the case of plain word n-grams, this is presupposed here.
+
+The second example illustrates more complex types of collocation are provided as provided by the \href{http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012}{\textstyleInternetlink{Wortschatz}} portal (scores and definitions as provided for \href{http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=beans}{\textstyleInternetlink{beans}}, \href{http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans}{\textstyleInternetlink{spill the beans}}, etc. 
+
+
+\bigskip
+
+\textstyleSourceText{@prefix wsen: {\textless}http://corpora.uni-leipzig.de/en/res?corpusId=eng\_news\_2012\&word={\textgreater}}
+
+
+\bigskip
+
+\textstyleSourceText{\# selected lexical entries}
+
+\textstyleSourceText{\# (we assume that every Wortschatz word is an independent lexical entry)}
+
+\textstyleSourceText{wsen:beans a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}beans{\textquotedbl}@en.}
+
+\textstyleSourceText{wsen:spill a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}spill{\textquotedbl}@en.}
+
+\textstyleSourceText{wsen:green a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}green{\textquotedbl}@en.}
+
+\textstyleSourceText{wsen:about a ontolex:LexicalEntry;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}about{\textquotedbl}@en}
+
+
+\bigskip
+
+\textstyleSourceText{\# collocations, non-lexicalized}
+
+\textstyleSourceText{(wsen:spill wsen:beans) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}182{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}cooccurrences in the same sentence, unordered{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://corpora.uni-leipzig.de/en/res?corpusId=eng\_news\_2012{\textgreater}.}
+
+
+\bigskip
+
+\textstyleSourceText{(wsen:green wsen:beans) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}778{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}left neighbor cooccurrence{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://corpora.uni-leipzig.de/en/res?corpusId=eng\_news\_2012{\textgreater};}
+
+\textstyleSourceText{\ \ lexinfo:termType lexinfo:idiom.}
+
+
+\bigskip
+
+\textstyleSourceText{(wsen:beans wsen:about) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}35{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}right neighbor cooccurrence{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://corpora.uni-leipzig.de/en/res?corpusId=eng\_news\_2012{\textgreater};}
+
+\textstyleSourceText{\ \ lexinfo:termType lexinfo:idiom.}
+
+
+\bigskip
+
+\textstyleSourceText{\# multi-word expression, lexicalized (!)}
+
+\textstyleSourceText{wsen:spill+the+beans a ontolex:MultiWordExpression;}
+
+\textstyleSourceText{\ \ ontolex:canonicalForm/ontolex:writtenRep {\textquotedbl}spill the beans{\textquotedbl}@en.}
+
+
+\bigskip
+
+\textstyleSourceText{(wsen:beans wsen:spill+the+beans) a frac:Collocation;}
+
+\textstyleSourceText{\ \ rdf:value {\textquotedbl}401{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:description {\textquotedbl}cooccurrences in the same sentence, unordered{\textquotedbl};}
+
+\textstyleSourceText{\ \ dct:source {\textless}http://corpora.uni-leipzig.de/en/res?corpusId=eng\_news\_2012{\textgreater}.}
+
+%
+%
+%
+%14. November 2019 12:58
+Again, it is recommended to define resource-specific subclasses of \textstyleTeletype{frac:Collocation} with default values for \textstyleTeletype{dct:description}, \textstyleTeletype{dct:source}, and (where applicable) \textstyleTeletype{lexinfo:termType}. 
+
+\subsection[Similarity]{Similarity}
+Similarity is a paradigmatic contextual relation between elements that can replace each other in the same context. In distributional semantics, a quantitative assessment of the similarity of two forms, lexemes, phrases, word senses or concepts is thus grounded in numerical representations of their respective contexts, i.e., their embeddings. In a broader sense of {\textasciigrave}embedding', also bags of words fall under the scope of \textstyleTeletype{frac:Embedding}, see the usage note below. 
+
+Similarity is characterized by a similarity score (\textstyleTeletype{rdf:value}), e.g., the number of shared dimensions/collocates (in a bag-of-word model) or the cosine distance between two word vectors (for fixed-size embeddings), the corpora which we used to generate this score (\textstyleTeletype{dct:source}), and the method used for calculating the score (\textstyleTeletype{dct:description}).
+
+Similarity is symmetric. The order of similes is irrelevant.
+
+Like \textstyleTeletype{frac:Collocation}, quantitative similarity relations are modelled as a subclass of \textstyleTeletype{frac:ContextualRelation} (and thus, as an \textstyleTeletype{rdf:List}).
+
+\subsubsection[Similarity (Class)]{Similarity (Class)}
+\textstyleStrongEmphasis{URI:} \url{http://www.w3.org/nl/lemon/frac#Similarity}
+
+\textstyleStrongEmphasis{Similarity} is a \textstyleTeletype{frac:ContextualRelation} that holds between two or more \textstyleTeletype{frac:Embedding}s, and is characterized by a similarity score (\textstyleTeletype{rdf:value}) in one or multiple source corpora (\textstyleTeletype{dct:source}) and a \textstyleTeletype{dct:description} that explains the method of comparison. 
+
+\textstyleStrongEmphasis{SubClassOf:} \textstyleTeletype{frac:ContextualRelation}
+
+\textstyleStrongEmphasis{rdf:first:} only \textstyleTeletype{frac:Embedding}
+
+\textstyleStrongEmphasis{rdf:rest*/rdf:first:} only \textstyleTeletype{frac:Embedding} 
+
+\textstyleTeletype{frac:Similarity} applies to two different use cases: The specific similarity between (exactly) two words, and similarity clusters (synonym groups obtained from clustering quantitatively obtained synonym candidates according to their distributional semantics in a particular corpus) that can contain an arbitrary number of words. Both differ in the semantics of \textstyleTeletype{rdf:value}: Quantitatively obtained similarity \textit{relations} normally provide a different score for every pair of similes. Within a similarity \textit{cluster}, a generalization over these pair-wise scores must be provided. This could be the minimal similarity between all cluster members or a score produced by the clustering algorithm (e.g., depth or size of cluster). This must be explained in \textstyleTeletype{dct:description}. 
+
+Similarity clusters are typical outcomes of \href{https://www.cs.york.ac.uk/semeval2010_WSI/datasets.html}{\textstyleInternetlink{Word Sense Induction}} techniques or \href{http://www.aclweb.org/anthology/D10-1056}{\textstyleInternetlink{unsupervised POS tagging}}. Classical sample data are Brown clusters, e.g., \href{https://github.com/Derekkk/Brown-Word-Clustering-and-word-similarity/blob/master/results-brown.txt}{\textstyleInternetlink{here}} or \href{https://s3-eu-west-1.amazonaws.com/downloads.gate.ac.uk/resources/derczynski-chester-boegh-brownpaths.tar.bz2}{\textstyleInternetlink{here}}. 
+
+\textstyleTeletype{Similarity} is defined as a property of embeddings, not between \textstyleTeletype{ontolex:Element}s. This excludes at least two important use cases: 
+
+\liststyleWWNumviii
+\begin{itemize}
+\item manual similarity assessments as used for evaluating similarity assessments, and as created, for example, as part of psycholinguistic association or priming experiments (also cf. WordNet synsets, which provide, however, detailed lexicographic information in addition to similarity, and which thus to be represented as \textstyleTeletype{ontolex:LexicalConcept}), 
+\item similarity assessments obtained by other means than embeddings, e.g., by means of a traditional bag of words. 
+\end{itemize}
+In both (and similar) cases, the recommendation is to make use of (a resource-specific subclass of) \textstyleTeletype{frac:Embedding}, nevertheless, and to document the specifics of the similarity relation and/or the embeddings in the \textstyleTeletype{dct:description} of these embeddings. For the first use case, this approach can be justified by assuming that embeddings are correlated with a psycholinguistically {\textasciigrave}real' phenomenon. For the second use case, any bag of words can be interpreted as an infinite-size binary vector for which an embedding provides a fixed-size approximation. 
+
+As with frequency and embeddings, a resource-specific similarity type can be defined, analoguously. In particular, this is required if directed (asymmetric) similarity assessments are to be provided. 
+
+\subsection{Corpus Annotation (non-normative)}
+The Ontolex Module for Frequency, Attestation and Corpus Information does not specify a vocabulary for annotating corpora or other data with lexical information, as this is being provided by the \href{https://www.w3.org/TR/annotation-vocab/}{\textstyleInternetlink{Web Annotation Vocabulary}}. The following description is non-normative as Web Annotation is defined in a separate W3C recommendation. The definitions below are reproduced, and refined only insofar as domain and range declarations have been refined to our usecase.
+
+In Web Annotation terminology, the annotated element is the {\textasciigrave}target', the content of the annotation is the {\textasciigrave}body', and the process and provenance of the annotation is expressed by properties of \textstyleTeletype{oa:Annotation}.
+
+\subsubsection[oa:Annotation (Class)]{oa:Annotation (Class)}
+\textstyleStrongEmphasis{IRI:} \url{http://www.w3.org/ns/oa#Annotation}
+
+\textstyleStrongEmphasis{Required Predicates:} \hyperlink{hastarget}{\textstyleInternetlink{oa:hasTarget}}, \hyperlink{rdftype}{\textstyleInternetlink{rdf:type}}, \hyperlink{hasbody}{\textstyleInternetlink{oa:hasBody}}
+
+\textstyleStrongEmphasis{Recommended Predicates:} \hyperlink{motivatedby}{\textstyleInternetlink{oa:motivatedBy}}, \hyperlink{dctermscreator}{\textstyleInternetlink{dcterms:creator}}, \hyperlink{dctermscreated}{\textstyleInternetlink{dcterms:created}}
+
+\textstyleStrongEmphasis{Other Predicates:} \hyperlink{styledby}{\textstyleInternetlink{oa:styledBy}}, \hyperlink{dctermsissued}{\textstyleInternetlink{dcterms:issued}}, \hyperlink{asgenerator}{\textstyleInternetlink{as:generator}} 
+
+ \includegraphics{index-img/index-img005.png}  
+
+\subsubsection[oa:hasBody (Object Property)]{oa:hasBody (Object Property)}
+\textstyleStrongEmphasis{IRI:} \url{http://www.w3.org/ns/oa#hasBody}
+
+The object of the relationship is a resource that is a body of the Annotation. In the context of \textstyleEmphasis{lemon}, the body is an \textstyleTeletype{ontolex:Element}
+
+\textstyleStrongEmphasis{Domain:} oa:Annotation
+
+\textstyleStrongEmphasis{Range:} ontolex:Element
+
+ \includegraphics{index-img/index-img006.png}  
+
+\subsubsection[oa:hasTarget (Object Property)]{oa:hasTarget (Object Property)}
+\textstyleStrongEmphasis{IRI:} \url{http://www.w3.org/ns/oa#hasTarget}
+
+The relationship between an Annotation and its Target.
+
+\textstyleStrongEmphasis{Domain:} oa:Annotation
+
+The Web Annotation Vocabulary supports different ways to define targets. This includes: 
+
+\liststyleWWNumix
+\begin{itemize}
+\item plain URI: The target can be a URI defined within the corpus (e.g., if corpus data is provided as native RDF, or by means of the \textstyleTeletype{@about} attribute in an \href{https://www.w3.org/TR/rdfa-primer/}{\textstyleInternetlink{HTML/XML+RDFa}} document, or by means of \textstyleTeletype{@xml:id} in a \href{http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.html}{\textstyleInternetlink{TEI/XML}} document). 
+\item string URI: String URIs provide the possibility to point directly to a text fragment in a web document, using the URI schemas as provided by \href{https://tools.ietf.org/html/rfc5147}{\textstyleInternetlink{RFC5147}} (text files only) or \href{http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html#introduction}{\textstyleInternetlink{NIF}} (all text-based formats). 
+\item \href{https://www.w3.org/TR/annotation-vocab/#textpositionselector}{\textstyleInternetlink{oa:TextPositionSelector}}: a range of text defined by the start and end positions of the selection in the stream 
+\item \href{https://www.w3.org/TR/annotation-vocab/#datapositionselector}{\textstyleInternetlink{oa:DataPositionSelector}}: a range of data by recording the start and end positions of the selection in the stream 
+\item \href{https://www.w3.org/TR/annotation-vocab/#textquoteselector}{\textstyleInternetlink{oa:TextQuoteSelector}}: The TextQuoteSelector describes a range of text by copying it. The TextQuoteSelector can include some of the text immediately before (a prefix) and after (a suffix) it to distinguish between multiple copies of the same sequence of characters. If this does suffice for disambiguation, all matching text fragments in the document are being annotated. 
+\item \href{https://www.w3.org/TR/annotation-vocab/#xpathselector}{\textstyleInternetlink{oa:XPathSelector}}: select elements and content within a resource that supports the Document Object Model via a specified XPath value. 
+\item \href{https://www.w3.org/TR/annotation-vocab/#rangeselector}{\textstyleInternetlink{oa:RangeSelector}}: identify the beginning and the end of the selection by using other Selectors. 
+\end{itemize}
+\textstyleTeletype{oa:Annotation} explicitly allows \textit{n:m} relations between \textstyleTeletype{ontolex:Element}s and elements in the annotated elements. It is thus sufficient for every \textstyleTeletype{ontolex:Element} to appear in one \textstyleTeletype{oa:hasBody} statement in order to produce a full annotation of the corpus. 
+
+As for frequency, embeddings, etc., resource-specific annotation classes can be defined by \textstyleTeletype{owl:Restriction} so that modelling effort and verbosity are reduced. These should follow the same conventions.
+
+\subsection{Usage guidelines}
+\subsubsection{Resource-specific subclasses of frac concepts}
+As corpus-derived information requires provenance and other metadata, the frac module uses reification (class-based modelling) for concepts such as frequency or embeddings. In a data set, this information will be recurring, and for redundancy reduction, we recommend to provide resource-specific subclasses of frac concepts that provide metadata by means of \textstyleTeletype{owl:Restriction}s that provide the value for the respective properties. This was illustrated above for the relevant frac classes.
+
+As a rule of best practice, we recommend for such cases to provide (a copy of) the OWL definitions of resource-specific classes \textstyleEmphasis{in the same graph (and file) as the data}. Within the graph containing the data, the following SPARQL 1.1 query \textstyleEmphasis{must} return the full frac definition of all instances of, say, \textstyleTeletype{:EPSDFrequency} (see examples above): 
+
+
+\bigskip
+
+\textstyleSourceText{CONSTRUCT \{}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ ?data a ?class, ?sourceClass; ?property ?value.}
+
+\textstyleSourceText{\} WHERE \{}
+
+\textstyleSourceText{\ \ ?data a ?sourceClass. \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \# e.g., [] a :EPSDFrequency}
+
+\textstyleSourceText{\ \ ?sourceClass (rdfs:subClassOf{\textbar}owl:equivalentClass)* ?class.}
+
+\textstyleSourceText{\ \ FILTER(strstarts(str(?class),'http://www.w3.org/ns/lemon/frac\#'))}
+
+\textstyleSourceText{\ \ \ \ \# ?class: all superclasses of ?sourceClass which are in the }\textstyleEmphasis{frac}\textstyleSourceText{ namespace}
+
+\textstyleSourceText{\ \ \{ \# return all value restrictions}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ ?class (rdfs:subClassOf{\textbar}owl:equivalentClass)* ?restriction.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ ?restriction a owl:Restriction.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ ?restriction owl:onProperty ?property.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ ?restriction owl:hasValue ?value.}
+
+\textstyleSourceText{\ \ \} UNION \{}
+
+\textstyleSourceText{\ \ \ \ \# return all directly expressed values}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ ?data ?property ?value.}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ FILTER(?property in (dct:source,rdf:value))}
+
+\textstyleSourceText{\ \ \ \ \ \ \ \ \ \ \# TODO: update list of properties}
+
+\textstyleSourceText{\ \ \}}
+
+\textstyleSourceText{\}}
+
+This query can be used as a test for \textstyleEmphasis{frac} compliancy, and for property {\textasciigrave}inference'. Note that it does not support \textstyleTeletype{owl:intersection} nor \textstyleTeletype{owl:join}, nor \textstyleTeletype{owl:sameAs}.
+
+We use the OWL2/DL vocabulary for modelling restrictions. However, \textstyleEmphasis{lemon} is partially compatible with OWL2/DL only in that several modules use \textstyleTeletype{rdf:List} -{}- which is a reserved construct in OWL2. Therefore, the primary means of accessing and manipulation \textstyleEmphasis{lemon} and \textstyleEmphasis{ontolex-frac} data is by means of SPARQL, resp., RDF- (rather than OWL-) technology. In particular, we do not guarantee nor require that OWL2/DL inferences can be used for validating or querying \textstyleEmphasis{lemon} and \textstyleEmphasis{ontolex-frac} data. 
+
+\subsubsection{RDF Serializations and CSV}
+Usually, numerical information drawn from corpora is distributed and shared as comma-separated values (CSV), e.g., ngram lists or embeddings. Ontolex-frac as an RDF vocabulary is agnostic about its serialization (RDF/TTL, RDF/XML, JSON-LD, etc.), but in particular, it is compliant with CSV and related tabular formats by means of W3C recommendations such as \href{https://www.w3.org/TR/csv2rdf/}{\textstyleInternetlink{CSV2RDF}}, \href{https://www.w3.org/TR/rdb-direct-mapping/}{\textstyleInternetlink{RDB Direct Mapping}} and the \href{https://www.w3.org/TR/r2rml/}{\textstyleInternetlink{RDB to RDF Mapping Language}}. For corpus-derived lexical-semantic information which is typically distributed in CSV, the best practice is to continue to do so, but to provide a mapping to Ontolex-frac as this provides a vocabulary for their interpretation as Linked Data, and thus establishes an interoperability layer over the raw data without creating additional overhead.
+
+Ontolex-frac is compliant with CSV formats, but its handling of structured information has an impact on the CSV format. In particular, individual dimensions of embeddings must not use comma as separator in order to be mapped to a single literal. For the example embedding of \textit{frak} above, the first column (containing the word) should be comma-separated, the following columns (containing the embedding) should be white-space separated. 
+
+\subsection{Acknowledgements}
+TBC 
+
+\subsection{References}
+from lexicog, to be revised
+
+[1] 
+
+J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. Gómez-Pérez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, \href{http://dx.doi.org/10.1007/s10579-012-9182-3}{\textstyleCitation{{\textquotedbl}Interchanging lexical resources on the Semantic Web{\textquotedbl} }}. Language Resources and Evaluation, vol. 46, 2012. 
+
+\hypertarget{bibklimekkdict}{}[2] 
+
+B. Klimek and M. Brümmer, \textstyleCitation{{\textquotedbl}Enhancing lexicography with semantic language databases{\textquotedbl}} Kernerman Dictionary News, 23, 5-10. 2015. 
+
+\hypertarget{bibgraciaapertium}{}[3] 
+
+J. Gracia, M. Villegas, A. Gómez-Pérez, and N. Bel, \textstyleCitation{{\textquotedbl}The apertium bilingual dictionaries on the web of data{\textquotedbl}} Semantic Web Journal, vol. 9, no. 2, pp. 231-240, Jan. 2018. 
+
+\hypertarget{bibbosquekdict}{}[4] 
+
+J. Bosque-Gil, J. Gracia, E. Montiel-Ponsoda, and G. Aguado-de Cea, \textstyleCitation{{\textquotedbl}Modelling multilingual lexicographic resources for the web of data: the k dictionaries case{\textquotedbl}} in Proc. of GLOBALEX'16 workshop at LREC'15, Portoroz, Slovenia, May 2016. 
+
+\hypertarget{bibkahndiachronic}{}[5] 
+
+F. Khan, J. E. Díaz-Vera, and M. Monachini, \textstyleCitation{{\textquotedbl}Representing Polysemy and Diachronic Lexico-Semantic Data on the Semantic Web{\textquotedbl}} In SWASH at ESWC (2016) 
+
+\hypertarget{bibdeclerckdialectal}{}[6] 
+
+T. Declerck and E. Wandl-Vogt, \textstyleCitation{{\textquotedbl}Cross-linking Austrian dialectal Dictionaries through formalized Meanings{\textquotedbl}} In Proceedings of the XVI EURALEX International Congress, pp. 329–343. 2014. 
+
+\hypertarget{bibabromeitetymological}{}[7] 
+
+F. Abromeit, C. Chiarcos, C. Fäth and M. Ionov, \textstyleCitation{{\textquotedbl}Linking the Tower of Babel: Modelling a Massive Set of Etymological Dictionaries as RDF{\textquotedbl}} In LDL 2016 5th Workshop on Linked Data in Linguistics: Managing, Building and Using Linked Language Resources (p. 11). May 2016. 
+
+[8] 
+
+J. Bosque-Gil, J. Gracia, and A. Gómez-Pérez, \textstyleCitation{{\textquotedbl}Linked data in lexicography{\textquotedbl}} Kernerman Dictionary News, pp. 19-24, Jul. 2016. 
+
+[9] 
+
+T. Declerck, E. Wandl-Vogt, and K. Mörth, \textstyleCitation{{\textquotedbl}Towards a Pan European Lexicography by Means of Linked (Open) Data{\textquotedbl}} In Electronic lexicography in the 21st century: linking lexical data in the digital age. Proceedings of the eLex 2015 conference (pp. 342-355), 2015. 
+
+[10] 
+
+J. Bosque-Gil, J. Gracia, and E. Montiel-Ponsoda, \href{http://ceur-ws.org/Vol-1899/OntoLex_2017_paper_5.pdf}{\textstyleCitation{{\textquotedbl}Towards a module for lexicography in OntoLex{\textquotedbl} }}in Proc. of the LDK workshops: OntoLex, TIAD and Challenges for Wordnets at 1st Language Data and Knowledge conference (LDK 2017), Galway, Ireland, vol. 1899. CEUR-WS, pp. 74-84, Jun 2017. 
+
+[11] 
+
+A. Parvizi, M. Kohl, M. González, R. Saurí, \textstyleCitation{{\textquotedbl}Towards a Linguistic Ontology with an Emphasis on Reasoning and Knowledge Reuse{\textquotedbl}} Language Resources and Evaluation Conference (LREC), May 2016. 
+
+[12] 
+
+J. Gracia, I. Kernerman, and J. Bosque-Gil, \href{../../%20https://elex.link/elex2017/wp-content/uploads/2017/09/paper33.pdf}{\textstyleCitation{{\textquotedbl}Toward linked data-native dictionaries{\textquotedbl}}}\href{../../%20https://elex.link/elex2017/wp-content/uploads/2017/09/paper33.pdf}{\textstyleInternetlink{ }}in. Proc. of eLex 2017 conference (Electronic lexicography in the 21st century), in Leiden, Netherlands. Lexical Computing CZ s.r.o., pp. 550-559, Sep. 2017. 
+
+[13] 
+
+S. Stolk, \textstyleCitation{{\textquotedbl}OntoLex and Onomasiological Ordering: Supporting Topical Thesauri{\textquotedbl}} in Proc. of the LDK2017 Workshops, NUI Galway, Ireland, 18 June (pp. 60–67), 2017. 
+
+[14] 
+
+I. El Maarouf, J. Bradbury, and P. Hanks, \textstyleCitation{{\textquotedbl}PDEV-lemon: a Linked Data implementation of the Pattern Dictionary of English Verbs based on the Lemon model{\textquotedbl}}. In 3rd Workshop on Linked Data in Linguistics: Multilingual Knowledge Resources and Natural Language Processing (p. 88). 2014. 
+
+[15] 
+
+F. Khan and F. Boschetti, \textstyleCitation{{\textquotedbl}Towards a Representation of Citations in Linked Data Lexical Resources{\textquotedbl}} In proc. of the XVIII EURALEX International Congress (EURALEX 2018). 2018 
+
+[16] 
+
+\textstyleCitation{animal. American Heritage Dictionary. Houghton Mifflin Harcourt, 1994.} Last accessed 28.10.18. 
+
+[17] 
+
+\textstyleCitation{blanco. Diccionario de la Lengua Española (DLE). Versión electrónica de la 23. Edición. December 2017.} Last accessed 28.10.18. 
+
+[18] 
+
+\textstyleCitation{air. Oxford English Living Dictionaries Online. }Last accessed 01.11.18. https://en.oxforddictionaries.com/definition/air Skript
+\end{document}
