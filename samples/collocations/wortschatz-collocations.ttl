@@ -1,0 +1,66 @@
+# more complex types of collocation are provided as provided by the Wortschatz portal [http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012]
+# (scores and definitions as provided for beans [http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=beans], spill the beans [http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans], etc.
+
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos#>.
+@prefix dbr: <http://dbpedia.org/resource/>.
+@prefix dbo: <http://dbpedia.org/ontology/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix provo: <http://www.w3.org/ns/prov#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix oa: <http://www.w3.org/ns/oa#>.
+@prefix aat: <http://vocab.getty.edu/aat/>.
+
+				
+@prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=>
+
+# selected lexical entries
+# (we assume that every Wortschatz word is an independent lexical entry)
+wsen:beans a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "beans"@en.
+wsen:spill a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "spill"@en.
+wsen:green a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "green"@en.
+wsen:about a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "about"@en
+
+# collocations, non-lexicalized
+(wsen:spill wsen:beans) a frac:Collocation;
+  rdf:value "182";
+  dct:description "cooccurrences in the same sentence, unordered";
+  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
+
+(wsen:green wsen:beans) a frac:Collocation;
+  rdf:value "778";
+  dct:description "left neighbor cooccurrence";
+  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
+  lexinfo:termType lexinfo:idiom.
+  
+(wsen:beans wsen:about) a frac:Collocation;
+  rdf:value "35";
+  dct:description "right neighbor cooccurrence";
+  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
+  lexinfo:termType lexinfo:idiom.
+  
+# multi-word expression, lexicalized (!)
+wsen:spill+the+beans a ontolex:MultiWordExpression;
+  ontolex:canonicalForm/ontolex:writtenRep "spill the beans"@en.
+
+(wsen:beans wsen:spill+the+beans) a frac:Collocation;
+  rdf:value "401";
+  dct:description "cooccurrences in the same sentence, unordered";
+  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
