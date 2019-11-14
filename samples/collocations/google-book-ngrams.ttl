@@ -1,0 +1,92 @@
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos#>.
+@prefix dbr: <http://dbpedia.org/resource/>.
+@prefix dbo: <http://dbpedia.org/ontology/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix provo: <http://www.w3.org/ns/prov#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix oa: <http://www.w3.org/ns/oa#>.
+@prefix aat: <http://vocab.getty.edu/aat/>.
+
+# The most elementary level of a collocation is an n-gram, as provided, for example, by Google Books, which provide n-gram frequencies per publication year as tab-separated values. For 2008, the 2012 edition provides the following statistics for the bigram kill + switch.
+
+# # form-form bigrams
+# kill	switch	2008	199	121
+
+# # form-lexeme bigrams
+# kill	switch_NOUN	2008	187	115
+# kill	switch_VERB	2008	8	8
+				
+# # lexeme-form bigrams
+# kill_ADJ	switch	2008	70	48
+# kill_NOUN	switch	2008	89	64
+# kill_VERB	switch	2008	40	30
+				
+# # lexeme-lexeme bigrams
+# kill_VERB	switch_VERB	2008	2	2
+# kill_NOUN	switch_NOUN	2008	83	61
+# kill_VERB	switch_NOUN	2008	35	26
+# kill_ADJ	switch_NOUN	2008	69	48
+# kill_NOUN	switch_VERB	2008	6	6
+
+# In this example, forms are string values (cf. ontolex:LexicalForm), lexemes are string values with parts-of-speech (cf. ontolex:LexicalEntry). A partial ontolex-frac representation is given below:
+
+				
+# kill (verb)
+:kill_v a ontolex:LexicalEntry;
+  lexinfo:partOfSpeech lexinfo:verb;
+  ontolex:canonicalForm :kill_cf.
+
+# kill (canonical form)
+:kill_cf ontolex:writtenRep "kill"@en.
+
+# switch (noun)
+:switch_n a ontolex:LexicalEntry;
+  lexinfo:partOfSpeech lexinfo:noun;
+  ontolex:canonicalForm :switch_cf.
+
+# switch (canonical form)
+:switch_cf ontolex:writtenRep "switch"@en.
+
+# form-form bigrams
+(:kill_cf :switch_cf) a frac:Collocation;
+  rdf:value "199";
+  dct:description "2-grams, English Version 20120701, word frequency";
+  dct:source <https://books.google.com/ngrams>;
+  dct:temporal "2008"^^xsd:date;
+  lexinfo:termType lexinfo:idiom.
+
+(:kill_cf :switch_cf) a frac:Collocation;
+  rdf:value "121";
+  dct:description "2-grams, English Version 20120701, document frequency";
+  dct:source <https://books.google.com/ngrams>;
+  dct:temporal "2008"^^xsd:date;
+  lexinfo:termType lexinfo:idiom.
+  
+# form-lexeme bigrams
+(:kill_cf :switch_n) a frac:Collocation;
+  rdf:value "187";
+  dct:description "2-grams, English Version 20120701, word frequency";
+  dct:source <https://books.google.com/ngrams>;
+  dct:temporal "2008"^^xsd:date;
+  lexinfo:termType lexinfo:idiom.
+
+(:kill_cf :switch_n) a frac:Collocation;
+  rdf:value "115";
+  dct:description "2-grams, English Version 20120701, document frequency";
+  dct:source <https://books.google.com/ngrams>;
+  dct:temporal "2008"^^xsd:date;
+  lexinfo:termType lexinfo:idiom.
