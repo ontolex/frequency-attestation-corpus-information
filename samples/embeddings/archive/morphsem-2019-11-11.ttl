@@ -1,0 +1,181 @@
+# RDF representation for embeddings
+
+# contributors
+# Christian Chiarcos (CC)
+# Thierry Declerck (TD)
+
+# history
+# 2019-11-08 TD initial example: embedding similarity of "card" and "cards" 
+# 2019-11-11 CC revision for draft compliancy
+
+# TODO: normalize naming scheme
+
+# baseURI: http://tutorial-topbraid.com/morphsem
+# imports: http://purl.org/dc/elements/1.1/
+# imports: http://purl.org/dc/terms/
+# imports: http://www.lexinfo.net/ontology/2.0/lexinfo
+# imports: http://www.w3.org/2004/02/skos/core
+# imports: http://www.w3.org/ns/lemon/decomp
+# imports: http://www.w3.org/ns/lemon/ontolex
+
+@prefix : <http://tutorial-topbraid.com/morphsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp/#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+#############
+# core data #
+#############
+
+:Form_card
+  rdf:type ontolex:Form ;
+  lexinfo:number lexinfo:singular ;
+  ontolex:writtenRep "card"@en ;
+.
+
+:Form_cards
+  rdf:type ontolex:Form ;
+  lexinfo:number lexinfo:plural ;
+  ontolex:writtenRep "cards"@en ;
+.
+
+:card
+  rdf:type ontolex:Word ;
+  lexinfo:partOfSpeech lexinfo:noun ;
+  ontolex:canonicalForm :Form_card ;
+  ontolex:otherForm :Form_cards ;
+  ontolex:reference <https://www.wikidata.org/wiki/Q1420> ;
+  ontolex:sense :LexicalSense_card ;
+.
+
+:LexicalSense_card
+  rdf:type ontolex:LexicalSense ;
+  rdfs:comment "portable physical object used for identification, authentication, data storage, or financial transaction (taken from wikidata)"@en ;
+  ontolex:isSenseOf :card ;
+  ontolex:reference <https://www.wikidata.org/wiki/Q42965339> ;
+.
+
+###################
+# FRAC data types #
+###################
+# cf. https://acoli-repo.github.io/ontolex-frac/
+
+frac:Similarity rdfs:subClassOf rdf:List.
+# - MUST contain at least (exactly?) two rdfs:members
+# - all rdfs:members MUST be frac:Embeddings
+# - MUST have exactly one rdf:value (similarity score)
+# - SHOULD have one dc:description (similarity/distance metric)
+
+# no relation between Similarity and Embedding necessary, this is either rdfs:member or one of its subproperties
+
+frac:Embedding a owl:Class.
+# - SHOULD have at least one dc:extent (vector length) [not MUST, because we could (ab)use this for bags of words, too, and these are not size-contrained]
+# - SHOULD have exactly one rdf:value (actual vector)
+# - SHOULD have one dc:description (embedding method/algorithm)
+# - SHOULD have exactly one dc:source (training corpus from which the embedding is obtained)
+# Nothing is required here because if we want to represent only the similarity, these details may not be known. They still should be.
+
+frac:embedding
+	rdfs:domain frac:Element;
+	rdfs:range frac:Embedding.
+# frac:Element (formerly ontolex:Element) is everything in the core model
+
+###########################
+# embeddings & similarity #
+###########################
+ 
+:Form_card frac:embedding :Embedding_card .
+:Form_cards frac:embedding :Embedding_cards .
+
+:Embedding_card a frac:Embedding;
+	dc:description "Word2Vec";		# TOCHECK: do we want to model algorithms as objects (as in initial draft)
+	dc:extent "50";					# 50-dimensional, not provided by TD
+	dc:source <http://PLEASE-PROVIDE-CORPUS-URI.org/> . # training corpus, not provided by TD
+	# we don't have an explicit embedding, should be value of rdf:value
+	# under the open world assumption, it is possible to omit that
+
+:Embedding_cards a frac:Embedding;
+	dc:description "Word2Vec";		# TOCHECK: do we want to model algorithms as objects (as in initial draft)
+	dc:extent "50";					# 50-dimensional, not provided by TD
+	dc:source <http://PLEASE-PROVIDE-CORPUS-URI.org/> . # training corpus, not provided by TD
+	# we don't have an explicit embedding, should be value of rdf:value
+
+:Similarity_W2V_1 a frac:Similarity;
+	dc:description "Word2Vec cosine distance"@en;	# default is most likely cosine
+	rdf:value "0.89";
+	rdfs:member :Embedding_card, :Embedding_cards. # non-directional, for directed similarities (if anything such does exist), use :_1, etc.
+
+###############
+# short-hands # (equivalent, but notationally more compact)
+###############
+# to minimize redundancy, introduce classes that provide values for frac:Embeddings and frac:Similarities
+# so we don't need to replicate this for every instance
+
+# :CosineSimilarity
+	# rdfs:subClassOf frac:Similarity;
+	# rdfs:subClassOf [
+		# a owl:Restriction;
+		# owl:onProperty dc:description;
+		# owl:hasValue "Word2Vec cosine distance"@en 
+	# ] .
+
+# :TDEmbedding
+	# rdfs:subClassOf frac:Embedding;
+	# rdfs:subClassOf [
+		# a owl:Restriction;
+		# owl:onProperty dc:description;
+		# owl:hasValue "Word2Vec"
+	# ];
+	# rdfs:subClassOf [
+		# a owl:Restriction;
+		# owl:onProperty dc:extent;
+		# owl:hasValue "50"
+	# ];
+	# rdfs:subClassOf [
+		# a owl:Restriction;
+		# owl:onProperty dc:source;
+		# owl:hasValue <http://PLEASE-PROVIDE-CORPUS-URI.org/>
+	# ] .
+	
+# # now, the following 5 triples are equivalent with "embeddings & similarity" statements above
+# :Embedding_card a frac:TDEmbedding.
+# :Embedding_cards a frac:TDEmbedding.
+# :Similarity_W2V_1 a frac:CosineSimilarity;
+	# rdf:value "0.89";
+	# rdfs:member :Embedding_card, :Embedding_cards.
+	
+# # can be further simplified with inverse properties and blank nodes
+# :Similarity_W2V_1 a frac:CosineSimilarity;
+	# rdf:value "0.89";
+	# rdfs:member 
+		# [ a :TDEmbedding; frac:embeddingOf Form_card ] , 
+		# [ a :TDEmbedding; frac:embeddingOf Form_cards ] .
+	
+#########################
+# additional vocabulary #
+#########################
+# instead of dc:description, we could also formalize embedding algorithms and distance metrics
+# CC: I strongly prefer *NOT* to deal with that within Frac, because this should be subject to a general-purpose software ontology, 
+#     and not "buried" in something such exotic as a submodule of a vocabulary for lexical data ;)
+#     Whenever such a vocabulary is found (or created), this can (and should) still be added to frac:Embedding and frac:Similarity objects -- independently from Frac
+
+# :Embedding_Algorithm
+  # rdf:type owl:Class ;
+  # rdfs:comment "Listing the distinct approaches" ;
+  # rdfs:label "Embedding algorithm" ;
+# .
+# :Embedding_Algorithm_W2V
+  # rdf:type :Embedding_Algorithm ;
+  # rdfs:comment "the Word2Vec algorithm" ;
+  # rdfs:label "Word2Vec" ;
+# .
+# :Embedding_Similarities
+  # rdf:type owl:Class ;
+  # rdfs:comment "Represent similarities are given by embedding algorithms" ;
+  # rdfs:label "Embedding similarities(@en}" ;
+# .

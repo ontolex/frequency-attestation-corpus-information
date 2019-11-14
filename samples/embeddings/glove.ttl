@@ -1,0 +1,66 @@
+#  The 50-dimensional GloVe 6B (Wikipedia 2014+Gigaword 5) embedding for frak is given below:
+# 
+# frak 0.015246 -0.30472 0.68107 -0.59727 -0.95368 -1.0931 0.58783 -0.19128 0.49108 0.61215 -0.14967 0.68197 0.22723 0.38514 -0.54721 -0.71187 0.21832 0.59857 0.1076 -0.23619 -0.86604 -0.91168 0.26087 -0.42067 0.60649 0.80644 -1.0477 0.67461 0.34154 -0.072511 -1.01 0.35331 -0.35636 0.9764 -0.62665 -0.29075 0.50797 -1.3538 0.18744 0.27852 -0.22557 -1.187 -0.11523 -0.078265 0.29849 0.22993 -0.12354 0.2829 1.0697 0.015366
+
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos#>.
+@prefix dbr: <http://dbpedia.org/resource/>.
+@prefix dbo: <http://dbpedia.org/ontology/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix provo: <http://www.w3.org/ns/prov#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix oa: <http://www.w3.org/ns/oa#>.
+@prefix aat: <http://vocab.getty.edu/aat/>.
+
+
+#  As a lemma (LexicalEntry) embedding, this can be represented as follows:
+			
+:frak a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
+  frac:embedding [ 
+    a frac:Embedding;
+	rdf:value "0.015246 -0.30472 0.68107 ...";
+	dct:source 
+	  <http://dumps.wikimedia.org/enwiki/20140102/>,
+	  <https://catalog.ldc.upenn.edu/LDC2011T07>;
+	dct:extent 50^^^xsd:int;
+	dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
+	
+
+# As with frac:Frequency, we recommend defining resource-specific subclasses of frac:Embedding in order to reduce redundancy in the data:
+		
+# resource-specific embedding class
+:GloVe6BEmbedding_50d rdfs:subClassOf frac:Embedding;
+  rdfs:subClassOf 
+    [ a owl:Restriction;
+	  owl:onProperty dct:source;
+	  owl:hasValue 
+		  <http://dumps.wikimedia.org/enwiki/20140102/>,
+		  <https://catalog.ldc.upenn.edu/LDC2011T07> ],
+	[ a owl:Restriction;
+	  owl:onProperty dct:extent;
+	  owl:hasValue 50^^^xsd:int ],
+	[ a owl:Restriction;
+	  owl:onProperty dct:description;
+	  owl:hasValue "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
+
+# embedding assignment
+:frak a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
+  frac:embedding [ 
+    a :GloVe6BEmbedding_50d;
+	rdf:value "0.015246 -0.30472 0.68107 ..." ].
+
