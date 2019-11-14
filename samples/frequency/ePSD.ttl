@@ -1,0 +1,86 @@
+# word and form frequencies for the Sumerian word a (n.) "water" from the Electronic Penn Sumerian Dictionary and the frequencies of the underlying corpus.
+
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos#>.
+@prefix dbr: <http://dbpedia.org/resource/>.
+@prefix dbo: <http://dbpedia.org/ontology/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix provo: <http://www.w3.org/ns/prov#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix oa: <http://www.w3.org/ns/oa#>.
+@prefix aat: <http://vocab.getty.edu/aat/>.
+
+# word frequency, over all form variants
+epsd:a_water_n a ontolex:LexicalEntry;
+ frac:frequency [ 
+  a frac:CorpusFrequency;
+  rdf:value "4683"^^xsd:int;
+  dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] .
+
+# form frequency for individual orthographical variants
+epsd:a_water_n ontolex:canonicalForm [
+ ontolex:writtenRep "𒀀"@sux-Xsux, "a"@sux-Latn;
+ frac:frequency [
+  a frac:CorpusFrequency;
+  rdf:value "4656"^^xsd:int;
+  dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] ] .
+
+epsd:a_water_n ontolex:otherForm [
+ ontolex:writtenRep "𒀉"@sux-Xsux, "a2"@sux-Latn;
+ frac:frequency [
+  a frac:CorpusFrequency;
+  rdf:value "1"^^xsd:int;
+  dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] ] .
+
+epsd:a_water_n ontolex:otherForm [
+ ontolex:writtenRep "𒂊"@sux-Xsux, "e"@sux-Latn;
+ frac:frequency [
+  a frac:CorpusFrequency;
+  rdf:value "24"^^xsd:int;
+  dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] ].
+
+
+# It is necessary to provide the link to the underlying corpus for every frequency assessment because the same element may receive different counts over different corpora. For data modelling, it is recommended to define a corpus- or collection-specific subclass of frac:CorpusFrequency with a fixed dct:source value. This leads to more compact data and avoids potential difficulties with the Open World Assumption (interpretability of incomplete data).
+				
+# Corpus Frequency in the EPSD corpus
+:EPSDFrequency rdfs:subClassOf frac:CorpusFrequency.
+:EPSDFrequency rdfs:subClassOf
+ [ a owl:Restriction ;
+   owl:onProperty dct:source ;
+   owl:hasValue <http://oracc.museum.upenn.edu/epsd2/pager> ] .
+
+# frequency assessment
+epsd:a_water_n frac:frequency [ 
+  a :EPSDFrequency;
+  rdf:value "4683"^^xsd:int ].
+	
+
+# frac:CorpusFrequency can be extended with additional filter conditions to define sub-corpora. For example, we can restrict the subcorpus to a particular time period, e.g., the Neo-Sumerian Ur III period:
+
+				
+# EPSD frequency for the Ur-III period (aat:300019910)
+:EPSDFrequency_UrIII 
+ rdfs:subClassOf :EPSDFrequency;
+ rdfs:subClassOf
+   [ a owl:Restriction ;
+     owl:onProperty dct:temporal ;
+     owl:hasValue aat:300019910 ] .
+
+# frequency assessment for sub-corpus
+epsd:a_water_n frac:frequency [ 
+  a :EPSDFrequency_UrIII;
+  rdf:value "2299"^^xsd:int ].
+  
