@@ -1,0 +1,53 @@
+﻿@base <http://oldenglishthesaurus.arts.gla.ac.uk/> .
+@prefix toe: <http://oldenglishthesaurus.arts.gla.ac.uk/> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix ex: <http://www.example.org/> .
+
+
+# Below are a lexical entry and a specific sense thereof
+# taken from A Thesaurus of Old English.
+
+<entry/#id=21808> a ontolex:LexicalEntry ;
+    rdfs:label "gēardagum"@ang ;
+    ontolex:canonicalForm [
+        ontolex:writtenRep "gēardagum"@ang
+    ] ;
+    ontolex:sense <sense/#id=21808> ;
+.
+
+<sense/#id=21808> a ontolex:LexicalSense ;
+    ontolex:isLexicalizedSenseOf <category/#id=9880> ;
+.
+
+<category/#id=9880> a ontolex:LexicalConcept ;
+    skos:prefLabel "Formerly, long ago"@eng ;
+.
+
+
+# Below is an annotation of the lexical sense, identifying a specific
+# occurrence in the DOEC Web Corpus as being in that sense.
+
+ex:attestation412 a oa:Annotation ;
+    oa:motivation oa:identifying ;
+    oa:hasBody <sense/#id=21808> ;
+    oa:hasTarget [
+        # based on the DOE Web Corpus
+        oa:hasSource <https://tapor.library.utoronto.ca/doecorpus/> ;
+        # for selecting the entire line in the DOE Web Corpus
+        oa:hasSelector [
+            a oa:TextPositionSelector ;
+            oa:start 982592 ;
+            oa:end 982708 ;
+        ] ;
+        # for selecting the exact token in the DOE Web Corpus
+        oa:hasSelector [
+            a oa:TextPositionSelector ;
+            oa:start 982607 ;  # equals start of line + 15 characters
+            oa:end 982616 ;    # equals start of line + 24 characters
+        ] ;
+    ]
+.
+
