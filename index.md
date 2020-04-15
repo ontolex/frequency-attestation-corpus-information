@@ -1,3 +1,12 @@
+# The Ontolex Module for Frequency, Attestation and Corpus Information
+# Draft Community Group Report 
+
+Editors:
+  Christian Chiarcos ([Applied Computational Linguistics, Goethe UniversitÃ¤t Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
+  Max Ionov ([Applied Computational Linguistics, Goethe UniversitÃ¤t Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
+Authors: (please add yourself)
+
+[Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) Â© 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
 
 <section id="abstract">
 
@@ -27,6 +36,26 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
 
 </section>
 
+## Table of Contents
+
+- [Introduction](#introduction)
+	- [Background and Motivation](#background-and-motivation)
+	- [Aim and Scope](#aim-and-scope)
+	- [Namespaces](#namespaces)
+- [Overview](#overview)
+- [Definitions](#definitions)
+	- [Frequency](#frequency)
+	- [Attestation](#attestation)
+	- [Embeddings](#embeddings)
+	- [Collocations](#collocations)
+	- [Similarity](#similarity)
+- [Corpus Annotation (non-normative)](#corpus-annotation-non-normative)
+- [Usage guidelines](#usage-guidelines)
+	- [Resource-specific subclasses of frac concepts](#resource-specific-subclasses-of-frac-concepts)
+	- [RDF Serializations and CSV](#rdf-serializations-and-csv)
+- [Acknowledgements](#acknowledgements)
+- [References](#references)
+
 <section>
 
 ## Introduction
@@ -39,7 +68,7 @@ The [_lemon_ model](https://www.w3.org/2016/05/ontolex/) provides a [core](https
 
 The current version of _lemon_ (as an outcome of the OntoLex group, sometimes referred as OntoLex-lemon in the literature) as well as its previous version ([lemon](https://lemon-model.net/) [<cite>[1](#bib-lemon_paper)</cite>]) have been increasingly used in the context of dictionaries and lexicographical data to convert existent lexicographic information into the standards and formats of the Semantic Web. In consequence, a designated _lemon_ <a href="">module for lexicography</a> (_lexicog_) has been designed, with applications in monolingual [<cite>[2](#bib-klimek-kdict)</cite>], bilingual [<cite>[3](#bib-gracia-apertium)</cite>], and multilingual [<cite>[4](#bib-bosque-kdict)</cite>] dictionaries, as well as diachronic [<cite>[5](#bib-kahn-diachronic)</cite>], dialectal [<cite>[6](#bib-declerck-dialectal)</cite>], and etymological ones [<cite>[7](#bib-abromeit-etymological)</cite>], among others. This module is partially motivated by requirements of corpus-based lexicography (frequency and collocation information) and digital philology (linking lexical resources with corpus data).
 
-A second motivation for a _lemon_ model for corpus-based information comes from natural language processing. With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics (KEYNESS-REFERENCE???), collocation vectors (Schütze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (??? and Schütze, 2017). With the proposed module, _lemon_ can serve as a community standard to encode, store and exchange vector representations (embeddings) along with the lexical concepts, senses, lemmas or words that they represent. The processing of word embeddings is beyond the scope of this module. Embeddings are thus represented as literals ("BLOB").
+A second motivation for a _lemon_ model for corpus-based information comes from natural language processing. With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics (KEYNESS-REFERENCE???), collocation vectors (SchÃ¼tze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (??? and SchÃ¼tze, 2017). With the proposed module, _lemon_ can serve as a community standard to encode, store and exchange vector representations (embeddings) along with the lexical concepts, senses, lemmas or words that they represent. The processing of word embeddings is beyond the scope of this module. Embeddings are thus represented as literals ("BLOB").
 
 The added value of using linked data technologies to represent such information is an increased level of interoperability and integration between different types of lexical resources, the textual data they pertain to, as well as distributional representations of words, lexical senses and lexical concepts. Creating a _lemon_ module in the OntoLex CG is a suitable means for establishing a vocabulary on a broad consensus that takes into account all use cases identified above in an adequate fashion. The OntoLex community is the natural forum to accomplish this for several reasons:
 
@@ -298,7 +327,7 @@ Fig. 4. Attestation module following Khan and Boschetti (2018)
 
 </div>
 
-> "Lexicographers use examples to support their analysis of the headword. The examples can either be authentic (exact quotations), adapted (modified versions of authentic examples) or invented examples. Authentic examples are attributed quotations (citations), which not only elucidate meaning and illustrate features of the headword (spelling, syntax, collocation, register etc.), but also function as attestations and are used provide evidence of the existence of a headword. We therefore call these examples “attestations”." (Depuydt and de Does 2018)
+> "Lexicographers use examples to support their analysis of the headword. The examples can either be authentic (exact quotations), adapted (modified versions of authentic examples) or invented examples. Authentic examples are attributed quotations (citations), which not only elucidate meaning and illustrate features of the headword (spelling, syntax, collocation, register etc.), but also function as attestations and are used provide evidence of the existence of a headword. We therefore call these examples Â“attestationsÂ”." (Depuydt and de Does 2018)
 
 <div class="entity">
 
@@ -388,9 +417,9 @@ In distributional semantics, the contexts in which a word is attested are taken 
 *   _It's a frakking Cylon._
 *   _Our job isn't to be careful, it's to shoot Cylons out of the frakking sky!_
 
-With the following list of reference words: <tt>(ship, ocean, lose, find, brain, mind, head, sky, Cylon, ...)</tt>, we obtain the vector <tt>(1,0,1,0,0,1,1,1,2,...)</tt> for the lemma (lexical entry) _frak_. For practical applications, these vectors are projected into lower-dimensional spaces, e.g., by means of statistical (Schütze 1993) or neural methods (Socher et al. 2011). The process of mapping a word to a numerical vector and its result are referred to as "word embedding". Aside from collocation counts, other methods for creating word embeddings do exist, but they are always defined relative to a corpus.
+With the following list of reference words: <tt>(ship, ocean, lose, find, brain, mind, head, sky, Cylon, ...)</tt>, we obtain the vector <tt>(1,0,1,0,0,1,1,1,2,...)</tt> for the lemma (lexical entry) _frak_. For practical applications, these vectors are projected into lower-dimensional spaces, e.g., by means of statistical (SchÃ¼tze 1993) or neural methods (Socher et al. 2011). The process of mapping a word to a numerical vector and its result are referred to as "word embedding". Aside from collocation counts, other methods for creating word embeddings do exist, but they are always defined relative to a corpus.
 
-Embeddings have become a dominating paradigm in natural language processing and machine learning, but, if compiled from large corpora, they require long training periods and thus tend to be re-used. However, embedding distributions often use tool-specific binary formats (cf. [Gensim](https://radimrehurek.com/gensim/models/word2vec.html)), and thus a portability problem arises. CSV and related formats (cf. [SENNA embeddings](https://github.com/baojie/senna/tree/master/embeddings)) are a better alternative, but their application to sense and concept embeddings (as provided, for example, by Rothe and Schütze 2017) is problematic if their distribution is detached from the definition of the underlying sense and concept definitions. With frac, Ontolex-lemon provides a vocabulary for the conjoint publication and sharing of embeddings and lexical information at all levels: non-lemmatized words (ontolex:Form), lemmatized words (ontolex:LexicalEntry), phrases (ontolex:MultiWordExpression), lexical senses (ontolex:LexicalSense) and lexical concepts (ontolex:LexicalConcept).
+Embeddings have become a dominating paradigm in natural language processing and machine learning, but, if compiled from large corpora, they require long training periods and thus tend to be re-used. However, embedding distributions often use tool-specific binary formats (cf. [Gensim](https://radimrehurek.com/gensim/models/word2vec.html)), and thus a portability problem arises. CSV and related formats (cf. [SENNA embeddings](https://github.com/baojie/senna/tree/master/embeddings)) are a better alternative, but their application to sense and concept embeddings (as provided, for example, by Rothe and SchÃ¼tze 2017) is problematic if their distribution is detached from the definition of the underlying sense and concept definitions. With frac, Ontolex-lemon provides a vocabulary for the conjoint publication and sharing of embeddings and lexical information at all levels: non-lemmatized words (ontolex:Form), lemmatized words (ontolex:LexicalEntry), phrases (ontolex:MultiWordExpression), lexical senses (ontolex:LexicalSense) and lexical concepts (ontolex:LexicalConcept).
 
 <div class="note">
 
@@ -517,7 +546,7 @@ Examples for non-word embeddings:
 *   [AutoExtend](http://www.cis.lmu.de/~sascha/AutoExtend/): (a method to build) synset and lexeme embeddings, data [here](http://www.cis.lmu.de/~sascha/AutoExtend/embeddings.zip)
 *   [SenseGram](https://github.com/uhh-lt/sensegram): sense embeddings, data [here](http://ltdata1.informatik.uni-hamburg.de/sensegram/)
 *   [Vec2Synset](http://tudarmstadt-lt.github.io/vec2synset/): (a method to build) WordNet synset (= LexicalConcept) embeddings
-*   [Character embeddings](https://minimaxir.com/2017/04/char-embeddings/) are probably beyond the scope of OntoLex, unless characters are regarded LexicalEntries. (Which they could, for languages such as Chinese or Sumerian certainly, but also for Western languages -- given the fact that character-level pseudo entries are sometimes used in dictionaries to describe the phonology and orthography of a language. This is the case, for example, for Grimm's [Deutsches Wörterbuch](http://woerterbuchnetz.de/cgi-bin/WBNetz/wbgui_py?sigle=DWB).)
+*   [Character embeddings](https://minimaxir.com/2017/04/char-embeddings/) are probably beyond the scope of OntoLex, unless characters are regarded LexicalEntries. (Which they could, for languages such as Chinese or Sumerian certainly, but also for Western languages -- given the fact that character-level pseudo entries are sometimes used in dictionaries to describe the phonology and orthography of a language. This is the case, for example, for Grimm's [Deutsches WÃ¶rterbuch](http://woerterbuchnetz.de/cgi-bin/WBNetz/wbgui_py?sigle=DWB).)
 
 </div>
 
@@ -867,11 +896,11 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 
 <section>
 
-## Usage guidelines
+# Usage guidelines
 
 <section>
 
-### Resource-specific subclasses of frac concepts
+## Resource-specific subclasses of frac concepts
 
 As corpus-derived information requires provenance and other metadata, the frac module uses reification (class-based modelling) for concepts such as frequency or embeddings. In a data set, this information will be recurring, and for redundancy reduction, we recommend to provide resource-specific subclasses of frac concepts that provide metadata by means of <tt>owl:Restriction</tt>s that provide the value for the respective properties. This was illustrated above for the relevant frac classes.
 
@@ -917,7 +946,7 @@ This query can be used as a test for _frac_ compliancy, and for property `infere
 
 <section>
 
-### RDF Serializations and CSV
+## RDF Serializations and CSV
 
 Usually, numerical information drawn from corpora is distributed and shared as comma-separated values (CSV), e.g., ngram lists or embeddings. Ontolex-frac as an RDF vocabulary is agnostic about its serialization (RDF/TTL, RDF/XML, JSON-LD, etc.), but in particular, it is compliant with CSV and related tabular formats by means of W3C recommendations such as [CSV2RDF](https://www.w3.org/TR/csv2rdf/), [RDB Direct Mapping](https://www.w3.org/TR/rdb-direct-mapping/) and the [RDB to RDF Mapping Language](https://www.w3.org/TR/r2rml/). For corpus-derived lexical-semantic information which is typically distributed in CSV, the best practice is to continue to do so, but to provide a mapping to Ontolex-frac as this provides a vocabulary for their interpretation as Linked Data, and thus establishes an interoperability layer over the raw data without creating additional overhead.
 
@@ -931,11 +960,11 @@ Ontolex-frac is compliant with CSV formats, but its handling of structured infor
 
 </section>
 
-## Acknowledgements
+# Acknowledgements
 
 TBC
 
-## References
+# References
 
 <div class="note">
 
@@ -945,15 +974,15 @@ from lexicog, to be revised
 
 <dt id="bib-mccrae-lemon">[1]</dt>
 
-<dd>J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. Gómez-Pérez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, [<cite>"Interchanging lexical resources on the Semantic Web"</cite> ](http://dx.doi.org/10.1007/s10579-012-9182-3). Language Resources and Evaluation, vol. 46, 2012.</dd>
+<dd>J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. GÃ³mez-PÃ©rez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, [<cite>"Interchanging lexical resources on the Semantic Web"</cite> ](http://dx.doi.org/10.1007/s10579-012-9182-3). Language Resources and Evaluation, vol. 46, 2012.</dd>
 
 <dt id="bib-klimek-kdict">[2]</dt>
 
-<dd>B. Klimek and M. Brümmer, <cite>"Enhancing lexicography with semantic language databases"</cite> Kernerman Dictionary News, 23, 5-10\. 2015.</dd>
+<dd>B. Klimek and M. BrÃ¼mmer, <cite>"Enhancing lexicography with semantic language databases"</cite> Kernerman Dictionary News, 23, 5-10\. 2015.</dd>
 
 <dt id="bib-gracia-apertium">[3]</dt>
 
-<dd>J. Gracia, M. Villegas, A. Gómez-Pérez, and N. Bel, <cite>"The apertium bilingual dictionaries on the web of data"</cite> Semantic Web Journal, vol. 9, no. 2, pp. 231-240, Jan. 2018.</dd>
+<dd>J. Gracia, M. Villegas, A. GÃ³mez-PÃ©rez, and N. Bel, <cite>"The apertium bilingual dictionaries on the web of data"</cite> Semantic Web Journal, vol. 9, no. 2, pp. 231-240, Jan. 2018.</dd>
 
 <dt id="bib-bosque-kdict">[4]</dt>
 
@@ -961,23 +990,23 @@ from lexicog, to be revised
 
 <dt id="bib-kahn-diachronic">[5]</dt>
 
-<dd>F. Khan, J. E. Díaz-Vera, and M. Monachini, <cite>"Representing Polysemy and Diachronic Lexico-Semantic Data on the Semantic Web"</cite> In SWASH at ESWC (2016)</dd>
+<dd>F. Khan, J. E. DÃ­az-Vera, and M. Monachini, <cite>"Representing Polysemy and Diachronic Lexico-Semantic Data on the Semantic Web"</cite> In SWASH at ESWC (2016)</dd>
 
 <dt id="bib-declerck-dialectal">[6]</dt>
 
-<dd>T. Declerck and E. Wandl-Vogt, <cite>"Cross-linking Austrian dialectal Dictionaries through formalized Meanings"</cite> In Proceedings of the XVI EURALEX International Congress, pp. 329–343\. 2014.</dd>
+<dd>T. Declerck and E. Wandl-Vogt, <cite>"Cross-linking Austrian dialectal Dictionaries through formalized Meanings"</cite> In Proceedings of the XVI EURALEX International Congress, pp. 329Â–343\. 2014.</dd>
 
 <dt id="bib-abromeit-etymological">[7]</dt>
 
-<dd>F. Abromeit, C. Chiarcos, C. Fäth and M. Ionov, <cite>"Linking the Tower of Babel: Modelling a Massive Set of Etymological Dictionaries as RDF"</cite> In LDL 2016 5th Workshop on Linked Data in Linguistics: Managing, Building and Using Linked Language Resources (p. 11). May 2016.</dd>
+<dd>F. Abromeit, C. Chiarcos, C. FÃ¤th and M. Ionov, <cite>"Linking the Tower of Babel: Modelling a Massive Set of Etymological Dictionaries as RDF"</cite> In LDL 2016 5th Workshop on Linked Data in Linguistics: Managing, Building and Using Linked Language Resources (p. 11). May 2016.</dd>
 
 <dt id="bib-bosque-lexicography">[8]</dt>
 
-<dd>J. Bosque-Gil, J. Gracia, and A. Gómez-Pérez, <cite>"Linked data in lexicography"</cite> Kernerman Dictionary News, pp. 19-24, Jul. 2016.</dd>
+<dd>J. Bosque-Gil, J. Gracia, and A. GÃ³mez-PÃ©rez, <cite>"Linked data in lexicography"</cite> Kernerman Dictionary News, pp. 19-24, Jul. 2016.</dd>
 
 <dt id="bib-declerck-paneuropean">[9]</dt>
 
-<dd>T. Declerck, E. Wandl-Vogt, and K. Mörth, <cite>"Towards a Pan European Lexicography by Means of Linked (Open) Data"</cite> In Electronic lexicography in the 21st century: linking lexical data in the digital age. Proceedings of the eLex 2015 conference (pp. 342-355), 2015.</dd>
+<dd>T. Declerck, E. Wandl-Vogt, and K. MÃ¶rth, <cite>"Towards a Pan European Lexicography by Means of Linked (Open) Data"</cite> In Electronic lexicography in the 21st century: linking lexical data in the digital age. Proceedings of the eLex 2015 conference (pp. 342-355), 2015.</dd>
 
 <dt id="bib-bosque-module">[10]</dt>
 
@@ -985,7 +1014,7 @@ from lexicog, to be revised
 
 <dt id="bib-parvizi-oxford">[11]</dt>
 
-<dd>A. Parvizi, M. Kohl, M. González, R. Saurí, <cite>"Towards a Linguistic Ontology with an Emphasis on Reasoning and Knowledge Reuse"</cite> Language Resources and Evaluation Conference (LREC), May 2016.</dd>
+<dd>A. Parvizi, M. Kohl, M. GonzÃ¡lez, R. SaurÃ­, <cite>"Towards a Linguistic Ontology with an Emphasis on Reasoning and Knowledge Reuse"</cite> Language Resources and Evaluation Conference (LREC), May 2016.</dd>
 
 <dt id="bib-gracia-native">[12]</dt>
 
@@ -993,7 +1022,7 @@ from lexicog, to be revised
 
 <dt id="bib-stolk-onomasiological">[13]</dt>
 
-<dd>S. Stolk, <cite>"OntoLex and Onomasiological Ordering: Supporting Topical Thesauri"</cite> in Proc. of the LDK2017 Workshops, NUI Galway, Ireland, 18 June (pp. 60–67), 2017.</dd>
+<dd>S. Stolk, <cite>"OntoLex and Onomasiological Ordering: Supporting Topical Thesauri"</cite> in Proc. of the LDK2017 Workshops, NUI Galway, Ireland, 18 June (pp. 60Â–67), 2017.</dd>
 
 <dt id="bib-elmaarouf-verbs">[14]</dt>
 
@@ -1009,7 +1038,7 @@ from lexicog, to be revised
 
 <dt id="RAE-dict">[17]</dt>
 
-<dd><cite>blanco. Diccionario de la Lengua Española (DLE). Versión electrónica de la 23\. Edición. December 2017.</cite> Last accessed 28.10.18.</dd>
+<dd><cite>blanco. Diccionario de la Lengua EspaÃ±ola (DLE). VersiÃ³n electrÃ³nica de la 23\. EdiciÃ³n. December 2017.</cite> Last accessed 28.10.18.</dd>
 
 <dt id="OED-dict-air">[18]</dt>
 
