@@ -58,11 +58,15 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
 
 <section>
 
-## Introduction
+## Introduction 
+
+back to ([Table of Contents](#table-of-contents))
 
 <section>
 
 ### Background and Motivation
+
+back to ([Table of Contents](#table-of-contents))
 
 The [_lemon_ model](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary (OntoLex) to represent _linguistic information_ associated to ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology.
 
@@ -83,6 +87,8 @@ The added value of using linked data technologies to represent such information 
 
 ### Aim and Scope
 
+back to ([Table of Contents](#table-of-contents))
+
 The goal of this module is to complement _lemon_ core elements with a vocabulary layer to represent lexicographical and semantic information derived from or defined with reference to corpora and external resources in a way that (a) _generalizes_ over use cases from digital lexicography, natural language processing, artificial intelligence, computational philology and corpus linguistics, that (b) facilitates _exchange, storage and re-usability_ of such data along with lexical information, and that (c) _minimizes information loss_.
 
 The scope of the model is three-fold:
@@ -102,6 +108,9 @@ _Corpus_ as used throughout this document is understood in its traditional, broa
 <section>
 
 ### Namespaces
+
+back to ([Table of Contents](#table-of-contents))
+
 
 This is a list of relevant namespaces that will be used in the rest of this document:
 
@@ -140,6 +149,8 @@ Other models [TO REVIEW]:
 
 ### ontolex:Element
 
+back to ([Table of Contents](#table-of-contents))
+
 We consider all _lemon_ core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of ontolex:Form (for word frequency and plain word/phrase embeddings), ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), ontolex:LexicalSense (for sense frequency and sense embeddings), and ontolex:LexicalConcept (for concept frequency and concept embeddings).
 
 ![](img/ontolex-element.png "ontolex:Element")
@@ -155,6 +166,9 @@ Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, o
 
 ## Overview
 
+back to ([Table of Contents](#table-of-contents))
+
+
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_fraq_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
 ![](img/ontolex-frac-2019-03.png "ontolex-frac-2019-03.png")
@@ -168,9 +182,15 @@ Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overvi
 
 ## Definitions
 
+back to ([Table of Contents](#table-of-contents))
+
+
 <section>
 
 ### Frequency
+
+back to ([Table of Contents](#table-of-contents))
+
 
 Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics. At its core, this means that lexicographers use corpus frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). As a qualitative assessment, frequency can be expressed with [lexinfo:frequency](http://www.lexinfo.net/ontology/2.0/lexinfo#frequency), "[t]he relative commonness with which a term occurs". However, this is an object property with possible values lexinfo:commonlyUsed, lexinfo:infrequentlyUsed, lexinfo:rarelyUsed, while absolute counts over a particular resource (corpus) require novel vocabulary elements.
 
@@ -313,6 +333,7 @@ epsd:a_water_n frac:frequency [
 <section>
 
 ### Attestation
+back to ([Table of Contents](#table-of-contents))
 
 <div class="note">
 
@@ -408,6 +429,7 @@ CC: Naming follows K and B, I'm not too happy with the name, though, because it'
 <section>
 
 ### Embeddings
+back to ([Table of Contents](#table-of-contents))
 
 In distributional semantics, the contexts in which a word is attested are taken to define its meaning. Contextual similarity is thus a correlate of semantic similarity. Different representations of context are possible, the most prominent model to date is the form of a vector. A word vector can be created, for example, by means of a reference list of vocabulary items, where every reference word is associated with a fixed position, e.g., _ship_ with position 1, _ocean_ with 2, _sky_ with 3, etc. Given a corpus (and a selection criterion for collocates, e.g., within the same sentence), every word in the corpus can be described by the frequency that a reference word occurred as a collocate in the corpus. Assume we want to define the meaning of _frak_, with (exactly) the following attestations in our sample corpus (random samples from [wikiquote](https://en.wikiquote.org/wiki/Battlestar_Galactica_(2003))):
 
@@ -555,6 +577,7 @@ Examples for non-word embeddings:
 <section>
 
 ## Collocations
+back to ([Table of Contents](#table-of-contents))
 
 <div class="note">
 
@@ -762,6 +785,7 @@ The second example illustrates more complex types of collocation are provided as
 <section>
 
 ## Similarity
+back to ([Table of Contents](#table-of-contents))
 
 Similarity is a paradigmatic contextual relation between elements that can replace each other in the same context. In distributional semantics, a quantitative assessment of the similarity of two forms, lexemes, phrases, word senses or concepts is thus grounded in numerical representations of their respective contexts, i.e., their embeddings. In a broader sense of `embedding', also bags of words fall under the scope of <tt>frac:Embedding</tt>, see the usage note below.
 
@@ -816,6 +840,7 @@ Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled a
 <section>
 
 ## Corpus Annotation (non-normative)
+back to ([Table of Contents](#table-of-contents))
 
 <div class="note">
 
@@ -897,10 +922,12 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 <section>
 
 # Usage guidelines
+back to ([Table of Contents](#table-of-contents))
 
 <section>
 
-## Resource-specific subclasses of frac concepts
+## Resource-specific subclasses of FrAC concepts
+back to ([Table of Contents](#table-of-contents))
 
 As corpus-derived information requires provenance and other metadata, the frac module uses reification (class-based modelling) for concepts such as frequency or embeddings. In a data set, this information will be recurring, and for redundancy reduction, we recommend to provide resource-specific subclasses of frac concepts that provide metadata by means of <tt>owl:Restriction</tt>s that provide the value for the respective properties. This was illustrated above for the relevant frac classes.
 
@@ -947,6 +974,7 @@ This query can be used as a test for _frac_ compliancy, and for property `infere
 <section>
 
 ## RDF Serializations and CSV
+back to ([Table of Contents](#table-of-contents))
 
 Usually, numerical information drawn from corpora is distributed and shared as comma-separated values (CSV), e.g., ngram lists or embeddings. Ontolex-frac as an RDF vocabulary is agnostic about its serialization (RDF/TTL, RDF/XML, JSON-LD, etc.), but in particular, it is compliant with CSV and related tabular formats by means of W3C recommendations such as [CSV2RDF](https://www.w3.org/TR/csv2rdf/), [RDB Direct Mapping](https://www.w3.org/TR/rdb-direct-mapping/) and the [RDB to RDF Mapping Language](https://www.w3.org/TR/r2rml/). For corpus-derived lexical-semantic information which is typically distributed in CSV, the best practice is to continue to do so, but to provide a mapping to Ontolex-frac as this provides a vocabulary for their interpretation as Linked Data, and thus establishes an interoperability layer over the raw data without creating additional overhead.
 
@@ -961,10 +989,12 @@ Ontolex-frac is compliant with CSV formats, but its handling of structured infor
 </section>
 
 # Acknowledgements
+back to ([Table of Contents](#table-of-contents))
 
 TBC
 
 # References
+back to ([Table of Contents](#table-of-contents))
 
 <div class="note">
 
