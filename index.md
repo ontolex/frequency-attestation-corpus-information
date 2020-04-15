@@ -44,6 +44,7 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
 	- [Namespaces](#namespaces)
 - [Overview](#overview)
 - [Definitions](#definitions)
+	- [ontolex:Element](#definitions)
 	- [Frequency](#frequency)
 	- [Attestation](#attestation)
 	- [Embeddings](#embeddings)
@@ -145,21 +146,6 @@ Other models [TO REVIEW]:
 
 </section>
 
-<section>
-
-### ontolex:Element
-
-back to ([Table of Contents](#table-of-contents))
-
-We consider all _lemon_ core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of ontolex:Form (for word frequency and plain word/phrase embeddings), ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), ontolex:LexicalSense (for sense frequency and sense embeddings), and ontolex:LexicalConcept (for concept frequency and concept embeddings).
-
-![](img/ontolex-element.png "ontolex:Element")
-Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
-
-> Such a top-level concept used to exist in _Monnet-lemon_, but has been abandoned in the 2016 edition of _lemon_. If this concept is not provided by a future revision of the _lemon_ core vocabulary, it will be introduced by this module. Note that the introduction of ontolex:Element has no effect on _lemon_ core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
-
-</section>
-
 </section>
 
 <section>
@@ -183,6 +169,22 @@ Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overvi
 ## Definitions
 
 back to ([Table of Contents](#table-of-contents))
+
+
+<section>
+
+### ontolex:Element
+
+back to ([Table of Contents](#table-of-contents))
+
+We consider all _lemon_ core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of ontolex:Form (for word frequency and plain word/phrase embeddings), ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), ontolex:LexicalSense (for sense frequency and sense embeddings), and ontolex:LexicalConcept (for concept frequency and concept embeddings).
+
+![](img/ontolex-element.png "ontolex:Element")
+Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
+
+> Such a top-level concept used to exist in _Monnet-lemon_, but has been abandoned in the 2016 edition of _lemon_. If this concept is not provided by a future revision of the _lemon_ core vocabulary, it will be introduced by this module. Note that the introduction of ontolex:Element has no effect on _lemon_ core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
+
+</section>
 
 
 <section>
