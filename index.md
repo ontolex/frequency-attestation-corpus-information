@@ -32,7 +32,7 @@ There are a number of ways that one may participate in the development of this r
 *   Mailing list: [public-ontolex@w3.org](http://lists.w3.org/Archives/Public/public-ontolex/)
 *   Wiki: [Main page](https://www.w3.org/community/ontolex/wiki/Main_Page)
 *   More information about meetings of the ONTOLEX group can be obtained [here](https://www.w3.org/community/ontolex/wiki/Main_Page#Meetings)
-*   [Source code](https://github.com/acoli-repo/ontolex-frac) for this document can be found on Github.
+*   [Source code](https://github.com/ontolex/frequency-attestation-corpus-information/) for this document can be found on Github.
 
 Disclaimer: This draft follows closely the structure and design of [The Ontolex Lexicography Module. Draft Community Group Report 28 October 2018](https://jogracia.github.io/ontolex-lexicog/), edited by Julia Bosque-Gil and Jorge Gracia. In particular, motivational and introductory text are partially adapted without being marked as quotes. This is to be replaced by original text before publication.
 
@@ -157,7 +157,7 @@ Other models [TO REVIEW]:
 back to ([Table of Contents](#table-of-contents))
 
 
-The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_fraq_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
+The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_frac_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
 ![](img/ontolex-frac-2019-03.png "ontolex-frac-2019-03.png")
 Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overview
@@ -175,13 +175,15 @@ back to ([Table of Contents](#table-of-contents))
 
 <section>
 
-### ontolex:Element
+### frac:Observable
 
 back to ([Table of Contents](#table-of-contents))
 
+> TODO: change this to `frac:Observable`
+
 We consider all _lemon_ core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of ontolex:Form (for word frequency and plain word/phrase embeddings), ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), ontolex:LexicalSense (for sense frequency and sense embeddings), and ontolex:LexicalConcept (for concept frequency and concept embeddings).
 
-![](img/ontolex-element.png "ontolex:Element")
+![](img/ontolex-element.png "frac:Observable")
 Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
 
 > Such a top-level concept used to exist in _Monnet-lemon_, but has been abandoned in the 2016 edition of _lemon_. If this concept is not provided by a future revision of the _lemon_ core vocabulary, it will be introduced by this module. Note that the introduction of ontolex:Element has no effect on _lemon_ core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
@@ -198,16 +200,17 @@ back to ([Table of Contents](#table-of-contents))
 
 Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics. At its core, this means that lexicographers use corpus frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). As a qualitative assessment, frequency can be expressed with [lexinfo:frequency](http://www.lexinfo.net/ontology/2.0/lexinfo#frequency), "[t]he relative commonness with which a term occurs". However, this is an object property with possible values lexinfo:commonlyUsed, lexinfo:infrequentlyUsed, lexinfo:rarelyUsed, while absolute counts over a particular resource (corpus) require novel vocabulary elements.
 
-Absolute frequencies are used in computational lexicography (e.g., the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/)), and they are an essential piece of information for NLP and corpus linguistics. In order to avoid confusion with lexinfo:Frequency, this is defined with reference to a particular dataset, a corpus.
+For modelling, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and totals are known. Absolute frequencies are used in computational lexicography (e.g., the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/)), and they are an essential piece of information for NLP and corpus linguistics.
+In order to avoid confusion with lexinfo:Frequency (which provides lexicographic assessments such as commonly used, infrequently used, etc.), this is defined with reference to a particular dataset, a corpus.
 
 <div class="entity">
 
 > ----------------------- ------------------------------------
 > ### frequency (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#frequency](http://www.w3.org/nl/lemon/frac#frequency)
-> The property **frequency** assigns a particular ontolex:Element a frac:CorpusFrequency.
-> **rdfs:range** ontolex:Element
-> **rdfs:domain** frac:CorpusFrequency
+> The property **frequency** assigns a particular `frac:Observable` a `frac:CorpusFrequency`.
+> **rdfs:range** `frac:Observable`
+> **rdfs:domain** `frac:CorpusFrequency`
 >
 > ----------------------- ------------------------------------
 </div>
@@ -217,21 +220,21 @@ Absolute frequencies are used in computational lexicography (e.g., the [Electron
 > ----------------------- ------------------------------------
 > ### CorpusFrequency (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#CorpusFrequency](http://www.w3.org/nl/lemon/frac#CorpusFrequency)
-> **Corpus frequency** provides the absolute number of attestations (rdf:value) of a particular ontolex:Element (see frac:frequency) in a particular language resource (dct:source).
-> **SubClassOf:** rdf:value exactly 1 xsd:int, dct:source min 1
+> **Corpus frequency** provides the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) in a particular language resource (`frac:corpus`).
+> **SubClassOf:** `rdf:value` exactly 1 `xsd:int`, `frac:corpus` min 1
 >
 > ----------------------- ------------------------------------
 </div>
 
 <div class="note">
 
-> If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple <tt>dct:source</tt> statements should be provided, to each resource individually. The cardinality of <tt>dct:source</tt> is thus 1 or higher.
+> If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple `dct:source` statements should be provided, to each resource individually. The cardinality of `dct:source` is thus 1 or higher.
 
 </div>
 
 <div class="Note">
 
-> QUESTION: better alternative to dct:source?
+> QUESTION: better alternative to `dct:source`?
 
 </div>
 
@@ -336,7 +339,7 @@ epsd:a_water_n frac:frequency [
 
 <section>
 
-### Attestation
+### Attestations
 back to ([Table of Contents](#table-of-contents))
 
 <div class="note">
