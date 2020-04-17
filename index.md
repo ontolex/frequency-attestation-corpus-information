@@ -46,7 +46,7 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
 	- [Namespaces](#namespaces)
 - [Overview](#overview)
 - [Definitions](#definitions)
-	- [ontolex:Element](#definitions)
+	- [Observable](#definitions)
 	- [Frequency](#frequency)
 	- [Attestation](#attestation)
 	- [Embeddings](#embeddings)
@@ -179,14 +179,23 @@ back to ([Table of Contents](#table-of-contents))
 
 back to ([Table of Contents](#table-of-contents))
 
-> TODO: change this to `frac:Observable`
+For OntoLex, we assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the core model and in existing or forthcoming OntoLex modules. This includes ontolex:Form (for token frequency, etc.), ontolex:LexicalEntry (frequency of disambiguated lemmas), \ontolex:LexicalSense (sense frequency), ontolex:LexicalConcept (e.g., synset frequency), lexicog:Entry (if used for representing homonyms: frequency of non-disambiguated lemmas), etc.
 
-We consider all _lemon_ core concepts as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we define the rdfs:domain of all properties that link lexical and corpus information by means of ontolex:Element, an abstract superclass of ontolex:Form (for word frequency and plain word/phrase embeddings), ontolex:LexicalEntry (for lemma frequency and lemma-based word/phrase embeddings), ontolex:LexicalSense (for sense frequency and sense embeddings), and ontolex:LexicalConcept (for concept frequency and concept embeddings).
+In particular, we consider all these elements as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we introduce frac:Observable as a top-level element within the FrAC module that is used to define the rdfs:domain of any properties that link lexical and corpus-derived information. 
+
+<div class="entity">
+
+> ----------------------- ------------------------------------
+> ### Observable (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Observable](http://www.w3.org/nl/lemon/frac#Observable)
+> **Observable** is an abstract superclass for every element in an OntoLex dataset for which we can provide frequency, attestation or other corpus-derived information. Elements that FrAC properties apply to  must be observable in a corpus or another linguistic data source.
+> ----------------------- ------------------------------------
+</div>
 
 ![](img/ontolex-element.png "frac:Observable")
 Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
 
-> Such a top-level concept used to exist in _Monnet-lemon_, but has been abandoned in the 2016 edition of _lemon_. If this concept is not provided by a future revision of the _lemon_ core vocabulary, it will be introduced by this module. Note that the introduction of ontolex:Element has no effect on _lemon_ core other that facilitating vocabulary organization, as ontolex:Element is not to be used for data modeling.
+> If future OntoLex modules require a similar generalization, it is advisable to deprecate frac:Observable and to replace it with a designated top-level concept ontolex:LexicalElement _in the core model_. Note that with _LemonElement_, such a concept used to exist in [_Monnet-Lemon_](https://www.lexinfo.net/ontology/lemon.owl), but has been abandoned in the 2016 edition of _OntoLex-lemon_. 
 
 </section>
 
