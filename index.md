@@ -188,7 +188,7 @@ In particular, we consider all these elements as being countable, annotatable/at
 > ----------------------- ------------------------------------
 > ### Observable (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Observable](http://www.w3.org/nl/lemon/frac#Observable)
-> **Observable** is an abstract superclass for every element in an OntoLex dataset for which we can provide frequency, attestation or other corpus-derived information. Elements that FrAC properties apply to  must be observable in a corpus or another linguistic data source.
+> **Observable** is an abstract superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, `ontolex:LexicalEntry`, `ontolex:LexicalSense`, `ontolex:Form`, and `ontolex:LexicalConcept`. Elements that FrAC properties apply to  must be observable in a corpus or another linguistic data source.
 > ----------------------- ------------------------------------
 </div>
 
@@ -196,6 +196,8 @@ In particular, we consider all these elements as being countable, annotatable/at
 Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
 
 > If future OntoLex modules require a similar generalization, it is advisable to deprecate frac:Observable and to replace it with a designated top-level concept ontolex:LexicalElement _in the core model_. Note that with _LemonElement_, such a concept used to exist in [_Monnet-Lemon_](https://www.lexinfo.net/ontology/lemon.owl), but has been abandoned in the 2016 edition of _OntoLex-lemon_. 
+
+> Note that frac:Observable is not limited to OntoLex core elements but that it can also include ontological concepts in general, as these are foreseen as external elements that OntoLex-Lemon can provide information about
 
 </section>
 
