@@ -6,7 +6,9 @@ Editors:
 * Max Ionov ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
 
 Authors: (please add yourself)
-* ...
+* Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/
+))
+*...
 
 [Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
 
@@ -347,7 +349,6 @@ epsd:a_water_n frac:frequency [
 </div>
 
 </section>
-
 <section>
 
 ### Attestations
@@ -368,6 +369,24 @@ Fig. 4. Attestation module following Khan and Boschetti (2018)
 
 > "Lexicographers use examples to support their analysis of the headword. The examples can either be authentic (exact quotations), adapted (modified versions of authentic examples) or invented examples. Authentic examples are attributed quotations (citations), which not only elucidate meaning and illustrate features of the headword (spelling, syntax, collocation, register etc.), but also function as attestations and are used provide evidence of the existence of a headword. We therefore call these examples attestations." (Depuydt and de Does 2018)
 
+
+
+<div class="entity">
+
+> --------
+> ### Attestation (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
+>  The **Attestation** class represents the use of an exact or normalized quotation or excerpt from a source document to illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register.  
+>
+> ------
+</div>
+
+A <tt>Citation</tt> is 
+>``a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web''. 
+
+This definition is taken from CITO \cite{peroni2012fabio}. The FrAC module does not prescribe a specific vocabulary for the citation object. If the CITO vocabulary is used, FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations  with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>.
+
+In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. Different conventions for referencing strings by character offsets do exist, representative solutions are string URIs as provided by RCF5147 (for plain text) and NIF (all mimetypes), As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as object.
 <div class="entity">
 
 >----------
@@ -380,26 +399,13 @@ Fig. 4. Attestation module following Khan and Boschetti (2018)
 > --------
 
 </div>
-
-<div class="entity">
-
-> --------
-> ### Attestation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
-> An **Attestation** is normally an exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense or lexeme in authentic data. Attestations should be accompanied by a <tt>Citation</tt> or the URI of a digital edition of the respective locus (<tt>dct:source</tt>). This URI can be externally defined (e.g., as a <tt>oa:Annotation</tt> or as a NIF URI), and can refer either to the entire work or to the exact location of the attestation within this source.
-> **SubClassOf:** rdf:quotation exactly 1 xsd:string
->
-> ------
-</div>
-
-
 <div class="entity">
 
 > ----
 > ### citation (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#citation](http://www.w3.org/nl/lemon/frac#citation)
-> The property **citation** assigns a particular ontolex:Element a frac:Citation.
-> **rdfs:range** ontolex:Element
+> Thi property assigns the text content of the dictionary quotation a frac:Citation.
+> **rdfs:range** xs:String
 > **rdfs:domain** frac:Citation
 >
 > -----
