@@ -349,6 +349,7 @@ epsd:a_water_n frac:frequency [
 </div>
 
 </section>
+
 <section>
 
 ### Attestations
@@ -381,10 +382,18 @@ Fig. 4. Attestation module following Khan and Boschetti (2018)
 > ------
 </div>
 
-A <tt>Citation</tt> is 
->``a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web''. 
+<div class="entity">
 
-This definition is taken from CITO \cite{peroni2012fabio}. The FrAC module does not prescribe a specific vocabulary for the citation object. If the CITO vocabulary is used, FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations  with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>.
+> --------
+> ### Citation (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Citation](http://www.w3.org/nl/lemon/frac#Citation)
+>  The **Citation** class represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference.  
+>
+> ------
+</div>
+
+The definition of <tt>Citation</tt> is based on the following from  \cite{peroni2012fabio} 
+>``a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web''. The FrAC module does not prescribe a specific vocabulary for the citation object. If the CITO vocabulary is used, FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations  with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>.
 
 In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. Different conventions for referencing strings by character offsets do exist, representative solutions are string URIs as provided by RCF5147 (for plain text) and NIF (all mimetypes), As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as object.
 <div class="entity">
@@ -402,56 +411,47 @@ In many applications, it is desirable to specify the location of the occurrence 
 <div class="entity">
 
 > ----
-> ### citation (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#citation](http://www.w3.org/nl/lemon/frac#citation)
-> Thi property assigns the text content of the dictionary quotation a frac:Citation.
+> ### quotation (DatatypeProperty)
+> **URI:** [http://www.w3.org/nl/lemon/frac#quotation](http://www.w3.org/nl/lemon/frac#quotation)
+> This property assigns the text content of the dictionary quotation associated with a frac:Attestation.
 > **rdfs:range** xs:String
-> **rdfs:domain** frac:Citation
+> **rdfs:domain** frac:Attestation
 >
 > -----
 
-<div class="entity">
-
-> ----
-> ### Citation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Citation](http://www.w3.org/nl/lemon/frac#Citation)
-> A **Citation** is a bibliographical reference to a source for the definition or illustration of a particular sense, form or lexeme. A citation _can_ provide an attestation, but can also stand on its own.
->
-> ---- 
-</div>
-
-</div>
-
-<div class="note">
-
-Details of bibliographical references are beyond the scope of the current proposal. Several designated vocabularies exist, e.g., FaBiO and CiTO, Bibo, the Open Citation Corpus, SpringerNature SciGraph BiRO or C4O
-
 </div>
 
 <div class="entity">
 
 > ----
->### makeAttestation (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#makeAttestation](http://www.w3.org/nl/lemon/frac#makeAttestation)
-> The property **makeAttestation** assigns a particular Citation a frac:Attestation.
+> ### citation (ObjectProperty)
+> **URI:** [http://www.w3.org/nl/lemon/frac#citation](http://www.w3.org/nl/lemon/frac#citation)
+> Thi property associates a citation to the frac:Observable citing it.
 > **rdfs:range** frac:Citation
-> **rdfs:domain** frac:Attestation
+> **rdfs:domain** frac:Observable
+>
+> -----
+
+</div>
+
+<div class="entity">
+
+> ----
+>### attestation (ObjectProperty)
+> **URI:** [http://www.w3.org/nl/lemon/frac#attestation](http://www.w3.org/nl/lemon/frac#attestation)
+> The property **attestation** associates an attestation to the frac:Observable.
+> **rdfs:range** frac:Attestation
+> **rdfs:domain** frac:Observable
 > 
 > ----
 </div>
 
 </div>
 
-<div class="note">
-
-CC: Naming follows K and B, I'm not too happy with the name, though, because it's too close to <tt>attestation</tt>, it will likely be confused.
-
-</div>
-
 </section>
 
 <section>
-
+	
 ### Embeddings
 back to ([Table of Contents](#table-of-contents))
 
