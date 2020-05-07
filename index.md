@@ -362,7 +362,6 @@ back to ([Table of Contents](#table-of-contents))
 ![](img/attestations-lexcit.png "Depuydt and de Does (2018)")
 Fig.  3. Attestation module following Depuydt and de Does (2018)
 
-
 ![](img/attestations-khan-boschetti.png "Khan and Boschetti (2018)")
 Fig. 4. Attestation module following Khan and Boschetti (2018)
 
@@ -382,18 +381,8 @@ Fig. 4. Attestation module following Khan and Boschetti (2018)
 > ------
 </div>
 
-<div class="entity">
-
-> --------
-> ### Citation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Citation](http://www.w3.org/nl/lemon/frac#Citation)
->  The **Citation** class represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference.  
->
-> ------
-</div>
-
-The definition of <tt>Citation</tt> is based on the following from  \cite{peroni2012fabio} 
->``a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web''. The FrAC module does not prescribe a specific vocabulary for the citation object. If the CITO vocabulary is used, FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations  with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>.
+Although we do not explicitly define a class representing citations we recommend (but do not prescribe) the use of the CITO vocabulary peroni2012fabio  where <tt>Citation</tt> is defined as 
+>a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web. 
 
 In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. Different conventions for referencing strings by character offsets do exist, representative solutions are string URIs as provided by RCF5147 (for plain text) and NIF (all mimetypes), As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as object.
 <div class="entity">
@@ -427,12 +416,36 @@ In many applications, it is desirable to specify the location of the occurrence 
 > ### citation (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#citation](http://www.w3.org/nl/lemon/frac#citation)
 > Thi property associates a citation to the frac:Observable citing it.
-> **rdfs:range** frac:Citation
 > **rdfs:domain** frac:Observable
 >
 > -----
 
 </div>
+
+<div class="entity">
+
+> ----
+>### attestationGloss (DatatypeProperty)
+> **URI:** [http://www.w3.org/nl/lemon/frac#attestationGloss](http://www.w3.org/nl/lemon/frac#attestationGloss)
+> The property **attestationGloss** contains the text content of an attestation as represented within a dictionary. This may be different from a direct quotation because the target expression may be omitted or normalized.
+> **rdfs:range** frac:Attestation
+> **rdfs:domain** xs:String
+> 
+> ----
+</div>
+
+
+<div class="entity">
+
+> ----
+>### locus (ObjectProperty)
+> **URI:** [http://www.w3.org/nl/lemon/frac#locus](http://www.w3.org/nl/lemon/frac#locus)
+> The property **locus** points to the location at which the relevant word(s) can be found.
+> **rdfs:domain** frac:Domain
+> 
+> ----
+</div>
+
 
 <div class="entity">
 
@@ -445,6 +458,9 @@ In many applications, it is desirable to specify the location of the occurrence 
 > 
 > ----
 </div>
+
+
+
 
 </div>
 
