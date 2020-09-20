@@ -1,3 +1,4 @@
+
 # The Ontolex Module for Frequency, Attestation and Corpus Information
 # Draft Community Group Report 
 
@@ -5,10 +6,15 @@ Editors:
 * Christian Chiarcos ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
 * Max Ionov ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
 
-Authors: (please add yourself)
+Contributors: (please add yourself)
+* Thierry Declerck
+* Jesse de Does
+* Katrien Depuydt
 * Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/
 ))
-*...
+* John P. McCrae
+* Sander Stolk
+* ...
 
 [Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
 
@@ -241,15 +247,41 @@ In order to avoid confusion with lexinfo:Frequency (which provides lexicographic
 
 <div class="note">
 
-> If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple `dct:source` statements should be provided, to each resource individually. The cardinality of `dct:source` is thus 1 or higher.
+> If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple `frac:corpus` statements should be provided, to each resource individually. The cardinality of `frac:corpus` is thus 1 or higher.
 
 </div>
 
 <div class="Note">
 
-> QUESTION: better alternative to `dct:source`?
+>TODO:  `frac:corpus` replaces the originally suggested `dct:source`, make sure the replacement is global and consistent, then remove this note.
 
 </div>
+
+> ----------------------- ------------------------------------
+> ### Corpus (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Corpus](http://www.w3.org/nl/lemon/frac#Corpus)
+> **Corpus  (Class)** represents  any  type  of  linguistic  data  or collection  thereof,  in  structured  or  unstructured  format.  At  the  lexical  level,  a  corpus  consists  of  individual elements (tokens, ‘words’), and data providers should  provide  the  total  number  of  elements.  It  should also provide provenance information, e.g., the tokenization  strategy,  preprocessing  steps,  etc.
+> **SubClassOf:** frac:total exactly 1 xsd:int
+>
+> ----------------------- ------------------------------------
+
+We  do  not  provide  a  formal  definition  of  what  a  corpus  is (it  can  be  any  kind  or  collection  of  linguistic  data  at  any scale,  structured  or  unstructured),  except  that  we  expect  it to  define  a  total  of  elements  contained  (`frac:total`). In many practical applications, it is necessary to provide relative  counts,  and  in  this  way,  these  can  be  easily  de- rived  from  the  absolute  (element)  frequency  provided  by the CorpusFrequency class  and  the  total  defined  by the underlying  corpus.
+
+> ----------------------- ------------------------------------
+> ### corpus (Property)
+> **corpus (Property)** assigns a `Corpus` to a particular `frac:CorpusFrequency`.
+> **Domain:** frac:CorpusFrequency
+> **Range:** frac:Corpus
+>
+> ----------------------- ------------------------------------
+
+> ----------------------- ------------------------------------
+> ### total (Property)
+> **total  (Property)** assigns  a  corpus  the  total  number  of  el- ements  that  it  contains.  In  the  context  of  OntoLex, these are instantiations of lexemes, only, i.e., tokens (‘words’).
+> **Domain:** frac:Corpus
+> **Range:** integer  (long)
+>
+> ----------------------- ------------------------------------
 
 The following example illustrates word and form frequencies for the Sumerian word _a_ (n.) "water" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
@@ -257,40 +289,42 @@ The following example illustrates word and form frequencies for the Sumerian wor
 
 <div>
 
-    # word frequency, over all form variants
-    epsd:a_water_n a ontolex:LexicalEntry;
-     frac:frequency [ 
-      a frac:CorpusFrequency;
-      rdf:value "4683"^^xsd:int;
-      dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] .
+	# word frequency, over all form variants 
+	epsd:kalag_strong_v a ontolex:LexicalEntry;
+		frac:frequency [
+			a frac:CorpusFrequency; 
+			rdf:value "2398"^^xsd:int; 
+			frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+		] .
 
-    # form frequency for individual orthographical variants
-    epsd:a_water_n ontolex:canonicalForm [
-     ontolex:writtenRep "??"@sux-Xsux, "a"@sux-Latn;
-     frac:frequency [
-      a frac:CorpusFrequency;
-      rdf:value "4656"^^xsd:int;
-      dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] ] .
+	# form frequency for individual orthographical variants 
+	epsd:kalag_strong_v ontolex:canonicalForm [
+		ontolex:writtenRep "kal-ga"@sux-Latn; 
+		frac:frequency [
+			a frac:CorpusFrequency; 
+			rdf:value "2312"^^xsd:int; 
+			frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+			]
+		] .
 
-    epsd:a_water_n ontolex:otherForm [
-     ontolex:writtenRep "??"@sux-Xsux, "a2"@sux-Latn;
-     frac:frequency [
-      a frac:CorpusFrequency;
-      rdf:value "1"^^xsd:int;
-      dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] ] .
-
-    epsd:a_water_n ontolex:otherForm [
-     ontolex:writtenRep "??"@sux-Xsux, "e"@sux-Latn;
-     frac:frequency [
-      a frac:CorpusFrequency;
-      rdf:value "24"^^xsd:int;
-      dct:source <http://oracc.museum.upenn.edu/epsd2/pager> ] ].
+	epsd:kalag_strong_v ontolex:otherForm [ 
+		ontolex:writtenRep "kalag"@sux-Latn; 
+		frac:frequency [ 
+			a frac:CorpusFrequency; 
+			rdf:value "70"^^xsd:int; 
+			frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+			]
+		] .
 
 </div>
 
 </div>
 
 The example shows orthographic variation (in the original writing system, Sumerian Cuneiform sux-Xsux, and its Latin transcription sux-Latn). It is slightly simplified insofar as the ePSD2 provides individual counts for different periods and that only three of six orthographical variants are given. Note that these are orthographical variants, not morphological variants (which are not given in the dictionary).
+
+<div class="note">
+> TODO: update the examples below with explicit `Corpus` elements. Add total.
+</div>
 
 <div class="note">
 
@@ -351,102 +385,112 @@ epsd:a_water_n frac:frequency [
 </section>
 
 <section>
-
-### Attestations
+	
+### Attestation
 back to ([Table of Contents](#table-of-contents))
 
-<div class="note">
+Attestations constitute  a  special  form  of  citation  that  provide  evidence  for  the  existence  of  a  certain  lexical  phenomena; they can elucidate meaning or illustrate various  linguistic  features.
 
-> This is an attempt for a consensus model based on Depuydt and de Does (2018) and Khan and Boschetti (2018). We do focus on data structures, the following aspects are not covered: Datatype properties regarding confidence (assumed to be in lexinfo), bibliographical details (subject to other vocabularies), and details of resource linking (subject to other vocabularies).
-
-![](img/attestations-lexcit.png "Depuydt and de Does (2018)")
-Fig.  3. Attestation module following Depuydt and de Does (2018)
-
-
-![](img/attestations-khan-boschetti.png "Khan and Boschetti (2018)")
-Fig. 4. Attestation module following Khan and Boschetti (2018)
-
-</div>
-
-> "Lexicographers use examples to support their analysis of the headword. The examples can either be authentic (exact quotations), adapted (modified versions of authentic examples) or invented examples. Authentic examples are attributed quotations (citations), which not only elucidate meaning and illustrate features of the headword (spelling, syntax, collocation, register etc.), but also function as attestations and are used provide evidence of the existence of a headword. We therefore call these examples attestations." (Depuydt and de Does 2018)
-
-
+In  scholarly  dictionaries,  attestations  are  a  representative selection  from  the  occurrences  of  a  headword  in  a  textual corpus.  These  citations  often  consist  of  a quotation  accompanied  by  a  reference  to  the  source.  The  quoted  text  usually contains  the  occurrence  of  the  headword.
 
 <div class="entity">
 
 > --------
 > ### Attestation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
->  The **Attestation** class represents the use of an exact or normalized quotation or excerpt from a source document to illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register.  
+>  The **Attestation** class represents an exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have a `quotation` or an `attestationGloss` and MUST define a `locus` object to identify the source of this material.
+>  **SubClassOf:** `frac:locus exactly 1`
 >
 > ------
 </div>
-
-<div class="entity">
 
 > --------
-> ### Citation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Citation](http://www.w3.org/nl/lemon/frac#Citation)
->  The **Citation** class represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference.  
+> ### quotation (Property)
+> **quotation** contains the text content of the dictionary quotation.
+> **Domain:** `Attestation`
+> **Range:** `xsd:String`
 >
-> ------
+> --------
+> ### attestationGloss (Property)
+> **attestationGloss** contains  the  text  content  of  an  attestation  as  represented  within  a  dictionary.  This  may  be different  from  a  direct  quotation  because  the  target  expression  may  be  omitted  or  normalized.
+> **Domain:** `Attestation`
+> **Range:** `xsd:String`  
+>
+> --------
+
+<div class="note">
+Note: Highly recommended to introduce a superproperty for `quotation` and `attestationGloss` in order to define it as obligatory attribute of `Attestation`. Is there any reason why `attestationGloss` is not a sub-property of `quotation`?
 </div>
 
-The definition of <tt>Citation</tt> is based on the following from  \cite{peroni2012fabio} 
->``a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web''. The FrAC module does not prescribe a specific vocabulary for the citation object. If the CITO vocabulary is used, FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations  with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>.
+> --------
+> ### citation (Property)
+> **frac:citation** associates a  citation  to  the  `Observable`  citing  it.
+> **Domain:**  `Observable`
+>
+> --------
+
+In general, the object of a citation represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference, cf. Peroni (2012) \cite{peroni2012fabio} : 
+
+>[a Citation is] ``a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web''. 
+
+However, note that FrAC does not formally define a general "Citation" class to define the range of `citation`, but only provides `Attestation` as one specific possibility. Beyond attestations, different vocabularies have been suggested for linking citations, and we advise users of FrAC to make a consistent choice among them, adequate for their respective needs and the conventions of their users community. `frac:citation` serves as an interface to these external vocabularies. If the CITO vocabulary is used, FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations  with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>.
+
+> ----
+> ### attestation (Property)
+> **frac:attestation** associates an attestation to the frac:Observable.  This  is  a  subproperty  of  `frac:citation` using concrete data as  evidence.
+> **Domain:** `Observable`
+> **Range:** `Attestation`
+> **SubPropertyOf:** `citation`
+>
+> ---- 
+</div>
 
 In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. Different conventions for referencing strings by character offsets do exist, representative solutions are string URIs as provided by RCF5147 (for plain text) and NIF (all mimetypes), As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as object.
-<div class="entity">
 
->----------
->### attestation (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#attestation](http://www.w3.org/nl/lemon/frac#attestation)
-> The property **attestation** assigns a particular ontolex:Element a frac:Attestation.
-> **rdfs:range** ontolex:Element
->**rdfs:domain** frac:Attestation
->
-> --------
-
-</div>
-<div class="entity">
+<div class="property">
 
 > ----
-> ### quotation (DatatypeProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#quotation](http://www.w3.org/nl/lemon/frac#quotation)
-> This property assigns the text content of the dictionary quotation associated with a frac:Attestation.
-> **rdfs:range** xs:String
-> **rdfs:domain** frac:Attestation
->
-> -----
-
-</div>
-
-<div class="entity">
-
-> ----
-> ### citation (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#citation](http://www.w3.org/nl/lemon/frac#citation)
-> Thi property associates a citation to the frac:Observable citing it.
-> **rdfs:range** frac:Citation
-> **rdfs:domain** frac:Observable
->
-> -----
-
-</div>
-
-<div class="entity">
-
-> ----
->### attestation (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#attestation](http://www.w3.org/nl/lemon/frac#attestation)
-> The property **attestation** associates an attestation to the frac:Observable.
-> **rdfs:range** frac:Attestation
-> **rdfs:domain** frac:Observable
+> ### locus (Property)
+> **frac:locus** points  to  the  location  at  which  the  relevant  word(s)  can  be  found.
+> **Domain:** `Attestation`
 > 
 > ----
 </div>
 
 </div>
+
+**example**:  [DiaMaNT (_Diachroon seMAntisch lexicon van de Nederlandse Taal_)](http://diamant.ivdnt.org/diamant-ui/) is a diachronic semantic computational  lexicon  of  Dutch,  at its core  formed by four scholarly historical dictionaries of  Dutch covering a language period from ca. 500 –  1976. The example below illustrates the combination of FrAC attestations with the [CITO](https://sparontologies.github.io/cito/current/cito.html) and [FRBR](http://purl.org/vocab/frbr/core#) vocabularies, as well as with the [NLP Interchange Format](https://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
+
+	diamant:entry_WNT_M030758 a ontolex:LexicalEntry ; 
+		ontolex:sense diamant:sense_WNT_M030758_bet_207 .
+
+	diamant:sense_WNT_M030758_bet_207 a ontolex:LexicalSense;
+		rdfs:label "V.-" ;
+	frac:attestation diamant:attestation_2108540 ; 
+	skos:definition "Iemand een kat (of de kat) aan het  been  jagen...... iemand in moeilijkheden brengen." .
+
+	diamant:attestation_2108540 a frac:Attestation ; 
+		cito:hasCitedEntity diamant:cited_document_WNT_332819  ;
+		cito:hasCitingEntity diamant:sense_WNT_M030758_bet_207; 
+		frac:locus diamant:locus_2108540  ;
+		frac:quotation "... dat men licht yemant de cat aen het been kan werpen," .
+
+	diamant:locus_2108540 a diamant:Occurrence ; 
+		nif:beginIndex 107 ;
+		nif:endIndex 110 .
+
+	diamant:cited_document_WNT_332819 a frbr:Manifestation ;
+		frbr:embodimentOf diamant:expression_WNT_332819 ; 
+		diamant:witnessYearFrom 1621 ;
+		diamant:witnessYearTo 1621 .
+
+	diamant:expression_WNT_332819 a frbr:Expression ; 
+		dcterms:creator "N. V. REIGERSB." ; 
+		dcterms:title "Brieven van Nicolaes van Reigersberch aan Hugo de Groot" ; 
+		frbr:embodiment diamant:quotation_WNT_332819 .
+
+
+Note: In the example above, NIF is not correctly used: NIF requires string URIs for loci, including the identification of the source document within the base URI and the identification of a context (this is instead provided via `hasCitedEntity`). To be revised or replaced.
 
 </section>
 
