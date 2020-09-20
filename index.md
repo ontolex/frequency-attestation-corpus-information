@@ -385,8 +385,8 @@ epsd:a_water_n frac:frequency [
 </section>
 
 <section>
-
-### Attestations
+	
+### Attestation
 back to ([Table of Contents](#table-of-contents))
 
 Attestations constitute  a  special  form  of  citation  that  provide  evidence  for  the  existence  of  a  certain  lexical  phenomena; they can elucidate meaning or illustrate various  linguistic  features.
