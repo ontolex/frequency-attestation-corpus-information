@@ -167,7 +167,7 @@ back to ([Table of Contents](#table-of-contents))
 
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_frac_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
-![](img/ontolex-frac-2019-03.png "ontolex-frac-2019-03.png")
+![](img/ontolex-frac-2020-06.png "ontolex-frac-2020-06.png")
 Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overview
 
 > DISCUSSION: Looks more complicated than it is. Shall we drop inferrable information ? (rdf:rest, rdf:first are available vocabulary elements because ContextualRelation is a subclass of rdf:List, subclasses of ontolex:Element should be dropped once ontolex:Element is introduced.) Keep rdf:List elements only if preserved in other ontolex modules.
@@ -201,9 +201,9 @@ In particular, we consider all these elements as being countable, annotatable/at
 </div>
 
 ![](img/ontolex-element.png "frac:Observable")
-Fig. 1. ontolex:Element as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
+Fig. 1. `frac:Observable` as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
 
-> If future OntoLex modules require a similar generalization, it is advisable to deprecate frac:Observable and to replace it with a designated top-level concept ontolex:LexicalElement _in the core model_. Note that with _LemonElement_, such a concept used to exist in [_Monnet-Lemon_](https://www.lexinfo.net/ontology/lemon.owl), but has been abandoned in the 2016 edition of _OntoLex-lemon_. 
+> If future OntoLex modules require a similar generalization, it is advisable to deprecate `frac:Observable` and to replace it with a designated top-level concept ontolex:LexicalElement _in the core model_. Note that with _LemonElement_, such a concept used to exist in [_Monnet-Lemon_](https://www.lexinfo.net/ontology/lemon.owl), but has been abandoned in the 2016 edition of _OntoLex-lemon_. 
 
 > Note that frac:Observable is not limited to OntoLex core elements but that it can also include ontological concepts in general, as these are foreseen as external elements that OntoLex-Lemon can provide information about
 
