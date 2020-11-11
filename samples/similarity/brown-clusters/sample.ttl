@@ -8,7 +8,6 @@
 # - frac:total of a frac:Corpus must be optional (not provided here)
 
 # SUGGESTED additions to FrAC draft:
-# - inverse property of rdfs:member for frac:Similarity [easier to model]
 # - inverse property of frac:embedding [easier to model]
 # With these, we can use the []-notation for blank embeddings
 # e.g.,
@@ -69,6 +68,7 @@ brown:Cluster
 # 11111111111111  natural 11392
 
 # (1) lexical entries with frequency and embeddings
+# alternatively, these could also be treated as lexical forms (depends on the normalization applied to the underlying corpus; in this case, no normalization was provided)
 brown:tax-exempt-le	
 	a ontolex:LexicalEntry; 
 	ontolex:canonicalForm [ ontolex:writtenRep "tax-exempt"@en ];

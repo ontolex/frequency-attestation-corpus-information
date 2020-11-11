@@ -1,0 +1,4 @@
+# word associations
+# (as predicted from word embeddings)
+
+# this is actually aggregate data, only
