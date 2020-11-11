@@ -1,0 +1,124 @@
+# Brown clusters:
+# path (positional code), membership, frequency
+# (collocation information should be dealt with later)
+
+# NECESSARY changes to FrAC draft:
+# - rdf:value of frac:Similarity must be untyped Literal, not a number
+# - frac:Similarity must be an rdfs:Container (here: an rdf:Bag -- unsorted), *not* an rdf:List
+# - frac:total of a frac:Corpus must be optional (not provided here)
+
+# SUGGESTED additions to FrAC draft:
+# - inverse property of rdfs:member for frac:Similarity [easier to model]
+# - inverse property of frac:embedding [easier to model]
+# With these, we can use the []-notation for blank embeddings
+# e.g.,
+	# brown:11111111111101
+		# a brown:Cluster;
+		# rdf:value "11111111111101";
+		# rdfs:member 
+			# [ a brown:RCV1CollocateSet; frac:isEmbeddingOf brown:tax-exempt-le ] , 
+			# [ a brown:RCV1CollocateSet; frac:isEmbeddingOf brown:high-yield-le ] . # etc.
+
+#######################
+# TBox: user concepts #
+#######################
+# primarily introduced to bundle resource-level metadata
+
+# Theoretically, we should provide a frac:total. Not easily to be found (they report the number of documents, but not tokens).
+brown:RCV1Freq 
+	rdfs:subClassOf frac:CorpusFrequency;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty frac:corpus ;
+		owl:hasValue <https://scikit-learn.org/0.18/datasets/rcv1.html>
+	].
+	
+# this is somewhat abstract, calculated from collocation scores
+# broadly speaking, this would probably fall under an extended notion of a weighted bag of word
+# the dc:description *SHOULD* include details on the underlying collocation metric (context window, filters, etc.) -- but we don't know that for this data [we do know the raw collocation scores, though]
+brown:RCV1CollocateSet
+	rdfs:subClassOf frac:BagOfWords;
+	rdfs:subClassOf [
+		a owl:Restriction ;
+		owl:onProperty frac:corpus ;
+		owl:hasValue <https://scikit-learn.org/0.18/datasets/rcv1.html>
+	].
+
+# note that this deviated from the FrAC draft in assuming that this is an rdfs:Container, *not* a List !
+brown:Cluster
+	rdfs:subClassOf rdf:Bag;			# unordered !
+	rdfs:subClassOf frac:Similarity;
+	rdfs:subClassOf [
+		a owl:Restriction;
+		owl:onProperty dc:description ;
+		owl:hasValue "Generalized Brown Cluster according to http://www.derczynski.com/sheffield/brown-tuning/"
+	].
+	
+#####################################
+# ABox: clusters and their elements #
+#####################################
+
+# encoded excerpt from generalized Brown clusters:
+# 11111111111101  tax-exempt      
+# 11111111111101  high-yield      994
+# 11111111111101  municipal       6593
+# 11111111111110  gross   9335
+# 11111111111111  natural 11392
+
+# (1) lexical entries with frequency and embeddings
+brown:tax-exempt-le	
+	a ontolex:LexicalEntry; 
+	ontolex:canonicalForm [ ontolex:writtenRep "tax-exempt"@en ];
+	frac:embedding _:tax-exempt-e;
+	frac:frequency [ a brown:RCV1Freq; rdf:value "893" ].
+
+brown:high-yield-le
+	a ontolex:LexicalEntry;
+	ontolex:canonicalForm [ ontolex:writtenRep "high-yield"@en ];
+	frac:embedding _:high-yield-e;
+	frac:frequency [ a brown:RCV1Freq; rdf:value "994" ] .
+	
+brown:municipal-le
+	a ontolex:LexicalEntry;
+	ontolex:canonicalForm [ ontolex:writtenRep "muncipal"@en ];
+	frac:embedding _:municipal-e;
+	frac:frequency [ a brown:RCV1Freq; rdf:value "6593" ].
+		
+brown:gross-le
+	a ontolex:LexicalEntry;
+	ontolex:canonicalForm [ ontolex:writtenRep "gross"@en ];
+	frac:embedding _:gross-e;
+	frac:frequency [ a brown:RCV1Freq; rdf:value "9335" ].
+	
+brown:natural-le
+	a ontolex:LexicalEntry;
+	ontolex:canonicalForm [ ontolex:writtenRep "natural"@en ];
+	frac:embedding _:natural-e;
+	frac:frequency [ a brownRCV1Freq; rdf:value "11392" ].
+
+# (2) "embeddings"	[ here: collocate bundles ]
+# We could add the raw collocation data [see file map]
+# There is no deep reason to make this a blank node, but 
+# Brown cluster users typically don't expect the underlying 
+# collocates to be provided, but just work with the clusters
+# themselves. 
+_:tax-exempt-e a brown:RCV1CollocateSet.	
+_:high-yield-e a brown:RCV1CollocateSet.
+_:municipial-e a brown:RCV1CollocateSet.
+_:gross-e a brown:RCV1CollocateSet.
+_:natural-e a brown:RCV1CollocateSet.
+	
+
+# (3) clusters
+		
+# note that we take the value of a cluster to be its path
+# this is not (as to be expected) a score, but an untyped Literal (heading zeros must not be dropped)
+brown:11111111111101
+	a brown:Cluster;
+	rdf:value "11111111111101";
+	rdfs:member _:tax-exempt-e , _:high-yield-e, _:municipal-e, _:gross-e . # etc.
+	
+brown:11111111111111 
+	a brown:Cluster;
+	rdf:value "11111111111111";
+	rdfs:member _:natural-e. # etc.
