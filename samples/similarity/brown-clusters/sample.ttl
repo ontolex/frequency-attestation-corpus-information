@@ -24,6 +24,7 @@
 #######################
 # primarily introduced to bundle resource-level metadata
 
+# contains metadata about the underlying data
 # Theoretically, we should provide a frac:total. Not easily to be found (they report the number of documents, but not tokens).
 brown:RCV1Freq 
 	rdfs:subClassOf frac:CorpusFrequency;
@@ -33,6 +34,7 @@ brown:RCV1Freq
 		owl:hasValue <https://scikit-learn.org/0.18/datasets/rcv1.html>
 	].
 	
+# contains metadata about the data underlying the clustering process (here: collocations)
 # this is somewhat abstract, calculated from collocation scores
 # broadly speaking, this would probably fall under an extended notion of a weighted bag of word
 # the dc:description *SHOULD* include details on the underlying collocation metric (context window, filters, etc.) -- but we don't know that for this data [we do know the raw collocation scores, though]
@@ -44,6 +46,7 @@ brown:RCV1CollocateSet
 		owl:hasValue <https://scikit-learn.org/0.18/datasets/rcv1.html>
 	].
 
+# contains metadata about the clustering method
 # note that this deviated from the FrAC draft in assuming that this is an rdfs:Container, *not* a List !
 brown:Cluster
 	rdfs:subClassOf rdf:Bag;			# unordered !
@@ -107,12 +110,11 @@ _:high-yield-e a brown:RCV1CollocateSet.
 _:municipial-e a brown:RCV1CollocateSet.
 _:gross-e a brown:RCV1CollocateSet.
 _:natural-e a brown:RCV1CollocateSet.
-	
 
 # (3) clusters
-		
-# note that we take the value of a cluster to be its path
-# this is not (as to be expected) a score, but an untyped Literal (heading zeros must not be dropped)
+
+# Note that we take the value of a cluster to be its path
+# This is not (as originally expected) a score, but an untyped Literal (heading zeros must not be dropped). I guess some kind of score can be postulated nevertheless (this is based on a hierarchical merging algorithm), but this is normally not provided.
 brown:11111111111101
 	a brown:Cluster;
 	rdf:value "11111111111101";
