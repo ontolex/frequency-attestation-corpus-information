@@ -1,0 +1,16 @@
+Generalised Brown clusters for the RCV1 corpus.
+
+These work as normal old Brown clusters, if you're that way inclined.
+Merge file also included
+Corpus "cleaned" as per Turian, Liang
+min-occur = 1
+a/c = 2650
+
+Details of advantages here:
+  http://derczynski.com/sheffield/papers/generalised-brown.pdf
+
+Tools for feature generation here:
+  http://dx.doi.org/10.5281/zenodo.33758
+
+Star our repo!
+  http://github.com/sean-chester/generalised-brown/stargazers
