@@ -38,11 +38,11 @@ milion words of Classical Latin) was used to train one of the two embeddings (se
 
 For this sample, we chose 4:
 
-* *subsisto* (to take a stand): a verb (see the [lemma](http://lila-erc.eu/data/id/lemma/126379))
-* *officium* (service): a noun (see the [lemma](http://lila-erc.eu/data/id/lemma/114811))
-* *mereo* (to deserve): a verb, with a variant inflectional paradigm (see the [lemma](http://lila-erc.eu/data/id/lemma/11209))
+* *subsisto* (to take a stand): a verb (see the [lemma](http://lila-erc.eu/data/id/lemma/126379) in LiLa)
+* *officium* (service): a noun (see the [lemma](http://lila-erc.eu/data/id/lemma/114811) in LiLa)
+* *mereo* (to deserve): a verb, with a variant inflectional paradigm (see the [lemma](http://lila-erc.eu/data/id/lemma/11209) in LiLa)
 * *mereor* (to deserve): like the previous verb, but taken as deponent (i.e. lacking the active 
-form; see [lemma](http://lila-erc.eu/data/id/lemma/112108)
+form; see the [lemma](http://lila-erc.eu/data/id/lemma/112108) in LiLa)
 
 Note that in the [LiLa lemma bank](https://github.com/CIRCSE/LiLa_Lemma-Bank) 
 *mereo* and *mereor* are connected with a special relation of `lemma variant`, 
