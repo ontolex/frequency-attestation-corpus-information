@@ -75,3 +75,6 @@ to LiLa, and those that will be in the future!
 
 Just stay tuned...
 
+**Funding**
+
+The *LiLa: Linking Latin* project has received funding from the European Research Council (ERC) under the European Union’s Horizon 2020 research and innovation programme – Grant Agreement No. 769994.
