@@ -9,3 +9,4 @@ Originally used in psychology.
 
 Other analogy data:
 - https://aclweb.org/aclwiki/Analogy_(State_of_the_art)
+- https://vecto.space/projects/BATS/
