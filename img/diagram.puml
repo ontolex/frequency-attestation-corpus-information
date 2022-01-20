@@ -47,7 +47,7 @@ CorpusFrequency -> Corpus: corpus
 Embedding -> Corpus: corpus
 ContextualRelation -> Corpus: corpus
 
-Corpus -[hidden]-> anyURI
+anyURI -[hidden]-> Corpus
 
 Collocation -> Observable: head
 Collocation -|> Observable
