@@ -1,6 +1,6 @@
 @startuml
 
-Collocation *-down- Observable
+Collocation o-down- Observable
 
 Embedding -down-> Attestation: attestationEmbedding
 Attestation -[hidden]-> CorpusFrequency
@@ -27,7 +27,7 @@ class ContextualRelation {
 
 ContextualRelation <|-down- Collocation
 ContextualRelation <|-down- Similarity
-Similarity *-down- Embedding
+Similarity o-down- Embedding
 
 class CorpusFrequency {
   int: rdf:value
