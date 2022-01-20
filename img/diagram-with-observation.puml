@@ -1,0 +1,50 @@
+@startuml
+
+class Observation {
+  str: dc:description
+  Literal: rdf:value
+}
+
+Observation -> Corpus: corpus
+
+Collocation -up-|> Observation
+Similarity -up-|> Observation
+CorpusFrequency -up-|> Observation
+Attestation -up-|> Observation
+Embedding -up-|> Observation
+
+Collocation *-down- Observable
+
+Embedding -down-> Attestation: attestationEmbedding
+
+Observable -> Embedding: embedding
+Observable -> CorpusFrequency: frequency
+Observable -> Attestation: attestation sub citation
+
+class Embedding {
+ int: dc:extent
+}
+
+FixedSizeVector -up-|> Embedding
+BagOfWords -up-|> Embedding
+TimeSeries -up-|> Embedding
+
+Similarity *-down- Embedding
+
+class CorpusFrequency {
+}
+
+class Attestation {
+  str: quotation
+  str: attestationGloss
+}
+
+class Corpus {
+  int: total
+}
+
+
+Collocation -down-> Observable: head
+Collocation -down-|> Observable
+
+@enduml
