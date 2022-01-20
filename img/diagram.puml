@@ -49,7 +49,7 @@ ContextualRelation -> Corpus: corpus
 
 anyURI -[hidden]-> Corpus
 
-Collocation -> Observable: head
-Collocation -|> Observable
+Collocation -down-> Observable: head
+Collocation -down-|> Observable
 
 @enduml
