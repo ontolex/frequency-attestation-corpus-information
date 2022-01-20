@@ -54,6 +54,7 @@ Cooccurrence -down-|> Observable
 
 class QueryResult {
   str: queryLanguage
+  json:Array: variables
 }
 
 
