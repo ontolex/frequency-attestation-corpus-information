@@ -19,7 +19,7 @@ CorpusFrequency -up-|> Observation
 Attestation -up-|> Observation
 Embedding -up-|> Observation
 
-Collocation o-down- Observable
+Cooccurrence o-down- Observable
 
 Embedding -down-> Attestation: attestationEmbedding
 
