@@ -13,4 +13,4 @@ This page supersedes the original repository under https://github.com/acoli-repo
 
 At the moment, this is done as UML diagram [edit [here](https://github.com/ontolex/frequency-attestation-corpus-information/edit/master/img/diagram.puml)] using the [PlantText editor](https://www.planttext.com/):
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram.puml)
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram.puml?cache=no)
