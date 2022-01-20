@@ -51,5 +51,5 @@ anyURI -[hidden]-> Corpus
 
 Collocation -down-> Observable: head
 Collocation -down-|> Observable
-
+ 
 @enduml
