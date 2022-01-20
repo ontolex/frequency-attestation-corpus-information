@@ -1,6 +1,6 @@
 # Diagram drafts
 
-originally done with Excel, PlantUml is easier to maintain and edit. The UML diagram is, however, not the recommended visualization, but only used for drafting.
+originally done with PPT, PlantUml is easier to maintain and edit. The UML diagram is, however, not the recommended visualization, but only used for drafting.
 
 ## Current diagram:
 
