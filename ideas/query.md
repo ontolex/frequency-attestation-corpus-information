@@ -18,7 +18,7 @@ Requirements:
 
 Suggestion:
 - create query/response objects
-  - attribute query (in any corpus query language)
+  - attribute query (in any corpus query language) => `rdf:value`
   - attribute query language
   - attribute variables: json array with string values (variable names)
   - response: set of ordered collocations, with element order corresponding to variables
@@ -30,3 +30,6 @@ Suggestion:
 practical application:
 - client creates a query/response object without responses
 - server returns a query/response object with responses
+
+
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-query.puml?cache=no)
