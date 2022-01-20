@@ -1,0 +1,55 @@
+@startuml
+
+Collocation *-down- Observable
+
+Embedding -down-> Attestation: attestationEmbedding
+Attestation -[hidden]-> CorpusFrequency
+
+
+Observable -> Embedding: embedding
+Observable -> CorpusFrequency: frequency
+Observable -> Attestation: attestation sub citation
+
+class Embedding {
+ str: dc:description
+ int: dc:extent
+ Literal: rdf:value
+}
+
+FixedSizeVector -up-|> Embedding
+BagOfWords -up-|> Embedding
+TimeSeries -up-|> Embedding
+
+class ContextualRelation {
+  str: dc:description
+  Literal: rdf:value
+}
+
+ContextualRelation <|-down- Collocation
+ContextualRelation <|-down- Similarity
+Similarity *-down- Embedding
+
+class CorpusFrequency {
+  int: rdf:value
+}
+
+class Attestation {
+  str: quotation
+  str: attestationGloss
+}
+
+class Corpus {
+  int: total
+}
+
+Attestation -> anyURI: locus
+CorpusFrequency -> Corpus: corpus
+Embedding -> Corpus: corpus
+ContextualRelation -> Corpus: corpus
+
+Corpus -[hidden]-> anyURI
+
+Collocation -> Observable: head
+Collocation -|> Observable
+
+@enduml
