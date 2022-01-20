@@ -18,3 +18,5 @@ Aspects of simplification:
 - abandon `ContextualRelation`
 - eliminate `quotation`. Instead, use `rdf:value`
 - rename `attestationGloss`  to `gloss`: No other glosses here.
+
+> *Note*: In the final diagram, maybe we don't draw arrows between classes and `Observation`, but, instead, put all observations into a box, label it "subclasses of Observation" and put the Observation class with its properties there
