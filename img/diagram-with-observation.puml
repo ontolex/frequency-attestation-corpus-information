@@ -35,8 +35,7 @@ class CorpusFrequency {
 }
 
 class Attestation {
-  str: quotation
-  str: attestationGloss
+  str: gloss
 }
 
 class Corpus {
