@@ -16,3 +16,5 @@ Aspects of simplification:
   - properties: `corpus` (link with corpus)
     - note: this means that `locus` is merged with `corpus`; maybe different name?
 - abandon `ContextualRelation`
+- eliminate `quotation`. Instead, use `rdf:value`
+- rename `attestationGloss`  to `gloss`: No other glosses here.
