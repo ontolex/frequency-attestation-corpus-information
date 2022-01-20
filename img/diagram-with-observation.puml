@@ -13,7 +13,7 @@ CorpusFrequency -up-|> Observation
 Attestation -up-|> Observation
 Embedding -up-|> Observation
 
-Collocation *-down- Observable
+Collocation o-down- Observable
 
 Embedding -down-> Attestation: attestationEmbedding
 
@@ -29,7 +29,7 @@ FixedSizeVector -up-|> Embedding
 BagOfWords -up-|> Embedding
 TimeSeries -up-|> Embedding
 
-Similarity *-down- Embedding
+Similarity o-down- Embedding
 
 class CorpusFrequency {
 }
