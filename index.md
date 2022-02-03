@@ -796,7 +796,7 @@ FrAC provides 10 pre-defined sub-properties of `frac:cscore` for frequently used
 
 - `frac:pmi`: pointwise mutual information (Sketch Engine: “MI-score”), “association ratio”
 	
-	<img src="https://render.githubusercontent.com/render/math?math=e^{i \pi} = -1">
+	<img src="https://render.githubusercontent.com/render/math?math=PMI(w_1,w_2)=log_2 \frac{P(w_1,w_2}{P(w_1)P(w_2)}">
 	
 - `frac:mi3`: SketchEngine: modified pmi score, see https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf 
 - `frac:pmi_logfreq`: SketchEngine, see https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf “MI.log-f”, formerly “salience” 
