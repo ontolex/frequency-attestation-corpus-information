@@ -506,27 +506,21 @@ see [samples/embeddings/draft.md](samples/embeddings/draft.md)
 ## Collocations
 back to ([Table of Contents](#table-of-contents))
 
-<div class="note">
-
-> CC: this is a part I am less certain about, mostly because of the rdf:List modelling (which is inspired by lexicog). Alternative suggestions welcome.
-
-</div>
-
-Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology. ... (MORE MOTIVATION AND EXAMPLES)
+Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology and lexicography.
 
 Collocations are usually defined on surface-oriented criteria, i.e., as a relation between forms or lemmas (lexical entries), not between senses, but they can be analyzed on the level of word senses (the sense that gave rise to the idiom or collocation). Indeed, collocations often contain a variable part, which can be represented by a <tt>ontolex:LexicalConcept</tt>.
 
-Collocations can involve two or more words, they are thus modelled as an <tt>rdf:List</tt> of <tt>ontolex:Element</tt>s. Collocations may have a fixed or a variable word order. By default, we assume variable word order, where a fixed word order is required, the collocation must be assigned <tt>lexinfo:termType lexinfo:idiom</tt>.
+Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observables</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
-Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>dct:source</tt>). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract <tt>frac:ContextualRelation</tt> class.
+Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>frac:corpus</tt>). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract <tt>frac:ContextualRelation</tt> class.
 
 <div class="entity">
 
 > ----
 > ### ContextualRelation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#ContextualRelation](http://www.w3.org/nl/lemon/frac#ContextualRelation)
-> **ContextualRelation** provides a relation between two or more lexical elements, characterized by a <tt>dct:description</tt> of the nature of relation, a corpus (<tt>dct:source</tt>) from which this relation was inferred, and a weight or probability assessment (<tt>rdf:value</tt>).
-> **SubClassOf:** rdf:List; rdf:value exactly 1 xsd:double, dct:source min 1, dct:description min 1 xsd:string
+> **ContextualRelation** provides a relation between two or more lexical elements, characterized by a <tt>dct:description</tt> of the nature of relation, a corpus (<tt>frac:corpus</tt>) from which this relation was inferred, and a weight or probability assessment (<tt>rdf:value</tt>).
+> **SubClassOf:** rdfs:Container; rdf:value min 1, frac:corpus exactly 1, dct:description min 1 xsd:string
 >
 > ---
 
@@ -539,26 +533,75 @@ We distinguish two primary contextual relations: syntagmatic (between co-occurri
 > ---
 > ### Collocation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
-> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>ontolex:Element</tt>s based on their co-occurrence within the same utterance and characterized by their collocation weight (<tt>rdf:value</tt>) in one or multiple source corpora (<tt>dct:source</tt>).
-> **SubClassOf:** <tt>frac:ContextualRelation</tt>
-> **rdf:first:** only <tt>ontolex:Element</tt>
-> **rdf:rest*/rdf:first:** only <tt>ontolex:Element</tt>
+> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Observables</tt>s based on their co-occurrence within the same context window and characterized by their collocation weight (<tt>frac:score</tt>) in one or multiple source corpora (<tt>frac:corpus</tt>).
+> **SubClassOf:** <tt>frac:ContextualRelation, frac:Observable</tt>
+> **rdfs:member:** only <tt>frac:Observable</tt>
+> **SubClassOf:** `frac:head` max 1
 >
 > ---
 </div>
 
 </div>
-
-Collocations are lists of ontolex:Elements, and formalized as <tt>rdf:List</tt>. Collocation elements can thus be directly accessed by <tt>rdf:first</tt>, <tt>rdf:_1</tt>, <tt>rdf:_2</tt>, etc. The property <tt>rdf:rest</tt> returns a <tt>rdf:List</tt> of <tt>ontolex:Element</tt>s, but not a <tt>frac:Collocation</tt>.
-
-By default, <tt>frac:Collocation</tt> is insensitive to word order. If a collocation is word order sensitive, it should be characterized by an appropriate <tt>dct:description</tt>, as well as by having <tt>lexinfo:termType lexinfo:idiom</tt>.
+	
+Collocations are collections of `frac:Observables`, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
+	
+By default, <tt>frac:Collocation</tt> is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in <tt>dct:description</tt>. 
 
 <div class="note">
+> Note that FrAC collocations can be used to represent collocations both in the lexicographic sense (as complex units of meaning) and in the quantative sense (as determined by collocation metrics over a particular corpus), but that the quantitative interpretation is the preferred one in the context of FrAC. To mark collocations in the lexicographic sense as such, they can be assigned a corresponding `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of `ontolex:MultiWordExpression` and the OntoLex-Decomp module rather than `frac:Collocation`. To provide collocation scores about a `ontolex:MultiWordExpression`, it can be linked via `rdfs:member` with a `frac:Collocation`.
+</div>
+	
+Collocations are `frac:Observable`s, i.e., they can be ascribed `frac:frequency`, `frac:attestation`, `frac:embedding`, they can be described in terms of their (embedding) similarity, and they can be nested inside larger collocations.
 
-> <tt>lexinfo:idiom</tt> is ``[a] group of words in a fixed order that have a particular meaning that is different from the meanings of each word understood on its own.'' In application to automatically generated collocations, the criterion of having `a particular meaning' is necessarily replaced by `a particular distribution pattern', as reflected by the collocation weight (<tt>rdf:value</tt>). _Idioms_ in the narrower sense of lexicalized multi-word expressions should not be modelled as <tt>frac:Collocation</tt>s, but as <tt>ontolex:MultiWordExpression</tt>s. [TO BE DISCUSSED]
+Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cscore`:
 
+<div class="property">
+
+> ---
+> ### cscore (property)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#cscore)
+> **Collocation score** is a subproperty of `rdf:value` that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.
+> **SubPropertyOf:** <tt>rdf:value</tt>
+> **domain:** <tt>frac:Collocation</tt>
+>
+> ---
 </div>
 
+FrAC provides 10 pre-defined sub-properties of `frac:cscore` for frequently used collocation metrics
+ (see http://www.lrec-conf.org/proceedings/lrec2002/pdf/128.pdf, https://www.nltk.org/howto/collocations.html, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf,  https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf for definitions):
+
+- `frac:pmi`: pointwise mutual information (Sketch Engine: “MI-score”), “association ratio”
+- `frac:mi3`: SketchEngine: modified pmi score, see https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf 
+- `frac:pmi_logfreq`: SketchEngine, see https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf “MI.log-f”, formerly “salience” 
+- `frac:student_t`: t-score
+- `frac:chi_sq`: Chi²
+- `frac:likelihood_ratio` (log-likelihood)
+- `frac:rel_freq`: collocation frequency relative to head frequency (note that SketchEngine returns percent rather than the actual score)
+- `frac:dice` Dice coefficient, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf 
+- `frac:logDice` (SketchEngine, https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf, this is the SketchEngine default score)
+- `frac:minSensitivity` (Pedersen, Dependent Bigram Identification, in Proc. Fifteenth National Conference on Artificial Intelligence, 1998,  https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf) 
+
+> Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
+	
+Many of these metrics are asymmetric, and distinguish the lexical element they are about (the head) from its collocate(s). If such metrics are provided, a collocation should explicitly identify its head:
+
+<div class="property">
+
+> ---
+> ### head (property)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#head)
+> The **head** property identifies the element of a collocation that its scores are about. A collocation must not have more than one head.
+> **domain:** <tt>frac:Collocation</tt>
+> **range:** <tt>frac:Observable</tt>
+>
+> ---
+</div>
+	
+As an example, the relative frequency score is the number of occurrences of a collocation relative to the overall frequency of its head.
+	
+> Note: The function of the property `frac:head` is restricted to indicate the directionality of asymmetric collocation scores. It must not be confused with the notion of "head" in certain fields of linguistics, e.g., dependency syntax. 
+> Note: `frac:head` should not be used to model the structure of collocation dictionaries, i.e., the selection of collocations to be displayed with a particular head word. For these functions, please resort to the *lexicog:` vocabulary. 
+	
 The most elementary level of a collocation is an n-gram, as provided, for example, by [Google Books](http://storage.googleapis.com/books/ngrams/books/datasetsv2.html), which provide n-gram frequencies per publication year as tab-separated values. For 2008, the 2012 edition provides the following statistics for the bigram _kill_ + _switch_.
 
 <div class="beispiel">
@@ -613,14 +656,14 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
 :switch_cf ontolex:writtenRep "switch"@en.
 
 # form-form bigrams
-(:kill_cf :switch_cf) a frac:Collocation;
+[ rdf:_1 :kill_cf; rdf:_2 :switch_cf ] a frac:Collocation, rdf:Seq ;
   rdf:value "199";
   dct:description "2-grams, English Version 20120701, word frequency";
   dct:source <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
-(:kill_cf :switch_cf) a frac:Collocation;
+[ rdf:_1 :kill_cf; rdf:_2 :switch_cf ] a frac:Collocation, rdf:Seq ; 
   rdf:value "121";
   dct:description "2-grams, English Version 20120701, document frequency";
   dct:source <https://books.google.com/ngrams>;
@@ -628,14 +671,14 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
   lexinfo:termType lexinfo:idiom.
 
 # form-lexeme bigrams
-(:kill_cf :switch_n) a frac:Collocation;
+[ rdf:_1 :kill_cf; rdf:_2 :switch_n ] a frac:Collocation, rdf:Seq ;
   rdf:value "187";
   dct:description "2-grams, English Version 20120701, word frequency";
   dct:source <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
-(:kill_cf :switch_n) a frac:Collocation;
+[ rdf:_1 :kill_cf, rdf:_2 :switch_n ] a frac:Collocation, rdf:Seq ;
   rdf:value "115";
   dct:description "2-grams, English Version 20120701, document frequency";
   dct:source <https://books.google.com/ngrams>;
@@ -643,12 +686,6 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
   lexinfo:termType lexinfo:idiom.` </pre>
 
 </div>
-
-</div>
-
-<div class="note">
-
-> Question: can canonical forms be shared across different lexical entries? For the case of plain word n-grams, this is presupposed here.
 
 </div>
 
@@ -671,18 +708,18 @@ The second example illustrates more complex types of collocation are provided as
 	  ontolex:canonicalForm/ontolex:writtenRep "about"@en
 
 	# collocations, non-lexicalized
-	(wsen:spill wsen:beans) a frac:Collocation;
+	[ rdfs:member wsen:spill, wsen:beans ] a frac:Collocation;
 	  rdf:value "182";
 	  dct:description "cooccurrences in the same sentence, unordered";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
 
-	(wsen:green wsen:beans) a frac:Collocation;
+	[ rdf:_1 wsen:green; rdf:_2 wsen:beans ] a frac:Collocation, rdf:Seq ;
 	  rdf:value "778";
 	  dct:description "left neighbor cooccurrence";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
 	  lexinfo:termType lexinfo:idiom.
 
-	(wsen:beans wsen:about) a frac:Collocation;
+	 [ rdf:_1 wsen:beans; rdf:_2 wsen:about ] a frac:Collocation, rdf:Seq;
 	  rdf:value "35";
 	  dct:description "right neighbor cooccurrence";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
@@ -692,7 +729,7 @@ The second example illustrates more complex types of collocation are provided as
 	wsen:spill+the+beans a ontolex:MultiWordExpression;
 	  ontolex:canonicalForm/ontolex:writtenRep "spill the beans"@en.
 
-	(wsen:beans wsen:spill+the+beans) a frac:Collocation;
+	[ rdfs:member wsen:beans, wsen:spill+the+beans ] a frac:Collocation;
 	  rdf:value "401";
 	  dct:description "cooccurrences in the same sentence, unordered";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.` </pre>
