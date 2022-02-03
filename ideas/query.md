@@ -1,8 +1,10 @@
 # Modelling corpus queries
 
-In the FrAC meeting at Jan 20, 11:00-12:00 CET, we had a long discussion on a richer modelling of collocations.
 
-Requirements:
+## Requirements
+
+In the FrAC meeting at Jan 20, 11:00-12:00 CET, we had a long discussion on a richer modelling of collocations:
+
 - represent morphosyntactically defined "slots" between lexical expressions, e.g., "VERB + analyze"
   - we could (ab)use synsem:SyntacticFrame, but then, with observables as "syntactic" arguments
     (but this is a bit of a stretch as collocations aren't necessarily syntactically structured)
@@ -16,18 +18,34 @@ Requirements:
 - keep it generic
   - we will not create dependencies from any particular query language
 
-Suggestion:
+## Proposal
+
 - create query/response objects
   - attribute query (in any corpus query language) => `rdf:value`
   - attribute query language
   - attribute variables: json array with string values (variable names)
-  - response: set of ordered collocations, with element order corresponding to variables
-    [ attestations can be indirectly linked via collocations ]
+  - response: set of ordered cooccurrences, with element order corresponding to variables
+  - cooccurrence as superclass of collocation, carries attestations (links to corpus matches)
 - depending on the corpus query language used, there is a mapping from positions in a collocation to positions in a query
 
-? shall we rename collocation to Cooccurrence
+### history
 
-practical application:
+- 02-03-2022: initial discussion at OntoLex-FrAC
+  - cooccurrence as superclass of collocation
+  - remove `Observation` (has not been discussed@FrAC, so far)
+- 01-20-2022: initial proposal 
+  - create query/response objects
+    - attribute query (in any corpus query language) => `rdf:value`
+    - attribute query language
+    - attribute variables: json array with string values (variable names)
+    - response: set of ordered collocations, with element order corresponding to variables
+      [ attestations can be indirectly linked via collocations ]
+  - depending on the corpus query language used, there is a mapping from positions in a collocation to positions in a query
+  - shall we rename collocation to Cooccurrence
+  - diagram uses `Observation` as superclass already
+
+## practical application
+- modelling complex syntactic patterns for collocation analysis, etc.
 - client creates a query/response object without responses
 - server returns a query/response object with responses
 
