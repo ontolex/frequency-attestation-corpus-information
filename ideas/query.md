@@ -32,7 +32,6 @@ In the FrAC meeting at Jan 20, 11:00-12:00 CET, we had a long discussion on a ri
 
 - 02-03-2022: initial discussion at OntoLex-FrAC
   - cooccurrence as superclass of collocation
-  - remove `Observation` (has not been discussed@FrAC, so far)
 - 01-20-2022: initial proposal 
   - create query/response objects
     - attribute query (in any corpus query language) => `rdf:value`
@@ -49,5 +48,8 @@ In the FrAC meeting at Jan 20, 11:00-12:00 CET, we had a long discussion on a ri
 - client creates a query/response object without responses
 - server returns a query/response object with responses
 
+## diagram
+
+Note that we use a number of minor modifications to the official diagram. In particular, we use the `Observation` class as a generalization over FrAC classes in order to produce a simpler diagram. This has not been discussed at telcos, yet.
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-query.puml?cache=no)
