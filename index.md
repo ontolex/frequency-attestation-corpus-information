@@ -791,23 +791,47 @@ Collocations can be described in terms of various collocation scores. If scores 
 > ---
 </div>
 
-FrAC provides 10 pre-defined sub-properties of `frac:cscore` for frequently used collocation metrics
- (see http://www.lrec-conf.org/proceedings/lrec2002/pdf/128.pdf, https://www.nltk.org/howto/collocations.html, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf,  https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf for definitions):
+FrAC provides 10 pre-defined sub-properties of `frac:cscore` for frequently used collocation metrics:
 
-- `frac:pmi`: pointwise mutual information (Sketch Engine: “MI-score”), “association ratio”
+- `frac:rel_freq` (*relative frequency*)
+
+	<img src="https://render.githubusercontent.com/render/math?math=RF(x,y|x) = \frac{f_{xy}}{f/x} (= R_x)">
 	
-	<img src="https://render.githubusercontent.com/render/math?math=PMI(w_1,w_2)=log_2 \frac{P(w_1,w_2}{P(w_1)P(w_2)}">
+- `frac:pmi` (*pointwise mutual information*, sometimes referred to as *MI-score* or *association ratio*):
 	
-- `frac:mi3`: SketchEngine: modified pmi score, see https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf 
-- `frac:pmi_logfreq`: SketchEngine, see https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf “MI.log-f”, formerly “salience” 
-- `frac:student_t`: t-score
+	<img src="https://render.githubusercontent.com/render/math?math=PMI(x,y)=log_2 \frac{f_{xy} N}{f_x f_y}">
+	
+- `frac:mi3` (*MI³-score*, as used in SketchEngine) 
+	
+	<img src="https://render.githubusercontent.com/render/math?math=PMI(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
+	
+- `frac:pmi_logfreq` (*MI.log-f*, formerly *salience*, formerly default metric in SketchEngine)
+	
+	<img src="https://render.githubusercontent.com/render/math?math=MI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
+
+- `frac:student_t` (*Student t test*, *T-score*)
+
+	<img src="https://render.githubusercontent.com/render/math?math=T(w_1,w_2)=\frac log_2 \frac{(P(w_1,w_2)^3) N}{P(w_1)P(w_2)}">
+	
 - `frac:chi_sq`: Chi²
 - `frac:likelihood_ratio` (log-likelihood)
-- `frac:rel_freq`: collocation frequency relative to head frequency (note that SketchEngine returns percent rather than the actual score)
 - `frac:dice` Dice coefficient, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf 
 - `frac:logDice` (SketchEngine, https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf, this is the SketchEngine default score)
-- `frac:minSensitivity` (Pedersen, Dependent Bigram Identification, in Proc. Fifteenth National Conference on Artificial Intelligence, 1998,  https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf) 
+- `frac:minSensitivity` (*minimum sensitivity*, cf. [Pedersen 1998](Pedersen, Dependent Bigram Identification, in Proc. Fifteenth National Conference on Artificial Intelligence, 1998,  https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf)) 
+	
+	<img src="https://render.githubusercontent.com/render/math?math=MS(x,y)=min(R_x,R_y)">
 
+with
+	- <img src="https://render.githubusercontent.com/render/math?math=x,y"> the (head) word and its collocate
+	- <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *X*
+	- <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *X* and *Y*
+	- <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *X*
+	- <img src="https://render.githubusercontent.com/render/math?math=N"> a weight given to one of the terms, if different from 1, this should be documented in `dc:description`
+
+	
+ (see http://www.lrec-conf.org/proceedings/lrec2002/pdf/128.pdf, https://www.nltk.org/howto/collocations.html, https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf,  https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf for definitions):
+
+	
 > Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
 	
 Many of these metrics are asymmetric, and distinguish the lexical element they are about (the head) from its collocate(s). If such metrics are provided, a collocation should explicitly identify its head:
