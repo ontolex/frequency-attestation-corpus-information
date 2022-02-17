@@ -765,7 +765,6 @@ We distinguish two primary contextual relations: syntagmatic (between co-occurri
 > ---
 </div>
 
-</div>
 	
 Collocations are collections of `frac:Observables`, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
 	
@@ -776,7 +775,7 @@ By default, <tt>frac:Collocation</tt> is insensitive to word order. If a colloca
 </div>
 	
 Collocations are `frac:Observable`s, i.e., they can be ascribed `frac:frequency`, `frac:attestation`, `frac:embedding`, they can be described in terms of their (embedding) similarity, and they can be nested inside larger collocations.
-
+	
 Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cscore`:
 
 <div class="property">
@@ -831,7 +830,7 @@ Many of these metrics are asymmetric, and distinguish the lexical element they a
 >
 > ---
 </div>
-	
+		
 As an example, the relative frequency score is the number of occurrences of a collocation relative to the overall frequency of its head.
 	
 > Note: The function of the property `frac:head` is restricted to indicate the directionality of asymmetric collocation scores. It must not be confused with the notion of "head" in certain fields of linguistics, e.g., dependency syntax. 
