@@ -1,0 +1,63 @@
+PREFIX : <http://odzic-stuff.tmp/>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX frac: <http://www.w3.org/ns/lemon/frac#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#>
+
+# head word
+:apply-v a ontolex:LexicalEntry;
+ontolex:canonicalForm [ ontolex:writtenRep "apply"];
+ontolex:sense :apply-v-sense1.
+
+# this is collocation specific to a sense,
+
+# this was forgotten before, but here, the sense is the observable (!)
+:apply-v-sense1 skos:definition "be relevant".
+:apply-equally a frac:Collocation, rdfs:Seq;
+rdf:_1 :apply-v-sense1;
+rdf:_2 :equally-adv;
+frac:attestation [ frac:quotation "These principles apply equally in all cases." ];
+frac:head :apply-v-sense1.
+
+# modifier
+:equally-adv a ontolex:LexicalEntry;
+ontolex:canonicalForm [ ontolex:writtenRep "equally"];
+lexinfo:partOfSpeech lexinfo:adverb. # syntactic pattern!
+:apply-to a frac:Collocation, rdfs:Seq;
+rdf:_1 :apply-v-sense1;
+rdf:_2 :to-prep;
+frac:attestation [ frac:quotation "These restrictions do not apply to us." ];
+frac:head :apply-v-sense1.
+:to-prep a ontolex:LexicalEntry;
+ontolex:canonicalForm [ ontolex:writtenRep "to"];
+lexinfo:partOfSpeech lexinfo:preposition. # syntactic pattern!
+:the-same-applies a frac:Collocation, rdfs:Seq;
+rdf:_1 :the;
+rdf:_2 :same;
+rdf:_3 :apply-v-sense1;
+frac:attestation [ frac:quotation "British companies are subject to international laws and the same applies to companies in Europe."];
+frac:head :apply-v-sense1.
+:the a ontolex:LexicalEntry;
+ontolex:canonicalForm [ ontolex:writtenRep "the"].
+:same a ontolex:LexicalEntry;
+ontolex:canonicalForm [ ontolex:writtenRep "same"].
+:the-same-applies rdf:_3 :apply-v-applies.
+:apply-v-applies ontolex:writtenRep "applies".
+:apply-v ontolex:lexicalForm :apply-v-applies.
+
+# no wreps here
+:analyse-verb a ontolex:LexicalEntry.
+
+# no sense differentiation here
+:analyze-carefully a frac:Collocation, rdfs:Seq;
+rdf:_1 :analyse-verb;
+rdf:_2 :carefully-adv.
+:analyse-in-depth a frac:Collocation, rdfs:Seq;
+rdf:_1 :analyse-verb;
+rdf:_2 :in-depth-adv. # sic! encoded as such in the original
+:analyse-in-detail a frac:Collocation, rdfs:Seq;
+rdf:_1 :analyse-verb;
+rdf:_2 :in-detail-adv;
+frac:attestation [ frac:quotation "The results must be analysed in detail."].
