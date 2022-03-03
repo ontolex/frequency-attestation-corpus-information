@@ -757,7 +757,7 @@ We distinguish two primary contextual relations: syntagmatic (between co-occurri
 > ---
 > ### Collocation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
-> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Observables</tt>s based on their co-occurrence within the same context window and characterized by their collocation weight (<tt>frac:score</tt>) in one or multiple source corpora (<tt>frac:corpus</tt>).
+> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Observables</tt>s based on their co-occurrence within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular source corpus (<tt>frac:corpus</tt>).
 > **SubClassOf:** <tt>frac:ContextualRelation, frac:Observable</tt>
 > **rdfs:member:** only <tt>frac:Observable</tt>
 > **SubClassOf:** `frac:head` max 1
@@ -1165,6 +1165,8 @@ This query can be used as a test for _frac_ compliancy, and for property `infere
 > We use the OWL2/DL vocabulary for modelling restrictions. However, _lemon_ is partially compatible with OWL2/DL only in that several modules use <tt>rdf:List</tt> -- which is a reserved construct in OWL2\. Therefore, the primary means of accessing and manipulation _lemon_ and _ontolex-frac_ data is by means of SPARQL, resp., RDF- (rather than OWL-) technology. In particular, we do not guarantee nor require that OWL2/DL inferences can be used for validating or querying _lemon_ and _ontolex-frac_ data.
 
 </div>
+
+> Note: **TODO** analoguous example for corpus-specific collocations
 
 </section>
 
