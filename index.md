@@ -795,8 +795,8 @@ FrAC defines a number of popular collocation metrics as sub-properties of `frac:
 
 - `frac:rel_freq` (*relative frequency*): <img src="https://render.githubusercontent.com/render/math?math=RF(x,y|x) = \frac{f_{xy}}{f_x} (= R_x)"> (asymmetric, requires `frac:head`)
 - `frac:pmi` (*pointwise mutual information*, sometimes referred to as *MI-score* or *association ratio*, cf. [Church and Hanks 1990, via Ewert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf): <img src="https://render.githubusercontent.com/render/math?math=PMI(x,y)=log_2 \frac{f_{xy} N}{f_x f_y}"> 
-- `frac:mi2` (*MI²-score*): <img src="https://render.githubusercontent.com/render/math?math=MI3(x,y)=log_2 \frac{f_{xy}^2 N}{f_x f_y}">
-- `frac:mi3` (*MI³-score*, cf. [Daille 1994 in Ebert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MI3(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
+- `frac:mi2` (*MI²-score*): <img src="https://render.githubusercontent.com/render/math?math=MI^2(x,y)=log_2 \frac{f_{xy}^2 N}{f_x f_y}">
+- `frac:mi3` (*MI³-score*, cf. [Daille 1994 in Ebert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MI^3(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
 - `frac:pmi_logfreq` (*MI.log-f*, *salience*, formerly default metric in SketchEngine): <img src="https://render.githubusercontent.com/render/math?math=MI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
 - `frac:dice` (*Dice coefficient*): <img src="https://render.githubusercontent.com/render/math?math=Dice(x,y)=\frac{2 f_{xy}}{f_x %2B f_y}">
 - `frac:logDice` (default metric in SketchEngine, [Rychly 2008](https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf)): <img src="https://render.githubusercontent.com/render/math?math=LogDice(x,y)=14 %2B log_2 Dice(x,y)">
@@ -806,10 +806,10 @@ FrAC defines a number of popular collocation metrics as sub-properties of `frac:
 with
 	
 - <img src="https://render.githubusercontent.com/render/math?math=x,y"> the (head) word and its collocate
-- <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *X*
-- <img src="https://render.githubusercontent.com/render/math?math=f_y"> the number of occurrences of the word *Y*
-- <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *X* and *Y*
-- <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *X*
+- <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *x*
+- <img src="https://render.githubusercontent.com/render/math?math=f_y"> the number of occurrences of the word *y*
+- <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *x* and *y*
+- <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *y*
 - <img src="https://render.githubusercontent.com/render/math?math=N"> a weight given to one of the terms, if different from 1, this should be documented in `dc:description`
 
 
@@ -829,10 +829,10 @@ with
 	
 In addition to classical collocation metrics as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of frac:cscore, as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <img src="https://render.githubusercontent.com/render/math?math=x \rightarrow y"> means that the existence of word *x* implies the existence of word *y* 
 
-- `frac:support` (the *support* is an indication of how frequently the rule appears in the dataset): <img src="https://render.githubusercontent.com/render/math?math=support(x \rightarrow y) = \frac{f_{xy}}{N}">
+- `frac:support` (the *support* is an indication of how frequently the rule appears in the dataset): <img src="https://render.githubusercontent.com/render/math?math=support(x \rightarrow y) = \frac{f_{xy}}{N}"> (with *N* the total number of collocations)
 - `frac:confidence` (the *confidence* is an indication of how often the rule has been found to be true): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{f_{xy}}{f_{x}}">
-- `frac:lift` (the *lift* or *interest* of a rule measures how many times more often -*X* and *Y* occur together than expected if they are statistically independent): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{f_{xy}}{f_{x}f_{y}}">
-- `frac:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *X* occurs without *Y*, i.e., the frequency that the rule makes an incorrect prediction, if *X* and *Y* are independent divided by the observed frequency of incorrect predictions): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{(1 - f_{y})f_{x}}{f_{x} - f_{xy}}">
+- `frac:lift` (the *lift* or *interest* of a rule measures how many times more often *x* and *y* occur together than expected if they are statistically independent): <img src="https://render.githubusercontent.com/render/math?math=lift(x \rightarrow y) = \frac{f_{xy}}{f_{x}f_{y}}">
+- `frac:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *x* occurs without *y*, i.e., the frequency that the rule makes an incorrect prediction, if *x* and *y* are independent divided by the observed frequency of incorrect predictions): <img src="https://render.githubusercontent.com/render/math?math=conviction(x \rightarrow y) = \frac{(1 - f_{y})f_{x}}{f_{x} - f_{xy}}">
  
 
 > Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
