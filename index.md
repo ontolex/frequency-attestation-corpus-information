@@ -14,6 +14,7 @@ Contributors: (please add yourself)
 ))
 * John P. McCrae
 * Sander Stolk
+* Ciprian-Octavian Truică
 * ...
 
 [Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
@@ -800,11 +801,15 @@ FrAC defines a number of popular collocation metrics as sub-properties of `frac:
 - `frac:dice` (*Dice coefficient*): <img src="https://render.githubusercontent.com/render/math?math=Dice(x,y)=\frac{2 f_{xy}}{f_x+f_y}">
 - `frac:logDice` (default metric in SketchEngine, [Rychly 2008](https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf)): <img src="https://render.githubusercontent.com/render/math?math=LogDice(x,y)=14+log_2 Dice(x,y)">
 - `frac:minSensitivity` (*minimum sensitivity*, cf. [Pedersen 1998](https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MS(x,y)=min(R_x,R_y)">
+- `frac:chi2` (*Person's Chi-square test* ([Manning 1999](https://nlp.stanford.edu/fsnlp/)): <img src="https://render.githubusercontent.com/render/math?math=\Chi^2(x,y)=\frac{N(O_{11}O_{22}-O_{12}O_{21})^2}{(O_{11}+O_{11})(O_{11}+O_{21})(O_{12}+O_{22})(O_{21}+O_{22})}">
+
 	
 with
 	
 - <img src="https://render.githubusercontent.com/render/math?math=x,y"> the (head) word and its collocate
+- <img src="https://render.githubusercontent.com/render/math?math=N"> the total number of words in the corpus (for <img src="https://render.githubusercontent.com/render/math?math=\Chi^2(x,y)">
 - <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *X*
+- <img src="https://render.githubusercontent.com/render/math?math=f_y"> the number of occurrences of the word *Y*
 - <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *X* and *Y*
 - <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *X*
 - <img src="https://render.githubusercontent.com/render/math?math=N"> a weight given to one of the terms, if different from 1, this should be documented in `dc:description`
