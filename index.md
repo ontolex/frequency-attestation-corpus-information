@@ -806,21 +806,24 @@ FrAC defines a number of popular collocation metrics as sub-properties of `frac:
 with
 	
 - <img src="https://render.githubusercontent.com/render/math?math=x,y"> the (head) word and its collocate
-- <img src="https://render.githubusercontent.com/render/math?math=N"> the total number of words in the corpus (for <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)">
 - <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *X*
 - <img src="https://render.githubusercontent.com/render/math?math=f_y"> the number of occurrences of the word *Y*
 - <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *X* and *Y*
+- <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *X*
+- <img src="https://render.githubusercontent.com/render/math?math=N"> a weight given to one of the terms, if different from 1, this should be documented in `dc:description`
 - <img src="https://render.githubusercontent.com/render/math?math=O_{11}=f_{xy}"> 
 - <img src="https://render.githubusercontent.com/render/math?math=O_{12}=f_{y} - f_{xy}"> 
 - <img src="https://render.githubusercontent.com/render/math?math=O_{21}=f_{x} - f_{xy}"> 
 - <img src="https://render.githubusercontent.com/render/math?math=O_{22}=N - f_{x} - f_{y} %2B 2f_{xy}"> 
-- <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *X*
-- <img src="https://render.githubusercontent.com/render/math?math=N"> a weight given to one of the terms, if different from 1, this should be documented in `dc:description`
+- <img src="https://render.githubusercontent.com/render/math?math=N"> the total number of words in the corpus (for <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)">)
 
+	
 In addition to collocation scores, also statistical independence tests are being employed as collocation scores:
 
 - `frac:likelihood_ratio` (*log likelihood*, *G²* [Dunning 1993, via Ewer 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
 - `frac:tScore` (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Ewert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf): <img src="https://render.githubusercontent.com/render/math?math=T(x,y)=\frac{f_{xy}-(f_x f_y)}{\sqrt{f_{xy}}}">
+
+In addition to classical collocation metrics as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of frac:cscore, as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) $x \leftarrow y$ means that the existence of word *x* implies the existence of word *y* 
 	
 > Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
 	
