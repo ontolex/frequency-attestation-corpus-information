@@ -818,7 +818,7 @@ In addition to collocation scores, also statistical independence tests are being
 
 - `frac:likelihood_ratio` (*log likelihood*, *G²* [Dunning 1993, via Ewer 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
 - `frac:tScore` (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Ewert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf): <img src="https://render.githubusercontent.com/render/math?math=T(x,y)=\frac{f_{xy}-(f_x f_y)}{\sqrt{f_{xy}}}">
-- `frac:chi2` (*Person's Chi-square test* ([Manning 1999](https://nlp.stanford.edu/fsnlp/)): <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)=\frac{N(O_{11}O_{22}-O_{12}O_{21})^2}{(O_{11} %2B O_{12})(O_{11} %2B O_{21})(O_{12} %2B O_{22})(O_{21} %2B O_{22})}">
+- `frac:chi2` (*Person's Chi-square test* [Manning 1999](https://nlp.stanford.edu/fsnlp/) ): <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)=\frac{N(O_{11}O_{22}-O_{12}O_{21})^2}{(O_{11} %2B O_{12})(O_{11} %2B O_{21})(O_{12} %2B O_{22})(O_{21} %2B O_{22})}">
 
 with
 - <img src="https://render.githubusercontent.com/render/math?math=O_{11}=f_{xy}"> 
@@ -829,11 +829,10 @@ with
 	
 In addition to classical collocation metrics as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of frac:cscore, as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <img src="https://render.githubusercontent.com/render/math?math=x \rightarrow y"> means that the existence of word *x* implies the existence of word *y* 
 
-- `frac:support` (the *support* is an indication of how frequently the rule appears in the dataset): <img src="https://render.githubusercontent.com/render/math?math=support(x \rightarrow y = \frac{f_{xy}}{N}">
-- `frac:confidence` (the *confidence* is an indication of how often the rule has been found to be true): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y = \frac{f_{xy}}{f_{x}}">
-- `frac:lift` (the *lift* or *interest* of a rule measures how many times more often -*X* and *Y* occur together than expected if they are statistically independent): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y = \frac{f_{xy}}{f_{x}f_{y}}">
-- `frac:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *X* occurs without *Y*, i.e., the frequency that the rule makes an incorrect prediction, if *X* and *Y* are independent divided by the observed frequency of incorrect predictions): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y = \frac{(1 - f_{y})f_{x}}{f_{x} - f_{xy}}">
-	
+- `frac:support` (the *support* is an indication of how frequently the rule appears in the dataset): <img src="https://render.githubusercontent.com/render/math?math=support(x \rightarrow y) = \frac{f_{xy}}{N}">
+- `frac:confidence` (the *confidence* is an indication of how often the rule has been found to be true): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{f_{xy}}{f_{x}}">
+- `frac:lift` (the *lift* or *interest* of a rule measures how many times more often -*X* and *Y* occur together than expected if they are statistically independent): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{f_{xy}}{f_{x}f_{y}}">
+- `frac:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *X* occurs without *Y*, i.e., the frequency that the rule makes an incorrect prediction, if *X* and *Y* are independent divided by the observed frequency of incorrect predictions): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{(1 - f_{y})f_{x}}{f_{x} - f_{xy}}">
  
 
 > Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
