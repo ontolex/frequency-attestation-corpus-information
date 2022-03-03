@@ -809,7 +809,7 @@ with
 - <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *x*
 - <img src="https://render.githubusercontent.com/render/math?math=f_y"> the number of occurrences of the word *y*
 - <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *x* and *y*
-- <img src="https://render.githubusercontent.com/render/math?math=R_x = \frac{f_{xy}}{f/x}"> relative frequency of *y*
+- <img src="https://render.githubusercontent.com/render/math?math=R_y = \frac{f_{xy}}{f_{y}}"> relative frequency of *y*
 - <img src="https://render.githubusercontent.com/render/math?math=N"> a weight given to one of the terms, if different from 1, this should be documented in `dc:description`
 
 
