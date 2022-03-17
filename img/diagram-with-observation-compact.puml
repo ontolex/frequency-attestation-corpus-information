@@ -1,0 +1,69 @@
+@startuml
+
+frame "observed about what" {
+
+  class Observable {}
+
+}
+
+  class Observation {
+    str: dc:description
+    Literal: rdf:value
+  }
+
+
+frame "observed what: Observation subclasses" {
+
+  class Collocation {}
+
+  class CorpusFrequency {
+  }
+
+  class Attestation {
+    str: gloss
+  }
+
+  Collocation -down[hidden]-> Attestation
+
+  class Embedding {
+   int: dc:extent
+  }
+
+  Similarity o-down- Embedding
+  Similarity --[hidden]-- Embedding
+
+  Similarity -down[hidden]-> FixedSizeVector
+  FixedSizeVector -[norank]-|> Embedding
+  FixedSizeVector -down[hidden]-> BagOfWords
+  BagOfWords -[norank]-|> Embedding
+  BagOfWords -down[hidden]-> TimeSeries
+  TimeSeries -[norank]-|> Embedding
+
+
+}
+
+"observed what: Observation subclasses" -right-|> Observation
+
+frame "observed where" {
+  class Corpus {
+    int: total
+  }
+}
+
+
+Observation -up-> Corpus: corpus
+
+Embedding -[norank]-> Attestation: attestationEmbedding
+
+Observable -[norank]-> Embedding: embedding
+Observable -[norank]-> CorpusFrequency: frequency
+Observable -[norank]-> Attestation: attestation sub citation
+
+
+
+Collocation -down-> Observable: head
+Collocation --|> Observable
+Observable -up-o Collocation
+
+
+@enduml

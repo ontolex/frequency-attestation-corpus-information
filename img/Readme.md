@@ -20,3 +20,8 @@ Aspects of simplification:
 - rename `attestationGloss`  to `gloss`: No other glosses here.
 
 > *Note*: In the final diagram, maybe we don't draw arrows between classes and `Observation`, but, instead, put all observations into a box, label it "subclasses of Observation" and put the Observation class with its properties there
+> This is the "compact view"
+
+## Compact view
+
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
