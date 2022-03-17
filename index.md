@@ -817,7 +817,7 @@ with
 In addition to collocation scores, also statistical independence tests are being employed as collocation scores:
 
 - `frac:likelihood_ratio` (*log likelihood*, *G²* [Dunning 1993, via Ewer 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
-- `frac:tScore` (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Ewert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf) ): <img src="https://render.githubusercontent.com/render/math?math=T(x,y)=\frac{f_{xy}-(f_x f_y)}{\sqrt{f_{xy}}}">
+- `frac:tScore` (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Ewert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf) ): <img src="https://render.githubusercontent.com/render/math?math=T(x,y)=\frac{f_{xy}-\frac{(f_x f_y)}{N}}{\sqrt{f_{xy}}}">
 - `frac:chi2` (*Person's Chi-square test* [Manning 1999](https://nlp.stanford.edu/fsnlp/) ): <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)=\frac{N(O_{11}O_{22}-O_{12}O_{21})^2}{(O_{11} %2B O_{12})(O_{11} %2B O_{21})(O_{12} %2B O_{22})(O_{21} %2B O_{22})}">
 
 with
