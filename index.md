@@ -14,6 +14,7 @@ Contributors: (please add yourself)
 ))
 * John P. McCrae
 * Sander Stolk
+* Ciprian-Octavian Truică
 * ...
 
 [Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
@@ -499,34 +500,252 @@ Note: In the example above, NIF is not correctly used: NIF requires string URIs 
 ### Embeddings
 back to ([Table of Contents](#table-of-contents))
 
-see [samples/embeddings/draft.md](samples/embeddings/draft.md)
 
+In distributional semantics, the contexts in which a word is attested are taken to define its meaning. Contextual similarity is thus a correlate of semantic similarity. Different representations of context are possible, the most prominent model to date is the form of a vector. A word vector can be created, for example, by means of a reference list of vocabulary items, where every reference word is associated with a fixed position, e.g., _ship_ with position 1, _ocean_ with 2, _sky_ with 3, etc. Given a corpus (and a selection criterion for collocates, e.g., within the same sentence), every word in the corpus can be described by the frequency that a reference word occurred as a collocate in the corpus. Assume we want to define the meaning of _frak_, with (exactly) the following attestations in our sample corpus (random samples from [wikiquote](https://en.wikiquote.org/wiki/Battlestar_Galactica_(2003))):
+
+*   _It's in the frakking ship!_
+*   _Have you lost your frakkin' mind?_
+*   _Oh, for frak's sake, let me see if I can make heads or tails of it._
+*   _It's a frakking Cylon._
+*   _Our job isn't to be careful, it's to shoot Cylons out of the frakking sky!_
+
+With the following list of reference words: <tt>(ship, ocean, lose, find, brain, mind, head, sky, Cylon, ...)</tt>, we obtain the vector <tt>(1,0,1,0,0,1,1,1,2,...)</tt> for the lemma (lexical entry) _frak_. For practical applications, these vectors are projected into lower-dimensional spaces, e.g., by means of statistical (Schütze 1993) or neural methods (Socher et al. 2011). The process of mapping a word to a numerical vector and its result are referred to as "word embedding". Aside from collocation counts, other methods for creating word embeddings do exist, but they are always defined relative to a corpus.
+
+Embeddings have become a dominating paradigm in natural language processing and machine learning, but, if compiled from large corpora, they require long training periods and thus tend to be re-used. However, embedding distributions often use tool-specific binary formats (cf. [Gensim](https://radimrehurek.com/gensim/models/word2vec.html)), and thus a portability problem arises. CSV and related formats (cf. [SENNA embeddings](https://github.com/baojie/senna/tree/master/embeddings)) are a better alternative, but their application to sense and concept embeddings (as provided, for example, by Rothe and Schütze 2017) is problematic if their distribution is detached from the definition of the underlying sense and concept definitions. With frac, Ontolex-lemon provides a vocabulary for the conjoint publication and sharing of embeddings and lexical information at all levels: non-lemmatized words (ontolex:Form), lemmatized words (ontolex:LexicalEntry), phrases (ontolex:MultiWordExpression), lexical senses (ontolex:LexicalSense) and lexical concepts (ontolex:LexicalConcept).
+
+<div class="note">
+
+> We focus on _publishing and sharing_ embeddings, not on their processing by means of Semantic Web formalisms, and thus, embeddings are represented as untyped or string literals with whitespace-separated numbers. If necessary, more elaborate representations, e.g., using rdf:List, may subsequently be generated from these literals.
+
+</div>
+
+Lexicalized embeddings provide their data via <tt>rdf:value</tt>, and should be published together with their metadata, most importantly
+
+*   procedure/method (<tt>dct:description</tt> with free text, e.g., "CBOW", "SKIP-GRAM", "collocation counts")
+*   corpus (<tt>dct:source</tt>)
+*   dimensionality (<tt>dct:extent</tt>)
+
+<div class="entity">
+
+> ----
+> ### embedding (ObjectProperty)
+> **URI:** [http://www.w3.org/nl/lemon/frac#embedding](http://www.w3.org/nl/lemon/frac#embedding)
+> The property **embedding** is a relation that maps a frac:Observable into a numerical feature space. An embedding is a structure-preserving mapping in the sense that it encodes and preserves contextual features of a particular frac:Observable (or, an aggregation over all its attestations) in a particular corpus.
+> **rdfs:range** ontolex:Element
+> **rdfs:domain** frac:Embedding
+>
+> ---
+</div>
+
+
+<div class="entity">
+
+> ---
+> ### Embedding (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Embedding](http://www.w3.org/nl/lemon/frac#Embedding)
+> An **Embedding** is a  representation (of a given frac:Observable (see <tt>frac:embedding</tt>) in a numerical feature space. It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>dct:source</tt>). The literal value of an Embedding is  provided by <tt>rdf:value</tt>).
+> **SubClassOf:** rdf:value exactly 1 xsd:string, dct:source min 1, dct:description min 1
+>
+> ---
+</div>
+
+</div>
+
+<div class="note">
+The use of the term "embedding" adopted here follows the terminology in mathematics: For the embedding of an object  _X_  in another object  _Y_, the embedding _f_ :  _X_  →  _Y_  (alternatively _f_ : _X_ ↪ _Y_) is defined as an  injective, structure-preserving map (morphism). (Rephrased from [https://en.wikipedia.org/wiki/Embedding](https://en.wikipedia.org/wiki/Embedding))  For "embedding" in the sense conventionally used in language technology, see the subclass frac:FixedSizeVector.</div>
+
+<div class="note">
+FrAC does not define the type of literal provided in the rdf:value of an embedding. The following examples use JSON literals, this is, however, informative, not normative. Alternative encodings based on tool-specific string representations (e.g., whitespace-separated numbers or comma-separated values) are possible. For string literals or untyped literal values, it is recommended to provide a regular expression that defines how to parse it as part of the description of the Embedding. As an example, the following regular expression for parsing embedding values can be used to parse whitespace-separated numbers (example in Perl):
+
+`split(/[^0-9\.,\-]+/, $value)`
+
+This means that doubles should be provided in the conventional format, not using the exponent notation.
+
+Also note that different subclasses of frac:Embedding may have different encoding strategies.
+</div>
+
+<div class="entity">
+
+> ---
+> ### FixedSizeVector (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#FixedSizeVector](http://www.w3.org/nl/lemon/frac#FixedSizeVector)
+> A **FixedSizeVector** is the value of a frac:embedding into a fixed-size numerical feature space. The literal value (<tt>rdf:value</tt>) of a FixedSizeVector is a list of numbers. The dimensionality of the feature space should be encoded by dct:extent.
+> **SubClassOf:** Embedding, dct:extent exactly 1
+>
+> ---
+</div>
+
+Word, sense or concept embeddings as conventionally used in language technology are fixed size vectors. The 50-dimensional [GloVe](https://nlp.stanford.edu/projects/glove/) 6B (Wikipedia 2014+Gigaword 5) embedding for _frak_ is given below:
+
+<tt>frak 0.015246 -0.30472 0.68107 -0.59727 -0.95368 -1.0931 0.58783 -0.19128 0.49108 0.61215 -0.14967 0.68197 0.22723 0.38514 -0.54721 -0.71187 0.21832 0.59857 0.1076 -0.23619 -0.86604 -0.91168 0.26087 -0.42067 0.60649 0.80644 -1.0477 0.67461 0.34154 -0.072511 -1.01 0.35331 -0.35636 0.9764 -0.62665 -0.29075 0.50797 -1.3538 0.18744 0.27852 -0.22557 -1.187 -0.11523 -0.078265 0.29849 0.22993 -0.12354 0.2829 1.0697 0.015366</tt>
+
+As a lemma (LexicalEntry) embedding, this can be represented as follows:
+
+<div class="beispiel">
+
+<div>
+
+<pre>
+:frak a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
+  frac:embedding [ 
+    a frac:FixedSizeVector;
+	rdf:value "[ 0.015246 , -0.30472 , 0.68107,  ... ]"^^rdf:JSON;
+	dct:source 
+      &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
+	  &lt;https://catalog.ldc.upenn.edu/LDC2011T07>;
+	dct:extent 50^^^xsd:int;
+	dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].`
+	</pre>
+
+</div>
+
+</div>
+
+In this example, the rdf:value of the embedding is represented my a JSON array (abbreviated).
+
+<div class="note">
+
+As with <tt>frac:Frequency</tt>, we recommend defining resource-specific subclasses of <tt>frac:Embedding</tt> in order to reduce redundancy in the data:
+
+<div class="beispiel">
+
+<div>
+
+<pre>
+ # resource-specific embedding class
+:GloVe6BEmbedding_50d rdfs:subClassOf frac:FixedSizeVector;
+  rdfs:subClassOf 
+    [ a owl:Restriction;
+	  owl:onProperty dct:source;
+	  owl:hasValue
+		  &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
+		  &lt;https://catalog.ldc.upenn.edu/LDC2011T07> ],
+	[ a owl:Restriction;
+	  owl:onProperty rdf:value;
+	  owl:allValuesFrom rdf:JSON ],
+	[ a owl:Restriction;
+	  owl:onProperty dct:extent;
+	  owl:hasValue 50^^xsd:int ],
+	[ a owl:Restriction;
+	  owl:onProperty dct:description;
+	  owl:hasValue "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
+
+# embedding assignment
+:frak a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
+  frac:embedding [ 
+    a :GloVe6BEmbedding_50d;
+	rdf:value "[ 0.015246 , -0.30472 , 0.68107 ,  ... ]"^^rdf:JSON.`</pre>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="note">
+
+Examples for non-word embeddings:
+
+*   [AutoExtend](http://www.cis.lmu.de/~sascha/AutoExtend/): (a method to build) synset and lexeme embeddings, data [here](http://www.cis.lmu.de/~sascha/AutoExtend/embeddings.zip)
+*   [SenseGram](https://github.com/uhh-lt/sensegram): sense embeddings, data [here](http://ltdata1.informatik.uni-hamburg.de/sensegram/)
+*   [Vec2Synset](http://tudarmstadt-lt.github.io/vec2synset/): (a method to build) WordNet synset (= LexicalConcept) embeddings
+*   [Character embeddings](https://minimaxir.com/2017/04/char-embeddings/) are probably beyond the scope of OntoLex, unless characters are regarded LexicalEntries. (Which they could, for languages such as Chinese or Sumerian certainly, but also for Western languages -- given the fact that character-level pseudo entries are sometimes used in dictionaries to describe the phonology and orthography of a language. This is the case, for example, for Grimm's [Deutsches Wörterbuch](http://woerterbuchnetz.de/cgi-bin/WBNetz/wbgui_py?sigle=DWB).)
+
+</div>
+
+</section>
+
+<section>
+
+<div class="entity">
+
+> ---
+> ### TimeSeries (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#TimeSeries](http://www.w3.org/nl/lemon/frac#TimeSeries)
+> A **TimeSeries** is a sequence of observations represented as numerical values, e.g., sensor data. Every point in the sequence is represented by a fixed number of numerical values. The time series is the concatenation of these values. The obligatory attribute <tt>dct:extent</tt> defines the number of observations (dimensionality) for every individual point of time. 
+> **SubClassOf:** Embedding, dct:extent exactly 1
+>
+> ---
+</div>
+
+Note: name to be discussed. Maybe "Sequence".
+Example to be provided by Manolis and Sander.
+...
+
+Note: Other embeddings are usually obtained by aggregation over multiple attestations in a corpus. TimeSeries, however, can also encode a single observation that serves as a prototype.
+
+Other examples of time series:
+- a sequence of contextualized word embeddings to represent longer phrases, e.g., in attention-based neural architectures [REF: Bahdanau, D., Cho, K., & Bengio, Y. (2015, January). Neural machine translation by jointly learning to align and translate. In _3rd International Conference on Learning Representations, ICLR 2015_. -- this ] 
+- formant analysis as provided in phonetic analysis by Praat [REF: Boersma, Paul; van Heuven, Vincent (2001). ["Speak and unSpeak with Praat"](http://www.fon.hum.uva.nl/paul/papers/speakUnspeakPraat_glot2001.pdf)  (PDF). _Glot International_. **5** (9/10): 341–347.]
+
+<div class="entity">
+
+> ---
+> ### BagOfWords (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#BagOfWords](http://www.w3.org/nl/lemon/frac#TimeSeries)
+> For any frac:Observable, a **frac:BagOfWords** represents the collocates it occurs with in a particular corpus. In a weighted bag of words, every collocate is stored together with a frequency, confidence score or association weight. A bag of words must not define a dct:extent.
+>
+> **SubClassOf:** Embedding, dct:extent exactly 0
+>
+> ---
+</div>
+Bags of words can be compared to word embeddings (in languagte technology) in the sense that they represent infinite-dimensional, uncompressed frequency counts obtained from the aggregation over attestations in a corpus. The interpretability of their respective numerical dimensions, however, depends on the lexical provided along with it, so the normal data structure of a bag of words is not a vector, but a map (from collocates to weights, frequencies or association scores) or a set (of collocates, assuming each collocate is equally weighted). The encoding of the rdf:value must be specified in the dct:description. The example below uses an rdf:JSON literal representing a map. 
+
+	
+Example taken from [Wortschatz](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=frac#coocs), collocations of _frac_ (significant collocates in the same sentence), with frequency scores provided, filtered for significance (log-likelihood):
+
+[sand](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=sand) (508), [mining](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=mining) (82), [Chesterland-based](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Chesterland-based) (75), [wells](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=wells) (73), [DNR](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=DNR) (73), [Silica](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Silica) (53), [fluid](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fluid) (52), [category](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=category) (51), [spill](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=spill) (49), [rigs](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=rigs) (48), [New Canaan](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=New+Canaan) (48), [oil](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=oil) (47), [drilling](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=drilling) (46), [County](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=County) (45), [shale](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=shale) (45), [mine](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=mine) (43), [Permian](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Permian) (41), [tons](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=tons) (40), [Canaan](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Canaan) (39), [gas](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=gas) (39), [More](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=More) (38), [fracturing](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fracturing) (38), [Texas](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Texas) (37), [Monroe](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Monroe) (35), [hydraulic](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=hydraulic) (35), [per](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=per) (35), [judge’s](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=judge%E2%80%99s) (35), [plant](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=plant) (34), [miner](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=miner) (34), [fluids](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fluids) (34), [Alpine](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Alpine) (33), [company](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=company) (33), [crews](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=crews) (30), [producer](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=producer) (28), [used](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=used) (26), [disposal](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=disposal) (25), [million](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=million) (24), [chemicals](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=chemicals) (23), [premium](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=premium) (22), [approximately](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=approximately) (22), [raw](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=raw) (21), [coal](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=coal) (20), [stages](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=stages) (20), [review](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=review) (20), [permit](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=permit) (18), [water](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=water) (18), [industry](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=industry) (18), [industrial](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=industrial) (17), [fees](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fees) (16), [production](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=production) (16), [attorney](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=attorney) (15), [lines](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=lines) (14), [active](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=active) (13), [Canadian](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Canadian) (12), [feet](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=feet) (12), [demand](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=demand) (12), [county](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=county) (11), [River](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=River) (11), [major](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=major) (11), [in](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=in) (11)
+
+<div class="beispiel">
+
+<div>
+
+<pre>
+:frac a ontolex:LexicalEntry;
+  ontolex:canonicalForm/ontolex:writtenRep "frac"@en;
+  frac:embedding [ 
+    a :BagOfWords;
+    dct:description "Cooccurrences of a word are those words that occur 
+    noticeably often together with it. This may be the case as immediate 
+    left neighbour, as immediate right neighbour, or in the same sentence. 
+    The relevance of a cooccurrence is measured using a significance 
+    measure; cooccurrences are ordered by their significance. At the 
+    _Leipzig Corpora Collection_ the log-likelihood ratio is used as significance 
+    measure and word pairs of little significance are removed.";
+    dct:source &lt;https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=frac>;
+	rdf:value " { \"sand\" : \"508\" , \"mining\" : \"82\" , ... }"^^rdf:JSON.`
+	</pre>
+</div>
+
+</div>
+
+</div>
+
+> Note: It is important to not confuse `frac:BagOfWords` and `frac:Collocation`. Both represent words in their context, but they differ in their usage and interpretation. A bag of words is an aggregation over *all* contexts that a word occurs in. A collocation represents *one* specific context constellation and its likelihood to occur for the word.
+	
+	</section>
 <section>
 
 ## Collocations
 back to ([Table of Contents](#table-of-contents))
 
-<div class="note">
-
-> CC: this is a part I am less certain about, mostly because of the rdf:List modelling (which is inspired by lexicog). Alternative suggestions welcome.
-
-</div>
-
-Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology. ... (MORE MOTIVATION AND EXAMPLES)
+Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology and lexicography.
 
 Collocations are usually defined on surface-oriented criteria, i.e., as a relation between forms or lemmas (lexical entries), not between senses, but they can be analyzed on the level of word senses (the sense that gave rise to the idiom or collocation). Indeed, collocations often contain a variable part, which can be represented by a <tt>ontolex:LexicalConcept</tt>.
 
-Collocations can involve two or more words, they are thus modelled as an <tt>rdf:List</tt> of <tt>ontolex:Element</tt>s. Collocations may have a fixed or a variable word order. By default, we assume variable word order, where a fixed word order is required, the collocation must be assigned <tt>lexinfo:termType lexinfo:idiom</tt>.
+Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observables</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
-Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>dct:source</tt>). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract <tt>frac:ContextualRelation</tt> class.
+Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>frac:corpus</tt>). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract <tt>frac:ContextualRelation</tt> class.
 
 <div class="entity">
 
 > ----
 > ### ContextualRelation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#ContextualRelation](http://www.w3.org/nl/lemon/frac#ContextualRelation)
-> **ContextualRelation** provides a relation between two or more lexical elements, characterized by a <tt>dct:description</tt> of the nature of relation, a corpus (<tt>dct:source</tt>) from which this relation was inferred, and a weight or probability assessment (<tt>rdf:value</tt>).
-> **SubClassOf:** rdf:List; rdf:value exactly 1 xsd:double, dct:source min 1, dct:description min 1 xsd:string
+> **ContextualRelation** provides a relation between two or more lexical elements, characterized by a <tt>dct:description</tt> of the nature of relation, a corpus (<tt>frac:corpus</tt>) from which this relation was inferred, and a weight or probability assessment (<tt>rdf:value</tt>).
+> **SubClassOf:** rdfs:Container; rdf:value min 1, frac:corpus exactly 1, dct:description min 1 xsd:string
 >
 > ---
 
@@ -539,26 +758,104 @@ We distinguish two primary contextual relations: syntagmatic (between co-occurri
 > ---
 > ### Collocation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
-> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>ontolex:Element</tt>s based on their co-occurrence within the same utterance and characterized by their collocation weight (<tt>rdf:value</tt>) in one or multiple source corpora (<tt>dct:source</tt>).
-> **SubClassOf:** <tt>frac:ContextualRelation</tt>
-> **rdf:first:** only <tt>ontolex:Element</tt>
-> **rdf:rest*/rdf:first:** only <tt>ontolex:Element</tt>
+> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Observables</tt>s based on their co-occurrence within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular source corpus (<tt>frac:corpus</tt>).
+> **SubClassOf:** <tt>frac:ContextualRelation, frac:Observable</tt>
+> **rdfs:member:** only <tt>frac:Observable</tt>
+> **SubClassOf:** `frac:head` max 1
 >
 > ---
 </div>
 
-</div>
-
-Collocations are lists of ontolex:Elements, and formalized as <tt>rdf:List</tt>. Collocation elements can thus be directly accessed by <tt>rdf:first</tt>, <tt>rdf:_1</tt>, <tt>rdf:_2</tt>, etc. The property <tt>rdf:rest</tt> returns a <tt>rdf:List</tt> of <tt>ontolex:Element</tt>s, but not a <tt>frac:Collocation</tt>.
-
-By default, <tt>frac:Collocation</tt> is insensitive to word order. If a collocation is word order sensitive, it should be characterized by an appropriate <tt>dct:description</tt>, as well as by having <tt>lexinfo:termType lexinfo:idiom</tt>.
+	
+Collocations are collections of `frac:Observables`, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
+	
+By default, <tt>frac:Collocation</tt> is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in <tt>dct:description</tt>. 
 
 <div class="note">
+> Note that FrAC collocations can be used to represent collocations both in the lexicographic sense (as complex units of meaning) and in the quantative sense (as determined by collocation metrics over a particular corpus), but that the quantitative interpretation is the preferred one in the context of FrAC. To mark collocations in the lexicographic sense as such, they can be assigned a corresponding `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of `ontolex:MultiWordExpression` and the OntoLex-Decomp module rather than `frac:Collocation`. To provide collocation scores about a `ontolex:MultiWordExpression`, it can be linked via `rdfs:member` with a `frac:Collocation`.
+</div>
+	
+Collocations are `frac:Observable`s, i.e., they can be ascribed `frac:frequency`, `frac:attestation`, `frac:embedding`, they can be described in terms of their (embedding) similarity, and they can be nested inside larger collocations.
+	
+Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cscore`:
 
-> <tt>lexinfo:idiom</tt> is ``[a] group of words in a fixed order that have a particular meaning that is different from the meanings of each word understood on its own.'' In application to automatically generated collocations, the criterion of having `a particular meaning' is necessarily replaced by `a particular distribution pattern', as reflected by the collocation weight (<tt>rdf:value</tt>). _Idioms_ in the narrower sense of lexicalized multi-word expressions should not be modelled as <tt>frac:Collocation</tt>s, but as <tt>ontolex:MultiWordExpression</tt>s. [TO BE DISCUSSED]
+<div class="property">
 
+> ---
+> ### cscore (property)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#cscore)
+> **Collocation score** is a subproperty of `rdf:value` that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.
+> **SubPropertyOf:** <tt>rdf:value</tt>
+> **domain:** <tt>frac:Collocation</tt>
+>
+> ---
 </div>
 
+FrAC defines a number of popular collocation metrics as sub-properties of `frac:cscore`:
+
+- `frac:rel_freq` (*relative frequency*): <img src="https://render.githubusercontent.com/render/math?math=RF(x,y|x) = \frac{f_{xy}}{f_x} (= R_x)"> (asymmetric, requires `frac:head`)
+- `frac:pmi` (*pointwise mutual information*, sometimes referred to as *MI-score* or *association ratio*, cf. [Church and Hanks 1990, via Ewert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf): <img src="https://render.githubusercontent.com/render/math?math=PMI(x,y)=log_2 \frac{f_{xy} N}{f_x f_y}"> 
+- `frac:mi2` (*MI²-score*): <img src="https://render.githubusercontent.com/render/math?math=MI^2(x,y)=log_2 \frac{f_{xy}^2 N}{f_x f_y}">
+- `frac:mi3` (*MI³-score*, cf. [Daille 1994 in Ebert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MI^3(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
+- `frac:pmi_logfreq` (*MI.log-f*, *salience*, formerly default metric in SketchEngine): <img src="https://render.githubusercontent.com/render/math?math=MI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
+- `frac:dice` (*Dice coefficient*): <img src="https://render.githubusercontent.com/render/math?math=Dice(x,y)=\frac{2 f_{xy}}{f_x %2B f_y}">
+- `frac:logDice` (default metric in SketchEngine, [Rychly 2008](https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf)): <img src="https://render.githubusercontent.com/render/math?math=LogDice(x,y)=14 %2B log_2 Dice(x,y)">
+- `frac:minSensitivity` (*minimum sensitivity*, cf. [Pedersen 1998](https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MS(x,y)=min(R_x,R_y)">
+
+	
+with
+	
+- <img src="https://render.githubusercontent.com/render/math?math=x,y"> the (head) word and its collocate
+- <img src="https://render.githubusercontent.com/render/math?math=f_x"> the number of occurrences of the word *x*
+- <img src="https://render.githubusercontent.com/render/math?math=f_y"> the number of occurrences of the word *y*
+- <img src="https://render.githubusercontent.com/render/math?math=f_{xy}"> the number of co-occurrences of the words *x* and *y*
+- <img src="https://render.githubusercontent.com/render/math?math=R_y = \frac{f_{xy}}{f_{y}}"> relative frequency of *y*
+- <img src="https://render.githubusercontent.com/render/math?math=N"> the total number of words in the corpus, this should be documented in `dc:description`
+
+
+	
+In addition to collocation scores, also statistical independence tests are being employed as collocation scores:
+
+- `frac:likelihood_ratio` (*log likelihood*, *G²* [Dunning 1993, via Ewer 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
+- `frac:tScore` (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Ewert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf) ): <img src="https://render.githubusercontent.com/render/math?math=T(x,y)=\frac{f_{xy}-\frac{(f_x f_y)}{N}}{\sqrt{f_{xy}}}">
+- `frac:chi2` (*Person's Chi-square test* [Manning 1999](https://nlp.stanford.edu/fsnlp/) ): <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)=\frac{N(O_{11}O_{22}-O_{12}O_{21})^2}{(O_{11} %2B O_{12})(O_{11} %2B O_{21})(O_{12} %2B O_{22})(O_{21} %2B O_{22})}">
+
+with
+- <img src="https://render.githubusercontent.com/render/math?math=O_{11}=f_{xy}"> 
+- <img src="https://render.githubusercontent.com/render/math?math=O_{12}=f_{y} - f_{xy}"> 
+- <img src="https://render.githubusercontent.com/render/math?math=O_{21}=f_{x} - f_{xy}"> 
+- <img src="https://render.githubusercontent.com/render/math?math=O_{22}=N - f_{x} - f_{y} %2B 2f_{xy}"> 
+- <img src="https://render.githubusercontent.com/render/math?math=N"> the total number of words in the corpus 
+	
+In addition to classical collocation metrics as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of frac:cscore, as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <img src="https://render.githubusercontent.com/render/math?math=x \rightarrow y"> means that the existence of word *x* implies the existence of word *y* 
+
+- `frac:support` (the *support* is an indication of how frequently the rule appears in the dataset): <img src="https://render.githubusercontent.com/render/math?math=support(x \rightarrow y) = \frac{f_{xy}}{N}"> (with *N* the total number of collocations)
+- `frac:confidence` (the *confidence* is an indication of how often the rule has been found to be true): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{f_{xy}}{f_{x}}">
+- `frac:lift` (the *lift* or *interest* of a rule measures how many times more often *x* and *y* occur together than expected if they are statistically independent): <img src="https://render.githubusercontent.com/render/math?math=lift(x \rightarrow y) = \frac{f_{xy}}{f_{x}f_{y}}">
+- `frac:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *x* occurs without *y*, i.e., the frequency that the rule makes an incorrect prediction, if *x* and *y* are independent divided by the observed frequency of incorrect predictions): <img src="https://render.githubusercontent.com/render/math?math=conviction(x \rightarrow y) = \frac{(1 - f_{y})f_{x}}{f_{x} - f_{xy}}">
+ 
+
+> Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
+	
+Many of these metrics are asymmetric, and distinguish the lexical element they are about (the head) from its collocate(s). If such metrics are provided, a collocation should explicitly identify its head:
+
+<div class="property">
+
+> ---
+> ### head (property)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#head)
+> The **head** property identifies the element of a collocation that its scores are about. A collocation must not have more than one head.
+> **domain:** <tt>frac:Collocation</tt>
+> **range:** <tt>frac:Observable</tt>
+>
+> ---
+</div>
+		
+As an example, the relative frequency score is the number of occurrences of a collocation relative to the overall frequency of its head.
+	
+> Note: The function of the property `frac:head` is restricted to indicate the directionality of asymmetric collocation scores. It must not be confused with the notion of "head" in certain fields of linguistics, e.g., dependency syntax. 
+> Note: `frac:head` should not be used to model the structure of collocation dictionaries, i.e., the selection of collocations to be displayed with a particular head word. For these functions, please resort to the *lexicog:` vocabulary. 
+	
 The most elementary level of a collocation is an n-gram, as provided, for example, by [Google Books](http://storage.googleapis.com/books/ngrams/books/datasetsv2.html), which provide n-gram frequencies per publication year as tab-separated values. For 2008, the 2012 edition provides the following statistics for the bigram _kill_ + _switch_.
 
 <div class="beispiel">
@@ -613,14 +910,14 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
 :switch_cf ontolex:writtenRep "switch"@en.
 
 # form-form bigrams
-(:kill_cf :switch_cf) a frac:Collocation;
+[ rdf:_1 :kill_cf; rdf:_2 :switch_cf ] a frac:Collocation, rdf:Seq ;
   rdf:value "199";
   dct:description "2-grams, English Version 20120701, word frequency";
   dct:source <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
-(:kill_cf :switch_cf) a frac:Collocation;
+[ rdf:_1 :kill_cf; rdf:_2 :switch_cf ] a frac:Collocation, rdf:Seq ; 
   rdf:value "121";
   dct:description "2-grams, English Version 20120701, document frequency";
   dct:source <https://books.google.com/ngrams>;
@@ -628,14 +925,14 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
   lexinfo:termType lexinfo:idiom.
 
 # form-lexeme bigrams
-(:kill_cf :switch_n) a frac:Collocation;
+[ rdf:_1 :kill_cf; rdf:_2 :switch_n ] a frac:Collocation, rdf:Seq ;
   rdf:value "187";
   dct:description "2-grams, English Version 20120701, word frequency";
   dct:source <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
-(:kill_cf :switch_n) a frac:Collocation;
+[ rdf:_1 :kill_cf, rdf:_2 :switch_n ] a frac:Collocation, rdf:Seq ;
   rdf:value "115";
   dct:description "2-grams, English Version 20120701, document frequency";
   dct:source <https://books.google.com/ngrams>;
@@ -643,12 +940,6 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
   lexinfo:termType lexinfo:idiom.` </pre>
 
 </div>
-
-</div>
-
-<div class="note">
-
-> Question: can canonical forms be shared across different lexical entries? For the case of plain word n-grams, this is presupposed here.
 
 </div>
 
@@ -671,18 +962,18 @@ The second example illustrates more complex types of collocation are provided as
 	  ontolex:canonicalForm/ontolex:writtenRep "about"@en
 
 	# collocations, non-lexicalized
-	(wsen:spill wsen:beans) a frac:Collocation;
+	[ rdfs:member wsen:spill, wsen:beans ] a frac:Collocation;
 	  rdf:value "182";
 	  dct:description "cooccurrences in the same sentence, unordered";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
 
-	(wsen:green wsen:beans) a frac:Collocation;
+	[ rdf:_1 wsen:green; rdf:_2 wsen:beans ] a frac:Collocation, rdf:Seq ;
 	  rdf:value "778";
 	  dct:description "left neighbor cooccurrence";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
 	  lexinfo:termType lexinfo:idiom.
 
-	(wsen:beans wsen:about) a frac:Collocation;
+	 [ rdf:_1 wsen:beans; rdf:_2 wsen:about ] a frac:Collocation, rdf:Seq;
 	  rdf:value "35";
 	  dct:description "right neighbor cooccurrence";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
@@ -692,7 +983,7 @@ The second example illustrates more complex types of collocation are provided as
 	wsen:spill+the+beans a ontolex:MultiWordExpression;
 	  ontolex:canonicalForm/ontolex:writtenRep "spill the beans"@en.
 
-	(wsen:beans wsen:spill+the+beans) a frac:Collocation;
+	[ rdfs:member wsen:beans, wsen:spill+the+beans ] a frac:Collocation;
 	  rdf:value "401";
 	  dct:description "cooccurrences in the same sentence, unordered";
 	  dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.` </pre>
@@ -895,6 +1186,8 @@ This query can be used as a test for _frac_ compliancy, and for property `infere
 > We use the OWL2/DL vocabulary for modelling restrictions. However, _lemon_ is partially compatible with OWL2/DL only in that several modules use <tt>rdf:List</tt> -- which is a reserved construct in OWL2\. Therefore, the primary means of accessing and manipulation _lemon_ and _ontolex-frac_ data is by means of SPARQL, resp., RDF- (rather than OWL-) technology. In particular, we do not guarantee nor require that OWL2/DL inferences can be used for validating or querying _lemon_ and _ontolex-frac_ data.
 
 </div>
+
+> Note: **TODO** analoguous example for corpus-specific collocations
 
 </section>
 

@@ -1,0 +1,64 @@
+@startuml
+
+class Observation {
+  str: dc:description
+  Literal: rdf:value
+}
+
+Observation -> Corpus: corpus
+
+QueryResult -up-|> Observation
+QueryResult -> Cooccurrence: result
+
+Cooccurrence -[hidden]> QueryResult
+
+Cooccurrence -up-|> Observation
+Similarity -up-|> Observation
+CorpusFrequency -up-|> Observation
+Attestation -up-|> Observation
+Embedding -up-|> Observation
+
+Cooccurrence o-down- Observable
+
+Collocation -|> Cooccurrence
+
+
+
+Embedding -down-> Attestation: attestationEmbedding
+
+Observable -> Embedding: embedding
+Observable -> CorpusFrequency: frequency
+Observable -> Attestation: attestation sub citation
+
+class Embedding {
+ int: dc:extent
+}
+
+FixedSizeVector -down-|> Embedding
+BagOfWords -left-|> Embedding
+TimeSeries -up-|> Embedding
+
+Similarity o-down- Embedding
+
+class CorpusFrequency {
+}
+
+class Attestation {
+  str: gloss
+}
+
+class Corpus {
+  int: tokens
+}
+
+
+Collocation -down-> Observable: head
+Cooccurrence -down-|> Observable
+
+class QueryResult {
+  str: queryLanguage
+  json:Array: variables
+}
+
+
+@enduml
