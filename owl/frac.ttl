@@ -1,0 +1,230 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix : <http://www.w3.org/ns/lemon/frac#> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix semiotics: <http://www.ontologydesignpatterns.org/cp/owl/semiotics.owl#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+
+
+##########################
+# vocabulary declaration #
+##########################
+
+<http://www.w3.org/ns/lemon/frac#>
+    a owl:Ontology, voaf:Vocabulary ;
+    owl:imports <http://www.w3.org/ns/lemon/ontolex> .
+
+#########################
+# imported vocabularies #
+#########################
+
+rdf:Bag
+    rdfs:subClassOf rdfs:Container .
+
+rdf:Seq
+    rdfs:subClassOf rdfs:Container .
+
+rdfs:member
+    a owl:ObjectProperty .
+
+rdf:value
+    a owl:DatatypeProperty .
+
+dc:extent
+    a owl:DatatypeProperty .
+
+######################
+# root-level classes #
+######################
+
+:Observation
+    a owl:Class;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onProperty rdf:value
+    ] ;
+
+    # the following constraint is semantically empty
+    # it is supposed to express that there should be
+    # a human-readable description, but we don't enforce it
+    # in order not to break validation
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
+        owl:onProperty dc:description
+    ] ;
+    vs:term_status "tbc" . 
+
+:Observable
+    a owl:Class ;
+    vs:term_status "stable" .
+
+    ontolex:Form
+        rdfs:subClassOf :Observable ;
+        vs:term_status "stable" .
+
+    ontolex:LexicalConcept
+        rdfs:subClassOf :Observable ;
+        vs:term_status "stable" .
+
+    ontolex:LexicalEntry
+        rdfs:subClassOf :Observable ;
+        vs:term_status "stable" .
+
+    ontolex:LexicalSense
+        rdfs:subClassOf :Observable ;
+        vs:term_status "stable" .
+
+    :citation
+        a owl:ObjectProperty ;
+        rdfs:domain :Observable ;
+        vs:term_status "tbc" .
+
+    :corpus
+        a owl:ObjectProperty ;
+        rdfs:domain :Observation ;
+        rdfs:range :Corpus ;
+        vs:term_status "tbc" ;
+        rdfs:comment "suggested as generalization over frac:corpus and frac:locus, probably to be renamed; originally, this was dc:source"@en .
+
+:Corpus
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onDataRange xsd:int ;
+        owl:onProperty :total
+    ] ;
+    vs:term_status "tbc" .
+
+    :total
+        a owl:DatatypeProperty, owl:FunctionalProperty ;
+        rdfs:domain :Corpus ;
+        rdfs:range xsd:int ;
+        rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ;
+        vs:term_status "tbc" .
+
+#############
+# frequency #
+#############
+
+:CorpusFrequency
+    a owl:Class ;
+    rdfs:subClassOf :Observation ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:cardinality "1"^^xsd:nonNegativeInteger ;
+        owl:onDataRange xsd:int ;
+        owl:onProperty rdf:value
+    ] ;
+    vs:term_status "stable" .
+
+    :frequency
+        a owl:ObjectProperty ;
+        rdfs:domain :Observable ;
+        rdfs:range :CorpusFrequency ;
+        vs:term_status "stable" .
+
+###############
+# attestation #
+###############
+
+:Attestation
+    rdfs:subClassOf :Observation ;
+    vs:term_status "stable" .
+
+    :attestation
+        a owl:ObjectProperty ;
+        rdfs:domain :Observable ;
+        rdfs:range :Attestation ;
+        rdfs:subPropertyOf :citation ;
+        vs:term_status "stable" .
+
+    :gloss
+        a owl:DatatypeProperty ;
+        rdfs:domain :Attestation ;
+        rdfs:range xsd:string ;
+        rdfs:comment "older draft had frac:gloss and frac:attestationGloss. One of these can be merged with the inherited rdf:value, but that must be defined." ;
+        vs:term_status "tbc" .
+
+###############
+# collocation #
+###############
+
+:Collocation
+    rdfs:subClassOf rdfs:Container, :Observable, :Observation, [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onClass :Observable ;
+        owl:onProperty rdfs:member
+    ] ;
+    vs:term_status "stable" .
+
+    :head
+        a owl:ObjectProperty ;
+        rdfs:domain :Collocation ;
+        rdfs:range :Observable ;
+        owl:propertyChainAxiom ([
+                owl:inverseOf rdfs:member
+            ]
+        ) ;
+        vs:term_status "stable" .
+
+#############
+# embedding #
+#############
+
+:Embedding
+    rdfs:subClassOf :Observation, [
+        a owl:Restriction ;
+        owl:onDataRange xsd:int ;
+        owl:onProperty dc:extent ;
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger
+    ] ;
+    vs:term_status "stable" .
+
+    :embedding
+        a owl:ObjectProperty ;
+        rdfs:domain :Observable ;
+        rdfs:range :Embedding ;
+        vs:term_status "stable" .
+
+    :attestationEmbedding
+        a owl:ObjectProperty ;
+        rdfs:domain :Attestation ;
+        rdfs:range :Embedding ;
+        vs:term_status "stable" .
+
+:BagOfWords
+    rdfs:subClassOf :Embedding ;
+    vs:term_status "stable" .
+
+:FixedSizeVector
+    rdfs:subClassOf :Embedding ;
+    vs:term_status "stable" .
+
+:TimeSeries
+    rdfs:subClassOf :Embedding ;
+    vs:term_status "stable" .
+
+##############
+# similarity #
+##############
+
+:Similarity
+    rdfs:subClassOf rdf:Bag, :Observation, [
+        a owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onClass :Embedding ;
+        owl:onProperty rdfs:member
+    ] ;
+    vs:term_status "stable" .
