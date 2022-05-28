@@ -1,0 +1,87 @@
+PREFIX : <http://ickweessoochni.ch/>
+PREFIX ontolex: <http://www.w3.org/ns/lemon/ontolex#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX frac: <http://www.w3.org/ns/lemon/frac#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#>
+PREFIX lexicog: <http://www.w3.org/ns/lemon/lexicog#>
+PREFIX dct: <http://purl.org/dc/terms/> 
+
+# GlobaLex-2022 sample
+
+# (1) core structure
+:point a ontolex:LexicalEntry ;		# p_e
+	lexinfo:partOfSpeech lexinfo:noun ;
+	ontolex:sense :point_sense_1 ;	# p_s
+	ontolex:canonicalForm [ ontolex:writtenRep "point"] .
+
+:point_sense_1 a ontolex:LexicalSense ; # p_s
+	skos:definition "thing said as part of a discussion" . # prop: confirmed
+
+#  (4.a) collocations, second example
+:col_1 a frac:Collocation , rdf:Seq ;
+	lexinfo:example "She's got a point" ;
+	frac:head :point_sense_1 ; # really?
+	rdf:_1 :point_sense_1 ;
+	rdf:_2 :have .
+
+:col_2_1 a frac:Collocation , rdf:Seq ;
+	lexinfo:example "I see your point" ;
+	frac:head :point_sense_1 ;
+	rdf:_1 :point_sense_1 ;
+	rdf:_2 :see .
+
+:col_2_2 a frac:Collocation , rdf:Seq ; 
+	lexinfo:example "Point taken" ;
+	frac:head :point_sense_1 ;
+	rdf:_1 :point_sense_1 ;
+	rdf:_2 :take .
+
+# (2) context (optional)
+:have a ontolex:LexicalEntry ;
+	lexinfo:partOfSpeech lexinfo:verb ;
+	ontolex:canonicalForm [ ontolex:writtenRep "have"] .
+
+
+:see a ontolex:LexicalEntry ;
+	lexinfo:partOfSpeech lexinfo:verb ;
+	ontolex:canonicalForm [ ontolex:writtenRep "see" ] .
+
+:take a ontolex:LexicalEntry ;
+	lexinfo:partOfSpeech lexinfo:verb ;
+	ontolex:canonicalForm [ ontolex:writtenRep "take" ] .
+
+
+# (1.a) layout
+:point_entry a lexicog:Entry ;		# p _=_ p_e 	
+	lexicog:describes :point ;		# describes :point_sense_1
+	lexicog:subComponent :point_sense_1_lc.
+
+:point_sense_1_lc 					# p_s_c _=_ p_s
+	a lexicog:LexicographicComponent ;
+	lexicog:describes :point_sense ;
+	lexicog:subComponent
+		:point_colloc_pattern_1 ,	# l_x
+		:point_colloc_pattern_2 .	# l_y
+
+# (3)
+:point_colloc_pattern_1 
+	a lexicog:LexicographicComponent ;
+	dct:description "ADJ" . # label ok, rdfs:label ???
+
+:point_colloc_pattern_2
+	a lexicog:LexicographicComponent ;
+	dct:description "VERB + POINT" ;
+	lexicog:subComponent :have_coll ,
+					 :see_take_coll .
+
+# (4)
+
+:have_coll
+	a lexicog:LexicographicComponent ;
+	lexicog:describes :col_1 .
+:see_take_coll
+	a lexicog:LexicographicComponent ;
+	lexicog:describes :col_2_1 , :col_2_2 .
+
