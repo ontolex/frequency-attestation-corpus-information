@@ -77,3 +77,8 @@ WHERE {
 | <http://ickweessoochni.ch/col_2_1> | "point see"  |
 | <http://ickweessoochni.ch/col_1>   | "point have" |
 -----------------------------------------------------
+
+
+As evident from these results (and by comparison with the examples, the OCDS notation `+` does not preserve order).
+
+Note that here, we only generated sequences of canonical forms. By substituting `ontolex:canonicalForm` with `ontolex:lexicalForm`, we can generate all candidate forms
