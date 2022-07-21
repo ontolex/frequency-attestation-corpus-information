@@ -10,8 +10,8 @@ Contributors: (please add yourself)
 * Thierry Declerck
 * Jesse de Does
 * Katrien Depuydt
-* Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/
-))
+* Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlanggen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
+* Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/))
 * John P. McCrae
 * Sander Stolk
 * Ciprian-Octavian Truică
