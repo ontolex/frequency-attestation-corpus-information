@@ -7,14 +7,15 @@ Editors:
 * Max Ionov ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
 
 Contributors: (please add yourself)
+* Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlanggen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
+* Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/))
+* Ciprian-Octavian Truică
+* Katerina Gkirtzou
+* John P. McCrae
+* Sander Stolk
 * Thierry Declerck
 * Jesse de Does
 * Katrien Depuydt
-* Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlanggen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
-* Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/))
-* John P. McCrae
-* Sander Stolk
-* Ciprian-Octavian Truică
 * ...
 
 [Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
@@ -208,6 +209,48 @@ Fig. 1. `frac:Observable` as a superclass of ontolex:LexicalEntry, ontolex:Form,
 
 > Note that frac:Observable is not limited to OntoLex core elements but that it can also include ontological concepts in general, as these are foreseen as external elements that OntoLex-Lemon can provide information about
 
+<div class="entity">
+
+> ----------------------- ------------------------------------
+> ### Observation (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Observation](http://www.w3.org/nl/lemon/frac#Observation)
+> **Observation** is an abstract superclass for anything that can be observed in a corpus about an Observable. An observation MUST have at least one `rdf:value` to express its value, it SHOULD have exactly one `frac:corpus` that defines the data from which this information was drawn, and it SHOULD have a `dct:description` explaining the methodolgy and/or extraction method by which the observation was obtained.
+> rdfs:subclassOf max 1 `frac:corpus`
+> rdfs:subClassOf 1 rdf:value
+> ----------------------- ------------------------------------
+</div>
+
+Observations as understood here are **empirical** (quantitative) observations that are made against a corpus, but we  do  not  provide  a  formal  definition  of  what  a  corpus  is (it  can  be  any  kind  or  collection  of  linguistic  data  at  any scale,  structured  or  unstructured), not about its physical materialization (as an electronic corpus, as a series of printed books, as a bibliographical database or as metadata record for a particular corpus).
+
+> **Note**: Should we rename "total" to `frac:tokens`?
+
+> ----------------------- ------------------------------------
+> ### Corpus (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Corpus](http://www.w3.org/nl/lemon/frac#Corpus)
+> **Corpus  (Class)** represents  any  type  of  linguistic  data  or collection  thereof,  in  structured  or  unstructured  format.  At  the  lexical  level,  a  corpus  consists  of  individual elements (tokens, ‘words’), and data providers SHOULD  provide  the  total  number  of  elements.  It  should also provide provenance information, e.g., the tokenization  strategy,  preprocessing  steps,  etc.
+> **SubClassOf:** frac:total max 1 xsd:int
+>
+> ----------------------- ------------------------------------
+
+> ----------------------- ------------------------------------
+> ### corpus (Property)
+> **corpus (Property)** assigns a `Corpus` to a particular `frac:Observation`.
+> **Domain:** frac:Observation
+> **Range:** frac:Corpus
+>
+> ----------------------- ------------------------------------
+
+A corpus is considered to be a non-empty collection of texts, in electronic or other form. (Note that a single text can constitute a corpus.)
+For machine-readable corpora are characterized by their size, and for these, data providers should provide the token count in the property `frac:total`.
+
+> ----------------------- ------------------------------------
+> ### total (Property)
+> **total  (Property)** assigns  a  corpus  the  total  number  of  elements  that  it  contains.  In  the  context  of  OntoLex, these are instantiations of lexemes, only, i.e., tokens (‘words’).
+> **Domain:** frac:Corpus
+> **Range:** integer  (long)
+>
+> ----------------------- ------------------------------------
+
 </section>
 
 
@@ -228,7 +271,7 @@ In order to avoid confusion with lexinfo:Frequency (which provides lexicographic
 > ----------------------- ------------------------------------
 > ### frequency (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#frequency](http://www.w3.org/nl/lemon/frac#frequency)
-> The property **frequency** assigns a particular `frac:Observable` a `frac:CorpusFrequency`.
+> The property **frequency** assigns a particular `frac:Observable` a `frac<<Frequency`.
 > **rdfs:range** `frac:Observable`
 > **rdfs:domain** `frac:CorpusFrequency`
 >
@@ -240,8 +283,9 @@ In order to avoid confusion with lexinfo:Frequency (which provides lexicographic
 > ----------------------- ------------------------------------
 > ### CorpusFrequency (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#CorpusFrequency](http://www.w3.org/nl/lemon/frac#CorpusFrequency)
-> **Corpus frequency** provides the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) in a particular language resource (`frac:corpus`).
-> **SubClassOf:** `rdf:value` exactly 1 `xsd:int`, `frac:corpus` min 1
+> **Corpus frequency** is a `frac:Observation` of the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) in a particular language resource (`frac:corpus`).
+> **SubClassOf:** `frac:Observation`
+> **SubClassOf:** `rdf:value` exactly 1 , `frac:corpus` exactly 1
 >
 > ----------------------- ------------------------------------
 </div>
@@ -258,31 +302,7 @@ In order to avoid confusion with lexinfo:Frequency (which provides lexicographic
 
 </div>
 
-> ----------------------- ------------------------------------
-> ### Corpus (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Corpus](http://www.w3.org/nl/lemon/frac#Corpus)
-> **Corpus  (Class)** represents  any  type  of  linguistic  data  or collection  thereof,  in  structured  or  unstructured  format.  At  the  lexical  level,  a  corpus  consists  of  individual elements (tokens, ‘words’), and data providers should  provide  the  total  number  of  elements.  It  should also provide provenance information, e.g., the tokenization  strategy,  preprocessing  steps,  etc.
-> **SubClassOf:** frac:total exactly 1 xsd:int
->
-> ----------------------- ------------------------------------
-
-We  do  not  provide  a  formal  definition  of  what  a  corpus  is (it  can  be  any  kind  or  collection  of  linguistic  data  at  any scale,  structured  or  unstructured),  except  that  we  expect  it to  define  a  total  of  elements  contained  (`frac:total`). In many practical applications, it is necessary to provide relative  counts,  and  in  this  way,  these  can  be  easily  de- rived  from  the  absolute  (element)  frequency  provided  by the CorpusFrequency class  and  the  total  defined  by the underlying  corpus.
-
-> ----------------------- ------------------------------------
-> ### corpus (Property)
-> **corpus (Property)** assigns a `Corpus` to a particular `frac:CorpusFrequency`.
-> **Domain:** frac:CorpusFrequency
-> **Range:** frac:Corpus
->
-> ----------------------- ------------------------------------
-
-> ----------------------- ------------------------------------
-> ### total (Property)
-> **total  (Property)** assigns  a  corpus  the  total  number  of  el- ements  that  it  contains.  In  the  context  of  OntoLex, these are instantiations of lexemes, only, i.e., tokens (‘words’).
-> **Domain:** frac:Corpus
-> **Range:** integer  (long)
->
-> ----------------------- ------------------------------------
+> Note: The definition above only applies to absolute frequencies. For expressing relative frequencies,  we  expect  the associated `frac:Corpus` object to  define  a  total  of  elements  contained  (`frac:total`). In many practical applications, it is necessary to provide relative  counts,  and  in  this  way,  these  can  be  easily  derived  from  the  absolute  (element)  frequency  provided  by the CorpusFrequency class  and  the  total  defined  by the underlying  corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the `CorpusFrequency` `rdf:value` and for the `frac:total` (i.e., `100%`) of the associated corpus.
 
 The following example illustrates word and form frequencies for the Sumerian word _a_ (n.) "water" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
@@ -399,18 +419,13 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 > --------
 > ### Attestation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
->  The **Attestation** class represents an exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have a `quotation` or an `attestationGloss` and MUST define a `locus` object to identify the source of this material.
->  **SubClassOf:** `frac:locus exactly 1`
->
+>  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation MUST have an `rdf:value`, it CAN have a `frac:attestationGloss`, and it SHOULD have a `frac:corpus` or `frac:locus` object to identify the source of this material.
+For an attestation, `rdf:value` represents the text content of the dictionary quotation.
+> **SubClassOf:** `rdf:value` exactly 1 
+> **SubClassOf:** `frac:Observation`
 > ------
 </div>
 
-> --------
-> ### quotation (Property)
-> **quotation** contains the text content of the dictionary quotation.
-> **Domain:** `Attestation`
-> **Range:** `xsd:String`
->
 > --------
 > ### attestationGloss (Property)
 > **attestationGloss** contains  the  text  content  of  an  attestation  as  represented  within  a  dictionary.  This  may  be different  from  a  direct  quotation  because  the  target  expression  may  be  omitted  or  normalized.
@@ -418,10 +433,6 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 > **Range:** `xsd:String`  
 >
 > --------
-
-<div class="note">
-Note: Highly recommended to introduce a superproperty for `quotation` and `attestationGloss` in order to define it as obligatory attribute of `Attestation`. Is there any reason why `attestationGloss` is not a sub-property of `quotation`?
-</div>
 
 > --------
 > ### citation (Property)
@@ -459,6 +470,8 @@ In many applications, it is desirable to specify the location of the occurrence 
 </div>
 
 </div>
+
+> Note: In humanities practice, locations (`frac:locus` objects) can be provided at different levels of granularity, e.g., referring to a particular text span within a text, to a verse, paragraph or chapter within which the text can be found, to a complete work, or a collection of works. Data providers should use `frac:locus` only if `frac:corpus` is not applicable. In particular, if the location is a complete work or a corpus identifiable by a URI, data providers should use the `frac:corpus` property. For references within a work or to a collection without explicitly defined boundaries (e.g., `Plato` to designate all of Plato's preserved works as well as any statement ascribed to him from an unpreserved work), data providers should use `frac:locus`.
 
 **example**:  [DiaMaNT (_Diachroon seMAntisch lexicon van de Nederlandse Taal_)](http://diamant.ivdnt.org/diamant-ui/) is a diachronic semantic computational  lexicon  of  Dutch,  at its core  formed by four scholarly historical dictionaries of  Dutch covering a language period from ca. 500 –  1976. The example below illustrates the combination of FrAC attestations with the [CITO](https://sparontologies.github.io/cito/current/cito.html) and [FRBR](http://purl.org/vocab/frbr/core#) vocabularies, as well as with the [NLP Interchange Format](https://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
 
@@ -543,8 +556,9 @@ Lexicalized embeddings provide their data via <tt>rdf:value</tt>, and should be 
 > ---
 > ### Embedding (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Embedding](http://www.w3.org/nl/lemon/frac#Embedding)
-> An **Embedding** is a  representation (of a given frac:Observable (see <tt>frac:embedding</tt>) in a numerical feature space. It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>dct:source</tt>). The literal value of an Embedding is  provided by <tt>rdf:value</tt>).
-> **SubClassOf:** rdf:value exactly 1 xsd:string, dct:source min 1, dct:description min 1
+> An **Embedding** is a representation (of a given frac:Observable (see <tt>frac:embedding</tt>) in a numerical feature space. It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>dct:source</tt>). The literal value of an Embedding is  provided by <tt>rdf:value</tt>). In OntoLex-FrAC, embeddings are `frac:Observation`s that are obtained from a particular corpus.
+> **SubClassOf:** rdf:value exactly 1 xsd:string, frac:corpus exactly 1, dct:description min 1
+> **SubClassOf:** `frac:Observation`
 >
 > ---
 </div>
@@ -737,29 +751,16 @@ Collocations are usually defined on surface-oriented criteria, i.e., as a relati
 
 Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observables</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
-Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>frac:corpus</tt>). Collocations share these characteristics with other types of contextual relations (see below), and thus, these are inherited from the abstract <tt>frac:ContextualRelation</tt> class.
+Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>frac:corpus</tt>). Collocations share these characteristics with other `frac:Observation`s and thus, these are inherited from the abstract <tt>frac:Observation</tt> class.
 
-<div class="entity">
-
-> ----
-> ### ContextualRelation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#ContextualRelation](http://www.w3.org/nl/lemon/frac#ContextualRelation)
-> **ContextualRelation** provides a relation between two or more lexical elements, characterized by a <tt>dct:description</tt> of the nature of relation, a corpus (<tt>frac:corpus</tt>) from which this relation was inferred, and a weight or probability assessment (<tt>rdf:value</tt>).
-> **SubClassOf:** rdfs:Container; rdf:value min 1, frac:corpus exactly 1, dct:description min 1 xsd:string
->
-> ---
-
-</div>
-
-We distinguish two primary contextual relations: syntagmatic (between co-occurring elements) and paradigmatic (between elements that can be substituted for each other). Syntagmatic contextual relations are formalized with <tt>frac:Collocation</tt>.
 
 <div class="entity">
 
 > ---
 > ### Collocation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
-> A **Collocation** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Observables</tt>s based on their co-occurrence within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular source corpus (<tt>frac:corpus</tt>).
-> **SubClassOf:** <tt>frac:ContextualRelation, frac:Observable</tt>
+> A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular source corpus (<tt>frac:corpus</tt>). Collocations are both observations and observables, and they are modelled as an aggregate (`rdfs:Container`) of observables.
+> **SubClassOf:** <tt>frac:Observation, rdfs:Container, frac:Observable</tt>
 > **rdfs:member:** only <tt>frac:Observable</tt>
 > **SubClassOf:** `frac:head` max 1
 >
@@ -1005,23 +1006,22 @@ The second example illustrates more complex types of collocation are provided as
 ## Similarity
 back to ([Table of Contents](#table-of-contents))
 
-Similarity is a paradigmatic contextual relation between elements that can replace each other in the same context. In distributional semantics, a quantitative assessment of the similarity of two forms, lexemes, phrases, word senses or concepts is thus grounded in numerical representations of their respective contexts, i.e., their embeddings. In a broader sense of `embedding', also bags of words fall under the scope of <tt>frac:Embedding</tt>, see the usage note below.
+Similarity is a paradigmatic relation between elements that can replace each other in the same context. In distributional semantics, a quantitative assessment of the similarity of two forms, lexemes, phrases, word senses or concepts is thus grounded in numerical representations of their respective contexts, i.e., their embeddings. In a broader sense of `embedding', also bags of words fall under the scope of <tt>frac:Embedding</tt>, see the usage note below.
 
-Similarity is characterized by a similarity score (<tt>rdf:value</tt>), e.g., the number of shared dimensions/collocates (in a bag-of-word model) or the cosine distance between two word vectors (for fixed-size embeddings), the corpora which we used to generate this score (<tt>dct:source</tt>), and the method used for calculating the score (<tt>dct:description</tt>).
+Similarity is characterized by a similarity score (<tt>rdf:value</tt>), e.g., the number of shared dimensions/collocates (in a bag-of-word model) or the cosine distance between two word vectors (for fixed-size embeddings), the corpus used to generate this score (<tt>frac:corpus</tt>), and the method used for calculating the score (<tt>dct:description</tt>).
 
 Similarity is symmetric. The order of similes is irrelevant.
 
-Like <tt>frac:Collocation</tt>, quantitative similarity relations are modelled as a subclass of <tt>frac:ContextualRelation</tt> (and thus, as an <tt>rdf:List</tt>).
+Like <tt>frac:Collocation</tt>, quantitative similarity relations are aggregates (containers, here `rdfs:Bag`s) of Observables.
 
 <div class="entity">
 
 > ----
 > ### Similarity (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Similarity](http://www.w3.org/nl/lemon/frac#Similarity)
-> **Similarity** is a <tt>frac:ContextualRelation</tt> that holds between two or more <tt>frac:Embedding</tt>s, and is characterized by a similarity score (<tt>rdf:value</tt>) in one or multiple source corpora (<tt>dct:source</tt>) and a <tt>dct:description</tt> that explains the method of comparison.
-> **SubClassOf:** <tt>frac:ContextualRelation</tt>
-> **rdf:first:** only <tt>frac:Embedding</tt>
-> **rdf:rest*/rdf:first:** only <tt>frac:Embedding</tt>
+> **Similarity** is a <tt>frac:Observation</tt> about the relatedness between two or more <tt>frac:Embedding</tt>s, and it is characterized by a similarity score (<tt>rdf:value</tt>) in a specific source corpus (<tt>frac:corpus</tt>) and a <tt>dct:description</tt> that explains the method of comparison.
+> **SubClassOf:** <tt>frac:Observation, rdfs:Bag</tt>
+> **rdfs:member:** only <tt>frac:Embedding</tt>
 >
 >---
 </div>
