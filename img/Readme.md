@@ -4,17 +4,19 @@ originally done with PPT, PlantUml is easier to maintain and edit. The UML diagr
 
 ## Current official diagram
 
+Until COLING paper is accepted, the following remains official:
+
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram.puml?cache=no)
+
+## Suggested simplification
+
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
 
 - May 2022: simplification suggested
 - May 2022: equivalent "compact view"
 - July 2022:
   - frac:locus restored
   - frac:gloss => frac:attestationGloss
-
-## Suggested simplification
-
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
 
 ### Simplification discussion
 
