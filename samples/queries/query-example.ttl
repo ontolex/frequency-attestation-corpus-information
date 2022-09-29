@@ -1,0 +1,413 @@
+
+@prefix kontext: <https://www.korpus.cz/kontext/> .
+@prefix frac: <https://github.com/ontolex/frequency-attestation-corpus-information/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+<kontext:q> a frac:QueryResult ;
+			frac:queryLanguage "CQL" ; # should it be an object property?
+			rdf:value "[lemma=\"cat\"] [tag=\"V.*\"]" ;
+			dc:source "news.mongabay.com" ;
+			frac:result [
+              a frac:Cooccurrence, rdfs:Seq ;
+              kontext:queryTerms 10,11 ;
+              rdf:_1 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "on" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "on" ] ;
+                  kontext:atag "Pp" ;
+                  kontext:tag "IN" ;
+                  kontext:tokenId "6811" ;
+                  lexinfo:partOfSpeech lexinfo:Preposition ;
+                ]; # rdf:_1
+              rdf:_2 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "the" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "the" ] ;
+                  kontext:atag "Dt" ;
+                  kontext:tag "DT" ;
+                  kontext:tokenId "6812" ;
+                  lexinfo:partOfSpeech lexinfo:Determiner ;
+                ]; # rdf:_2
+              rdf:_3 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "southwestern" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "southwestern" ] ;
+                  kontext:atag "Aj" ;
+                  kontext:tag "JJ" ;
+                  kontext:tokenId "6813" ;
+                  lexinfo:partOfSpeech lexinfo:Adjective ;
+                ]; # rdf:_3
+              rdf:_4 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "coast" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "coast" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NN" ;
+                  kontext:tokenId "6814" ;
+                  lexinfo:partOfSpeech lexinfo:Noun ;
+                ]; # rdf:_4
+              rdf:_5 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "of" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "of" ] ;
+                  kontext:atag "Pp" ;
+                  kontext:tag "IN" ;
+                  kontext:tokenId "6815" ;
+                  lexinfo:partOfSpeech lexinfo:Preposition ;
+                ]; # rdf:_5
+              rdf:_6 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Japan" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "Japan" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NP" ;
+                  kontext:tokenId "6816" ;
+                  lexinfo:partOfSpeech lexinfo:ProperNoun ;
+                ]; # rdf:_6
+              rdf:_7 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "'s" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "'s" ] ;
+                  kontext:atag "Xy" ;
+                  kontext:tag "POS" ;
+                  kontext:tokenId "6817" ;
+                ]; # rdf:_7
+              rdf:_8 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Kyushu" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "Kyushu" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NP" ;
+                  kontext:tokenId "6818" ;
+                  lexinfo:partOfSpeech lexinfo:ProperNoun ;
+                ]; # rdf:_8
+              rdf:_9 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Island" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "Island" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NP" ;
+                  kontext:tokenId "6819" ;
+                  lexinfo:partOfSpeech lexinfo:ProperNoun ;
+                ]; # rdf:_9
+              rdf:_10 [
+                a ontolex:LexicalEntry ; # ???
+                  ontolex:lexicalForm [ ontolex:writtenRep "," ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "," ] ;
+                  kontext:atag "Zz" ;
+                  kontext:tag "," ;
+                  kontext:tokenId "6820" ;
+                ]; # rdf:_10
+              rdf:_11 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "cats" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "cat" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NNS" ;
+                  kontext:tokenId "6821" ;
+                  lexinfo:partOfSpeech lexinfo:Noun ;
+                ]; # rdf:_11
+              rdf:_12 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "began" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "begin" ] ;
+                  kontext:atag "Vb" ;
+                  kontext:tag "VVD" ;
+                  kontext:tokenId "6821" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_12
+              rdf:_13 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "to" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "to" ] ;
+                  kontext:atag "Xy" ;
+                  kontext:tag "TO" ;
+                  kontext:tokenId "6822" ;
+                  lexinfo:partOfSpeech lexinfo:Preposition ;
+                ]; # rdf:_13
+              rdf:_14 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "behave" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "behave" ] ;
+                  kontext:atag "Vb" ;
+                  kontext:tag "VV" ;
+                  kontext:tokenId "6823" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_14
+              rdf:_15 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "very" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "very" ] ;
+                  kontext:atag "Av" ;
+                  kontext:tag "RB" ;
+                  kontext:tokenId "6824" ;
+                  lexinfo:partOfSpeech lexinfo:Adverb ;
+                ]; # rdf:_15
+              rdf:_16 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "strangely" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "strangely" ] ;
+                  kontext:atag "Av" ;
+                  kontext:tag "RB" ;
+                  kontext:tokenId "6825" ;
+                  lexinfo:partOfSpeech lexinfo:Adverb ;
+                ]; # rdf:_16
+              rdf:_17 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "." ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "." ] ;
+                  kontext:atag "Zz" ;
+                  kontext:tag "SENT" ;
+                  kontext:tokenId "6826" 
+                ]; # rdf:_17
+              rdf:_18 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "They" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "they" ] ;
+                  kontext:atag "Pn" ;
+                  kontext:tag "PP" ;
+                  kontext:tokenId "6827" ;
+                  lexinfo:partOfSpeech lexinfo:Pronoun ;
+                ]; # rdf:_18
+              rdf:_19 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "convulsed" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "convulse" ] ;
+                  kontext:atag "Vb" ;
+                  kontext:tag "VVD" ;
+                  kontext:tokenId "6828" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_19
+              rdf:_20 [
+                a ontolex:LexicalEntry ; # ???
+                  ontolex:lexicalForm [ ontolex:writtenRep "," ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "," ] ;
+                  kontext:atag "Zz" ;
+                  kontext:tag "," ;
+                  kontext:tokenId "6829" ;
+                ]; # rdf:_20
+              rdf:_21 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "displayed" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "display" ] ;
+                  kontext:atag "Vb" ;
+                  kontext:tag "VVD" ;
+                  kontext:tokenId "6830" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_22
+              rdf:_23 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "excessive" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "excessive" ] ;
+                  kontext:atag "Aj" ;
+                  kontext:tag "JJ" ;
+                  kontext:tokenId "6831" ;
+                  lexinfo:partOfSpeech lexinfo:Adjective ;
+                ]; # rdf:_23
+            ], # frac:result
+			[
+              a frac:Cooccurrence, rdfs:Seq ;
+              kontext:queryTerms 10, 11 ;
+              rdf:_1 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "surface" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "surface" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NN" ;
+                  kontext:tokenId "6871" ;
+                  lexinfo:partOfSpeech lexinfo:Noun ;
+                ]; # rdf:_1
+              rdf:_2 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "of" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "of" ] ;
+                  kontext:atag "Pp" ;
+                  kontext:tag "IN" ;
+                  kontext:tokenId "6872" ;
+                  lexinfo:partOfSpeech lexinfo:Preposition ;
+                ]; # rdf:_2
+              rdf:_3 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "the" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "the" ] ;
+                  kontext:atag "Dt" ;
+                  kontext:tag "DT" ;
+                  kontext:tokenId "6873" ;
+                  lexinfo:partOfSpeech lexinfo:Determiner ;
+                ]; # rdf:_3
+              rdf:_4 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Shiranui" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "Shiranui" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NP" ;
+                  kontext:tokenId "6874" ;
+                  lexinfo:partOfSpeech lexinfo:ProperNoun ;
+                ]; # rdf:_4
+              rdf:_5 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Sea" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "Sea" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NP" ;
+                  kontext:tokenId "6875" ;
+                  lexinfo:partOfSpeech lexinfo:ProperNoun ;
+                ]; # rdf:_5
+              rdf:_6 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "." ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "." ] ;
+                  kontext:atag "Zz" ;
+                  kontext:tag "SENT" ;
+                  kontext:tokenId "6876" ;
+                ]; # rdf:_5
+              rdf:_7 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Many" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "many" ] ;
+                  kontext:atag "Aj" ;
+                  kontext:tag "JJ" ;
+                  kontext:tokenId "6877" ;
+                  lexinfo:partOfSpeech lexinfo:Numeral ;
+                ]; # rdf:_5
+              rdf:_8 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "of" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "of" ] ;
+                  kontext:atag "Pp" ;
+                  kontext:tag "IN" ;
+                  kontext:tokenId "6878" ;
+                  lexinfo:partOfSpeech lexinfo:Preposition ;
+                ]; # rdf:_6
+              rdf:_9 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "the" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "the" ] ;
+                  kontext:atag "Dt" ;
+                  kontext:tag "DT" ;
+                  kontext:tokenId "6879" ;
+                  lexinfo:partOfSpeech lexinfo:Determiner ;
+                ]; # rdf:_7
+              rdf:_10 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "ailing" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "ailing" ] ;
+                  kontext:atag "Aj" ;
+                  kontext:tag "JJ" ;
+                  kontext:tokenId "6880" ;
+                  lexinfo:partOfSpeech lexinfo:Adjective ;
+                ]; # rdf:_8
+              rdf:_11 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "cats" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "cat" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NNS" ;
+                  kontext:tokenId "6881" ;
+                  lexinfo:partOfSpeech lexinfo:Noun ;
+                ]; # rdf:_9
+              rdf:_12 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "wandered" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "wander" ] ;
+                  kontext:atag "Vb" ;
+                  kontext:tag "VVN" ;
+                  kontext:tokenId "6881" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_10
+              rdf:_13 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "into" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "into" ] ;
+                  kontext:atag "Pp" ;
+                  kontext:tag "IN" ;
+                  kontext:tokenId "6882" ;
+                  lexinfo:partOfSpeech lexinfo:Preposition ;
+                ]; # rdf:_11
+              rdf:_14 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "the" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "the" ] ;
+                  kontext:atag "Dt" ;
+                  kontext:tag "DT" ;
+                  kontext:tokenId "6883" ;
+                  lexinfo:partOfSpeech lexinfo:Determiner ;
+                ]; # rdf:_12
+              rdf:_15 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "sea" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "sea" ] ;
+                  kontext:atag "Nn" ;
+                  kontext:tag "NN" ;
+                  kontext:tokenId "6884" ;
+                  lexinfo:partOfSpeech lexinfo:Noun ;
+                ]; # rdf:_13
+              rdf:_16 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "and" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "and" ] ;
+                  kontext:atag "Cj" ;
+                  kontext:tag "CC" ;
+                  kontext:tokenId "6885" ;
+                  lexinfo:partOfSpeech lexinfo:Conjunction ;
+                ]; # rdf:_14
+              rdf:_17 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "drowned" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "drowned" ] ;
+                  kontext:atag "Aj" ;
+                  kontext:tag "JJ" ;
+                  kontext:tokenId "6886" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_15
+              rdf:_18 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "." ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "." ] ;
+                  kontext:atag "Zz" ;
+                  kontext:tag "SENT" ;
+                  kontext:tokenId "6887" ;
+                ]; # rdf:_16
+              rdf:_19 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "Soon" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "soon" ] ;
+                  kontext:atag "Av" ;
+                  kontext:tag "RB" ;
+                  kontext:tokenId "6888" ;
+                  lexinfo:partOfSpeech lexinfo:Adverb ;
+                ]; # rdf:_17
+              rdf:_20 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "," ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "," ] ;
+                  kontext:atag "Zz" ;
+                  kontext:tag "," ;
+                  kontext:tokenId "6889" ;
+                ]; # rdf:_18
+              rdf:_21 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "there" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "there" ] ;
+                  kontext:atag "Xx" ;
+                  kontext:tag "EX" ;
+                  kontext:tokenId "6890" ;
+                ]; # rdf:_19
+              rdf:_22 [
+                a ontolex:LexicalEntry ;
+                  ontolex:lexicalForm [ ontolex:writtenRep "were" ] ;
+                  ontolex:canonicalForm [ ontolex:writtenRep "be" ] ;
+                  kontext:atag "Vb" ;
+                  kontext:tag "VBD" ;
+                  kontext:tokenId "6891" ;
+                  lexinfo:partOfSpeech lexinfo:Verb ;
+                ]; # rdf:_20
+            ] .
+			# what is json array in RDF? What are rdf:variables?
+
+# <kontext:result1> a frac:Cooccurrence . # a terrible class name due to possible orthographic errors :)
+
