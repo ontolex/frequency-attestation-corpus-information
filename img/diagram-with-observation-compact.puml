@@ -20,7 +20,8 @@ frame "observed what: Observation subclasses" {
   }
 
   class Attestation {
-    str: gloss
+    str: attestationGloss
+    uri: locus
   }
 
   Collocation -down[hidden]-> Attestation

@@ -2,11 +2,23 @@
 
 originally done with PPT, PlantUml is easier to maintain and edit. The UML diagram is, however, not the recommended visualization, but only used for drafting.
 
-## Current diagram:
+## Current official diagram
+
+Until COLING paper is accepted, the following remains official:
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram.puml?cache=no)
 
-## Suggested simplification:
+## Suggested simplification
+
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
+
+- May 2022: simplification suggested
+- May 2022: equivalent "compact view"
+- July 2022:
+  - frac:locus restored
+  - frac:gloss => frac:attestationGloss
+
+### Simplification discussion
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation.puml?cache=no)
 
@@ -22,6 +34,4 @@ Aspects of simplification:
 > *Note*: In the final diagram, maybe we don't draw arrows between classes and `Observation`, but, instead, put all observations into a box, label it "subclasses of Observation" and put the Observation class with its properties there
 > This is the "compact view"
 
-## Compact view
 
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
