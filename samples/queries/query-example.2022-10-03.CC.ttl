@@ -1,0 +1,126 @@
+@prefix kontext: <https://www.korpus.cz/kontext/> .
+@prefix frac: <https://github.com/ontolex/frequency-attestation-corpus-information/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+
+<kontext:q> a frac:QueryResult ;
+			frac:queryLanguage <https://wiki.korpus.cz/doku.php/kurz:pokrocile_dotazy> ; 
+        # MI: should it be an object property?
+        # CC: yes, used documentation page for the exact corpus management system
+			
+      rdf:value "[lemma=\"cat\"] [xpos=\"V.*\"]" ;
+      # MI rdf:value "[lemma=\"cat\"] [tag=\"V.*\"]" ;
+        # CC: changed query to run over ud_22_en_ewt_a corpus [not clear which corpus that was originally]
+        #     the results are different, but I only updated the model, not the content
+
+			frac:corpus <https://lindat.mff.cuni.cz/services/kontext/first_form?corpname=ud_22_en_ewt_a>; 
+      # MI: dc:source "news.mongabay.com" ;
+      # CC: instead, frac:corpus (but I agree that dc:source would be a better name)
+      #     however, the QueryResult object is for the entire corpus, news.mongabay.com is a feature of a single response line
+      #     we don't have the corpus link to the exact corpus, so I suggest ud_22_en_ewt_a, instead
+      
+      # frac:variables "[ \"[lemma=\\\"cat\\\"]\", \"[xpos=\\\"V.*\\\"]\" ]"; 
+      # CC: original proposal with variable names (or, here, query terms) in a JSON array, but the double escaping is error-prone
+      #     hence, as a Seq (in analogy with frac:result):
+      frac:variables [ a rdfs:Seq; rdf:_1 "[lemma=\"cat\"]"; rdf:_2 "[xpos=\"V.*\"]" ] ;
+      # CC: visually nicer in Turtle is an RDF list:
+      # frac:variables ( "[lemma=\"cat\"]", "[xpos=\"V.*\"]" ) ;
+
+      # CC: the following is rather different, only one Cooccurrence, but one Attestation per match (KWIC)
+      #     cf. MI: one Cooccurrence per match (KWIC)
+      frac:result [
+
+              a frac:Cooccurrence, rdfs:Seq ;
+              # MI: a frac:Cooccurrence . # a terrible class name due to possible orthographic errors :)
+              # CC: yes ;)
+
+              rdf:_1 [ a frac:Observable; # CC: equivalent to the first query term
+                       ontolex:canonicalForm [ ontolex:writtenRep "cat" ] ] ;
+                       # CC: in this formalization, we imply that this observable is a lexical entry
+              rdf:_2 [ a frac:Observable;
+                       lexinfo:partOfSpeech lexinfo:verb ] ;
+                       # CC: note that this is *an interpretation* of the query term, cannot be automatically produced
+              # note that these observables are actually optional, use them if you can or want to produce a machine-readable interpretation
+              # of your query terms or your want to (additionally!) provide attestations for sub-terms (e.g., by pointing to different loci URIs)
+              # a minimalistic response would just give a frac:Cooccurrence with its frac:attestations
+
+              frac:attestation 
+                [ a frac:Attestation;
+                  frac:locus [ rdfs:label "news.mongabay.com" ] ; # frac:corpus? dc:source? 
+                  # note that the query doesn't give use a proper URI, hence a blank node with label
+                  # but better would be a direct pointer into the corpus match
+                  # alternatively, we could also return a nif:String with all context and annotations
+                  rdf:value "on the southwestern coast of Japan 's Kyushu Island , <b>cats</b> <b>began</b> to behave very strangely . They convulsed , displayed excessive"
+                  # note that we don't keep the annotations, nor do we properly mark up the variables
+                  # this could be done in XML markup, like the match highlighting here
+                  ],
+                [ a frac:Attestation;
+                  frac:locus [ rdfs:label "news.mongabay.com" ] ; # we should really avoid blank nodes here, as this must be the same as the last news.mongabay.com thing
+                  rdf:value "surface of the Shiranui Sea . Many of the ailing <b>cats</b> <b>wandered</b> into the sea and drowned . Soon , there were"
+                ]
+              ] .
+
+# Alternative model for first actual response of https://lindat.mff.cuni.cz/services/kontext/first_form?corpname=ud_22_en_ewt_a
+
+<kontext:q> a frac:QueryResult ;
+      frac:queryLanguage <https://wiki.korpus.cz/doku.php/kurz:pokrocile_dotazy> ; 
+      rdf:value "[lemma=\"cat\"] [xpos=\"V.*\"]" ;
+      frac:corpus <https://lindat.mff.cuni.cz/services/kontext/first_form?corpname=ud_22_en_ewt_a>; 
+      frac:variables [ a rdfs:Seq; rdf:_1 "[lemma=\"cat\"]"; rdf:_2 "[xpos=\"V.*\"]" ] ;
+      frac:result [
+
+              a frac:Cooccurrence, rdfs:Seq ;
+              rdf:_1 [ a frac:Observable; frac:attestation _:cat1, _:cat2 ];
+              rdf:_2 [ a frac:Observable; frac:attestation _:verb1, _:verb2 ];
+              # CC: explicit variables to have attestation links per observable
+              #     if we don't have/need an explicit variable linking, we can just give the matches directly
+              
+              frac:attestation _:match1, _:match2 .
+      ].
+
+# KWIC in NIF
+_:match1 a frac:Attestation;
+  frac:corpus [ rdfs:label "dev" ] ; # frac:locus? dc:source? BUT: please not a blank node!
+  rdf:value "they receive , they are not toys . maybe the  <b>cat</b> <b>needs</b>   a \" new ' home ......... Julie I am looking" ;
+  frac:locus _:context1 .
+_:cat1 a frac:Attestation;
+  frac:corpus [ rdfs:label "dev" ] ;
+  rdf:value "cat";
+  frac:locus _:cat_match1.
+_:verb1 a frac:Attestation;
+  frac:corpus [ rdfs:label "dev" ] ;
+  rdf:value "needs";
+  frac:locus _:verb_match1.
+
+# NIF Strings should better not be blank nodes, but proper pointers into the corpus
+# but the actual response is ripped out of context, so a blank node is the semantic equivalent
+_:context1 a nif:String;
+  nif:anchorOf "they receive , they are not toys . maybe the  cat needs   a   \" new ' home ......... Julie I am looking".
+_:cat_match1 a nif:String;
+  nif:beginIndex 47^xsd:int;
+  nif:endIndex 50^xsd:int ;
+  nif:referenceContext _:context1.
+_:verb_match1 a nif:String;
+  nif:beginIndex 52^xsd:int;
+  nif:endIndex 56^xsd:int;
+  nif:referenceContext _:context1.
+
+# full annotations in CoNLL-RDF:
+
+_:c1_1 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_2; conll:WORD "they"; conll:UPOS "PRON".
+_:c1_2 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_3; conll:WORD "receive"; conll:UPOS "VERB".
+_:c1_3 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_4; conll:WORD ","; conll:UPOS "PUNCT".
+_:c1_4 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_5; conll:WORD "they"; conll:UPOS "PRON".
+_:c1_5 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_6; conll:WORD "are"; conll:UPOS "AUX".
+_:c1_6 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_7; conll:WORD "not"; conll:UPOS "ADV".
+_:c1_7 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_8; conll:WORD "toys"; conll:UPOS "NOUN".
+_:c1_8 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_9; conll:WORD "."; conll:UPOS "PUNCT".
+_:c1_9 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_10; conll:WORD "maybe"; conll:UPOS "ADV".
+_:c1_10 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_11; conll:WORD "the"; conll:UPOS "DET".
+_:c1_11 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_12; conll:WORD "cat"; conll:UPOS "NOUN"; owl:sameAs _:cat_match1.
+_:c1_12 a nif:Word; nif:substringOf _:context1; nif:next:Word _:c1_13; conll:WORD "needs"; conll:UPOS "VERB"; owl:sameAs _:verb_match1.
+# etc.
+# instead of owl:sameAs, we can always just provide the CoNLL-RDF URI directly
