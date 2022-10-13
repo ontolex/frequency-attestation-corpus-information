@@ -21,7 +21,8 @@
 
 <http://www.w3.org/ns/lemon/frac#>
     a owl:Ontology, voaf:Vocabulary ;
-    owl:imports <http://www.w3.org/ns/lemon/ontolex> .
+    # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
+    .
 
 #########################
 # imported vocabularies #
