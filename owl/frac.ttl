@@ -42,6 +42,9 @@ rdf:value
 dc:extent
     a owl:DatatypeProperty .
 
+dc:description
+    a owl:DatatypeProperty .
+
 ######################
 # root-level classes #
 ######################
@@ -49,19 +52,19 @@ dc:extent
 :Observation
     a owl:Class;
     rdfs:subClassOf [
-        a owl:Restriction ;
-        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-        owl:onProperty rdf:value
-    ] ;
+        a <http://www.w3.org/2002/07/owl#Restriction> ;
+        <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+        <http://www.w3.org/2002/07/owl#onProperty> rdf:value
+   ] ;
 
     # the following constraint is semantically empty
     # it is supposed to express that there should be
     # a human-readable description, but we don't enforce it
     # in order not to break validation
     rdfs:subClassOf [
-        a owl:Restriction ;
-        owl:minQualifiedCardinality "0"^^xsd:nonNegativeInteger ;
-        owl:onProperty dc:description
+        a <http://www.w3.org/2002/07/owl#Restriction> ;
+        <http://www.w3.org/2002/07/owl#minCardinality> "0"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+        <http://www.w3.org/2002/07/owl#onProperty> dc:description
     ] ;
     vs:term_status "tbc" . 
 
@@ -95,7 +98,7 @@ dc:extent
         rdfs:domain :Observation ;
         rdfs:range :Corpus ;
         vs:term_status "tbc" ;
-        rdfs:comment "suggested as generalization over frac:corpus and frac:locus, probably to be renamed; originally, this was dc:source"@en .
+        rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dc:source"@en .
 
 :Corpus
     rdfs:subClassOf [
@@ -153,8 +156,18 @@ dc:extent
         a owl:DatatypeProperty ;
         rdfs:domain :Attestation ;
         rdfs:range xsd:string ;
-        rdfs:comment "older draft had frac:gloss and frac:attestationGloss. One of these can be merged with the inherited rdf:value, but that must be defined." ;
+        rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ;
         vs:term_status "tbc" .
+
+
+:locus
+    a owl:ObjectProperty ;
+    rdfs:domain :Attestation ;
+    rdfs:range :Corpus ;
+    vs:term_status "stable" ;
+    rdfs:comment """Points from an Observation to the exact location in the source material on where it is to be found. This can be, for example, a page in a book, the string URI of a passage in a text, a canonical reference to a passage in piece of literatur, or any Web Annotation selector. We have confirmed name, function and necessity of this property.
+    When the locus is provided, it is not necessary to also refer to the source material as a whole. The existence of such a reference is nevertheless implied."""@en .
+
 
 ###############
 # collocation #
@@ -166,6 +179,11 @@ dc:extent
         owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
         owl:onClass :Observable ;
         owl:onProperty rdfs:member
+    ] ,
+    [
+        a <http://www.w3.org/2002/07/owl#Restriction> ;
+        <http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Observable> ;
+        <http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member>
     ] ;
     vs:term_status "stable" .
 
@@ -173,10 +191,6 @@ dc:extent
         a owl:ObjectProperty ;
         rdfs:domain :Collocation ;
         rdfs:range :Observable ;
-        owl:propertyChainAxiom ([
-                owl:inverseOf rdfs:member
-            ]
-        ) ;
         vs:term_status "stable" .
 
 #############
@@ -223,8 +237,12 @@ dc:extent
 :Similarity
     rdfs:subClassOf rdf:Bag, :Observation, [
         a owl:Restriction ;
-        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
-        owl:onClass :Embedding ;
+        owl:minCardinality "2"^^xsd:nonNegativeInteger ;
         owl:onProperty rdfs:member
+    ] ,
+    [
+       a <http://www.w3.org/2002/07/owl#Restriction> ;
+        <http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Embedding> ;
+        <http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member>
     ] ;
     vs:term_status "stable" .
