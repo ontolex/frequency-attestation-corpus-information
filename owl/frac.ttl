@@ -163,7 +163,6 @@ dc:description
 :locus
     a owl:ObjectProperty ;
     rdfs:domain :Attestation ;
-    rdfs:range :Corpus ;
     vs:term_status "stable" ;
     rdfs:comment """Points from an Observation to the exact location in the source material on where it is to be found. This can be, for example, a page in a book, the string URI of a passage in a text, a canonical reference to a passage in piece of literatur, or any Web Annotation selector. We have confirmed name, function and necessity of this property.
     When the locus is provided, it is not necessary to also refer to the source material as a whole. The existence of such a reference is nevertheless implied."""@en .
