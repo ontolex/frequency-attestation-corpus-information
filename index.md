@@ -243,12 +243,10 @@ back to ([Table of Contents](#table-of-contents))
 
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_frac_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
-![](https://service.tib.eu/webvowl/#opts=doc=1;cd=180;dd=220;filter_disjoint=false;filter_setOperator=true;mode_compact=true;#iri=https://github.com/ontolex/frequency-attestation-corpus-information/raw/master/owl/frac.ttl "vis")
-
 ![](img/ontolex-frac-2020-06.png "ontolex-frac-2020-06.png")
-Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overview
+Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overview. TODO: UPDATE!
 
-> DISCUSSION: Looks more complicated than it is. Shall we drop inferrable information ? (rdf:rest, rdf:first are available vocabulary elements because ContextualRelation is a subclass of rdf:List, subclasses of ontolex:Element should be dropped once ontolex:Element is introduced.) Keep rdf:List elements only if preserved in other ontolex modules.
+> NOTE that Fig. 2 is dated. Please use [this link](https://service.tib.eu/webvowl/#opts=doc=1;cd=180;dd=220;filter_disjoint=false;filter_setOperator=true;mode_compact=true;#iri=https://github.com/ontolex/frequency-attestation-corpus-information/raw/master/owl/frac.ttl) to get a live view on [the ontology](owl/frac.ttl).
 
 </section>
 
