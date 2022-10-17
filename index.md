@@ -153,44 +153,42 @@ This is a list of relevant namespaces that will be used in the rest of this docu
 
 OntoLex module for frequency, attestation and corpus information
 
-```
-    @prefix frac: <http://www.w3.org/ns/lemon/frac#> .
-```
+```@prefix frac: <http://www.w3.org/ns/lemon/frac#> .```
 
 OntoLex (core) model and other _lemon_ modules:
 
 ```
-    @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
-    @prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
-    @prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
-    @prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
-    @prefix lime: <http://www.w3.org/ns/lemon/lime#> .
-    @prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
 ```
 
 Other models [TO REVIEW]:
 
 ```
-    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
-    @prefix owl: <http://www.w3.org/2002/07/owl#>.
-    @prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
-    @prefix skos: <http://www.w3.org/2004/02/skos#>.
-    @prefix dbr: <http://dbpedia.org/resource/>.
-    @prefix dbo: <http://dbpedia.org/ontology/>.
-    @prefix void: <http://rdfs.org/ns/void#>.
-    @prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>.
-    @prefix dct: <http://purl.org/dc/terms/>.
-    @prefix provo: <http://www.w3.org/ns/prov#>.
-    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
-    @prefix oa: <http://www.w3.org/ns/oa#>.
-    @prefix aat: <http://vocab.getty.edu/aat/>.
-    @prefix voaf: <http://purl.org/vocommons/voaf#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+@prefix skos: <http://www.w3.org/2004/02/skos#>.
+@prefix dbr: <http://dbpedia.org/resource/>.
+@prefix dbo: <http://dbpedia.org/ontology/>.
+@prefix void: <http://rdfs.org/ns/void#>.
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>.
+@prefix dct: <http://purl.org/dc/terms/>.
+@prefix provo: <http://www.w3.org/ns/prov#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix oa: <http://www.w3.org/ns/oa#>.
+@prefix aat: <http://vocab.getty.edu/aat/>.
+@prefix voaf: <http://purl.org/vocommons/voaf#>.
 ```
 
 Helper namespace (for monitoring revision status, remove from final):
 
 ```
-    @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> .
 ```
 
 
@@ -200,36 +198,36 @@ Necessary for bootstrapping Turtle from **this file**, keep in, but remove secti
 
 
 ```
-    ##########################
-    # vocabulary declaration #
-    ##########################
+##########################
+# vocabulary declaration #
+##########################
 
-    <http://www.w3.org/ns/lemon/frac#>
-        a owl:Ontology, voaf:Vocabulary ;
-        # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
-        .
+<http://www.w3.org/ns/lemon/frac#>
+    a owl:Ontology, voaf:Vocabulary ;
+    # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
+    .
 
-    #########################
-    # imported vocabularies #
-    #########################
+#########################
+# imported vocabularies #
+#########################
 
-    rdf:Bag
-        rdfs:subClassOf rdfs:Container .
+rdf:Bag
+    rdfs:subClassOf rdfs:Container .
 
-    rdf:Seq
-        rdfs:subClassOf rdfs:Container .
+rdf:Seq
+    rdfs:subClassOf rdfs:Container .
 
-    rdfs:member
-        a owl:ObjectProperty .
+rdfs:member
+    a owl:ObjectProperty .
 
-    rdf:value
-        a owl:DatatypeProperty .
+rdf:value
+    a owl:DatatypeProperty .
 
-    dct:extent
-        a owl:DatatypeProperty .
+dct:extent
+    a owl:DatatypeProperty .
 
-    dct:description
-        a owl:DatatypeProperty .
+dct:description
+    a owl:DatatypeProperty .
 ```
 
 </section>
@@ -285,21 +283,21 @@ frac:Observable
     a owl:Class ;
     vs:term_status "stable" .
 
-    ontolex:Form
-        rdfs:subClassOf frac:Observable ;
-        vs:term_status "stable" .
+ontolex:Form
+    rdfs:subClassOf frac:Observable ;
+    vs:term_status "stable" .
 
-    ontolex:LexicalConcept
-        rdfs:subClassOf frac:Observable ;
-        vs:term_status "stable" .
+ontolex:LexicalConcept
+    rdfs:subClassOf frac:Observable ;
+    vs:term_status "stable" .
 
-    ontolex:LexicalEntry
-        rdfs:subClassOf frac:Observable ;
-        vs:term_status "stable" .
+ontolex:LexicalEntry
+    rdfs:subClassOf frac:Observable ;
+    vs:term_status "stable" .
 
-    ontolex:LexicalSense
-        rdfs:subClassOf frac:Observable ;
-        vs:term_status "stable" .
+ontolex:LexicalSense
+    rdfs:subClassOf frac:Observable ;
+    vs:term_status "stable" .
 ```
 
 
@@ -369,40 +367,40 @@ frac:Corpus
 ```
 
 > ----------------------- ------------------------------------
-> ### corpus (Property)
-> **corpus (Property)** assigns a `Corpus` to a particular `frac:Observation`.
+> ### corpus (ObjectProperty)
+> The property **corpus** assigns a `Corpus` to a particular `frac:Observation`.
 > **Domain:** frac:Observation
 > **Range:** frac:Corpus
 >
 > ----------------------- ------------------------------------
 
 ```
-    frac:corpus
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Observation ;
-        rdfs:range frac:Corpus ;
-        vs:term_status "tbc" ;
-        rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dct:source"@en .
+frac:corpus
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Observation ;
+    rdfs:range frac:Corpus ;
+    vs:term_status "tbc" ;
+    rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dct:source"@en .
 ```
 
 A corpus is considered to be a non-empty collection of texts, in electronic or other form. (Note that a single text can constitute a corpus.)
-For machine-readable corpora are characterized by their size, and for these, data providers should provide the token count in the property `frac:total`.
+For machine-readable corpora that are/can be characterized by their size, data providers should provide the token count in the property `frac:total`.
 
 > ----------------------- ------------------------------------
-> ### total (Property)
-> **total  (Property)** assigns  a  corpus  the  total  number  of  elements  that  it  contains.  In  the  context  of  OntoLex, these are instantiations of lexemes, only, i.e., tokens (‘words’).
+> ### total (DatatypeProperty)
+> The datatype property **total** assigns  a  corpus  the  total  number  of  elements  that  it  contains.  In  the  context  of  OntoLex, these are instantiations of lexemes, only, i.e., tokens (‘words’).
 > **Domain:** frac:Corpus
 > **Range:** integer  (long)
 >
 > ----------------------- ------------------------------------
 
 ```
-    frac:total
-        a owl:DatatypeProperty, owl:FunctionalProperty ;
-        rdfs:domain frac:Corpus ;
-        rdfs:range xsd:int ;
-        rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ;
-        vs:term_status "tbc" .
+frac:total
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain frac:Corpus ;
+    rdfs:range xsd:int ;
+    rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ;
+    vs:term_status "tbc" .
 ```
 
 </section>
@@ -457,18 +455,18 @@ frac:CorpusFrequency
 > ### frequency (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#frequency](http://www.w3.org/nl/lemon/frac#frequency)
 > The property **frequency** assigns a particular `frac:Observable` a `frac<<Frequency`.
-> **rdfs:range** `frac:Observable`
-> **rdfs:domain** `frac:CorpusFrequency`
+> **rdfs:domain** `frac:Observable`
+> **rdfs:range** `frac:CorpusFrequency`
 >
 > ----------------------- ------------------------------------
 </div>
 
 ```
-    frac:frequency
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Observable ;
-        rdfs:range frac:CorpusFrequency ;
-        vs:term_status "stable" .
+frac:frequency
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Observable ;
+    rdfs:range frac:CorpusFrequency ;
+    vs:term_status "stable" .
 ```
 
 
@@ -623,8 +621,8 @@ frac:Attestation
 ```
 
 > ----
-> ### attestation (Property)
-> **frac:attestation** associates an attestation to the frac:Observable.  This  is  a  subproperty  of  `frac:citation` using concrete data as  evidence.
+> ### attestation (ObjectProperty)
+> The property **frac:attestation** associates an attestation to the frac:Observable.  This  is  a  subproperty  of  `frac:citation` using concrete data as  evidence.
 > **Domain:** `Observable`
 > **Range:** `Attestation`
 > **SubPropertyOf:** `citation`
@@ -633,26 +631,26 @@ frac:Attestation
 </div>
 
 ```
-    frac:attestation
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Observable ;
-        rdfs:range frac:Attestation ;
-        rdfs:subPropertyOf frac:citation ;
-        vs:term_status "stable" .
+frac:attestation
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Observable ;
+    rdfs:range frac:Attestation ;
+    rdfs:subPropertyOf frac:citation ;
+    vs:term_status "stable" .
 ```
 
 > --------
-> ### citation (Property)
-> **frac:citation** associates a  citation  to  the  `Observable`  citing  it.
+> ### citation (ObjectProperty)
+> The property **frac:citation** associates a  citation  to  the  `Observable`  citing  it.
 > **Domain:**  `Observable`
 >
 > --------
 
 ``` 
-    frac:citation
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Observable ;
-        vs:term_status "tbc" .
+frac:citation
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Observable ;
+    vs:term_status "tbc" .
 ```
 
 In general, the object of a citation represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference, cf. Peroni (2012) \cite{peroni2012fabio}: 
@@ -664,20 +662,23 @@ However, note that FrAC does not formally define a general "Citation" class to d
 
 > --------
 > ### gloss (Property)
-> an **attestation gloss** contains  the  text  content  of  an  attestation  as  represented  within  a  dictionary.  This  may  be different  from  a  direct  quotation  because  the  target  expression  may  be  omitted  or  normalized.
+> The **gloss** of an attestation contains  the  text  content  of  an  attestation  *as  represented  within  a  dictionary*.  This property should not be used to provide direct quotations from the original data source, which should be represented by `rdf:value`. Instead, its recommended use is for representations that are either enriched (e.g., by annotations and metadata), amended (e.g., by expanding ligatures or omissions), simplified (e.g., by omissions from the original context, e.g., of the lexeme under consideration) or otherwise differentiated from the plain text representation of the context.
 > **Domain:** `Attestation`
 > **Range:** `xsd:String`  
 >
 > --------
 
 ```
-    frac:gloss
-        a owl:DatatypeProperty ;
-        rdfs:domain frac:Attestation ;
-        rdfs:range xsd:string ;
-        rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ;
-        vs:term_status "tbc" .
+frac:gloss
+    a owl:DatatypeProperty ;
+    rdfs:domain frac:Attestation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ;
+    vs:term_status "tbc" .
 ```
+
+> Note: With `frac:gloss` and `rdf:value`, `frac:Attestation` provides *two* different properties to represent the context of an observable in any particular data source. `rdf:value` should provide information as found in the underlying corpus, e.g., a plain text string. If the dictionary provides a different representation, or if the attestation as given in an underlying dictionary has not yet been confirmed to match the context in the underlying corpus, applications should use `frac:gloss` instead of `rdf:value`. In other words, `rdf:value` corresponds to the representation of the context in the underlying corpus, `frac:gloss` to its representation in the underlying dictionary. If both are confirmed to be equal, use `rdf:value`.
+
 
 In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. Different conventions for referencing strings by character offsets do exist, representative solutions are string URIs as provided by RCF5147 (for plain text) and NIF (all mimetypes), As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as object.
 
@@ -814,10 +815,10 @@ Collocations can be described in terms of various collocation scores. If scores 
 </div>
 
 ```
-    frac:cscore
-        rdfs:subPropertyOf rdf:value ;
-        rdfs:domain frac:Collocation ;
-        vs:term_status "stable" .
+frac:cscore
+    rdfs:subPropertyOf rdf:value ;
+    rdfs:domain frac:Collocation ;
+    vs:term_status "stable" .
 ```
 
 FrAC defines a number of popular collocation metrics as sub-properties of `frac:cscore`:
@@ -892,11 +893,11 @@ Many of these metrics are asymmetric, and distinguish the lexical element they a
 </div>
 
 ```
-    frac:head
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Collocation ;
-        rdfs:range frac:Observable ;
-        vs:term_status "stable" .
+frac:head
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Collocation ;
+    rdfs:range frac:Observable ;
+    vs:term_status "stable" .
 ```
 
 As an example, the relative frequency score is the number of occurrences of a collocation relative to the overall frequency of its head.
@@ -1122,11 +1123,11 @@ frac:Embedding
 </div>
 
 ```
-    frac:embedding
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Observable ;
-        rdfs:range frac:Embedding ;
-        vs:term_status "stable" .
+frac:embedding
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Observable ;
+    rdfs:range frac:Embedding ;
+    vs:term_status "stable" .
 ```
 
 
@@ -1334,19 +1335,19 @@ Since 2018, static word and concept embeddings have been increasingly replaced b
 > ### attestationEmbedding (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#embedding](http://www.w3.org/nl/lemon/frac#embedding)
 > The property **attestation embedding** is a relation that maps an attestation of a particular observable into a numerical feature space. The string representation of the attestation should represent the necessary context that the respective embedding is calculated from.
-> **rdfs:range** frac:Attestation
-> **rdfs:domain** frac:Embedding
+> **rdfs:domain** frac:Attestation
+> **rdfs:range** frac:Embedding
 >
 > ---
 </div>
 
 
 ```
-    frac:attestationEmbedding
-        a owl:ObjectProperty ;
-        rdfs:domain frac:Attestation ;
-        rdfs:range frac:Embedding ;
-        vs:term_status "stable" .
+frac:attestationEmbedding
+    a owl:ObjectProperty ;
+    rdfs:domain frac:Attestation ;
+    rdfs:range frac:Embedding ;
+    vs:term_status "stable" .
 ```
 
 TODO: example attestation embedding

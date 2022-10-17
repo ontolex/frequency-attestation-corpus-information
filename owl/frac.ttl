@@ -1,56 +1,56 @@
-
-@prefix frac: <http://www.w3.org/ns/lemon/frac#> . 
-
-
-@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> . 
-@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> . 
-@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> . 
-@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> . 
-@prefix lime: <http://www.w3.org/ns/lemon/lime#> . 
-@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> . 
+                                                                                                                                      
+    @prefix frac: <http://www.w3.org/ns/lemon/frac#> . 
 
 
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>. 
-@prefix owl: <http://www.w3.org/2002/07/owl#>. 
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#>. 
-@prefix skos: <http://www.w3.org/2004/02/skos#>. 
-@prefix dbr: <http://dbpedia.org/resource/>. 
-@prefix dbo: <http://dbpedia.org/ontology/>. 
-@prefix void: <http://rdfs.org/ns/void#>. 
-@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>. 
-@prefix dct: <http://purl.org/dc/terms/>. 
-@prefix provo: <http://www.w3.org/ns/prov#>. 
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. 
-@prefix oa: <http://www.w3.org/ns/oa#>. 
-@prefix aat: <http://vocab.getty.edu/aat/>. 
-@prefix voaf: <http://purl.org/vocommons/voaf#>. 
+    @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> . 
+    @prefix synsem: <http://www.w3.org/ns/lemon/synsem#> . 
+    @prefix decomp: <http://www.w3.org/ns/lemon/decomp#> . 
+    @prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> . 
+    @prefix lime: <http://www.w3.org/ns/lemon/lime#> . 
+    @prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> . 
 
 
-@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> . 
+    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>. 
+    @prefix owl: <http://www.w3.org/2002/07/owl#>. 
+    @prefix xsd: <http://www.w3.org/2001/XMLSchema#>. 
+    @prefix skos: <http://www.w3.org/2004/02/skos#>. 
+    @prefix dbr: <http://dbpedia.org/resource/>. 
+    @prefix dbo: <http://dbpedia.org/ontology/>. 
+    @prefix void: <http://rdfs.org/ns/void#>. 
+    @prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>. 
+    @prefix dct: <http://purl.org/dc/terms/>. 
+    @prefix provo: <http://www.w3.org/ns/prov#>. 
+    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. 
+    @prefix oa: <http://www.w3.org/ns/oa#>. 
+    @prefix aat: <http://vocab.getty.edu/aat/>. 
+    @prefix voaf: <http://purl.org/vocommons/voaf#>. 
 
 
-########################## 
-# vocabulary declaration # 
-########################## 
-<http://www.w3.org/ns/lemon/frac#> 
-a owl:Ontology, voaf:Vocabulary ; 
-# owl:imports <http://www.w3.org/ns/lemon/ontolex> 
-. 
-######################### 
-# imported vocabularies # 
-######################### 
-rdf:Bag 
-rdfs:subClassOf rdfs:Container . 
-rdf:Seq 
-rdfs:subClassOf rdfs:Container . 
-rdfs:member 
-a owl:ObjectProperty . 
-rdf:value 
-a owl:DatatypeProperty . 
-dct:extent 
-a owl:DatatypeProperty . 
-dct:description 
-a owl:DatatypeProperty . 
+    @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> . 
+
+
+    ########################## 
+    # vocabulary declaration # 
+    ########################## 
+    <http://www.w3.org/ns/lemon/frac#> 
+        a owl:Ontology, voaf:Vocabulary ; 
+        # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
+        . 
+    ######################### 
+    # imported vocabularies # 
+    ######################### 
+    rdf:Bag 
+        rdfs:subClassOf rdfs:Container . 
+    rdf:Seq 
+        rdfs:subClassOf rdfs:Container . 
+    rdfs:member 
+        a owl:ObjectProperty . 
+    rdf:value 
+        a owl:DatatypeProperty . 
+    dct:extent 
+        a owl:DatatypeProperty . 
+    dct:description 
+        a owl:DatatypeProperty . 
 
 
 ##################### 
@@ -59,65 +59,65 @@ a owl:DatatypeProperty .
 
 
 frac:Observable 
-a owl:Class ; 
-vs:term_status "stable" . 
-ontolex:Form 
-rdfs:subClassOf frac:Observable ; 
-vs:term_status "stable" . 
-ontolex:LexicalConcept 
-rdfs:subClassOf frac:Observable ; 
-vs:term_status "stable" . 
-ontolex:LexicalEntry 
-rdfs:subClassOf frac:Observable ; 
-vs:term_status "stable" . 
-ontolex:LexicalSense 
-rdfs:subClassOf frac:Observable ; 
-vs:term_status "stable" . 
+    a owl:Class ; 
+    vs:term_status "stable" . 
+    ontolex:Form 
+        rdfs:subClassOf frac:Observable ; 
+        vs:term_status "stable" . 
+    ontolex:LexicalConcept 
+        rdfs:subClassOf frac:Observable ; 
+        vs:term_status "stable" . 
+    ontolex:LexicalEntry 
+        rdfs:subClassOf frac:Observable ; 
+        vs:term_status "stable" . 
+    ontolex:LexicalSense 
+        rdfs:subClassOf frac:Observable ; 
+        vs:term_status "stable" . 
 
 
 frac:Observation 
-a owl:Class; 
-rdfs:subClassOf [ 
-a <http://www.w3.org/2002/07/owl#Restriction> ; 
-<http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
-<http://www.w3.org/2002/07/owl#onProperty> rdf:value 
-] ; 
-# the following constraint is semantically empty 
-# it is supposed to express that there should be 
-# a human-readable description, but we don't enforce it 
-# in order not to break validation 
-rdfs:subClassOf [ 
-a <http://www.w3.org/2002/07/owl#Restriction> ; 
-<http://www.w3.org/2002/07/owl#minCardinality> "0"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
-<http://www.w3.org/2002/07/owl#onProperty> dct:description 
-] ; 
-vs:term_status "tbc" . 
+    a owl:Class; 
+    rdfs:subClassOf [ 
+        a <http://www.w3.org/2002/07/owl#Restriction> ; 
+        <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
+        <http://www.w3.org/2002/07/owl#onProperty> rdf:value 
+   ] ; 
+    # the following constraint is semantically empty 
+    # it is supposed to express that there should be 
+    # a human-readable description, but we don't enforce it 
+    # in order not to break validation 
+    rdfs:subClassOf [ 
+        a <http://www.w3.org/2002/07/owl#Restriction> ; 
+        <http://www.w3.org/2002/07/owl#minCardinality> "0"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
+        <http://www.w3.org/2002/07/owl#onProperty> dct:description 
+    ] ; 
+    vs:term_status "tbc" . 
 
 
 frac:Corpus 
-rdfs:subClassOf [ 
-a owl:Restriction ; 
-owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ; 
-owl:onDataRange xsd:int ; 
-owl:onProperty frac:total 
-] ; 
-vs:term_status "tbc" . 
+    rdfs:subClassOf [ 
+        a owl:Restriction ; 
+        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ; 
+        owl:onDataRange xsd:int ; 
+        owl:onProperty frac:total 
+    ] ; 
+    vs:term_status "tbc" . 
 
 
-frac:corpus 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Observation ; 
-rdfs:range frac:Corpus ; 
-vs:term_status "tbc" ; 
-rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dct:source"@en . 
+    frac:corpus 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Observation ; 
+        rdfs:range frac:Corpus ; 
+        vs:term_status "tbc" ; 
+        rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dct:source"@en . 
 
 
-frac:total 
-a owl:DatatypeProperty, owl:FunctionalProperty ; 
-rdfs:domain frac:Corpus ; 
-rdfs:range xsd:int ; 
-rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ; 
-vs:term_status "tbc" . 
+    frac:total 
+        a owl:DatatypeProperty, owl:FunctionalProperty ; 
+        rdfs:domain frac:Corpus ; 
+        rdfs:range xsd:int ; 
+        rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ; 
+        vs:term_status "tbc" . 
 
 
 ############# 
@@ -126,184 +126,184 @@ vs:term_status "tbc" .
 
 
 frac:CorpusFrequency 
-a owl:Class ; 
-rdfs:subClassOf frac:Observation ; 
-rdfs:subClassOf [ 
-a owl:Restriction ; 
-owl:cardinality "1"^^xsd:nonNegativeInteger ; 
-owl:onDataRange xsd:int ; 
-owl:onProperty rdf:value 
-] ; 
-vs:term_status "stable" . 
+    a owl:Class ; 
+    rdfs:subClassOf frac:Observation ; 
+    rdfs:subClassOf [ 
+        a owl:Restriction ; 
+        owl:cardinality "1"^^xsd:nonNegativeInteger ; 
+        owl:onDataRange xsd:int ; 
+        owl:onProperty rdf:value 
+    ] ; 
+    vs:term_status "stable" . 
 
 
-frac:frequency 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Observable ; 
-rdfs:range frac:CorpusFrequency ; 
-vs:term_status "stable" . 
+    frac:frequency 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Observable ; 
+        rdfs:range frac:CorpusFrequency ; 
+        vs:term_status "stable" . 
 
-
+																																																						           	                   
 ############### 
 # attestation # 
 ############### 
 
 
 frac:Attestation 
-rdfs:subClassOf frac:Observation ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf frac:Observation ; 
+    vs:term_status "stable" . 
 
 
-frac:attestation 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Observable ; 
-rdfs:range frac:Attestation ; 
-rdfs:subPropertyOf frac:citation ; 
-vs:term_status "stable" . 
+    frac:attestation 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Observable ; 
+        rdfs:range frac:Attestation ; 
+        rdfs:subPropertyOf frac:citation ; 
+        vs:term_status "stable" . 
 
 
-frac:citation 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Observable ; 
-vs:term_status "tbc" . 
+    frac:citation 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Observable ; 
+        vs:term_status "tbc" . 
 
 
-frac:gloss 
-a owl:DatatypeProperty ; 
-rdfs:domain frac:Attestation ; 
-rdfs:range xsd:string ; 
-rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ; 
-vs:term_status "tbc" . 
+    frac:gloss 
+        a owl:DatatypeProperty ; 
+        rdfs:domain frac:Attestation ; 
+        rdfs:range xsd:string ; 
+        rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ; 
+        vs:term_status "tbc" . 
 
 
 frac:locus 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Attestation ; 
-vs:term_status "stable" ; 
-rdfs:comment """Points from an Observation to the exact location in the source material on where it is to be found. This can be, for example, a page in a book, the string URI of a passage in a text, a canonical reference to a passage in piece of literatur, or any Web Annotation selector. We have confirmed name, function and necessity of this property. 
-When the locus is provided, it is not necessary to also refer to the source material as a whole. The existence of such a reference is nevertheless implied."""@en . 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Attestation ; 
+    vs:term_status "stable" ; 
+    rdfs:comment """Points from an Observation to the exact location in the source material on where it is to be found. This can be, for example, a page in a book, the string URI of a passage in a text, a canonical reference to a passage in piece of literatur, or any Web Annotation selector. We have confirmed name, function and necessity of this property. 
+    When the locus is provided, it is not necessary to also refer to the source material as a whole. The existence of such a reference is nevertheless implied."""@en . 
 
-
+																																				
 ############### 
 # collocation # 
 ############### 
 
 
 frac:Collocation 
-rdfs:subClassOf rdfs:Container, frac:Observable, frac:Observation, [ 
-a owl:Restriction ; 
-owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ; 
-owl:onClass frac:Observable ; 
-owl:onProperty rdfs:member 
-] , 
-[ 
-a <http://www.w3.org/2002/07/owl#Restriction> ; 
-<http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Observable> ; 
-<http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member> 
-] ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf rdfs:Container, frac:Observable, frac:Observation, [ 
+        a owl:Restriction ; 
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ; 
+        owl:onClass frac:Observable ; 
+        owl:onProperty rdfs:member 
+    ] , 
+    [ 
+        a <http://www.w3.org/2002/07/owl#Restriction> ; 
+        <http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Observable> ; 
+        <http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member> 
+    ] ; 
+    vs:term_status "stable" . 
 
 
-frac:cscore 
-rdfs:subPropertyOf rdf:value ; 
-rdfs:domain frac:Collocation ; 
-vs:term_status "stable" . 
+    frac:cscore 
+        rdfs:subPropertyOf rdf:value ; 
+        rdfs:domain frac:Collocation ; 
+        vs:term_status "stable" . 
 
+    
+    frac:rel_freq rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:pmi rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:mi2 rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:mi3 rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:pmi_logfreq rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:dice rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:logDice rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:minSensitivity rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:likelihood_ratio rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:tScore rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:chi2 rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:support rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:confidence rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:lift rdfs:subPropertyOf frac:cscore . 
+    
+    
+    frac:conviction rdfs:subPropertyOf frac:cscore . 
+    
 
-frac:rel_freq rdfs:subPropertyOf frac:cscore . 
+    frac:head 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Collocation ; 
+        rdfs:range frac:Observable ; 
+        vs:term_status "stable" . 
 
-
-frac:pmi rdfs:subPropertyOf frac:cscore . 
-
-
-frac:mi2 rdfs:subPropertyOf frac:cscore . 
-
-
-frac:mi3 rdfs:subPropertyOf frac:cscore . 
-
-
-frac:pmi_logfreq rdfs:subPropertyOf frac:cscore . 
-
-
-frac:dice rdfs:subPropertyOf frac:cscore . 
-
-
-frac:logDice rdfs:subPropertyOf frac:cscore . 
-
-
-frac:minSensitivity rdfs:subPropertyOf frac:cscore . 
-
-
-frac:likelihood_ratio rdfs:subPropertyOf frac:cscore . 
-
-
-frac:tScore rdfs:subPropertyOf frac:cscore . 
-
-
-frac:chi2 rdfs:subPropertyOf frac:cscore . 
-
-
-frac:support rdfs:subPropertyOf frac:cscore . 
-
-
-frac:confidence rdfs:subPropertyOf frac:cscore . 
-
-
-frac:lift rdfs:subPropertyOf frac:cscore . 
-
-
-frac:conviction rdfs:subPropertyOf frac:cscore . 
-
-
-frac:head 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Collocation ; 
-rdfs:range frac:Observable ; 
-vs:term_status "stable" . 
-
-
+                                                                                                                                                                                                                           
 ############# 
 # embedding # 
 ############# 
 
 
 frac:Embedding 
-rdfs:subClassOf frac:Observation, [ 
-a owl:Restriction ; 
-owl:onDataRange xsd:int ; 
-owl:onProperty dct:extent ; 
-owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger 
-] ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf frac:Observation, [ 
+        a owl:Restriction ; 
+        owl:onDataRange xsd:int ; 
+        owl:onProperty dct:extent ; 
+        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger 
+    ] ; 
+    vs:term_status "stable" . 
 
 
-frac:embedding 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Observable ; 
-rdfs:range frac:Embedding ; 
-vs:term_status "stable" . 
+    frac:embedding 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Observable ; 
+        rdfs:range frac:Embedding ; 
+        vs:term_status "stable" . 
 
 
 frac:FixedSizeVector 
-rdfs:subClassOf frac:Embedding ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf frac:Embedding ; 
+    vs:term_status "stable" . 
 
-
+        		      	  			       	  	  		  		  		  	  		  	  		  	          	
 frac:TimeSeries 
-rdfs:subClassOf frac:Embedding ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf frac:Embedding ; 
+    vs:term_status "stable" . 
 
 
 frac:BagOfWords 
-rdfs:subClassOf frac:Embedding ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf frac:Embedding ; 
+    vs:term_status "stable" . 
 
-
-frac:attestationEmbedding 
-a owl:ObjectProperty ; 
-rdfs:domain frac:Attestation ; 
-rdfs:range frac:Embedding ; 
-vs:term_status "stable" . 
+                                        		
+    frac:attestationEmbedding 
+        a owl:ObjectProperty ; 
+        rdfs:domain frac:Attestation ; 
+        rdfs:range frac:Embedding ; 
+        vs:term_status "stable" . 
 
 
 ############## 
@@ -312,15 +312,16 @@ vs:term_status "stable" .
 
 
 frac:Similarity 
-rdfs:subClassOf rdf:Bag, frac:Observation, [ 
-a owl:Restriction ; 
-owl:minCardinality "2"^^xsd:nonNegativeInteger ; 
-owl:onProperty rdfs:member 
-] , 
-[ 
-a <http://www.w3.org/2002/07/owl#Restriction> ; 
-<http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Embedding> ; 
-<http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member> 
-] ; 
-vs:term_status "stable" . 
+    rdfs:subClassOf rdf:Bag, frac:Observation, [ 
+        a owl:Restriction ; 
+        owl:minCardinality "2"^^xsd:nonNegativeInteger ; 
+        owl:onProperty rdfs:member 
+    ] , 
+    [ 
+       a <http://www.w3.org/2002/07/owl#Restriction> ; 
+        <http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Embedding> ; 
+        <http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member> 
+    ] ; 
+    vs:term_status "stable" . 
 
+        	                                        	      	      	      	                    	      	      	            

@@ -41,15 +41,18 @@ for input in args:
 		input=open(input,"rt", errors="ignore")
 	ttl_mode=False
 	for line in input:
-		line=re.sub(r"```"," ``` ",line).strip()
+		indent=line[0:-len(line.lstrip())]
+		line=re.sub(r"```"," ``` ",line).rstrip()
 		if not ttl_mode and verbose:
 			sys.stdout.write("# ")
+		sys.stdout.write(indent)
 		for tok in line.split():
 			if tok=="```":
 				ttl_mode=not ttl_mode
 				sys.stdout.write("\n")
 				if not ttl_mode and verbose:
 					sys.stdout.write("# ")
+				sys.stdout.write(indent)
 			else:
 				if verbose or ttl_mode:
 					sys.stdout.write(tok+" ")
