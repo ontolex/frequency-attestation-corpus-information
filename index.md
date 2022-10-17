@@ -54,15 +54,35 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
     + [Background and Motivation](#background-and-motivation)
     + [Aim and Scope](#aim-and-scope)
     + [Namespaces](#namespaces)
-    + [Vocabulary declaration](#vocabulary-declaration)
   * [Overview](#overview)
-  * [Definitions](#definitions)
-    + [Top-level concepts](#top-level-concepts)
-    + [Frequency](#frequency)
-    + [Attestation](#attestation)
-    + [Collocations](#collocations)
-    + [Embeddings](#embeddings)
-    + [Similarity](#similarity)
+  * [Observations and Observables](#observations-and-observables)
+    + [Observable (Class)](#observable--class-)
+    + [Observation (Class)](#observation--class-)
+    + [Corpus (Class)](#corpus--class-)
+    + [corpus (Property)](#corpus--property-)
+    + [total (Property)](#total--property-)
+  * [Frequency](#frequency)
+    + [CorpusFrequency (Class)](#corpusfrequency--class-)
+    + [frequency (ObjectProperty)](#frequency--objectproperty-)
+  * [Attestation](#attestation)
+    + [Attestation (Class)](#attestation--class-)
+    + [attestation (Property)](#attestation--property-)
+    + [citation (Property)](#citation--property-)
+    + [gloss (Property)](#gloss--property-)
+    + [locus (Property)](#locus--property-)
+  * [Collocations](#collocations)
+    + [Collocation (Class)](#collocation--class-)
+    + [cscore (property)](#cscore--property-)
+    + [head (property)](#head--property-)
+  * [Embeddings](#embeddings)
+    + [Embedding (Class)](#embedding--class-)
+    + [embedding (ObjectProperty)](#embedding--objectproperty-)
+    + [FixedSizeVector (Class)](#fixedsizevector--class-)
+    + [TimeSeries (Class)](#timeseries--class-)
+    + [BagOfWords (Class)](#bagofwords--class-)
+    + [attestationEmbedding (ObjectProperty)](#attestationembedding--objectproperty-)
+  * [Similarity](#similarity)
+    + [Similarity (Class)](#similarity--class-)
   * [Corpus Annotation (non-normative)](#corpus-annotation--non-normative-)
     + [oa:Annotation (Class)](#oa-annotation--class-)
     + [oa:hasBody (Object Property)](#oa-hasbody--object-property-)
@@ -72,7 +92,6 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
   * [RDF Serializations and CSV](#rdf-serializations-and-csv)
 - [Acknowledgements](#acknowledgements)
 - [References](#references)
-
 
 <section>
 
@@ -233,13 +252,7 @@ Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overvi
 
 <section>
 
-## Definitions
-
-back to ([Table of Contents](#table-of-contents))
-
-<section>
-
-### Top-level concepts
+## Observations and Observables
 
 ```
 #####################
@@ -397,7 +410,7 @@ For machine-readable corpora are characterized by their size, and for these, dat
 
 <section>
 
-### Frequency
+## Frequency
 
 ```
 #############
@@ -576,7 +589,7 @@ epsd:a_water_n frac:frequency [
 
 <section>
 	
-### Attestation
+## Attestation
 
 ```
 ###############
@@ -728,7 +741,7 @@ Note: In the example above, NIF is not correctly used: NIF requires string URIs 
 
 <section>
 
-### Collocations
+## Collocations
 
 ```
 ###############
@@ -1036,8 +1049,8 @@ The second example illustrates more complex types of collocation are provided as
 </section>
 
 <section>
-	
-### Embeddings
+
+## Embeddings
 
 ```
 #############
@@ -1342,7 +1355,7 @@ TODO: example attestation embedding
 
 <section>
 
-### Similarity
+## Similarity
 
 ```
 ##############
