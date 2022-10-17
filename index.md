@@ -50,24 +50,29 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
 
 ## Table of Contents
 
-- [Introduction](#introduction)
-	- [Background and Motivation](#background-and-motivation)
-	- [Aim and Scope](#aim-and-scope)
-	- [Namespaces](#namespaces)
-- [Overview](#overview)
-- [Definitions](#definitions)
-	- [Observable](#definitions)
-	- [Frequency](#frequency)
-	- [Attestation](#attestation)
-	- [Embeddings](#embeddings)
-	- [Collocations](#collocations)
-	- [Similarity](#similarity)
-- [Corpus Annotation (non-normative)](#corpus-annotation-non-normative)
+  * [Introduction](#introduction)
+    + [Background and Motivation](#background-and-motivation)
+    + [Aim and Scope](#aim-and-scope)
+    + [Namespaces](#namespaces)
+    + [Vocabulary declaration](#vocabulary-declaration)
+  * [Overview](#overview)
+  * [Definitions](#definitions)
+    + [Top-level concepts](#top-level-concepts)
+    + [Frequency](#frequency)
+    + [Attestation](#attestation)
+    + [Collocations](#collocations)
+    + [Embeddings](#embeddings)
+    + [Similarity](#similarity)
+  * [Corpus Annotation (non-normative)](#corpus-annotation--non-normative-)
+    + [oa:Annotation (Class)](#oa-annotation--class-)
+    + [oa:hasBody (Object Property)](#oa-hasbody--object-property-)
+    + [oa:hasTarget (Object Property)](#oa-hastarget--object-property-)
 - [Usage guidelines](#usage-guidelines)
-	- [Resource-specific subclasses of frac concepts](#resource-specific-subclasses-of-frac-concepts)
-	- [RDF Serializations and CSV](#rdf-serializations-and-csv)
+  * [Resource-specific subclasses of FrAC concepts](#resource-specific-subclasses-of-frac-concepts)
+  * [RDF Serializations and CSV](#rdf-serializations-and-csv)
 - [Acknowledgements](#acknowledgements)
 - [References](#references)
+
 
 <section>
 
@@ -594,6 +599,7 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 For an attestation, `rdf:value` represents the text content of the dictionary quotation.
 > **SubClassOf:** `rdf:value` exactly 1 
 > **SubClassOf:** `frac:Observation`
+>
 > ------
 </div>
 
@@ -722,7 +728,7 @@ Note: In the example above, NIF is not correctly used: NIF requires string URIs 
 
 <section>
 
-## Collocations
+### Collocations
 
 ```
 ###############
@@ -1336,7 +1342,7 @@ TODO: example attestation embedding
 
 <section>
 
-## Similarity
+### Similarity
 
 ```
 ##############
