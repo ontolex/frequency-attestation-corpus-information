@@ -7,7 +7,7 @@ Editors:
 * Max Ionov ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
 
 Contributors: (please add yourself)
-* Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlanggen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
+* Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
 * Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/))
 * Ciprian-Octavian Truică
 * Katerina Gkirtzou
