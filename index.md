@@ -1,10 +1,9 @@
-
 # The Ontolex Module for Frequency, Attestation and Corpus Information
 # Draft Community Group Report 
 
 Editors:
-* Christian Chiarcos ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
-* Max Ionov ([Applied Computational Linguistics, Goethe Universität Frankfurt, Germany](http://informatik.uni-frankfurt.de/)) 
+* Christian Chiarcos ([Applied Computational Linguistics, University of Augsburg, Germany](https://www.uni-augsburg.de/de/fakultaet/philhist/professuren/angewandte-computerlinguistik/)) 
+* Max Ionov (Institute for Digital Humanities, University of Cologne, Germany)
 
 Contributors: (please add yourself)
 * Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
@@ -18,7 +17,7 @@ Contributors: (please add yourself)
 * Katrien Depuydt
 * ...
 
-[Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2020 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
+[Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2023 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
 
 <section id="abstract">
 
@@ -105,11 +104,13 @@ back to ([Table of Contents](#table-of-contents))
 
 back to ([Table of Contents](#table-of-contents))
 
-The [_lemon_ model](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary (OntoLex) to represent _linguistic information_ associated to ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology.
+[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary to represent _linguistic information_ associated to ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology. The OntoLex module for Frequency, Attestations and Corpus-Based Information (OntoLex-FrAC) complements OntoLex-Lemon with the capability of including information drawn from or found in corpora.
 
-The current version of _lemon_ (as an outcome of the OntoLex group, sometimes referred as OntoLex-lemon in the literature) as well as its previous version ([lemon](https://lemon-model.net/) [<cite>[1](#bib-lemon_paper)</cite>]) have been increasingly used in the context of dictionaries and lexicographical data to convert existent lexicographic information into the standards and formats of the Semantic Web. In consequence, a designated _lemon_ <a href="">module for lexicography</a> (_lexicog_) has been designed, with applications in monolingual [<cite>[2](#bib-klimek-kdict)</cite>], bilingual [<cite>[3](#bib-gracia-apertium)</cite>], and multilingual [<cite>[4](#bib-bosque-kdict)</cite>] dictionaries, as well as diachronic [<cite>[5](#bib-kahn-diachronic)</cite>], dialectal [<cite>[6](#bib-declerck-dialectal)</cite>], and etymological ones [<cite>[7](#bib-abromeit-etymological)</cite>], among others. This module is partially motivated by requirements of corpus-based lexicography (frequency and collocation information) and digital philology (linking lexical resources with corpus data).
+This builds on two primary motivations:
 
-A second motivation for a _lemon_ model for corpus-based information comes from natural language processing. With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics (KEYNESS-REFERENCE???), collocation vectors (Schütze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (??? and Schütze, 2017). With the proposed module, _lemon_ can serve as a community standard to encode, store and exchange vector representations (embeddings) along with the lexical concepts, senses, lemmas or words that they represent. The processing of word embeddings is beyond the scope of this module. Embeddings are thus represented as literals ("BLOB").
+- corpus-based lexicography: OntoLex-Lemon has been increasingly used to publish, exchange and create dictionaries and lexicographical data in a *machine-readable* way. This module is partially motivated by requirements of corpus-based lexicography (frequency and collocation information) and digital philology (linking lexical resources with corpus data) and complements the [OntoLex module for lexicography](https://www.w3.org/2019/09/lexicog/) in that regard.
+
+- natural language processing: With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics (KEYNESS-REFERENCE???), collocation vectors (Schütze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (??? and Schütze, 2017). With the proposed module, _lemon_ can serve as a community standard to encode, store and exchange vector representations (embeddings) along with the lexical concepts, senses, lemmas or words that they represent. The processing of word embeddings is beyond the scope of this module. Embeddings are thus represented as literals ("BLOB").
 
 The added value of using linked data technologies to represent such information is an increased level of interoperability and integration between different types of lexical resources, the textual data they pertain to, as well as distributional representations of words, lexical senses and lexical concepts. Creating a _lemon_ module in the OntoLex CG is a suitable means for establishing a vocabulary on a broad consensus that takes into account all use cases identified above in an adequate fashion. The OntoLex community is the natural forum to accomplish this for several reasons:
 
@@ -241,10 +242,10 @@ back to ([Table of Contents](#table-of-contents))
 
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_frac_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
-![](img/ontolex-frac-2020-06.png "ontolex-frac-2020-06.png")
-Fig. 2 Module for Frequency, Attestation and Corpus Information (_frac_), overview. TODO: UPDATE!
+![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
+Fig. 2 OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_), overview (Draft)
 
-> NOTE that Fig. 2 is dated. Please use [this link](https://service.tib.eu/webvowl/#opts=doc=1;cd=180;dd=220;filter_disjoint=false;filter_setOperator=true;mode_compact=true;#iri=https://github.com/ontolex/frequency-attestation-corpus-information/raw/master/owl/frac.ttl) to get a live view on [the ontology](owl/frac.ttl).
+> NOTE that Fig. 2 is to be manually reformatted. Also, it is not automatically updated. Please use [this link](https://service.tib.eu/webvowl/#opts=doc=1;cd=180;dd=220;filter_disjoint=false;filter_setOperator=true;mode_compact=true;#iri=https://github.com/ontolex/frequency-attestation-corpus-information/raw/master/owl/frac.ttl) to get a live view on [the ontology](owl/frac.ttl).
 
 </section>
 
@@ -263,7 +264,7 @@ back to ([Table of Contents](#table-of-contents))
 
 OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a *corpus* about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean 
 
-- any *lexical entity* that can be described with OntoLex (including, but not limited to OntoLex core classes `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense` or `ontolex:LexicalConcept`), as well as 
+- any *lexical entity* that can be described with OntoLex (including, but not limited to OntoLex core classes `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense` or `ontolex:LexicalConcept`), as well as
 - any *ontological entity* from a knowledge graph (corresponding to the object of an `ontolex:denotes`, `ontolex:reference` or `ontolex:isConceptOf` property). 
 
 The top-level concepts of OntoLex-FrAC are thus `frac:Observable`, `frac:Observation` and `frac:Corpus`.
@@ -300,16 +301,14 @@ ontolex:LexicalSense
     vs:term_status "stable" .
 ```
 
-
 ![](img/ontolex-element.png "frac:Observable")
 Fig. 1. `frac:Observable` as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
 
 For OntoLex, we assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the core model and in existing or forthcoming OntoLex modules. This includes ontolex:Form (for token frequency, etc.), ontolex:LexicalEntry (frequency of disambiguated lemmas), ontolex:LexicalSense (sense frequency), ontolex:LexicalConcept (e.g., synset frequency), lexicog:Entry (if used for representing homonyms: frequency of non-disambiguated lemmas), etc. (cf. Fig. 1). 
 In particular, we consider all these elements as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we introduce frac:Observable as a top-level element within the FrAC module that is used to define the rdfs:domain of any properties that link lexical and corpus-derived information. 
 
-> If future OntoLex modules require a similar generalization, it is advisable to deprecate `frac:Observable` and to replace it with a designated top-level concept ontolex:LexicalElement _in the core model_. Note that with _LemonElement_, such a concept used to exist in [_Monnet-Lemon_](https://www.lexinfo.net/ontology/lemon.owl), but has been abandoned in the 2016 edition of _OntoLex-lemon_. 
 
-> Note that frac:Observable is not limited to OntoLex core elements but that it can also include ontological concepts in general, as these are foreseen as external elements that OntoLex-Lemon can provide information about
+> Note: The definition `frac:Observable` does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as `frac:Observable`. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a corpus or its annotations.
 
 <div class="entity">
 
@@ -490,32 +489,32 @@ The following example illustrates word and form frequencies for the Sumerian wor
 
 <div>
 
-	# word frequency, over all form variants 
-	epsd:kalag_strong_v a ontolex:LexicalEntry;
-		frac:frequency [
-			a frac:CorpusFrequency; 
-			rdf:value "2398"^^xsd:int; 
-			frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
-		] .
+    # word frequency, over all form variants 
+    epsd:kalag_strong_v a ontolex:LexicalEntry;
+        frac:frequency [
+            a frac:CorpusFrequency; 
+            rdf:value "2398"^^xsd:int; 
+            frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+        ] .
 
-	# form frequency for individual orthographical variants 
-	epsd:kalag_strong_v ontolex:canonicalForm [
-		ontolex:writtenRep "kal-ga"@sux-Latn; 
-		frac:frequency [
-			a frac:CorpusFrequency; 
-			rdf:value "2312"^^xsd:int; 
-			frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
-			]
-		] .
+    # form frequency for individual orthographical variants 
+    epsd:kalag_strong_v ontolex:canonicalForm [
+        ontolex:writtenRep "kal-ga"@sux-Latn; 
+        frac:frequency [
+            a frac:CorpusFrequency; 
+            rdf:value "2312"^^xsd:int; 
+            frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+            ]
+        ] .
 
-	epsd:kalag_strong_v ontolex:otherForm [ 
-		ontolex:writtenRep "kalag"@sux-Latn; 
-		frac:frequency [ 
-			a frac:CorpusFrequency; 
-			rdf:value "70"^^xsd:int; 
-			frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
-			]
-		] .
+    epsd:kalag_strong_v ontolex:otherForm [ 
+        ontolex:writtenRep "kalag"@sux-Latn; 
+        frac:frequency [ 
+            a frac:CorpusFrequency; 
+            rdf:value "70"^^xsd:int; 
+            frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+            ]
+        ] .
 
 </div>
 
@@ -535,7 +534,7 @@ The example shows orthographic variation (in the original writing system, Sumeri
 
 <div>
 
-<pre>				 
+<pre>                
 # Corpus Frequency in the EPSD corpus
 :EPSDFrequency rdfs:subClassOf frac:CorpusFrequency.
 :EPSDFrequency rdfs:subClassOf
@@ -547,7 +546,7 @@ The example shows orthographic variation (in the original writing system, Sumeri
 epsd:a_water_n frac:frequency [ 
   a :EPSDFrequency;
   rdf:value "4683"^^xsd:int ].`
-	</pre>
+    </pre>
 
 </div>
 
@@ -563,7 +562,7 @@ frac:CorpusFrequency can be extended with additional filter conditions to define
 
 <div>
 
-<pre>				 
+<pre>                
 # EPSD frequency for the Ur-III period (aat:300019910)
 :EPSDFrequency_UrIII 
  rdfs:subClassOf :EPSDFrequency;
@@ -586,7 +585,7 @@ epsd:a_water_n frac:frequency [
 </section>
 
 <section>
-	
+    
 ## Attestation
 
 ```
@@ -606,9 +605,9 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 > --------
 > ### Attestation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
->  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation MUST have an `rdf:value`, it CAN have a `frac:attestationGloss`, and it SHOULD have a `frac:corpus` or `frac:locus` object to identify the source of this material.
-For an attestation, `rdf:value` represents the text content of the dictionary quotation.
-> **SubClassOf:** `rdf:value` exactly 1 
+>  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have an `rdf:value`, it CAN have a `frac:gloss`, and it SHOULD have a `frac:corpus` or `frac:locus` object to identify the source of this material.
+For an attestation, `rdf:value` represents the text of a quotation as represented in the original source. If that needs to be distinguished or is different from the way how it is represented in the dictionary, FrAC users should use `frac:gloss` for the latter purpose. 
+> **SubClassOf:** `rdf:value` max 1 
 > **SubClassOf:** `frac:Observation`
 >
 > ------
@@ -662,6 +661,7 @@ However, note that FrAC does not formally define a general "Citation" class to d
 
 > --------
 > ### gloss (Property)
+
 > The **gloss** of an attestation contains  the  text  content  of  an  attestation  *as  represented  within  a  dictionary*.  This property should not be used to provide direct quotations from the original data source, which should be represented by `rdf:value`. Instead, its recommended use is for representations that are either enriched (e.g., by annotations and metadata), amended (e.g., by expanding ligatures or omissions), simplified (e.g., by omissions from the original context, e.g., of the lexeme under consideration) or otherwise differentiated from the plain text representation of the context.
 > **Domain:** `Attestation`
 > **Range:** `xsd:String`  
@@ -679,6 +679,17 @@ frac:gloss
 
 > Note: With `frac:gloss` and `rdf:value`, `frac:Attestation` provides *two* different properties to represent the context of an observable in any particular data source. `rdf:value` should provide information as found in the underlying corpus, e.g., a plain text string. If the dictionary provides a different representation, or if the attestation as given in an underlying dictionary has not yet been confirmed to match the context in the underlying corpus, applications should use `frac:gloss` instead of `rdf:value`. In other words, `rdf:value` corresponds to the representation of the context in the underlying corpus, `frac:gloss` to its representation in the underlying dictionary. If both are confirmed to be equal, use `rdf:value`.
 
+As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the example `"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ...`. In OntoLex-FrAC, this would be the `frac:gloss` because it contains additional information about spelling variation/normalized spelling not found found in the quoted source (`MS. Cote.`):
+
+    <https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
+        frac:attestation [
+            a frac:Attestation;
+            rdf:value "Ða niétenu ðonne beóþ hwæthwugununges" ;
+            frac:gloss "Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."
+            # TODO: resolve literature pointers properly!
+        ] .
+
+> Bosworth, Joseph. “hwæt-hweganunges.” In _An Anglo-Saxon Dictionary Online_, edited by Thomas Northcote Toller, Christ Sean, and Ondřej Tichy. Prague: Faculty of Arts, Charles University, 2014. https://bosworthtoller.com/20070. [REFORMAT]
 
 In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. Different conventions for referencing strings by character offsets do exist, representative solutions are string URIs as provided by RCF5147 (for plain text) and NIF (all mimetypes), As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as object.
 
@@ -707,33 +718,33 @@ frac:locus
 
 **example**:  [DiaMaNT (_Diachroon seMAntisch lexicon van de Nederlandse Taal_)](http://diamant.ivdnt.org/diamant-ui/) is a diachronic semantic computational  lexicon  of  Dutch,  at its core  formed by four scholarly historical dictionaries of  Dutch covering a language period from ca. 500 –  1976. The example below illustrates the combination of FrAC attestations with the [CITO](https://sparontologies.github.io/cito/current/cito.html) and [FRBR](http://purl.org/vocab/frbr/core#) vocabularies, as well as with the [NLP Interchange Format](https://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
 
-	diamant:entry_WNT_M030758 a ontolex:LexicalEntry ; 
-		ontolex:sense diamant:sense_WNT_M030758_bet_207 .
+    diamant:entry_WNT_M030758 a ontolex:LexicalEntry ; 
+        ontolex:sense diamant:sense_WNT_M030758_bet_207 .
 
-	diamant:sense_WNT_M030758_bet_207 a ontolex:LexicalSense;
-		rdfs:label "V.-" ;
-	frac:attestation diamant:attestation_2108540 ; 
-	skos:definition "Iemand een kat (of de kat) aan het  been  jagen...... iemand in moeilijkheden brengen." .
+    diamant:sense_WNT_M030758_bet_207 a ontolex:LexicalSense;
+        rdfs:label "V.-" ;
+    frac:attestation diamant:attestation_2108540 ; 
+    skos:definition "Iemand een kat (of de kat) aan het  been  jagen...... iemand in moeilijkheden brengen." .
 
-	diamant:attestation_2108540 a frac:Attestation ; 
-		cito:hasCitedEntity diamant:cited_document_WNT_332819  ;
-		cito:hasCitingEntity diamant:sense_WNT_M030758_bet_207; 
-		frac:locus diamant:locus_2108540  ;
-		frac:quotation "... dat men licht yemant de cat aen het been kan werpen," .
+    diamant:attestation_2108540 a frac:Attestation ; 
+        cito:hasCitedEntity diamant:cited_document_WNT_332819  ;
+        cito:hasCitingEntity diamant:sense_WNT_M030758_bet_207; 
+        frac:locus diamant:locus_2108540  ;
+        frac:quotation "... dat men licht yemant de cat aen het been kan werpen," .
 
-	diamant:locus_2108540 a diamant:Occurrence ; 
-		nif:beginIndex 107 ;
-		nif:endIndex 110 .
+    diamant:locus_2108540 a diamant:Occurrence ; 
+        nif:beginIndex 107 ;
+        nif:endIndex 110 .
 
-	diamant:cited_document_WNT_332819 a frbr:Manifestation ;
-		frbr:embodimentOf diamant:expression_WNT_332819 ; 
-		diamant:witnessYearFrom 1621 ;
-		diamant:witnessYearTo 1621 .
+    diamant:cited_document_WNT_332819 a frbr:Manifestation ;
+        frbr:embodimentOf diamant:expression_WNT_332819 ; 
+        diamant:witnessYearFrom 1621 ;
+        diamant:witnessYearTo 1621 .
 
-	diamant:expression_WNT_332819 a frbr:Expression ; 
-		dcterms:creator "N. V. REIGERSB." ; 
-		dcterms:title "Brieven van Nicolaes van Reigersberch aan Hugo de Groot" ; 
-		frbr:embodiment diamant:quotation_WNT_332819 .
+    diamant:expression_WNT_332819 a frbr:Expression ; 
+        dcterms:creator "N. V. REIGERSB." ; 
+        dcterms:title "Brieven van Nicolaes van Reigersberch aan Hugo de Groot" ; 
+        frbr:embodiment diamant:quotation_WNT_332819 .
 
 
 Note: In the example above, NIF is not correctly used: NIF requires string URIs for loci, including the identification of the source document within the base URI and the identification of a context (this is instead provided via `hasCitedEntity`). To be revised or replaced.
@@ -1178,13 +1189,13 @@ As a lemma (LexicalEntry) embedding, this can be represented as follows:
   ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
   frac:embedding [ 
     a frac:FixedSizeVector;
-	rdf:value "[ 0.015246 , -0.30472 , 0.68107,  ... ]"^^rdf:JSON;
-	dct:source 
+    rdf:value "[ 0.015246 , -0.30472 , 0.68107,  ... ]"^^rdf:JSON;
+    dct:source 
       &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
-	  &lt;https://catalog.ldc.upenn.edu/LDC2011T07>;
-	dct:extent 50^^^xsd:int;
-	dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].`
-	</pre>
+      &lt;https://catalog.ldc.upenn.edu/LDC2011T07>;
+    dct:extent 50^^^xsd:int;
+    dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].`
+    </pre>
 
 </div>
 
@@ -1205,26 +1216,26 @@ As with <tt>frac:Frequency</tt>, we recommend defining resource-specific subclas
 :GloVe6BEmbedding_50d rdfs:subClassOf frac:FixedSizeVector;
   rdfs:subClassOf 
     [ a owl:Restriction;
-	  owl:onProperty dct:source;
-	  owl:hasValue
-		  &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
-		  &lt;https://catalog.ldc.upenn.edu/LDC2011T07> ],
-	[ a owl:Restriction;
-	  owl:onProperty rdf:value;
-	  owl:allValuesFrom rdf:JSON ],
-	[ a owl:Restriction;
-	  owl:onProperty dct:extent;
-	  owl:hasValue 50^^xsd:int ],
-	[ a owl:Restriction;
-	  owl:onProperty dct:description;
-	  owl:hasValue "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
+      owl:onProperty dct:source;
+      owl:hasValue
+          &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
+          &lt;https://catalog.ldc.upenn.edu/LDC2011T07> ],
+    [ a owl:Restriction;
+      owl:onProperty rdf:value;
+      owl:allValuesFrom rdf:JSON ],
+    [ a owl:Restriction;
+      owl:onProperty dct:extent;
+      owl:hasValue 50^^xsd:int ],
+    [ a owl:Restriction;
+      owl:onProperty dct:description;
+      owl:hasValue "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
 
 # embedding assignment
 :frak a ontolex:LexicalEntry;
   ontolex:canonicalForm/ontolex:writtenRep "frak"@en;
   frac:embedding [ 
     a :GloVe6BEmbedding_50d;
-	rdf:value "[ 0.015246 , -0.30472 , 0.68107 ,  ... ]"^^rdf:JSON.`</pre>
+    rdf:value "[ 0.015246 , -0.30472 , 0.68107 ,  ... ]"^^rdf:JSON.`</pre>
 
 </div>
 
@@ -1294,7 +1305,7 @@ frac:BagOfWords
 
 Bags of words can be compared to word embeddings (in languagte technology) in the sense that they represent infinite-dimensional, uncompressed frequency counts obtained from the aggregation over attestations in a corpus. The interpretability of their respective numerical dimensions, however, depends on the lexical provided along with it, so the normal data structure of a bag of words is not a vector, but a map (from collocates to weights, frequencies or association scores) or a set (of collocates, assuming each collocate is equally weighted). The encoding of the rdf:value must be specified in the dct:description. The example below uses an rdf:JSON literal representing a map. 
 
-	
+    
 Example taken from [Wortschatz](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=frac#coocs), collocations of _frac_ (significant collocates in the same sentence), with frequency scores provided, filtered for significance (log-likelihood):
 
 [sand](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=sand) (508), [mining](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=mining) (82), [Chesterland-based](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Chesterland-based) (75), [wells](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=wells) (73), [DNR](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=DNR) (73), [Silica](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Silica) (53), [fluid](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fluid) (52), [category](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=category) (51), [spill](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=spill) (49), [rigs](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=rigs) (48), [New Canaan](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=New+Canaan) (48), [oil](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=oil) (47), [drilling](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=drilling) (46), [County](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=County) (45), [shale](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=shale) (45), [mine](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=mine) (43), [Permian](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Permian) (41), [tons](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=tons) (40), [Canaan](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Canaan) (39), [gas](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=gas) (39), [More](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=More) (38), [fracturing](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fracturing) (38), [Texas](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Texas) (37), [Monroe](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Monroe) (35), [hydraulic](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=hydraulic) (35), [per](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=per) (35), [judge’s](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=judge%E2%80%99s) (35), [plant](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=plant) (34), [miner](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=miner) (34), [fluids](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fluids) (34), [Alpine](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Alpine) (33), [company](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=company) (33), [crews](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=crews) (30), [producer](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=producer) (28), [used](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=used) (26), [disposal](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=disposal) (25), [million](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=million) (24), [chemicals](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=chemicals) (23), [premium](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=premium) (22), [approximately](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=approximately) (22), [raw](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=raw) (21), [coal](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=coal) (20), [stages](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=stages) (20), [review](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=review) (20), [permit](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=permit) (18), [water](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=water) (18), [industry](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=industry) (18), [industrial](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=industrial) (17), [fees](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=fees) (16), [production](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=production) (16), [attorney](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=attorney) (15), [lines](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=lines) (14), [active](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=active) (13), [Canadian](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=Canadian) (12), [feet](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=feet) (12), [demand](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=demand) (12), [county](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=county) (11), [River](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=River) (11), [major](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=major) (11), [in](https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=in) (11)
@@ -1316,8 +1327,8 @@ Example taken from [Wortschatz](https://corpora.uni-leipzig.de/en/res?corpusId=e
     _Leipzig Corpora Collection_ the log-likelihood ratio is used as significance 
     measure and word pairs of little significance are removed.";
     dct:source &lt;https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=frac>;
-	rdf:value " { \"sand\" : \"508\" , \"mining\" : \"82\" , ... }"^^rdf:JSON.`
-	</pre>
+    rdf:value " { \"sand\" : \"508\" , \"mining\" : \"82\" , ... }"^^rdf:JSON.`
+    </pre>
 </div>
 
 </div>
@@ -1529,22 +1540,22 @@ As a rule of best practice, we recommend for such cases to provide (a copy of) t
 <div>
 
     CONSTRUCT {
-    	?data a ?class, ?sourceClass; ?property ?value.
+        ?data a ?class, ?sourceClass; ?property ?value.
     } WHERE {
-      ?data a ?sourceClass.	                  # e.g., [] a :EPSDFrequency
+      ?data a ?sourceClass.                   # e.g., [] a :EPSDFrequency
       ?sourceClass (rdfs:subClassOf|owl:equivalentClass)* ?class.
       FILTER(strstarts(str(?class),'http://www.w3.org/ns/lemon/frac#'))
         # ?class: all superclasses of ?sourceClass which are in the frac namespace
       { # return all value restrictions
-    	  ?class (rdfs:subClassOf|owl:equivalentClass)* ?restriction.
-    	  ?restriction a owl:Restriction.
-    	  ?restriction owl:onProperty ?property.
-    	  ?restriction owl:hasValue ?value.
+          ?class (rdfs:subClassOf|owl:equivalentClass)* ?restriction.
+          ?restriction a owl:Restriction.
+          ?restriction owl:onProperty ?property.
+          ?restriction owl:hasValue ?value.
       } UNION {
         # return all directly expressed values
-    	  ?data ?property ?value.
-    	  FILTER(?property in (dct:source,rdf:value))
-    	  # TODO: update list of properties
+          ?data ?property ?value.
+          FILTER(?property in (dct:source,rdf:value))
+          # TODO: update list of properties
       }
     }
 
