@@ -605,9 +605,9 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 > --------
 > ### Attestation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
->  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation MUST have an `rdf:value`, it CAN have a `frac:attestationGloss`, and it SHOULD have a `frac:corpus` or `frac:locus` object to identify the source of this material.
-For an attestation, `rdf:value` represents the text content of the dictionary quotation.
-> **SubClassOf:** `rdf:value` exactly 1 
+>  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have an `rdf:value`, it CAN have a `frac:gloss`, and it SHOULD have a `frac:corpus` or `frac:locus` object to identify the source of this material.
+For an attestation, `rdf:value` represents the text of a quotation as represented in the original source. If that needs to be distinguished or is different from the way how it is represented in the dictionary, FrAC users should use `frac:gloss` for the latter purpose. 
+> **SubClassOf:** `rdf:value` max 1 
 > **SubClassOf:** `frac:Observation`
 >
 > ------
@@ -661,6 +661,7 @@ However, note that FrAC does not formally define a general "Citation" class to d
 
 > --------
 > ### gloss (Property)
+
 > The **gloss** of an attestation contains  the  text  content  of  an  attestation  *as  represented  within  a  dictionary*.  This property should not be used to provide direct quotations from the original data source, which should be represented by `rdf:value`. Instead, its recommended use is for representations that are either enriched (e.g., by annotations and metadata), amended (e.g., by expanding ligatures or omissions), simplified (e.g., by omissions from the original context, e.g., of the lexeme under consideration) or otherwise differentiated from the plain text representation of the context.
 > **Domain:** `Attestation`
 > **Range:** `xsd:String`  
