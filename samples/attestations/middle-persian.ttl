@@ -1,0 +1,60 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#> .
+@prefix morph: <https://www.w3.org/community/ontolex/wiki/Morphology#> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix cito: <http://purl.org/spar/cito/> .
+
+@prefix : <https://www.mpcorpus.org/dictionary/> .
+
+:frestidan 	a ontolex:LexicalEntry ;
+           	ontolex:canonicalForm :frestidan_form_frestidan ;
+			lexinfo:partOfSpeech lexinfo:verb ;
+			ontolex:otherForm :frestidan_form_frested ;
+			ontolex:otherForm :frestidan_form_frestad ;
+			ontolex:sense :frestidan_sense ;
+			frac:attestation :frestidan_lemma_att_1 .
+
+:frestidan_lemma_att_1 a frac:Attestation ;
+    frac:quotation "ud čim yazad dēn ēwāz ō ēran šahr frēstīd" ;
+	cito:hasCitedEntity :Dk5_150598 ;
+	cito:hasCitingEntity :frestidan .
+
+:frestidan_form_frested_att_1 a frac:Attestation ;
+	frac:quotation "homānāg ast zōr ī ahnč’k kē xwarišnān xwārišnān andar ō kumīg ī xwēšīg kadag āhenǰēd čiyōn kār_framān kē abzār gōšt xwarišnān xrīnēd bē ō xānag frēstēd" ;
+	cito:hasCitedEntity :WZ_675759 ;
+	cito:hasCitingEntity :frestidan_form_frested .
+
+:frestidan_sense_att_1 a frac:Attestation ;
+	frac:quotation "u =š ō wuzurg_mihr guft kū wuzurg_mihr ī amāh čē ast ān tis ī =t guft kū kunēm ō sačidarm frēstēm" ;
+	cito:hasCitedEntity :WCNA_662114 ;
+	cito:hasCitingEntity :frestidan_sense .
+
+:frestidan_form_frestidan a ontolex:Form ;
+                ontolex:writtenRep "frēstīdan"@pal , "plystytn"@pal,
+									"ŠDRWNytn"@pal , "ŠḎṞWNytn"@pal ;
+				lexinfo:verbFormMood lexinfo:infinitive ;
+				frac:frequency [ 
+  					a frac:CorpusFrequency;
+  					rdf:value "11"^^xsd:int;
+  					dct:source <https://bulbul.sk/MPCD/entry_005_frestidan.html> ] .
+
+:frestidan_form_frested a ontolex:Form ;
+				ontolex:writtenRep "frēstēd"@pal , "plystd"@pal ;
+				lexinfo:tense lexinfo:present ;
+				lexinfo:person lexinfo:third ;
+				lexinfo:number lexinfo:singular .
+
+:frestidan_form_frestad a ontolex:Form ;
+				ontolex:writtenRep "frēstād"@pal, "plystd"@pal ;
+				lexinfo:tense lexinfo:present ;
+				lexinfo:person lexinfo:third ;
+				lexinfo:number lexinfo:singular .
+
+:frestidan_sense a ontolex:LexicalSense ;
+					rdfs:label "to send"@en .
+
