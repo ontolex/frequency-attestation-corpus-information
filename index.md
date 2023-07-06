@@ -1691,7 +1691,7 @@ from lexicog, to be revised
 
 <dt id="bib-mccrae-lemon">[1]</dt>
 
-<dd>J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. Gómez-Pérez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, [<cite>"Interchanging lexical resources on the Semantic Web"</cite> ](http://dx.doi.org/10.1007/s10579-012-9182-3). Language Resources and Evaluation, vol. 46, 2012.</dd>
+<dd>J. McCrae, G. Aguado-de Cea, P. Buitelaar, P. Cimiano, T. Declerck, A. Gómez-Pérez, J. Gracia, L. Hollink, E. Montiel-Ponsoda, D. Spohr, and T. Wunner, [<cite>"Interchanging lexical resources on the Semantic Web"</cite>](http://dx.doi.org/10.1007/s10579-012-9182-3). Language Resources and Evaluation, vol. 46, 2012.</dd>
 
 <dt id="bib-klimek-kdict">[2]</dt>
 
@@ -1711,7 +1711,7 @@ from lexicog, to be revised
 
 <dt id="bib-declerck-dialectal">[6]</dt>
 
-<dd>T. Declerck and E. Wandl-Vogt, <cite>"Cross-linking Austrian dialectal Dictionaries through formalized Meanings"</cite> In Proceedings of the XVI EURALEX International Congress, pp. 329343\. 2014.</dd>
+<dd>T. Declerck and E. Wandl-Vogt, <cite>"Cross-linking Austrian dialectal Dictionaries through formalized Meanings"</cite> In Proceedings of the XVI EURALEX International Congress, pp. 329-343\. 2014.</dd>
 
 <dt id="bib-abromeit-etymological">[7]</dt>
 
@@ -1739,7 +1739,7 @@ from lexicog, to be revised
 
 <dt id="bib-stolk-onomasiological">[13]</dt>
 
-<dd>S. Stolk, <cite>"OntoLex and Onomasiological Ordering: Supporting Topical Thesauri"</cite> in Proc. of the LDK2017 Workshops, NUI Galway, Ireland, 18 June (pp. 6067), 2017.</dd>
+<dd>S. Stolk, <cite>"OntoLex and Onomasiological Ordering: Supporting Topical Thesauri"</cite> in Proc. of the LDK2017 Workshops, NUI Galway, Ireland, 18 June (pp. 60-67), 2017.</dd>
 
 <dt id="bib-elmaarouf-verbs">[14]</dt>
 
