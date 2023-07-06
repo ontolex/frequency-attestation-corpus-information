@@ -2,10 +2,12 @@
 # Draft Community Group Report 
 
 Editors:
+
 * Christian Chiarcos ([Applied Computational Linguistics, University of Augsburg, Germany](https://www.uni-augsburg.de/de/fakultaet/philhist/professuren/angewandte-computerlinguistik/)) 
 * Max Ionov (Institute for Digital Humanities, University of Cologne, Germany)
 
 Contributors: (please add yourself)
+
 * Besim Kabashi ([Corpus and Computational Linguistics, Friedrich-Alexander-Universität Erlangen-Nürnberg, Germany](https://www.linguistik.phil.fau.de/))
 * Fahad Khan ([Istituto di Linguistica Computazionale <<A. Zampolli>>, Italy](www.ilc.cnr.it/))
 * Ciprian-Octavian Truică
@@ -57,12 +59,12 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
   * [Observations and Observables](#observations-and-observables)
     + [Observable (Class)](#observable--class-)
     + [Observation (Class)](#observation--class-)
-    + [Corpus (Class)](#corpus--class-)
-    + [corpus (Property)](#corpus--property-)
-    + [total (Property)](#total--property-)
+    + [observedIn (ObjectProperty)](#observedin--property-)
   * [Frequency](#frequency)
-    + [CorpusFrequency (Class)](#corpusfrequency--class-)
+    + [Frequency (Class)](#frequency--class-)
+    + [unit (Property)](#unit--property-)
     + [frequency (ObjectProperty)](#frequency--objectproperty-)
+    + [total (ObjectProperty)](#total--property-)
   * [Attestation](#attestation)
     + [Attestation (Class)](#attestation--class-)
     + [attestation (Property)](#attestation--property-)
@@ -108,16 +110,16 @@ back to ([Table of Contents](#table-of-contents))
 
 This builds on two primary motivations:
 
-- corpus-based lexicography: OntoLex-Lemon has been increasingly used to publish, exchange and create dictionaries and lexicographical data in a *machine-readable* way. This module is partially motivated by requirements of corpus-based lexicography (frequency and collocation information) and digital philology (linking lexical resources with corpus data) and complements the [OntoLex module for lexicography](https://www.w3.org/2019/09/lexicog/) in that regard.
+- corpus-based lexicography: OntoLex-Lemon has been increasingly used to publish, exchange and create dictionaries and lexicographical data in a *machine-readable* way. This module is partially motivated by requirements of corpus-based lexicography (frequency, collocations, semantic similarity) and digital philology (linking lexical resources with attestations and corpus data) and complements the [OntoLex module for lexicography](https://www.w3.org/2019/09/lexicog/) in that regard.
 
-- natural language processing: With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics (KEYNESS-REFERENCE???), collocation vectors (Schütze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (??? and Schütze, 2017). With the proposed module, _lemon_ can serve as a community standard to encode, store and exchange vector representations (embeddings) along with the lexical concepts, senses, lemmas or words that they represent. The processing of word embeddings is beyond the scope of this module. Embeddings are thus represented as literals ("BLOB").
+- natural language processing: With the rise of distributional semantics since the early 1990s, lexical semantics have been complemented by corpus-based co-occurrence statistics, collocation vectors (Schütze 1993), word embeddings (Collobert et al. 2012) and sense embeddings (Rothe and Schütze, 2017). With the proposed module and in addition to the requirements from corpus-based lexicography, OntoLex can serve as a community standard to encode, store and exchange numerical vector representations (embeddings) along with the lexical concepts, senses, lemmas, words or contexts (attestations) that they represent.
 
-The added value of using linked data technologies to represent such information is an increased level of interoperability and integration between different types of lexical resources, the textual data they pertain to, as well as distributional representations of words, lexical senses and lexical concepts. Creating a _lemon_ module in the OntoLex CG is a suitable means for establishing a vocabulary on a broad consensus that takes into account all use cases identified above in an adequate fashion. The OntoLex community is the natural forum to accomplish this for several reasons:
+The added value of using linked data technologies to represent such information is an increased level of interoperability and integration between different types of lexical resources, the textual data they pertain to, as well as distributional representations of words, lexical senses and lexical concepts. Creating a designated module within OntoLex is a suitable means for establishing a vocabulary on a broad consensus that takes into account all use cases identified above in an adequate fashion. The OntoLex community is the natural forum to accomplish this for several reasons:
 
-1.  The extended use of _lemon_ to support digital lexicography,
-2.  the improved application and applicabiltiy of _lemon_ in natural language processing,
+1.  The extended use of OntoLex-Lemon to support digital lexicography,
+2.  the improved application and applicabiltiy of OntoLex-Lemon in natural language processing,
 3.  the coming together of the lexicography, AI and human language technology communities, resp. resources, and
-4.  the possibility of reusing already available mechanisms in _lemon_, preventing researchers from "re-inventing the wheel",
+4.  the possibility of reusing already available mechanisms in OntoLex-Lemon, preventing researchers from "re-inventing the wheel",
 
 </section>
 
@@ -184,6 +186,10 @@ Other models [TO REVIEW]:
 @prefix oa: <http://www.w3.org/ns/oa#>.
 @prefix aat: <http://vocab.getty.edu/aat/>.
 @prefix voaf: <http://purl.org/vocommons/voaf#>.
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> 
+
 ```
 
 Helper namespace (for monitoring revision status, remove from final):
@@ -239,7 +245,6 @@ dct:description
 
 back to ([Table of Contents](#table-of-contents))
 
-
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_frac_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
@@ -261,13 +266,12 @@ Fig. 2 OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_)
 
 back to ([Table of Contents](#table-of-contents))
 
-
-OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a *corpus* about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean 
+OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a language resource about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean 
 
 - any *lexical entity* that can be described with OntoLex (including, but not limited to OntoLex core classes `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense` or `ontolex:LexicalConcept`), as well as
 - any *ontological entity* from a knowledge graph (corresponding to the object of an `ontolex:denotes`, `ontolex:reference` or `ontolex:isConceptOf` property). 
 
-The top-level concepts of OntoLex-FrAC are thus `frac:Observable`, `frac:Observation` and `frac:Corpus`.
+The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Observation`, complemented by a designating where the observation has been `frac:observedIn`.
 
 
 <div class="entity">
@@ -308,15 +312,16 @@ For OntoLex, we assume that frequency, attestation and corpus information can be
 In particular, we consider all these elements as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we introduce frac:Observable as a top-level element within the FrAC module that is used to define the rdfs:domain of any properties that link lexical and corpus-derived information. 
 
 
-> Note: The definition `frac:Observable` does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as `frac:Observable`. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a corpus or its annotations.
+> **Note:** The definition `frac:Observable` does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as `frac:Observable`. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
 
 <div class="entity">
 
 > ----------------------- ------------------------------------
 > ### Observation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Observation](http://www.w3.org/nl/lemon/frac#Observation)
-> **Observation** is an abstract superclass for anything that can be observed in a corpus about an Observable. An observation MUST have at least one `rdf:value` to express its value, it SHOULD have exactly one `frac:corpus` that defines the data from which this information was drawn, and it SHOULD have a `dct:description` explaining the methodolgy and/or extraction method by which the observation was obtained.
-> rdfs:subclassOf max 1 `frac:corpus`
+> **Observation** is an abstract superclass for anything that can be observed in a corpus about an Observable. An observation MUST have at least one `rdf:value` to express its value, it SHOULD have exactly one `frac:observedIn` that defines the data from which this information was drawn, and it SHOULD have a `dct:description` explaining the methodolgy and/or extraction method by which the observation was obtained.
+> rdfs:subclassOf 1 `frac:observedIn`
+> rdfs:subclassOf min 1 `dct:description`
 > rdfs:subClassOf 1 rdf:value
 > ----------------------- ------------------------------------
 </div>
@@ -328,6 +333,12 @@ frac:Observation
         a <http://www.w3.org/2002/07/owl#Restriction> ;
         <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
         <http://www.w3.org/2002/07/owl#onProperty> rdf:value
+   ] ;
+
+   rdfs:subClassOf [
+        a <http://www.w3.org/2002/07/owl#Restriction> ;
+        <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ;
+        <http://www.w3.org/2002/07/owl#onProperty> frac:observedIn
    ] ;
 
     # the following constraint is semantically empty
@@ -342,65 +353,91 @@ frac:Observation
     vs:term_status "tbc" . 
 ```
 
-Observations as understood here are **empirical** (quantitative) observations that are made against a corpus, but we  do  not  provide  a  formal  definition  of  what  a  corpus  is (it  can  be  any  kind  or  collection  of  linguistic  data  at  any scale,  structured  or  unstructured), not about its physical materialization (as an electronic corpus, as a series of printed books, as a bibliographical database or as metadata record for a particular corpus).
-
-> **Note**: Should we rename "total" to `frac:tokens`?
+Observations as understood here are **empirical** (quantitative) observations that are made against a corpus, a text, a document or another type of language data. Observations can be made in any  kind  of  (collection  or excerpt of)  linguistic  data  at  any scale,  structured  or  unstructured, regardless of its physical materialization (as an electronic corpus, as a series of printed books, as a bibliographical database or as metadata record for a particular corpus).
 
 > ----------------------- ------------------------------------
-> ### Corpus (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Corpus](http://www.w3.org/nl/lemon/frac#Corpus)
-> **Corpus  (Class)** represents  any  type  of  linguistic  data  or collection  thereof,  in  structured  or  unstructured  format.  At  the  lexical  level,  a  corpus  consists  of  individual elements (tokens, ‘words’), and data providers SHOULD  provide  the  total  number  of  elements.  It  should also provide provenance information, e.g., the tokenization  strategy,  preprocessing  steps,  etc.
-> **SubClassOf:** frac:total max 1 xsd:int
->
-> ----------------------- ------------------------------------
-
-```
-frac:Corpus
-    rdfs:subClassOf [
-        a owl:Restriction ;
-        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
-        owl:onDataRange xsd:int ;
-        owl:onProperty frac:total
-    ] ;
-    vs:term_status "tbc" .
-```
-
-> ----------------------- ------------------------------------
-> ### corpus (ObjectProperty)
-> The property **corpus** assigns a `Corpus` to a particular `frac:Observation`.
+> ### observedIn (ObjectProperty)
+> For a `frac:Observation`,  the property **observedIn** defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc.
+> As these data sources can have different characteristics, users SHOULD specify their respective type using the [DCMI Type Vocabulary](https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#section-7).
 > **Domain:** frac:Observation
-> **Range:** frac:Corpus
+> **Range:** anyURI
 >
 > ----------------------- ------------------------------------
 
+> Note: proposed in June 2023 to replace `frac:corpus`, along with the abandonment of `frac:Corpus`.
+
 ```
-frac:corpus
+frac:observedIn
     a owl:ObjectProperty ;
     rdfs:domain frac:Observation ;
-    rdfs:range frac:Corpus ;
+    rdfs:range [   
+        a owl:Restriction ;
+        owl:onProperty rdf:type ;
+        owl:someValuesFrom [
+            a owl:Restriction ;
+            owl:onProperty dcam:memberOf ;
+            owl:hasValue dcterms:DCMIType ] ] ;
     vs:term_status "tbc" ;
-    rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dct:source"@en .
+    rdfs:comment """For an Observation, the property observedIn defines the URI of the data
+    source (or its metadata entry) that this particular observation was made in or derived from.
+    This can be, for example, a corpus or a text represented by its access URL, a book 
+    represented by its bibliographical metadata, etc."""@en .
 ```
 
-A corpus is considered to be a non-empty collection of texts, in electronic or other form. (Note that a single text can constitute a corpus.)
-For machine-readable corpora that are/can be characterized by their size, data providers should provide the token count in the property `frac:total`.
+For machine-readable corpora that are/can be characterized by their size, data providers should provide the token count with the property `frac:total`, see section on Frequency below.
 
-> ----------------------- ------------------------------------
-> ### total (DatatypeProperty)
-> The datatype property **total** assigns  a  corpus  the  total  number  of  elements  that  it  contains.  In  the  context  of  OntoLex, these are instantiations of lexemes, only, i.e., tokens (‘words’).
-> **Domain:** frac:Corpus
-> **Range:** integer  (long)
->
-> ----------------------- ------------------------------------
+We provide three examples for FrAC data sources below:
 
-```
-frac:total
-    a owl:DatatypeProperty, owl:FunctionalProperty ;
-    rdfs:domain frac:Corpus ;
-    rdfs:range xsd:int ;
-    rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ;
-    vs:term_status "tbc" .
-```
+1. 2012 English news subcorpus of the Leipzig Corpora collection, primarily used for computational lexicography. For `frac:total`, see the frequency section. The data provider provides the total number of sentences, lemmas ("types") and words ("tokens"), as reflected by the units of the `frac:Frequency`. The use of additional language resource metadata, e.g., language or publication year, is highly recommended, but not formally required.
+
+        <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012> a dcmitype:Collection ;
+            frac:total 
+                [ a frac:Frequency ; frac:unit "sentences" ; rdf:value "8,525,045" ] ,
+                [ a frac:Frequency ; frac:unit "tokens" ;    rdf:value "177,363,729" ] ,
+                [ a frac:Frequency ; frac:unit "lemmas" ;    rdf:value "1,126,551" ] ;
+            dct:language "en" ;
+            dct:date "2012" ;
+            rdfs:comment """Leipzig Corpora Collection: English news corpus based on material 
+                            from 2012. Leipzig Corpora Collection. Dataset. 
+                            https://corpora.uni-leipzig.de?corpusId=eng_news_2012."""@en .
+
+    > Implementation note: dct:language Should be URI, not value
+
+    > Note that `frac:total` RDFS-entails that its object is a `frac:Frequency`. This information, included here for the sake of completeness, can thus be left implicit.
+
+2. Google Books NGrams, a collection of n-grams. This is not a corpus, but a table of tab-separated values with sequences of words, their frequency in the underlying corpus and the number of individual documents they occur in (document frequency) for individual languages and n-gram sizes. This is a multilingual resource, so we cannot provide a unique language code. Further, it does not provide a total.
+
+        <https://books.google.com/ngrams> a dcmitype:Dataset .
+
+3. The EPSD corpus, the data basis underlying the Electronic Penn Sumerian Dictionary. This is a multilingual corpus, consisting primarily of Sumerian, but also of Akkadian texts, hence it provides two language codes. The frequencies ("almost ...", "over ...") are provided in the same form as on the EPSD website for version 2.7.
+
+        <http://oracc.museum.upenn.edu/epsd2> a dcmitype:Collection ;
+            dct:language "sux", "akk" ;
+            frac:total [ frac:unit "lexemes" ;        rdf:value "almost 16,000" ] ;
+            frac:total [ frac:unit "names" ;          rdf:value "over 50,000" ] ;
+            frac:total [ frac:unit "distinct forms" ; rdf:value "more than 225,000" ] ;
+            frac:total [ frac:unit "texts" ;          rdf:value "over 110,000" ] ;
+            frac:total [ frac:uniq "tokens" ;         rdf:value "almost 3.4 million" ] .
+
+4. Yet another type of FrAC data sources are `dcmitype:Text` objects, including digitally edited text, edited text bundled with metadata about the original text, or digital metadata about a non-digital text. Also note that in this particular case, the only total provided by the original metadata / description (indirectly, though) is that this constitutes one letter.
+
+        <https://www.dbnl.org/tekst/groo001brie04_01/groo001brie04_01_0003.php> a dcmitype:Text ;
+            frac:total [ frac:unit "letters" ; rdf:value "1" ] ;
+            dct:language "nl" ;
+            dct:date "1629-01-06" ;
+            dct:author "N. van Reigersberch" ;
+            rdfs:comment """Hugo de Groot, Briefwisseling van Hugo Grotius. Deel 4(1964), 1361. 
+                1629 januari 6. Van N. van Reigersberch, Adres: (A Mon)sieur Monsieur Grotius à 
+                Paris. 
+                In dorso schreef Grotius: 6 Jan. 1629 N. Reigersberg."""@nl .
+
+    > Note: For anchoring individual attestations in documents, groups of documents, or their components, the property `frac:locus` can be used in addition to `frac:observedIn`, see Attestation section below. Furthermore, it is recommended to employ specialized vocabularies for bibliographical references.
+
+    > Implementation note: example from attestation section could be updated to https://www.dbnl.org/tekst/groo001brie04_01/groo001brie04_01_0003.php?q=dat%20men%20licht%20yemant%20de%20cat%20aen%20het%20been%20kan%20werpen;#hl1
+
+> Implementation note: list all datasets used below here
+
+> Note that for FrAC data sources illustrated above, we use the original access URL as data source URI. As these will resolve only if the data providers themselves provide linked-data-compliant metadata, these URIs will not resolve at the moment. For providers of lexical data, a best practice recommendation for cases in which they are not in control of the access URL is to mint (and host) a distinct data source URI and define it to be `owl:sameAs` the access URL.
 
 </section>
 
@@ -418,7 +455,7 @@ frac:total
 back to ([Table of Contents](#table-of-contents))
 
 
-Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics. At its core, this means that lexicographers use corpus frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). As a qualitative assessment, frequency can be expressed with [lexinfo:frequency](http://www.lexinfo.net/ontology/2.0/lexinfo#frequency), "[t]he relative commonness with which a term occurs". However, this is an object property with possible values lexinfo:commonlyUsed, lexinfo:infrequentlyUsed, lexinfo:rarelyUsed, while absolute counts over a particular resource (corpus) require novel vocabulary elements.
+Frequency information is a crucial component in human language technology. Corpus-based lexicography originates with Francis and Kucera (1958), and subsequently, the analysis of frequency distributions of word forms, lemmas and other linguistic elements has become a standard technique in lexicography and philology, and given rise to the field of corpus linguistics. At its core, this means that lexicographers use (corpus) frequency and distribution information while compiling lexical entries (also see the section on collocations and similarity below). As a qualitative assessment, frequency can be expressed with [lexinfo:frequency](http://www.lexinfo.net/ontology/2.0/lexinfo#frequency), "[t]he relative commonness with which a term occurs". However, this is an object property with possible values lexinfo:commonlyUsed, lexinfo:infrequentlyUsed, lexinfo:rarelyUsed, while absolute counts over a particular resource (corpus) require novel vocabulary elements.
 
 For modelling, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and totals are known. Absolute frequencies are used in computational lexicography (e.g., the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/)), and they are an essential piece of information for NLP and corpus linguistics.
 In order to avoid confusion with lexinfo:Frequency (which provides lexicographic assessments such as commonly used, infrequently used, etc.), this is defined with reference to a particular dataset, a corpus.
@@ -426,17 +463,17 @@ In order to avoid confusion with lexinfo:Frequency (which provides lexicographic
 <div class="entity">
 
 > ----------------------- ------------------------------------
-> ### CorpusFrequency (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#CorpusFrequency](http://www.w3.org/nl/lemon/frac#CorpusFrequency)
-> **Corpus frequency** is a `frac:Observation` of the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) in a particular language resource (`frac:corpus`).
+> ### Frequency (Class)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Frequency](http://www.w3.org/nl/lemon/frac#Frequency)
+> **Frequency** is a `frac:Observation` of the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) that is `frac:observedIn` in a particular data source. Using `frac:unit`, frequency objects can also identify the (segmentation) unit that their counts are based on. 
 > **SubClassOf:** `frac:Observation`
-> **SubClassOf:** `rdf:value` exactly 1 , `frac:corpus` exactly 1
+> **SubClassOf:** `rdf:value` exactly 1 , `frac:observedIn` exactly 1
 >
 > ----------------------- ------------------------------------
 </div>
 
 ```
-frac:CorpusFrequency
+frac:Frequency
     a owl:Class ;
     rdfs:subClassOf frac:Observation ;
     rdfs:subClassOf [
@@ -451,11 +488,28 @@ frac:CorpusFrequency
 <div class="entity">
 
 > ----------------------- ------------------------------------
+> ### unit (Property)
+> **URI:** [http://www.w3.org/nl/lemon/frac#unit](http://www.w3.org/nl/lemon/frac#unit)
+> For a `frac:Frequency` object, the property **unit** provides an identifier of the respective segmentation unit.
+> **rdfs:range** `frac:Frequency`
+>
+> ----------------------- ------------------------------------
+</div>
+
+Examples for `frac:unit` include string literals such as `"tokens"`, `"sentences"`, etc. If a future community standard provides reference URIs for such datatypes, `frac:unit` should be used as a datatype property. Until such a convention has been established, it is recommended to be used as a datatype property.
+
+> Note: One function of `frac:unit` is to calculate relative frequencies from absolute values as provided by the `rdf:value` of `frac:Frequency` objects. While these can be calculated by diving `rdf:value` of a particular frequency object *f* by the `rdf:value` of its `frac:observedIn/frac:total`, this equation is restricted to frequency objects using the same `frac:unit`.
+
+> Implementation note: check whether domain and range are always put right!
+
+<div class="entity">
+
+> ----------------------- ------------------------------------
 > ### frequency (ObjectProperty)
 > **URI:** [http://www.w3.org/nl/lemon/frac#frequency](http://www.w3.org/nl/lemon/frac#frequency)
-> The property **frequency** assigns a particular `frac:Observable` a `frac<<Frequency`.
+> The property **frequency** assigns a particular `frac:Observable` a `frac:Frequency`.
 > **rdfs:domain** `frac:Observable`
-> **rdfs:range** `frac:CorpusFrequency`
+> **rdfs:range** `frac:Frequency`
 >
 > ----------------------- ------------------------------------
 </div>
@@ -464,24 +518,48 @@ frac:CorpusFrequency
 frac:frequency
     a owl:ObjectProperty ;
     rdfs:domain frac:Observable ;
-    rdfs:range frac:CorpusFrequency ;
+    rdfs:range frac:Frequency ;
     vs:term_status "stable" .
 ```
 
 
 <div class="note">
 
-> If information from multiple language resources is aggregated (also cf. the section on embeddings below), multiple `frac:corpus` statements should be provided, to each resource individually. The cardinality of `frac:corpus` is thus 1 or higher.
+> If information from multiple language resources is aggregated (also cf. the section on embeddings below), these should be aggregated into a a single data source that can be referred to by `frac:observedIn`, as there must be exactly one `frac:observedIn`.
+
+> TODO: make sure that this unique cardinality constrain is respected in the examples here.
 
 </div>
 
-<div class="Note">
+The definition above only applies to absolute frequencies. For expressing relative frequencies, we  expect  the associated data source (`frac:observedIn`) object to  define  a  total  of  elements  contained  (`frac:total`). In many practical applications, it is necessary to provide relative  counts,  and  in  this  way,  these  can  be  easily  derived  from  the  absolute  (element)  frequency  provided  by the Frequency class  and  the  total  defined  by the underlying  corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the `Frequency` `rdf:value` and for the `frac:total` (i.e., `100%`) of the associated corpus.
 
->TODO:  `frac:corpus` replaces the originally suggested `dct:source`, make sure the replacement is global and consistent, then remove this note.
+> ----------------------- ------------------------------------
+> ### total (ObjectProperty)
+> The object property **total** assigns  any potential FrAC data source (i.e., `dct:Collection`, `dct:Dataset`, `dct:Text` or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as a `frac:Frequency` object.
+> **Domain:** class that is a `dcam:memberOf` DCMI Type
+> **Range:** frac:Frequency
+>
+> ----------------------- ------------------------------------
 
-</div>
+> Note: For `frac:total`, users should provide both the frequency and the segmentation/unit over which this frequency is obtailed. For an observable, then, relative frequencies (for any given unit *u*) can then be calculated from the object values of `frac:frequency/rdf:value`  and `frac:frequency/frac:observedIn/frac:total/rdf:value` if (and only if) the correspondung units match.
 
-> Note: The definition above only applies to absolute frequencies. For expressing relative frequencies,  we  expect  the associated `frac:Corpus` object to  define  a  total  of  elements  contained  (`frac:total`). In many practical applications, it is necessary to provide relative  counts,  and  in  this  way,  these  can  be  easily  derived  from  the  absolute  (element)  frequency  provided  by the CorpusFrequency class  and  the  total  defined  by the underlying  corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the `CorpusFrequency` `rdf:value` and for the `frac:total` (i.e., `100%`) of the associated corpus.
+
+```
+frac:total
+    a owl:DatatypeProperty, owl:FunctionalProperty ;
+    rdfs:domain [
+        a owl:Restriction ;
+        owl:onProperty rdf:type ;
+        owl:someValuesFrom [
+            a owl:Restriction ;
+            owl:onProperty  dcam:memberOf ;
+            owl:hasValue dcterms:DCMIType  ] ] ;
+    rdfs:range xsd:int ;
+    rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ;
+    vs:term_status "tbc" .
+```
+
+
 
 The following example illustrates word and form frequencies for the Sumerian word _a_ (n.) "water" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
@@ -492,27 +570,27 @@ The following example illustrates word and form frequencies for the Sumerian wor
     # word frequency, over all form variants 
     epsd:kalag_strong_v a ontolex:LexicalEntry;
         frac:frequency [
-            a frac:CorpusFrequency; 
+            a frac:Frequency; 
             rdf:value "2398"^^xsd:int; 
-            frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+            frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
         ] .
 
     # form frequency for individual orthographical variants 
     epsd:kalag_strong_v ontolex:canonicalForm [
         ontolex:writtenRep "kal-ga"@sux-Latn; 
         frac:frequency [
-            a frac:CorpusFrequency; 
+            a frac:Frequency; 
             rdf:value "2312"^^xsd:int; 
-            frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+            frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
             ]
         ] .
 
     epsd:kalag_strong_v ontolex:otherForm [ 
         ontolex:writtenRep "kalag"@sux-Latn; 
         frac:frequency [ 
-            a frac:CorpusFrequency; 
+            a frac:Frequency; 
             rdf:value "70"^^xsd:int; 
-            frac:corpus <http://oracc.museum.upenn.edu/epsd2/pager>
+            frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
             ]
         ] .
 
@@ -528,18 +606,18 @@ The example shows orthographic variation (in the original writing system, Sumeri
 
 <div class="note">
 
-> It is necessary to provide the link to the underlying corpus _for every frequency assessment_ because the same element may receive different counts over different corpora. For data modelling, it is recommended to define a corpus- or collection-specific subclass of frac:CorpusFrequency with a fixed dct:source value. This leads to more compact data and avoids potential difficulties with the Open World Assumption (interpretability of incomplete data).
+> It is necessary to provide the link to the underlying corpus _for every frequency assessment_ because the same element may receive different counts over different corpora. For data modelling, it is recommended to define a corpus- or collection-specific subclass of frac:Frequency with a fixed `frac:observedIn` object. This leads to more compact data and avoids potential difficulties with the Open World Assumption (interpretability of incomplete data).
 
 <div class="beispiel">
 
 <div>
 
 <pre>                
-# Corpus Frequency in the EPSD corpus
-:EPSDFrequency rdfs:subClassOf frac:CorpusFrequency.
+# Frequency in the EPSD corpus
+:EPSDFrequency rdfs:subClassOf frac:Frequency.
 :EPSDFrequency rdfs:subClassOf
  [ a owl:Restriction ;
-   owl:onProperty dct:source ;
+   owl:onProperty frac:observedIn ;
    owl:hasValue <http://oracc.museum.upenn.edu/epsd2/pager> ] .
 
 # frequency assessment
@@ -556,7 +634,7 @@ epsd:a_water_n frac:frequency [
 
 <div class="note">
 
-frac:CorpusFrequency can be extended with additional filter conditions to define sub-corpora. For example, we can restrict the subcorpus to a particular time period, e.g., the Neo-Sumerian Ur III period:
+`frac:Frequency` can be extended with additional filter conditions to define sub-corpora. For example, we can restrict the subcorpus to a particular time period, e.g., the Neo-Sumerian Ur III period:
 
 <div class="beispiel">
 
@@ -605,7 +683,7 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 > --------
 > ### Attestation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
->  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have an `rdf:value`, it CAN have a `frac:gloss`, and it SHOULD have a `frac:corpus` or `frac:locus` object to identify the source of this material.
+>  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have an `rdf:value`, it CAN have a `frac:gloss`, and it SHOULD have a `frac:observedIn` or `frac:locus` object to identify the source of this material.
 For an attestation, `rdf:value` represents the text of a quotation as represented in the original source. If that needs to be distinguished or is different from the way how it is represented in the dictionary, FrAC users should use `frac:gloss` for the latter purpose. 
 > **SubClassOf:** `rdf:value` max 1 
 > **SubClassOf:** `frac:Observation`
@@ -714,7 +792,10 @@ frac:locus
 
 </div>
 
-> Note: In humanities practice, locations (`frac:locus` objects) can be provided at different levels of granularity, e.g., referring to a particular text span within a text, to a verse, paragraph or chapter within which the text can be found, to a complete work, or a collection of works. Data providers should use `frac:locus` only if `frac:corpus` is not applicable. In particular, if the location is a complete work or a corpus identifiable by a URI, data providers should use the `frac:corpus` property. For references within a work or to a collection without explicitly defined boundaries (e.g., `Plato` to designate all of Plato's preserved works as well as any statement ascribed to him from an unpreserved work), data providers should use `frac:locus`.
+> Note: In humanities practice, locations (`frac:locus` objects) can be provided at different levels of granularity, e.g., referring to a particular text span within a text, to a verse, paragraph or chapter within which the text can be found, to a complete work, or a collection of works. Data providers should generally use `frac:observedIn` unless the the specific semantics require the use of `frac:locus`. In particular, if the location is a complete work (e.g., `dct:Text`) or a corpus identifiable by a URI (i.e., a `dct:Collection`), data providers should use the `frac:observedIn` property. For references within a work or to a collection without explicitly defined boundaries (e.g., `Plato` to designate all of Plato's preserved works as well as any statement ascribed to him from an unpreserved work), data providers should use `frac:locus`.
+
+> Implementation note: as the type of data source is now to indicated by `dct:DMCIType`, we can merge `frac:locus` and `frac:observedIn`, again.
+
 
 **example**:  [DiaMaNT (_Diachroon seMAntisch lexicon van de Nederlandse Taal_)](http://diamant.ivdnt.org/diamant-ui/) is a diachronic semantic computational  lexicon  of  Dutch,  at its core  formed by four scholarly historical dictionaries of  Dutch covering a language period from ca. 500 –  1976. The example below illustrates the combination of FrAC attestations with the [CITO](https://sparontologies.github.io/cito/current/cito.html) and [FRBR](http://purl.org/vocab/frbr/core#) vocabularies, as well as with the [NLP Interchange Format](https://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
 
@@ -769,7 +850,7 @@ Collocations are usually defined on surface-oriented criteria, i.e., as a relati
 
 Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observables</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
-Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus used to create them (<tt>frac:corpus</tt>). Collocations share these characteristics with other `frac:Observation`s and thus, these are inherited from the abstract <tt>frac:Observation</tt> class.
+Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus or data source used to create them (<tt>frac:observedIn</tt>). Collocations share these characteristics with other `frac:Observation`s and thus, these are inherited from the abstract <tt>frac:Observation</tt> class.
 
 
 <div class="entity">
@@ -777,7 +858,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 > ---
 > ### Collocation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
-> A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular source corpus (<tt>frac:corpus</tt>). Collocations are both observations and observables, and they are modelled as an aggregate (`rdfs:Container`) of observables.
+> A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular data source (<tt>frac:observedIn</tt>). Collocations are both observations and observables, and they are modelled as an aggregate (`rdfs:Container`) of observables.
 > **SubClassOf:** <tt>frac:Observation, rdfs:Container, frac:Observable</tt>
 > **rdfs:member:** only <tt>frac:Observable</tt>
 > **SubClassOf:** `frac:head` max 1
@@ -973,14 +1054,14 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
 [ rdf:_1 :kill_cf; rdf:_2 :switch_cf ] a frac:Collocation, rdf:Seq ;
   rdf:value "199";
   dct:description "2-grams, English Version 20120701, word frequency";
-  dct:source <https://books.google.com/ngrams>;
+  frac;observedIn <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
 [ rdf:_1 :kill_cf; rdf:_2 :switch_cf ] a frac:Collocation, rdf:Seq ; 
   rdf:value "121";
   dct:description "2-grams, English Version 20120701, document frequency";
-  dct:source <https://books.google.com/ngrams>;
+  frac:observedIn <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
@@ -988,14 +1069,14 @@ In this example, forms are string values (cf. <tt>ontolex:LexicalForm</tt>), lex
 [ rdf:_1 :kill_cf; rdf:_2 :switch_n ] a frac:Collocation, rdf:Seq ;
   rdf:value "187";
   dct:description "2-grams, English Version 20120701, word frequency";
-  dct:source <https://books.google.com/ngrams>;
+  frac:observedIn <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.
 
 [ rdf:_1 :kill_cf, rdf:_2 :switch_n ] a frac:Collocation, rdf:Seq ;
   rdf:value "115";
   dct:description "2-grams, English Version 20120701, document frequency";
-  dct:source <https://books.google.com/ngrams>;
+  frac:observedIn <https://books.google.com/ngrams>;
   dct:temporal "2008"^^xsd:date;
   lexinfo:termType lexinfo:idiom.` </pre>
 
@@ -1025,18 +1106,18 @@ The second example illustrates more complex types of collocation are provided as
     [ rdfs:member wsen:spill, wsen:beans ] a frac:Collocation;
       rdf:value "182";
       dct:description "cooccurrences in the same sentence, unordered";
-      dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
+      frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
 
     [ rdf:_1 wsen:green; rdf:_2 wsen:beans ] a frac:Collocation, rdf:Seq ;
       rdf:value "778";
       dct:description "left neighbor cooccurrence";
-      dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
+      frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
       lexinfo:termType lexinfo:idiom.
 
      [ rdf:_1 wsen:beans; rdf:_2 wsen:about ] a frac:Collocation, rdf:Seq;
       rdf:value "35";
       dct:description "right neighbor cooccurrence";
-      dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
+      frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
       lexinfo:termType lexinfo:idiom.
 
     # multi-word expression, lexicalized (!)
@@ -1046,7 +1127,7 @@ The second example illustrates more complex types of collocation are provided as
     [ rdfs:member wsen:beans, wsen:spill+the+beans ] a frac:Collocation;
       rdf:value "401";
       dct:description "cooccurrences in the same sentence, unordered";
-      dct:source <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.` </pre>
+      frac:obsevedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.` </pre>
 
 </div>
 
@@ -1054,7 +1135,7 @@ The second example illustrates more complex types of collocation are provided as
 
 <div class="note">
 
-> Again, it is recommended to define resource-specific subclasses of <tt>frac:Collocation</tt> with default values for <tt>dct:description</tt>, <tt>dct:source</tt>, and (where applicable) <tt>lexinfo:termType</tt>.
+> Again, it is recommended to define resource-specific subclasses of <tt>frac:Collocation</tt> with default values for <tt>dct:description</tt>, <tt>frac:obsevedIn</tt>, and (where applicable) <tt>lexinfo:termType</tt>.
 
 </div>
 
@@ -1094,7 +1175,7 @@ Embeddings have become a dominating paradigm in natural language processing and 
 Lexicalized embeddings provide their data via <tt>rdf:value</tt>, and should be published together with their metadata, most importantly
 
 *   procedure/method (<tt>dct:description</tt> with free text, e.g., "CBOW", "SKIP-GRAM", "collocation counts")
-*   corpus (<tt>dct:source</tt>)
+*   corpus (<tt>frac:observedIn</tt>)
 *   dimensionality (<tt>dct:extent</tt>)
 
 
@@ -1103,8 +1184,8 @@ Lexicalized embeddings provide their data via <tt>rdf:value</tt>, and should be 
 > ---
 > ### Embedding (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Embedding](http://www.w3.org/nl/lemon/frac#Embedding)
-> An **Embedding** is a representation (of a given frac:Observable (see <tt>frac:embedding</tt>) in a numerical feature space. It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>dct:source</tt>). The literal value of an Embedding is  provided by <tt>rdf:value</tt>). In OntoLex-FrAC, embeddings are `frac:Observation`s that are obtained from a particular corpus.
-> **SubClassOf:** rdf:value exactly 1 xsd:string, frac:corpus exactly 1, dct:description min 1
+> An **Embedding** is a representation (of a given frac:Observable (see <tt>frac:embedding</tt>) in a numerical feature space. It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>frac:observedIn</tt>). The literal value of an Embedding is  provided by <tt>rdf:value</tt>). In OntoLex-FrAC, embeddings are `frac:Observation`s that are obtained from a particular corpus.
+> **SubClassOf:** rdf:value exactly 1 xsd:string, frac:observedIn exactly 1, dct:description min 1
 > **SubClassOf:** `frac:Observation`
 >
 > ---
@@ -1190,9 +1271,10 @@ As a lemma (LexicalEntry) embedding, this can be represented as follows:
   frac:embedding [ 
     a frac:FixedSizeVector;
     rdf:value "[ 0.015246 , -0.30472 , 0.68107,  ... ]"^^rdf:JSON;
-    dct:source 
+    frac:observedIn
       &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
       &lt;https://catalog.ldc.upenn.edu/LDC2011T07>;
+      # note: two values for frac:obseredIn entails that these are owl:sameAs
     dct:extent 50^^^xsd:int;
     dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014\. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].`
     </pre>
@@ -1216,7 +1298,7 @@ As with <tt>frac:Frequency</tt>, we recommend defining resource-specific subclas
 :GloVe6BEmbedding_50d rdfs:subClassOf frac:FixedSizeVector;
   rdfs:subClassOf 
     [ a owl:Restriction;
-      owl:onProperty dct:source;
+      owl:onProperty frac:observedIn;
       owl:hasValue
           &lt;http://dumps.wikimedia.org/enwiki/20140102/>,
           &lt;https://catalog.ldc.upenn.edu/LDC2011T07> ],
@@ -1326,7 +1408,7 @@ Example taken from [Wortschatz](https://corpora.uni-leipzig.de/en/res?corpusId=e
     measure; cooccurrences are ordered by their significance. At the 
     _Leipzig Corpora Collection_ the log-likelihood ratio is used as significance 
     measure and word pairs of little significance are removed.";
-    dct:source &lt;https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=frac>;
+    frac:observedIn &lt;https://corpora.uni-leipzig.de/en/res?corpusId=eng_newscrawl-public_2018&word=frac>;
     rdf:value " { \"sand\" : \"508\" , \"mining\" : \"82\" , ... }"^^rdf:JSON.`
     </pre>
 </div>
@@ -1379,7 +1461,7 @@ back to ([Table of Contents](#table-of-contents))
 
 Similarity is a paradigmatic relation between elements that can replace each other in the same context. In distributional semantics, a quantitative assessment of the similarity of two forms, lexemes, phrases, word senses or concepts is thus grounded in numerical representations of their respective contexts, i.e., their embeddings. In a broader sense of `embedding', also bags of words fall under the scope of <tt>frac:Embedding</tt>, see the usage note below.
 
-Similarity is characterized by a similarity score (<tt>rdf:value</tt>), e.g., the number of shared dimensions/collocates (in a bag-of-word model) or the cosine distance between two word vectors (for fixed-size embeddings), the corpus used to generate this score (<tt>frac:corpus</tt>), and the method used for calculating the score (<tt>dct:description</tt>).
+Similarity is characterized by a similarity score (<tt>rdf:value</tt>), e.g., the number of shared dimensions/collocates (in a bag-of-word model) or the cosine distance between two word vectors (for fixed-size embeddings), the corpus used to generate this score (<tt>frac:observedIn</tt>), and the method used for calculating the score (<tt>dct:description</tt>).
 
 Similarity is symmetric. The order of similes is irrelevant.
 
@@ -1390,7 +1472,7 @@ Like <tt>frac:Collocation</tt>, quantitative similarity relations are aggregates
 > ----
 > ### Similarity (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Similarity](http://www.w3.org/nl/lemon/frac#Similarity)
-> **Similarity** is a <tt>frac:Observation</tt> about the relatedness between two or more <tt>frac:Embedding</tt>s, and it is characterized by a similarity score (<tt>rdf:value</tt>) in a specific source corpus (<tt>frac:corpus</tt>) and a <tt>dct:description</tt> that explains the method of comparison.
+> **Similarity** is a <tt>frac:Observation</tt> about the relatedness between two or more <tt>frac:Embedding</tt>s, and it is characterized by a similarity score (<tt>rdf:value</tt>) in a specific source corpus (<tt>frac:observedIn</tt>) and a <tt>dct:description</tt> that explains the method of comparison.
 > **SubClassOf:** <tt>frac:Observation, rdfs:Bag</tt>
 > **rdfs:member:** only <tt>frac:Embedding</tt>
 >
@@ -1554,7 +1636,7 @@ As a rule of best practice, we recommend for such cases to provide (a copy of) t
       } UNION {
         # return all directly expressed values
           ?data ?property ?value.
-          FILTER(?property in (dct:source,rdf:value))
+          FILTER(?property in (frac:observedIn,rdf:value))
           # TODO: update list of properties
       }
     }
@@ -1677,3 +1759,4 @@ from lexicog, to be revised
 <dt id="OED-dict-air">[18]</dt>
 
 <dd><cite>air. Oxford English Living Dictionaries Online.</cite> Last accessed 01.11.18\. https://en.oxforddictionaries.com/definition/air <script>setTimeout(function(){CodeMirror.colorize();}, 20);</script></dd>
+
