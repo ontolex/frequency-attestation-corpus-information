@@ -73,7 +73,7 @@ Disclaimer: This draft follows closely the structure and design of [The Ontolex 
     + [locus (Property)](#locus--property-)
   * [Collocations](#collocations)
     + [Collocation (Class)](#collocation--class-)
-    + [cscore (property)](#cscore--property-)
+    + [cScore (property)](#cScore--property-)
     + [head (property)](#head--property-)
   * [Embeddings](#embeddings)
     + [Embedding (Class)](#embedding--class-)
@@ -858,7 +858,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 > ---
 > ### Collocation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
-> A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cscore</tt>) in a particular data source (<tt>frac:observedIn</tt>). Collocations are both observations and observables, and they are modelled as an aggregate (`rdfs:Container`) of observables.
+> A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cScore</tt>) in a particular data source (<tt>frac:observedIn</tt>). Collocations are both observations and observables, and they are modelled as an aggregate (`rdfs:Container`) of observables.
 > **SubClassOf:** <tt>frac:Observation, rdfs:Container, frac:Observable</tt>
 > **rdfs:member:** only <tt>frac:Observable</tt>
 > **SubClassOf:** `frac:head` max 1
@@ -892,13 +892,13 @@ By default, <tt>frac:Collocation</tt> is insensitive to word order. If a colloca
     
 Collocations are `frac:Observable`s, i.e., they can be ascribed `frac:frequency`, `frac:attestation`, `frac:embedding`, they can be described in terms of their (embedding) similarity, and they can be nested inside larger collocations.
     
-Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cscore`:
+Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cScore`:
 
 <div class="property">
 
 > ---
-> ### cscore (property)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#cscore)
+> ### cScore (property)
+> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#cScore)
 > **Collocation score** is a subproperty of `rdf:value` that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.
 > **SubPropertyOf:** <tt>rdf:value</tt>
 > **domain:** <tt>frac:Collocation</tt>
@@ -907,30 +907,30 @@ Collocations can be described in terms of various collocation scores. If scores 
 </div>
 
 ```
-frac:cscore
+frac:cScore
     rdfs:subPropertyOf rdf:value ;
     rdfs:domain frac:Collocation ;
     vs:term_status "stable" .
 ```
 
-FrAC defines a number of popular collocation metrics as sub-properties of `frac:cscore`:
+FrAC defines a number of popular collocation metrics as sub-properties of `frac:cScore`:
 
-- `frac:rel_freq` (*relative frequency*): <img src="https://render.githubusercontent.com/render/math?math=RF(x,y|x) = \frac{f_{xy}}{f_x} (= R_x)"> (asymmetric, requires `frac:head`)
-    ```frac:rel_freq rdfs:subPropertyOf frac:cscore . ```
+- `frac:relFreq` (*relative frequency*): <img src="https://render.githubusercontent.com/render/math?math=RF(x,y|x) = \frac{f_{xy}}{f_x} (= R_x)"> (asymmetric, requires `frac:head`)
+    ```frac:relFreq rdfs:subPropertyOf frac:cScore . ```
 - `frac:pmi` (*pointwise mutual information*, sometimes referred to as *MI-score* or *association ratio*, cf. [Church and Hanks 1990, via Ewert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf): <img src="https://render.githubusercontent.com/render/math?math=PMI(x,y)=log_2 \frac{f_{xy} N}{f_x f_y}"> 
-    ```frac:pmi rdfs:subPropertyOf frac:cscore .```
-- `frac:mi2` (*MI²-score*): <img src="https://render.githubusercontent.com/render/math?math=MI^2(x,y)=log_2 \frac{f_{xy}^2 N}{f_x f_y}">
-    ```frac:mi2 rdfs:subPropertyOf frac:cscore . ```
-- `frac:mi3` (*MI³-score*, cf. [Daille 1994 in Ebert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MI^3(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
-    ```frac:mi3 rdfs:subPropertyOf frac:cscore .```
-- `frac:pmi_logfreq` (*MI.log-f*, *salience*, formerly default metric in SketchEngine): <img src="https://render.githubusercontent.com/render/math?math=MI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
-    ```frac:pmi_logfreq rdfs:subPropertyOf frac:cscore .```
+    ```frac:pmi rdfs:subPropertyOf frac:cScore .```
+- `frac:pmi2` (*PMI²-score*): <img src="https://render.githubusercontent.com/render/math?math=PMI^2(x,y)=log_2 \frac{f_{xy}^2 N}{f_x f_y}">
+    ```frac:pmi2 rdfs:subPropertyOf frac:cScore . ```
+- `frac:mi3` (*PMI³-score*, cf. [Daille 1994 in Ebert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <img src="https://render.githubusercontent.com/render/math?math=PMI^3(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
+    ```frac:pmi3 rdfs:subPropertyOf frac:cScore .```
+- `frac:pmiLogFreq` (*MI.log-f*, *salience*, formerly default metric in SketchEngine): <img src="https://render.githubusercontent.com/render/math?math=MI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
+    ```frac:pmiLogFreq rdfs:subPropertyOf frac:cScore .```
 - `frac:dice` (*Dice coefficient*): <img src="https://render.githubusercontent.com/render/math?math=Dice(x,y)=\frac{2 f_{xy}}{f_x %2B f_y}">
-    ```frac:dice rdfs:subPropertyOf frac:cscore .```
+    ```frac:dice rdfs:subPropertyOf frac:cScore .```
 - `frac:logDice` (default metric in SketchEngine, [Rychly 2008](https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf)): <img src="https://render.githubusercontent.com/render/math?math=LogDice(x,y)=14 %2B log_2 Dice(x,y)">
-    ```frac:logDice rdfs:subPropertyOf frac:cscore .```
+    ```frac:logDice rdfs:subPropertyOf frac:cScore .```
 - `frac:minSensitivity` (*minimum sensitivity*, cf. [Pedersen 1998](https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf)): <img src="https://render.githubusercontent.com/render/math?math=MS(x,y)=min(R_x,R_y)">
-    ```frac:minSensitivity rdfs:subPropertyOf frac:cscore .```
+    ```frac:minSensitivity rdfs:subPropertyOf frac:cScore .```
 
 with
     
@@ -943,12 +943,12 @@ with
 
 In addition to collocation scores, also statistical independence tests are being employed as collocation scores:
 
-- `frac:likelihood_ratio` (*log likelihood*, *G²* [Dunning 1993, via Ewer 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
-    ```frac:likelihood_ratio rdfs:subPropertyOf frac:cscore .```
+- `frac:logLikelihood` (*log likelihood*, *G²* [Dunning 1993, via Ewer 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
+    ```frac:logLikelihood rdfs:subPropertyOf frac:cScore .```
 - `frac:tScore` (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Ewert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf) ): <img src="https://render.githubusercontent.com/render/math?math=T(x,y)=\frac{f_{xy}-\frac{(f_x f_y)}{N}}{\sqrt{f_{xy}}}">
-    ```frac:tScore rdfs:subPropertyOf frac:cscore .```
+    ```frac:tScore rdfs:subPropertyOf frac:cScore .```
 - `frac:chi2` (*Person's Chi-square test* [Manning 1999](https://nlp.stanford.edu/fsnlp/) ): <img src="https://render.githubusercontent.com/render/math?math=\chi^2(x,y)=\frac{N(O_{11}O_{22}-O_{12}O_{21})^2}{(O_{11} %2B O_{12})(O_{11} %2B O_{21})(O_{12} %2B O_{22})(O_{21} %2B O_{22})}">
-    ```frac:chi2 rdfs:subPropertyOf frac:cscore .```
+    ```frac:chi2 rdfs:subPropertyOf frac:cScore .```
 
 with
 - <img src="https://render.githubusercontent.com/render/math?math=O_{11}=f_{xy}"> 
@@ -957,20 +957,20 @@ with
 - <img src="https://render.githubusercontent.com/render/math?math=O_{22}=N - f_{x} - f_{y} %2B 2f_{xy}"> 
 - <img src="https://render.githubusercontent.com/render/math?math=N"> the total number of words in the corpus 
     
-In addition to classical collocation metrics as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of frac:cscore, as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <img src="https://render.githubusercontent.com/render/math?math=x \rightarrow y"> means that the existence of word *x* implies the existence of word *y* 
+In addition to classical collocation metrics as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of frac:cScore, as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <img src="https://render.githubusercontent.com/render/math?math=x \rightarrow y"> means that the existence of word *x* implies the existence of word *y* 
 
 - `frac:support` (the *support* is an indication of how frequently the rule appears in the dataset): <img src="https://render.githubusercontent.com/render/math?math=support(x \rightarrow y) = \frac{f_{xy}}{N}"> (with *N* the total number of collocations)
-    ```frac:support rdfs:subPropertyOf frac:cscore .```
+    ```frac:support rdfs:subPropertyOf frac:cScore .```
 - `frac:confidence` (the *confidence* is an indication of how often the rule has been found to be true): <img src="https://render.githubusercontent.com/render/math?math=confidence(x \rightarrow y) = \frac{f_{xy}}{f_{x}}">
-    ```frac:confidence rdfs:subPropertyOf frac:cscore .```
+    ```frac:confidence rdfs:subPropertyOf frac:cScore .```
 - `frac:lift` (the *lift* or *interest* of a rule measures how many times more often *x* and *y* occur together than expected if they are statistically independent): <img src="https://render.githubusercontent.com/render/math?math=lift(x \rightarrow y) = \frac{f_{xy}}{f_{x}f_{y}}">
-    ```frac:lift rdfs:subPropertyOf frac:cscore .```
+    ```frac:lift rdfs:subPropertyOf frac:cScore .```
 - `frac:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *x* occurs without *y*, i.e., the frequency that the rule makes an incorrect prediction, if *x* and *y* are independent divided by the observed frequency of incorrect predictions): <img src="https://render.githubusercontent.com/render/math?math=conviction(x \rightarrow y) = \frac{(1 - f_{y})f_{x}}{f_{x} - f_{xy}}">
-    ```frac:conviction rdfs:subPropertyOf frac:cscore .```
+    ```frac:conviction rdfs:subPropertyOf frac:cScore .```
  
 > Note: As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted (cf. https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf). However, these may be defined by the user.
     
-Many of these metrics are asymmetric, and distinguish the lexical element they are about (the head) from its collocate(s). If such metrics are provided, a collocation should explicitly identify its head:
+Many of these metrics are asymmetric and distinguish the lexical element they are about (the head) from its collocate(s). If such metrics are provided, a collocation should explicitly identify its head:
 
 <div class="property">
 
