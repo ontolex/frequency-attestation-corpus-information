@@ -924,7 +924,7 @@ FrAC defines a number of popular collocation metrics as sub-properties of `frac:
     ```frac:pmi2 rdfs:subPropertyOf frac:cScore . ```
 - `frac:pmi3` (*PMI³-score*, cf. [Daille 1994 in Ebert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <img src="https://render.githubusercontent.com/render/math?math=PMI^3(x,y)=log_2 \frac{f_{xy}^3 N}{f_x f_y}">
     ```frac:pmi3 rdfs:subPropertyOf frac:cScore .```
-- `frac:pmiLogFreq` (*MI.log-f*, *salience*, formerly default metric in SketchEngine): <img src="https://render.githubusercontent.com/render/math?math=MI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
+- `frac:pmiLogFreq` (*PMI.log-f*, *salience*, formerly default metric in SketchEngine): <img src="https://render.githubusercontent.com/render/math?math=PMI.log-f(x,y)=log_2 \frac{f_{xy} N}{f_x f_y} \times log f_{xy}">
     ```frac:pmiLogFreq rdfs:subPropertyOf frac:cScore .```
 - `frac:dice` (*Dice coefficient*): <img src="https://render.githubusercontent.com/render/math?math=Dice(x,y)=\frac{2 f_{xy}}{f_x %2B f_y}">
     ```frac:dice rdfs:subPropertyOf frac:cScore .```
