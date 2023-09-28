@@ -287,7 +287,9 @@ The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Obse
 ```
 frac:Observable
     a owl:Class ;
-    vs:term_status "stable" .
+    # vs:term_status "stable" ;
+    skos:definition """Observable is an abstract superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, `ontolex:LexicalEntry`, `ontolex:LexicalSense`, `ontolex:Form`, and `ontolex:LexicalConcept`. Elements that FrAC properties apply to  must be observable in a corpus or another linguistic data source."""@en;
+    rdfs:label "observable"@en.
 
 ontolex:Form
     rdfs:subClassOf frac:Observable ;
@@ -320,7 +322,7 @@ In particular, we consider all these elements as being countable, annotatable/at
 > ----------------------- ------------------------------------
 > ### Observation (Class)
 > **URI:** [http://www.w3.org/nl/lemon/frac#Observation](http://www.w3.org/nl/lemon/frac#Observation)
-> **Observation** is an abstract superclass for anything that can be observed in a corpus about an Observable. An observation MUST have at least one `rdf:value` to express its value, it SHOULD have exactly one `frac:observedIn` that defines the data from which this information was drawn, and it SHOULD have a `dct:description` explaining the methodolgy and/or extraction method by which the observation was obtained.
+> **Observation** is an abstract superclass for anything that can be observed in a corpus about an Observable. An observation MUST have at least one `rdf:value` to express its value, it SHOULD have exactly one `frac:observedIn` property that defines the data from which this information was drawn, and it SHOULD have a `dct:description` explaining the methodolgy and/or extraction method by which the observation was obtained.
 > rdfs:subclassOf 1 `frac:observedIn`
 > rdfs:subclassOf min 1 `dct:description`
 > rdfs:subClassOf 1 rdf:value
