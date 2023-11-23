@@ -4,7 +4,6 @@
 Editors:
 
 * Christian Chiarcos ([Applied Computational Linguistics, University of Augsburg, Germany](https://www.uni-augsburg.de/de/fakultaet/philhist/professuren/angewandte-computerlinguistik/)) 
-* Max Ionov (Institute for Digital Humanities, University of Cologne, Germany)
 
 Contributors: (please add yourself)
 
@@ -18,6 +17,7 @@ Contributors: (please add yourself)
 * Jesse de Does
 * Katrien Depuydt
 * Elena-Simona Apostol
+* Max Ionov (Institute for Digital Humanities, University of Cologne, Germany)
 * ...
 
 [Copyright](https://www.w3.org/Consortium/Legal/ipr-notice#Copyright) © 2023 the Contributors to the The Ontolex Module for Frequency, Attestation and Corpus Information Specification, published by [Ontology Lexica](http://www.w3.org/community/ontolex/) under the [W3C Community Contributor License Agreement (CLA)](https://www.w3.org/community/about/agreements/cla/). A human-readable summary is [available](https://www.w3.org/community/about/agreements/cla-deed/). 
