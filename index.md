@@ -13,7 +13,7 @@ Contributors: (please add yourself)
 * Katerina Gkirtzou
 * John P. McCrae
 * Sander Stolk
-* Thierry Declerck
+* Thierry Declerck+
 * Jesse de Does
 * Katrien Depuydt
 * Elena-Simona Apostol
@@ -24,14 +24,14 @@ Contributors: (please add yourself)
 
 <section id="abstract">
 
-This document describes the _module for frequency, attestation and corpus information_ of the Lexicon Model for Ontologies (_lemon_) as a result of the work of the Ontology Lexica community group (OntoLex). The module is targeted at complementing dictionaries and other linguistic resources containing lexicographic data with a vocabulary to express
+This document describes the _module for frequency, attestation and corpus information_ of the OntoLex Lexicon Model for Ontologies (_OntoLex-Lemon_) developed by the W3C Community Group Ontology-Lexica. The module is targeted at complementing dictionaries and other linguistic resources containing lexicographic data with a vocabulary to express
 
-*   corpus-derived statistics (frequency and cooccurrence information, collocations),
-*   pointers from lexical resources to corpora and other collections of text (attestations),
-*   the annotation of corpora and other language resources with lexical information (lemmatization against a dictionary), and
+*   corpus-derived information (frequency and cooccurrence information, collocation analysis, distributional similarity),
+*   pointers from lexical resources to corpora and other collections of text (attestations, examples),
+*   the linking of corpora and linguistic primary data with lexical information (dictionary linking), and
 *   distributional semantics (collocation vectors, word embeddings, sense embeddings, concept embeddings).
 
-The module tackles use cases in corpus-based lexicography, corpus linguistics and natural language processing, and operates in combination with the _lemon_ core module, referred to as _OntoLex_, as well as with other _lemon_ modules.
+The module tackles use cases in corpus-based lexicography, corpus linguistics and natural language processing, and operates in combination with the _OntoLex-Lemon_ core module (_Lemon_), as well as with other _lemon_ modules.
 
 </section>
 
@@ -39,14 +39,18 @@ The module tackles use cases in corpus-based lexicography, corpus linguistics an
 
 This document is a working draft for a module for frequency, attestation and corpus data of the OntoLex specifications. It is not a W3C Standard nor is it on the W3C Standards Track.
 
-There are a number of ways that one may participate in the development of this report:
+> Note: the following information is to be removed from the final report
 
-*   Mailing list: [public-ontolex@w3.org](http://lists.w3.org/Archives/Public/public-ontolex/)
-*   Wiki: [Main page](https://www.w3.org/community/ontolex/wiki/Main_Page)
-*   More information about meetings of the ONTOLEX group can be obtained [here](https://www.w3.org/community/ontolex/wiki/Main_Page#Meetings)
-*   [Source code](https://github.com/ontolex/frequency-attestation-corpus-information/) for this document can be found on Github.
+    There are a number of ways that one may participate in the development of this report:
+
+    *   Mailing list: [public-ontolex@w3.org](http://lists.w3.org/Archives/Public/public-ontolex/)
+    *   Wiki: [Main page](https://www.w3.org/community/ontolex/wiki/Main_Page)
+    *   More information about meetings of the ONTOLEX group can be obtained [here](https://www.w3.org/community/ontolex/wiki/Main_Page#Meetings)
+    *   [Source code](https://github.com/ontolex/frequency-attestation-corpus-information/) for this document can be found on Github.
 
 Disclaimer: This draft follows closely the structure and design of [The Ontolex Lexicography Module. Draft Community Group Report 28 October 2018](https://jogracia.github.io/ontolex-lexicog/), edited by Julia Bosque-Gil and Jorge Gracia. In particular, motivational and introductory text are partially adapted without being marked as quotes. This is to be replaced by original text before publication.
+
+> Note: HTML template to be applied
 
 </section>
 
@@ -107,7 +111,7 @@ back to ([Table of Contents](#table-of-contents))
 
 back to ([Table of Contents](#table-of-contents))
 
-[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary to represent _linguistic information_ associated to ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology. The OntoLex module for Frequency, Attestations and Corpus-Based Information (OntoLex-FrAC) complements OntoLex-Lemon with the capability of including information drawn from or found in corpora.
+[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary to represent _linguistic information_ associated to ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology. The OntoLex module for Frequency, Attestations and Corpus-Based Information (OntoLex-FrAC) complements OntoLex-Lemon with the capability of including information drawn from or found in corpora and linguistic primary data.
 
 This builds on two primary motivations:
 
@@ -130,17 +134,17 @@ The added value of using linked data technologies to represent such information 
 
 back to ([Table of Contents](#table-of-contents))
 
-The goal of this module is to complement _lemon_ core elements with a vocabulary layer to represent lexicographical and semantic information derived from or defined with reference to corpora and external resources in a way that (a) _generalizes_ over use cases from digital lexicography, natural language processing, artificial intelligence, computational philology and corpus linguistics, that (b) facilitates _exchange, storage and re-usability_ of such data along with lexical information, and that (c) _minimizes information loss_.
+The goal of this module is to complement _OntoLex-Lemon_ elements with a vocabulary layer to represent lexicographical and semantic information derived from or defined with reference to corpora and external resources in a way that (a) _generalizes_ over use cases from digital lexicography, natural language processing, artificial intelligence, computational philology and corpus linguistics, that (b) facilitates _exchange, storage and re-usability_ of such data along with lexical information, and that (c) _minimizes information loss_ in comparison to other commonly used formalisms for such data.
 
 The scope of the model is three-fold:
 
-1.  extending the _OntoLex-lexicog_ model with corpus information to support existing challenges in corpus-driven lexicography,
+1.  complementing _OntoLex-Lexicog_ with corpus information to support corpus-driven lexicography (results of statistical analyses) and the inclusion of corpus evidence (attestations),
 2.  modelling _existing_ lexical and distributional-semantic resources (corpus-based dictionaries, collocation dictionaries, embeddings) as linked data, to allow their conjoint publication and inter-operation by Semantic Web standards, and
-3.  providing a conceptual / abstract model of relevant concepts in _distributional semantics_ that facilitates building linked data-based applications that consume and combine both lexical and distributional information.
+3.  providing a conceptual / abstract model of relevant concepts in _distributional semantics_ (embeddings, similarity metrics, collocations) that facilitates building linked data-based applications that consume and combine both lexical and distributional information.
 
 <div class="note">
 
-_Corpus_ as used throughout this document is understood in its traditional, broader sense as a structured data collection -- or material suitable for being included into such a collection, such as manuscripts or other works. We do not intend to limit the use of the term to corpora in a linguistic or NLP sense. Language resources of any kind (web documents, dictionaries, plain text, unannotated corpora, etc.) are considered "corpus data" and a collection of such information as a "corpus" in this sense. Any information drawn from or pertaining to such information is considered "corpus-based".
+_Corpus_ as used throughout this document is understood in its traditional, broader sense as a structured data collection -- or material suitable for being included into such a collection, such as manuscripts or other works. We do not intend to limit the use of the term to corpora in a linguistic or NLP sense. Language resources of any kind (web documents, dictionaries, plain text, unannotated corpora, etc.) are considered "corpus data" and a collection of such information as a "corpus" in this sense. Any information drawn from or pertaining to such information is considered "corpus-based". Accordingly, we account for observations in any kind of resource (identified by a URI), but ask users to specify its specific type according to the Dublin Core standard.
 
 </div>
 
@@ -151,7 +155,6 @@ _Corpus_ as used throughout this document is understood in its traditional, broa
 ### Namespaces
 
 back to ([Table of Contents](#table-of-contents))
-
 
 This is a list of relevant namespaces that will be used in the rest of this document:
 
@@ -246,7 +249,7 @@ dct:description
 
 back to ([Table of Contents](#table-of-contents))
 
-The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_frac_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent rdfs:subClassOf. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
+The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent `rdfs:subClassOf`. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
 ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
 Fig. 2 OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_), overview (Draft)
@@ -311,9 +314,8 @@ ontolex:LexicalSense
 ![](img/ontolex-element.png "frac:Observable")
 Fig. 1. `frac:Observable` as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
 
-For OntoLex, we assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the core model and in existing or forthcoming OntoLex modules. This includes ontolex:Form (for token frequency, etc.), ontolex:LexicalEntry (frequency of disambiguated lemmas), ontolex:LexicalSense (sense frequency), ontolex:LexicalConcept (e.g., synset frequency), lexicog:Entry (if used for representing homonyms: frequency of non-disambiguated lemmas), etc. (cf. Fig. 1). 
-In particular, we consider all these elements as being countable, annotatable/attestable and suitable for a numerical representation by means of a vector (embedding). For this reason, we introduce frac:Observable as a top-level element within the FrAC module that is used to define the rdfs:domain of any properties that link lexical and corpus-derived information. 
-
+For OntoLex, we assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (for token frequency, etc.), `ontolex:LexicalEntry` (frequency of disambiguated lemmas), `ontolex:LexicalSense` (sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas), etc. (cf. Fig. 1). 
+In particular, we consider all these elements as being countable, annotatable/attestable and suitable for a numerical representation by means of an embedding. For this reason, we introduce `frac:Observable` as a top-level element within the FrAC module that is used to define the `rdfs:domain` of any properties that link lexical and corpus-derived information. 
 
 > **Note:** The definition `frac:Observable` does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as `frac:Observable`. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
 
@@ -367,8 +369,6 @@ Observations as understood here are **empirical** (quantitative) observations th
 >
 > ----------------------- ------------------------------------
 
-> Note: proposed in June 2023 to replace `frac:corpus`, along with the abandonment of `frac:Corpus`.
-
 ```
 frac:observedIn
     a owl:ObjectProperty ;
@@ -387,45 +387,39 @@ frac:observedIn
     represented by its bibliographical metadata, etc."""@en .
 ```
 
-For machine-readable corpora that are/can be characterized by their size, data providers should provide the token count with the property `frac:total`, see section on Frequency below.
+For machine-readable corpora that are/can be characterized by their size, data providers can provide overall size information using the property `frac:total`, see section on Frequency below.
 
-We provide three examples for FrAC data sources below:
+We provide four examples for FrAC data sources below:
 
 1. 2012 English news subcorpus of the Leipzig Corpora collection, primarily used for computational lexicography. For `frac:total`, see the frequency section. The data provider provides the total number of sentences, lemmas ("types") and words ("tokens"), as reflected by the units of the `frac:Frequency`. The use of additional language resource metadata, e.g., language or publication year, is highly recommended, but not formally required.
 
         <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012> a dcmitype:Collection ;
             frac:total 
-                [ a frac:Frequency ; frac:unit "sentences" ; rdf:value "8,525,045" ] ,
-                [ a frac:Frequency ; frac:unit "tokens" ;    rdf:value "177,363,729" ] ,
-                [ a frac:Frequency ; frac:unit "lemmas" ;    rdf:value "1,126,551" ] ;
-            dct:language "en" ;
+                [ a frac:Frequency ; frac:measure "sentences" ; rdf:value "8,525,045" ] ,
+                [ a frac:Frequency ; frac:measure "tokens" ;    rdf:value "177,363,729" ] ,
+                [ a frac:Frequency ; frac:measure "lemmas" ;    rdf:value "1,126,551" ] ;
+            dct:language <http://lexvo.org/id/iso639-3/eng> ;
             dct:date "2012" ;
-            rdfs:comment """Leipzig Corpora Collection: English news corpus based on material 
-                            from 2012. Leipzig Corpora Collection. Dataset. 
-                            https://corpora.uni-leipzig.de?corpusId=eng_news_2012."""@en .
-
-    > Implementation note: dct:language Should be URI, not value
-
-    > Note that `frac:total` RDFS-entails that its object is a `frac:Frequency`. This information, included here for the sake of completeness, can thus be left implicit.
+            dct:description """Leipzig Corpora Collection: English news corpus based on material 
+                            from 2012. Leipzig Corpora Collection. Dataset."""@en .
 
 2. Google Books NGrams, a collection of n-grams. This is not a corpus, but a table of tab-separated values with sequences of words, their frequency in the underlying corpus and the number of individual documents they occur in (document frequency) for individual languages and n-gram sizes. This is a multilingual resource, so we cannot provide a unique language code. Further, it does not provide a total.
 
         <https://books.google.com/ngrams> a dcmitype:Dataset .
 
-3. The EPSD corpus, the data basis underlying the Electronic Penn Sumerian Dictionary. This is a multilingual corpus, consisting primarily of Sumerian, but also of Akkadian texts, hence it provides two language codes. The frequencies ("almost ...", "over ...") are provided in the same form as on the EPSD website for version 2.7.
+3. The EPSD corpus, the data basis underlying the Electronic Penn Sumerian Dictionary. This is a multilingual corpus, consisting primarily of Sumerian, but also of Akkadian texts, hence it provides two language codes. The frequencies ("almost ...", "over ...") are provided in the same form as on the EPSD website for version 2.7. Note that `frac:Frequency` can be RDFS-inferred from `frac:total` and `frac:measure`, so that it can be left implicit.
 
         <http://oracc.museum.upenn.edu/epsd2> a dcmitype:Collection ;
             dct:language "sux", "akk" ;
-            frac:total [ frac:unit "lexemes" ;        rdf:value "almost 16,000" ] ;
-            frac:total [ frac:unit "names" ;          rdf:value "over 50,000" ] ;
-            frac:total [ frac:unit "distinct forms" ; rdf:value "more than 225,000" ] ;
-            frac:total [ frac:unit "texts" ;          rdf:value "over 110,000" ] ;
-            frac:total [ frac:uniq "tokens" ;         rdf:value "almost 3.4 million" ] .
+            frac:total [ frac:measure "lexemes" ;        rdf:value "almost 16,000" ] ;
+            frac:total [ frac:measure "names" ;          rdf:value "over 50,000" ] ;
+            frac:total [ frac:measure "distinct forms" ; rdf:value "more than 225,000" ] ;
+            frac:total [ frac:measure "texts" ;          rdf:value "over 110,000" ] ;
+            frac:total [ frac:measure "tokens" ;         rdf:value "almost 3.4 million" ] .
 
 4. Yet another type of FrAC data sources are `dcmitype:Text` objects, including digitally edited text, edited text bundled with metadata about the original text, or digital metadata about a non-digital text. Also note that in this particular case, the only total provided by the original metadata / description (indirectly, though) is that this constitutes one letter.
 
         <https://www.dbnl.org/tekst/groo001brie04_01/groo001brie04_01_0003.php> a dcmitype:Text ;
-            frac:total [ frac:unit "letters" ; rdf:value "1" ] ;
             dct:language "nl" ;
             dct:date "1629-01-06" ;
             dct:author "N. van Reigersberch" ;
@@ -436,9 +430,7 @@ We provide three examples for FrAC data sources below:
 
     > Note: For anchoring individual attestations in documents, groups of documents, or their components, the property `frac:locus` can be used in addition to `frac:observedIn`, see Attestation section below. Furthermore, it is recommended to employ specialized vocabularies for bibliographical references.
 
-    > Implementation note: example from attestation section could be updated to https://www.dbnl.org/tekst/groo001brie04_01/groo001brie04_01_0003.php?q=dat%20men%20licht%20yemant%20de%20cat%20aen%20het%20been%20kan%20werpen;#hl1
-
-> Implementation note: list all datasets used below here
+> Implementation note: tbc. whether all example datasets used in text are listed here
 
 > Note that for FrAC data sources illustrated above, we use the original access URL as data source URI. As these will resolve only if the data providers themselves provide linked-data-compliant metadata, these URIs will not resolve at the moment. For providers of lexical data, a best practice recommendation for cases in which they are not in control of the access URL is to mint (and host) a distinct data source URI and define it to be `owl:sameAs` the access URL.
 
@@ -832,6 +824,8 @@ frac:locus
 
 
 Note: In the example above, NIF is not correctly used: NIF requires string URIs for loci, including the identification of the source document within the base URI and the identification of a context (this is instead provided via `hasCitedEntity`). To be revised or replaced.
+
+Note: Update example to https://www.dbnl.org/tekst/groo001brie04_01/groo001brie04_01_0003.php?q=dat%20men%20licht%20yemant%20de%20cat%20aen%20het%20been%20kan%20werpen;#hl1
 
 </section>
 
