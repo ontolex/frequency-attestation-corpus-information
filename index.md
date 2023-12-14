@@ -251,10 +251,15 @@ back to ([Table of Contents](#table-of-contents))
 
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent `rdfs:subClassOf`. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
-![](img/diagram-2023-large.png)
 
-> Note: old diagram: ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
-Fig. 2 OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_), overview (Draft). Please use [this link](https://service.tib.eu/webvowl/#opts=doc=1;cd=180;dd=220;filter_disjoint=false;filter_setOperator=true;mode_compact=true;#iri=https://github.com/ontolex/frequency-attestation-corpus-information/raw/master/owl/frac.ttl) to get a live view on [the ontology](owl/frac.ttl).
+![](https://raw.githubusercontent.com/acoli-repo/frac-addenda/master/img/diagram-2023.png)
+Fig. 2 OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_), overview 
+
+> Note: old diagram: 
+    
+    ![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
+
+    Please use [this link](https://service.tib.eu/webvowl/#opts=doc=1;cd=180;dd=220;filter_disjoint=false;filter_setOperator=true;mode_compact=true;#iri=https://github.com/ontolex/frequency-attestation-corpus-information/raw/master/owl/frac.ttl) to get a live view on [the ontology](owl/frac.ttl).
 
 </section>
 
