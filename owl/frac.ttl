@@ -1,58 +1,61 @@
-                                                                                                                                      
-    @prefix frac: <http://www.w3.org/ns/lemon/frac#> . 
+                                                                                                                                                          
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> . 
 
 
-    @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> . 
-    @prefix synsem: <http://www.w3.org/ns/lemon/synsem#> . 
-    @prefix decomp: <http://www.w3.org/ns/lemon/decomp#> . 
-    @prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> . 
-    @prefix lime: <http://www.w3.org/ns/lemon/lime#> . 
-    @prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> . 
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> . 
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> . 
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> . 
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> . 
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> . 
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> . 
 
 
-    @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>. 
-    @prefix owl: <http://www.w3.org/2002/07/owl#>. 
-    @prefix xsd: <http://www.w3.org/2001/XMLSchema#>. 
-    @prefix skos: <http://www.w3.org/2004/02/skos#>. 
-    @prefix dbr: <http://dbpedia.org/resource/>. 
-    @prefix dbo: <http://dbpedia.org/ontology/>. 
-    @prefix void: <http://rdfs.org/ns/void#>. 
-    @prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>. 
-    @prefix dct: <http://purl.org/dc/terms/>. 
-    @prefix provo: <http://www.w3.org/ns/prov#>. 
-    @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. 
-    @prefix oa: <http://www.w3.org/ns/oa#>. 
-    @prefix aat: <http://vocab.getty.edu/aat/>. 
-    @prefix voaf: <http://purl.org/vocommons/voaf#>. 
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>. 
+@prefix owl: <http://www.w3.org/2002/07/owl#>. 
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>. 
+@prefix skos: <http://www.w3.org/2004/02/skos#>. 
+@prefix dbr: <http://dbpedia.org/resource/>. 
+@prefix dbo: <http://dbpedia.org/ontology/>. 
+@prefix void: <http://rdfs.org/ns/void#>. 
+@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>. 
+@prefix dct: <http://purl.org/dc/terms/>. 
+@prefix provo: <http://www.w3.org/ns/prov#>. 
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. 
+@prefix oa: <http://www.w3.org/ns/oa#>. 
+@prefix aat: <http://vocab.getty.edu/aat/>. 
+@prefix voaf: <http://purl.org/vocommons/voaf#>. 
+@prefix dcam: <http://purl.org/dc/dcam/> . 
+@prefix dcterms: <http://purl.org/dc/terms/> . 
+@prefix dcmitype: <http://purl.org/dc/dcmitype/> 
 
 
-    @prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> . 
+@prefix vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#> . 
 
 
-    ########################## 
-    # vocabulary declaration # 
-    ########################## 
-    <http://www.w3.org/ns/lemon/frac#> 
-        a owl:Ontology, voaf:Vocabulary ; 
-        # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
-        . 
-    ######################### 
-    # imported vocabularies # 
-    ######################### 
-    rdf:Bag 
-        rdfs:subClassOf rdfs:Container . 
-    rdf:Seq 
-        rdfs:subClassOf rdfs:Container . 
-    rdfs:member 
-        a owl:ObjectProperty . 
-    rdf:value 
-        a owl:DatatypeProperty . 
-    dct:extent 
-        a owl:DatatypeProperty . 
-    dct:description 
-        a owl:DatatypeProperty . 
+########################## 
+# vocabulary declaration # 
+########################## 
+<http://www.w3.org/ns/lemon/frac#> 
+    a owl:Ontology, voaf:Vocabulary ; 
+    # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
+    . 
+######################### 
+# imported vocabularies # 
+######################### 
+rdf:Bag 
+    rdfs:subClassOf rdfs:Container . 
+rdf:Seq 
+    rdfs:subClassOf rdfs:Container . 
+rdfs:member 
+    a owl:ObjectProperty . 
+rdf:value 
+    a owl:DatatypeProperty . 
+dct:extent 
+    a owl:DatatypeProperty . 
+dct:description 
+    a owl:DatatypeProperty . 
 
-
+        
 ##################### 
 # top-level classes # 
 ##################### 
@@ -60,19 +63,21 @@
 
 frac:Observable 
     a owl:Class ; 
+    # vs:term_status "stable" ; 
+    skos:definition """Observable is an abstract superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, `ontolex:LexicalEntry`, `ontolex:LexicalSense`, `ontolex:Form`, and `ontolex:LexicalConcept`. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source."""@en; 
+    rdfs:label "observable"@en. 
+ontolex:Form 
+    rdfs:subClassOf frac:Observable ; 
     vs:term_status "stable" . 
-    ontolex:Form 
-        rdfs:subClassOf frac:Observable ; 
-        vs:term_status "stable" . 
-    ontolex:LexicalConcept 
-        rdfs:subClassOf frac:Observable ; 
-        vs:term_status "stable" . 
-    ontolex:LexicalEntry 
-        rdfs:subClassOf frac:Observable ; 
-        vs:term_status "stable" . 
-    ontolex:LexicalSense 
-        rdfs:subClassOf frac:Observable ; 
-        vs:term_status "stable" . 
+ontolex:LexicalConcept 
+    rdfs:subClassOf frac:Observable ; 
+    vs:term_status "stable" . 
+ontolex:LexicalEntry 
+    rdfs:subClassOf frac:Observable ; 
+    vs:term_status "stable" . 
+ontolex:LexicalSense 
+    rdfs:subClassOf frac:Observable ; 
+    vs:term_status "stable" . 
 
 
 frac:Observation 
@@ -81,6 +86,11 @@ frac:Observation
         a <http://www.w3.org/2002/07/owl#Restriction> ; 
         <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
         <http://www.w3.org/2002/07/owl#onProperty> rdf:value 
+   ] ; 
+   rdfs:subClassOf [ 
+        a <http://www.w3.org/2002/07/owl#Restriction> ; 
+        <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
+        <http://www.w3.org/2002/07/owl#onProperty> frac:observedIn 
    ] ; 
     # the following constraint is semantically empty 
     # it is supposed to express that there should be 
@@ -94,38 +104,29 @@ frac:Observation
     vs:term_status "tbc" . 
 
 
-frac:Corpus 
-    rdfs:subClassOf [ 
+frac:observedIn 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Observation ; 
+    rdfs:range [ 
         a owl:Restriction ; 
-        owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ; 
-        owl:onDataRange xsd:int ; 
-        owl:onProperty frac:total 
-    ] ; 
-    vs:term_status "tbc" . 
+        owl:onProperty rdf:type ; 
+        owl:someValuesFrom [ 
+            a owl:Restriction ; 
+            owl:onProperty dcam:memberOf ; 
+            owl:hasValue dcterms:DCMIType ] ] ; 
+    vs:term_status "tbc" ; 
+    rdfs:comment """For an Observation, the property observedIn defines the URI of the data 
+    source (or its metadata entry) that this particular observation was made in or derived from. 
+    This can be, for example, a corpus or a text represented by its access URL, a book 
+    represented by its bibliographical metadata, etc."""@en . 
 
-
-    frac:corpus 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Observation ; 
-        rdfs:range frac:Corpus ; 
-        vs:term_status "tbc" ; 
-        rdfs:comment "Points from an Observation to the data in which that Observation has been made. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc. Note: probably to be renamed; originally, this was dct:source"@en . 
-
-
-    frac:total 
-        a owl:DatatypeProperty, owl:FunctionalProperty ; 
-        rdfs:domain frac:Corpus ; 
-        rdfs:range xsd:int ; 
-        rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ; 
-        vs:term_status "tbc" . 
-
-
+                                                                                                                                                                                                                                                                                                                                        
 ############# 
 # frequency # 
 ############# 
 
 
-frac:CorpusFrequency 
+frac:Frequency 
     a owl:Class ; 
     rdfs:subClassOf frac:Observation ; 
     rdfs:subClassOf [ 
@@ -137,13 +138,27 @@ frac:CorpusFrequency
     vs:term_status "stable" . 
 
 
-    frac:frequency 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Observable ; 
-        rdfs:range frac:CorpusFrequency ; 
-        vs:term_status "stable" . 
+frac:frequency 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Observable ; 
+    rdfs:range frac:Frequency ; 
+    vs:term_status "stable" . 
 
-																																																						           	                   
+
+frac:total 
+    a owl:DatatypeProperty, owl:FunctionalProperty ; 
+    rdfs:domain [ 
+        a owl:Restriction ; 
+        owl:onProperty rdf:type ; 
+        owl:someValuesFrom [ 
+            a owl:Restriction ; 
+            owl:onProperty dcam:memberOf ; 
+            owl:hasValue dcterms:DCMIType ] ] ; 
+    rdfs:range xsd:int ; 
+    rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en ; 
+    vs:term_status "tbc" . 
+
+                                                                                                                                                                                                                                                          
 ############### 
 # attestation # 
 ############### 
@@ -154,28 +169,28 @@ frac:Attestation
     vs:term_status "stable" . 
 
 
-    frac:attestation 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Observable ; 
-        rdfs:range frac:Attestation ; 
-        rdfs:subPropertyOf frac:citation ; 
-        vs:term_status "stable" . 
+frac:attestation 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Observable ; 
+    rdfs:range frac:Attestation ; 
+    rdfs:subPropertyOf frac:citation ; 
+    vs:term_status "stable" . 
 
 
-    frac:citation 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Observable ; 
-        vs:term_status "tbc" . 
+frac:citation 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Observable ; 
+    vs:term_status "tbc" . 
 
 
-    frac:gloss 
-        a owl:DatatypeProperty ; 
-        rdfs:domain frac:Attestation ; 
-        rdfs:range xsd:string ; 
-        rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ; 
-        vs:term_status "tbc" . 
+frac:gloss 
+    a owl:DatatypeProperty ; 
+    rdfs:domain frac:Attestation ; 
+    rdfs:range xsd:string ; 
+    rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." ; 
+    vs:term_status "tbc" . 
 
-
+                                                                    
 frac:locus 
     a owl:ObjectProperty ; 
     rdfs:domain frac:Attestation ; 
@@ -183,7 +198,7 @@ frac:locus
     rdfs:comment """Points from an Observation to the exact location in the source material on where it is to be found. This can be, for example, a page in a book, the string URI of a passage in a text, a canonical reference to a passage in piece of literatur, or any Web Annotation selector. We have confirmed name, function and necessity of this property. 
     When the locus is provided, it is not necessary to also refer to the source material as a whole. The existence of such a reference is nevertheless implied."""@en . 
 
-																																				
+                                                                                                                                                
 ############### 
 # collocation # 
 ############### 
@@ -204,62 +219,62 @@ frac:Collocation
     vs:term_status "stable" . 
 
 
-    frac:cscore 
-        rdfs:subPropertyOf rdf:value ; 
-        rdfs:domain frac:Collocation ; 
-        vs:term_status "stable" . 
+frac:cScore 
+    rdfs:subPropertyOf rdf:value ; 
+    rdfs:domain frac:Collocation ; 
+    vs:term_status "stable" . 
 
     
-    frac:rel_freq rdfs:subPropertyOf frac:cscore . 
+    frac:relFreq rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:pmi rdfs:subPropertyOf frac:cscore . 
+    frac:pmi rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:mi2 rdfs:subPropertyOf frac:cscore . 
+    frac:pmi2 rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:mi3 rdfs:subPropertyOf frac:cscore . 
+    frac:pmi3 rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:pmi_logfreq rdfs:subPropertyOf frac:cscore . 
+    frac:pmiLogFreq rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:dice rdfs:subPropertyOf frac:cscore . 
+    frac:dice rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:logDice rdfs:subPropertyOf frac:cscore . 
+    frac:logDice rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:minSensitivity rdfs:subPropertyOf frac:cscore . 
+    frac:minSensitivity rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:likelihood_ratio rdfs:subPropertyOf frac:cscore . 
+    frac:logLikelihood rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:tScore rdfs:subPropertyOf frac:cscore . 
+    frac:tScore rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:chi2 rdfs:subPropertyOf frac:cscore . 
+    frac:chi2 rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:support rdfs:subPropertyOf frac:cscore . 
+    frac:support rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:confidence rdfs:subPropertyOf frac:cscore . 
+    frac:confidence rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:lift rdfs:subPropertyOf frac:cscore . 
+    frac:lift rdfs:subPropertyOf frac:cScore . 
     
     
-    frac:conviction rdfs:subPropertyOf frac:cscore . 
+    frac:conviction rdfs:subPropertyOf frac:cScore . 
     
 
-    frac:head 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Collocation ; 
-        rdfs:range frac:Observable ; 
-        vs:term_status "stable" . 
+frac:head 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Collocation ; 
+    rdfs:range frac:Observable ; 
+    vs:term_status "stable" . 
 
                                                                                                                                                                                                                            
 ############# 
@@ -277,18 +292,18 @@ frac:Embedding
     vs:term_status "stable" . 
 
 
-    frac:embedding 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Observable ; 
-        rdfs:range frac:Embedding ; 
-        vs:term_status "stable" . 
+frac:embedding 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Observable ; 
+    rdfs:range frac:Embedding ; 
+    vs:term_status "stable" . 
 
 
 frac:FixedSizeVector 
     rdfs:subClassOf frac:Embedding ; 
     vs:term_status "stable" . 
 
-        		      	  			       	  	  		  		  		  	  		  	  		  	          	
+                                                                                                                                                 
 frac:TimeSeries 
     rdfs:subClassOf frac:Embedding ; 
     vs:term_status "stable" . 
@@ -298,12 +313,12 @@ frac:BagOfWords
     rdfs:subClassOf frac:Embedding ; 
     vs:term_status "stable" . 
 
-                                        		
-    frac:attestationEmbedding 
-        a owl:ObjectProperty ; 
-        rdfs:domain frac:Attestation ; 
-        rdfs:range frac:Embedding ; 
-        vs:term_status "stable" . 
+                                                
+frac:attestationEmbedding 
+    a owl:ObjectProperty ; 
+    rdfs:domain frac:Attestation ; 
+    rdfs:range frac:Embedding ; 
+    vs:term_status "stable" . 
 
 
 ############## 
@@ -324,4 +339,4 @@ frac:Similarity
     ] ; 
     vs:term_status "stable" . 
 
-        	                                        	      	      	      	                    	      	      	            
+                                                                                                                                              
