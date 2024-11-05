@@ -287,7 +287,7 @@ The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Obse
 
 > ----------------------- ------------------------------------
 > ### Observable (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Observable](http://www.w3.org/nl/lemon/frac#Observable)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Observable](http://www.w3.org/ns/lemon/frac#Observable)
 > **Observable** is an abstract superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, `ontolex:LexicalEntry`, `ontolex:LexicalSense`, `ontolex:Form`, and `ontolex:LexicalConcept`. Elements that FrAC properties apply to  must be observable in a corpus or another linguistic data source.
 > ----------------------- ------------------------------------
 </div>
@@ -328,7 +328,7 @@ In particular, we consider all these elements as being countable, annotatable/at
 
 > ----------------------- ------------------------------------
 > ### Observation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Observation](http://www.w3.org/nl/lemon/frac#Observation)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Observation](http://www.w3.org/ns/lemon/frac#Observation)
 > **Observation** is an abstract superclass for anything that can be observed in a corpus about an Observable. An observation MUST have at least one `rdf:value` to express its value, it SHOULD have exactly one `frac:observedIn` property that defines the data from which this information was drawn, and it SHOULD have a `dct:description` explaining the methodolgy and/or extraction method by which the observation was obtained.
 > rdfs:subclassOf 1 `frac:observedIn`
 > rdfs:subclassOf min 1 `dct:description`
@@ -464,7 +464,7 @@ In order to avoid confusion with lexinfo:Frequency (which provides lexicographic
 
 > ----------------------- ------------------------------------
 > ### Frequency (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Frequency](http://www.w3.org/nl/lemon/frac#Frequency)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Frequency](http://www.w3.org/ns/lemon/frac#Frequency)
 > **Frequency** is a `frac:Observation` of the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) that is `frac:observedIn` in a particular data source. Using `frac:unit`, frequency objects can also identify the (segmentation) unit that their counts are based on. 
 > **SubClassOf:** `frac:Observation`
 > **SubClassOf:** `rdf:value` exactly 1 , `frac:observedIn` exactly 1
@@ -489,7 +489,7 @@ frac:Frequency
 
 > ----------------------- ------------------------------------
 > ### unit (Property)
-> **URI:** [http://www.w3.org/nl/lemon/frac#unit](http://www.w3.org/nl/lemon/frac#unit)
+> **URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
 > For a `frac:Frequency` object, the property **unit** provides an identifier of the respective segmentation unit.
 > **rdfs:range** `frac:Frequency`
 >
@@ -506,7 +506,7 @@ Examples for `frac:unit` include string literals such as `"tokens"`, `"sentences
 
 > ----------------------- ------------------------------------
 > ### frequency (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#frequency](http://www.w3.org/nl/lemon/frac#frequency)
+> **URI:** [http://www.w3.org/ns/lemon/frac#frequency](http://www.w3.org/ns/lemon/frac#frequency)
 > The property **frequency** assigns a particular `frac:Observable` a `frac:Frequency`.
 > **rdfs:domain** `frac:Observable`
 > **rdfs:range** `frac:Frequency`
@@ -682,7 +682,7 @@ In  scholarly  dictionaries,  attestations  are  a  representative selection  fr
 
 > --------
 > ### Attestation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Attestation](http://www.w3.org/nl/lemon/frac#Attestation)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Attestation](http://www.w3.org/ns/lemon/frac#Attestation)
 >  An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation  or  excerpt  from  a  source  document  that  illustrates a  particular  form,  sense,  lexeme  or  features  such  as  spelling variation,  morphology,  syntax,  collocation,  register.  An attestation SHOULD have an `rdf:value`, it CAN have a `frac:gloss`, and it SHOULD have a `frac:observedIn` or `frac:locus` object to identify the source of this material.
 For an attestation, `rdf:value` represents the text of a quotation as represented in the original source. If that needs to be distinguished or is different from the way how it is represented in the dictionary, FrAC users should use `frac:gloss` for the latter purpose. 
 > **SubClassOf:** `rdf:value` max 1 
@@ -859,7 +859,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 > ---
 > ### Collocation (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#Collocation)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 > A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cScore</tt>) in a particular data source (<tt>frac:observedIn</tt>). Collocations are both observations and observables, and they are modelled as an aggregate (`rdfs:Container`) of observables.
 > **SubClassOf:** <tt>frac:Observation, rdfs:Container, frac:Observable</tt>
 > **rdfs:member:** only <tt>frac:Observable</tt>
@@ -900,7 +900,7 @@ Collocations can be described in terms of various collocation scores. If scores 
 
 > ---
 > ### cScore (property)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#cScore)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#cScore)
 > **Collocation score** is a subproperty of `rdf:value` that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.
 > **SubPropertyOf:** <tt>rdf:value</tt>
 > **domain:** <tt>frac:Collocation</tt>
@@ -978,7 +978,7 @@ Many of these metrics are asymmetric and distinguish the lexical element they ar
 
 > ---
 > ### head (property)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Collocation](http://www.w3.org/nl/lemon/frac#head)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#head)
 > The **head** property identifies the element of a collocation that its scores are about. A collocation must not have more than one head.
 > **domain:** <tt>frac:Collocation</tt>
 > **range:** <tt>frac:Observable</tt>
@@ -1185,7 +1185,7 @@ Lexicalized embeddings provide their data via <tt>rdf:value</tt>, and should be 
 
 > ---
 > ### Embedding (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Embedding](http://www.w3.org/nl/lemon/frac#Embedding)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Embedding](http://www.w3.org/ns/lemon/frac#Embedding)
 > An **Embedding** is a representation (of a given frac:Observable (see <tt>frac:embedding</tt>) in a numerical feature space. It is defined by the methodology used for creating it (<tt>dct:description</tt>), the URI of the corpus or language resource from which it was created (<tt>frac:observedIn</tt>). The literal value of an Embedding is  provided by <tt>rdf:value</tt>). In OntoLex-FrAC, embeddings are `frac:Observation`s that are obtained from a particular corpus.
 > **SubClassOf:** rdf:value exactly 1 xsd:string, frac:observedIn exactly 1, dct:description min 1
 > **SubClassOf:** `frac:Observation`
@@ -1208,7 +1208,7 @@ frac:Embedding
 
 > ----
 > ### embedding (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#embedding](http://www.w3.org/nl/lemon/frac#embedding)
+> **URI:** [http://www.w3.org/ns/lemon/frac#embedding](http://www.w3.org/ns/lemon/frac#embedding)
 > The property **embedding** is a relation that maps a frac:Observable into a numerical feature space. An embedding is a structure-preserving mapping in the sense that it encodes and preserves contextual features of a particular frac:Observable (or, an aggregation over all its attestations) in a particular corpus.
 > **rdfs:range** ontolex:Element
 > **rdfs:domain** frac:Embedding
@@ -1244,7 +1244,7 @@ Also note that different subclasses of frac:Embedding may have different encodin
 
 > ---
 > ### FixedSizeVector (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#FixedSizeVector](http://www.w3.org/nl/lemon/frac#FixedSizeVector)
+> **URI:** [http://www.w3.org/ns/lemon/frac#FixedSizeVector](http://www.w3.org/ns/lemon/frac#FixedSizeVector)
 > A **FixedSizeVector** is the value of a frac:embedding into a fixed-size numerical feature space. The literal value (<tt>rdf:value</tt>) of a FixedSizeVector is a list of numbers. The dimensionality of the feature space should be encoded by dct:extent.
 > **SubClassOf:** Embedding, dct:extent exactly 1
 >
@@ -1346,7 +1346,7 @@ Examples for non-word embeddings:
 
 > ---
 > ### TimeSeries (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#TimeSeries](http://www.w3.org/nl/lemon/frac#TimeSeries)
+> **URI:** [http://www.w3.org/ns/lemon/frac#TimeSeries](http://www.w3.org/ns/lemon/frac#TimeSeries)
 > A **TimeSeries** is a sequence of observations represented as numerical values, e.g., sensor data. Every point in the sequence is represented by a fixed number of numerical values. The time series is the concatenation of these values. The obligatory attribute <tt>dct:extent</tt> defines the number of observations (dimensionality) for every individual point of time. 
 > **SubClassOf:** Embedding, dct:extent exactly 1
 >
@@ -1373,7 +1373,7 @@ Other examples of time series:
 
 > ---
 > ### BagOfWords (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#BagOfWords](http://www.w3.org/nl/lemon/frac#TimeSeries)
+> **URI:** [http://www.w3.org/ns/lemon/frac#BagOfWords](http://www.w3.org/ns/lemon/frac#TimeSeries)
 > For any frac:Observable, a **frac:BagOfWords** represents the collocates it occurs with in a particular corpus. In a weighted bag of words, every collocate is stored together with a frequency, confidence score or association weight. A bag of words must not define a dct:extent.
 >
 > **SubClassOf:** Embedding, dct:extent exactly 0
@@ -1428,7 +1428,7 @@ Since 2018, static word and concept embeddings have been increasingly replaced b
 
 > ----
 > ### attestationEmbedding (ObjectProperty)
-> **URI:** [http://www.w3.org/nl/lemon/frac#embedding](http://www.w3.org/nl/lemon/frac#embedding)
+> **URI:** [http://www.w3.org/ns/lemon/frac#embedding](http://www.w3.org/ns/lemon/frac#embedding)
 > The property **attestation embedding** is a relation that maps an attestation of a particular observable into a numerical feature space. The string representation of the attestation should represent the necessary context that the respective embedding is calculated from.
 > **rdfs:domain** frac:Attestation
 > **rdfs:range** frac:Embedding
@@ -1473,7 +1473,7 @@ Like <tt>frac:Collocation</tt>, quantitative similarity relations are aggregates
 
 > ----
 > ### Similarity (Class)
-> **URI:** [http://www.w3.org/nl/lemon/frac#Similarity](http://www.w3.org/nl/lemon/frac#Similarity)
+> **URI:** [http://www.w3.org/ns/lemon/frac#Similarity](http://www.w3.org/ns/lemon/frac#Similarity)
 > **Similarity** is a <tt>frac:Observation</tt> about the relatedness between two or more <tt>frac:Embedding</tt>s, and it is characterized by a similarity score (<tt>rdf:value</tt>) in a specific source corpus (<tt>frac:observedIn</tt>) and a <tt>dct:description</tt> that explains the method of comparison.
 > **SubClassOf:** <tt>frac:Observation, rdfs:Bag</tt>
 > **rdfs:member:** only <tt>frac:Embedding</tt>
