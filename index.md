@@ -122,8 +122,10 @@ Other models [TO REVIEW]:
 The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent `rdfs:subClassOf`. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
 
 
+<figure id="overview-figure">
 ![](https://raw.githubusercontent.com/acoli-repo/frac-addenda/master/img/diagram-2023.png)
-Fig. 2 OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_), overview 
+<figcaption>OntoLex Module for Frequency, Attestation and Corpus Information (_FrAC_), overview</figcaption>
+</figure>
 
 </section>
 </section>
@@ -152,7 +154,7 @@ The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Obse
 
 <figure>
 ![](img/ontolex-element.png "frac:Observable")
-Fig. 1. `frac:Observable` as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept
+<figcaption>`frac:Observable` as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept</figcaption>
 </figure>
 
 </section>
