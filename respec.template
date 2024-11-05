@@ -11,8 +11,19 @@
     <script class="remove">
       // All config options at https://respec.org/docs/
       var respecConfig = {
-        specStatus: "CG-FINAL",
+        specStatus: "CG-DRAFT",
         editors: [
+$for(editor)$
+    {
+"name": 
+"$editor.name$", 
+"company": 
+"$editor.company$", 
+"companyURL": 
+"$editor.companyURL$"},
+$endfor$
+        ],
+        authors: [
 $for(author)$
     {
 "name": 
@@ -25,7 +36,8 @@ $endfor$
         ],
         github: "ontolex/frequency-attestation-corpus-information",
         shortName: "FrAC",
-        group: "ontolex"
+        group: "ontolex",
+        latestVersion: "https://ontolex.github.io/frequency-attestation-corpus-information/"
       };
     </script>
     <style>
@@ -36,10 +48,16 @@ $endfor$
      margin-right: auto;
      padding: 10px;
  }
- .entity h3 {
+.entity > p:first-child {
      margin-top: 3px;
      padding-bottom: 5px;
      border-bottom: 1px solid #000080;
+     font-size: 120%;
+     color: var(--heading-text);
+     page-break-after: avoid;
+     page-break-inside: avoid;
+     line-height: 1.2;        /* Keep wrapped headings compact */
+     hyphens: manual;         /* Hyphenated headings look weird */
  }
  .description {
      border-top: 1px dashed #808080;
