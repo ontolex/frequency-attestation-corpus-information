@@ -535,51 +535,25 @@ locus (ObjectProperty)
 </div>
 
 <div class="note">
-`frac:locus` denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, `frac:observedIn` can refer to a corpus of other collections of texts. `frac:locus` normally refers to a location identified by RFC5147 character offsets, NIF URIs, or Open Annotation references, whereas `frac:observedIn` refers to `dct:Text`s or `dct:Collection`s.
+`frac:locus` denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, `frac:observedIn` can refer to a corpus of other collections of texts. `frac:locus` normally refers to a location identified by RFC5147 character offsets, NIF URIs, Open Annotation or Text Fragments references, whereas `frac:observedIn` refers to `dct:Text`s or `dct:Collection`s.
 </div>
 
-<aside class="example" title="Example: DiaMaNT">
-
-[DiaMaNT (_Diachroon seMAntisch lexicon van de Nederlandse Taal_)](http://diamant.ivdnt.org/diamant-ui/) is a diachronic semantic computational lexicon of Dutch, at its core formed by four scholarly historical dictionaries of Dutch covering a language period from ca. 500 – 1976. The example below illustrates the combination of FrAC attestations with the [CITO](https://sparontologies.github.io/cito/current/cito.html) and [FRBR](http://purl.org/vocab/frbr/core#) vocabularies, as well as with the [NLP Interchange Format](https://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
+<aside class="example" title="Example: Locus of the term 'lexical entry' in the OntoLex specification">
 
 ```turtle
-diamant:entry_WNT_M030758 a ontolex:LexicalEntry ; 
-    ontolex:sense diamant:sense_WNT_M030758_bet_207 .
-
-diamant:sense_WNT_M030758_bet_207 a ontolex:LexicalSense;
-    rdfs:label "V.-" ;
-frac:attestation diamant:attestation_2108540 ; 
-skos:definition "Iemand een kat (of de kat) aan het  been  jagen...... iemand in moeilijkheden brengen." .
-
-diamant:attestation_2108540 a frac:Attestation ; 
-    cito:hasCitedEntity diamant:cited_document_WNT_332819  ;
-    cito:hasCitingEntity diamant:sense_WNT_M030758_bet_207; 
-    frac:locus diamant:locus_2108540  ;
-    frac:quotation "... dat men licht yemant de cat aen het been kan werpen," .
-
-diamant:locus_2108540 a diamant:Occurrence ; 
-    nif:beginIndex 107 ;
-    nif:endIndex 110 .
-
-diamant:cited_document_WNT_332819 a frbr:Manifestation ;
-    frbr:embodimentOf diamant:expression_WNT_332819 ; 
-    diamant:witnessYearFrom 1621 ;
-    diamant:witnessYearTo 1621 .
-
-diamant:expression_WNT_332819 a frbr:Expression ; 
-    dcterms:creator "N. V. REIGERSB." ; 
-    dcterms:title "Brieven van Nicolaes van Reigersberch aan Hugo de Groot" ; 
-    frbr:embodiment diamant:quotation_WNT_332819 .
+:lexical_entry a ontolex:LexicalEntry ;
+ ontolex:canonicalForm [
+   ontolex:writtenRep "lexical entry" ;
+   frac:attestation [
+     a frac:Attestation ;
+     rdf:value "lexical entry" ;
+     frac:locus 
+    <https://www.w3.org/2016/05/ontolex/#:~:text=of%20a-,lexical%20entry,-is%20expressed> ;
+     frac:observedIn <https://www.w3.org/TR/ontolex/>
+   ]
+ ] .
 ```
 </aside>
-
-<div class="note">
-In the example above, NIF is not correctly used: NIF requires string URIs for loci, including the identification of the source document within the base URI and the identification of a context (this is instead provided via `hasCitedEntity`). To be revised or replaced.
-</div>
-
-<div class="note">
-Update example to https://www.dbnl.org/tekst/groo001brie04_01/groo001brie04_01_0003.php?q=dat%20men%20licht%20yemant%20de%20cat%20aen%20het%20been%20kan%20werpen;#hl1
-</div>
 
 </section>
 </section>
@@ -767,6 +741,10 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 
 ## Corpus Annotation (non-normative)
 
+<section>
+
+### Web Annotation
+
 <div class="note">
 
 The Ontolex Module for Frequency, Attestation and Corpus Information does not specify a vocabulary for annotating corpora or other data with lexical information, as this is being provided by the [Web Annotation Vocabulary](https://www.w3.org/TR/annotation-vocab/). The following description is non-normative as Web Annotation is defined in a separate W3C recommendation. The definitions below are reproduced and refined only insofar as domain and range declarations have been refined to our use case.
@@ -805,7 +783,16 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 <aside class="example" title="Example: Web Annotation">
 
 ```turtle
-TODO
+:annotation a oa:Annotation, frac:Attestation ;
+  oa:hasTarget :target ;
+  frac:locus :target ;
+  oa:hasBody :lex_entry .
+
+:target a oa:TexPositionSelector ;
+  oa:start 123 ;
+  oe:end 456  .
+
+:lex_entry frac:attestation :annotation .
 ```
 </aside>
 
@@ -820,6 +807,32 @@ TODO
 As for frequency, embeddings, etc., resource-specific annotation classes can be defined by <tt>owl:Restriction</tt> so that modelling effort and verbosity are reduced. These should follow the same conventions.
 
 </div>
+
+</section>
+
+<section>
+
+### NLP Interchange Format
+
+The NLP Interchange Format (NIF) is a standard for the representation of text annotations. It is based on RDF and allows for the representation of text, its structure, and annotations. NIF is particularly useful for the representation of text annotations in the context of the Semantic Web. The NIF standard is defined in the [NIF 2.1 specification](http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
+
+NIF strings can be used as a locus for an attestation as follows:
+
+<div class="example" title="Example: NIF">
+
+```turtle
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+:annotation a frac:Attestation ;
+  frac:locus <http://example.org/text#char=123,456> .
+
+<http://example.org/text#char=123,456> a nif:String ;
+  nif:beginIndex "123"^^xsd:nonNegativeInteger ;
+  nif:endIndex "456"^^xsd:nonNegativeInteger ;
+  nif:isString "The quick brown fox jumps over the lazy dog."@en .
+```
+
+</section>
 
 </section>
 
