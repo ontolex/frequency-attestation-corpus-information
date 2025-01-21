@@ -7,6 +7,9 @@ editor:
 - name: John P. McCrae
   companyURL: https://www.universityofgalway.ie/
   company: Research Ireland Insight Centre for Data Analytics & Research Ireland ADAPT Centre, University of Galway
+- name: Maxim Ionov
+  companyURL: https://www.unizar.es/
+  company: Department of Computer Science and Systems Engineering, University of Zaragoza, Spain
 author:
 - name: Besim Kabashi
   companyURL: https://www.linguistik.phil.fau.de/
@@ -35,10 +38,7 @@ author:
 - name: Elena-Simona Apostol
   company: University Politehnica of Bucharest
   companyURL: https://upb.ro/
-- name: Max Ionov
-  companyURL: https://www.uni-koeln.de/
-  company: Institute for Digital Humanities, University of Cologne, Germany
-date: 2024-11-05
+date: 2025-01-21
 ---
 
 <section id="abstract">
@@ -48,10 +48,10 @@ date: 2024-11-05
 This document describes the _module for frequency, attestation and corpus information_ of the OntoLex Lexicon Model for Ontologies (_OntoLex-Lemon_) developed by the W3C Community Group Ontology-Lexica. The module is targeted at complementing dictionaries and other linguistic resources containing lexicographic data with a vocabulary to express
 
 *   corpus-derived information (frequency and cooccurrence information, collocation analysis),
-*   pointers from lexical resources to corpora and other collections of text (attestations, examples),
-*   the linking of corpora and linguistic primary data with lexical information (dictionary linking), and
+*   pointers from lexical resources to corpora and other collections of text (attestations, examples), and
+*   the linking of corpora and linguistic primary data with lexical information (dictionary linking).
 
-The module tackles use cases in corpus-based lexicography, corpus linguistics and natural language processing, and operates in combination with the _OntoLex-Lemon_ core module (_Lemon_), as well as with other _lemon_ modules.
+The module tackles use cases in corpus-based lexicography and corpus linguistics, and operates in combination with the _OntoLex-Lemon_ core module (_Lemon_), as well as with other _lemon_ modules.
 </section>
 
 <section id="sotd">
@@ -72,9 +72,8 @@ If you wish to make comments regarding this document, please send them to public
 In particular, the model's primary motivation is to provide a means to link lexical resources to corpora and other collections of text, and to express the relationship between lexical information and the primary data from which it is derived. As such this module will:
 
 1.  Extend the use of OntoLex-Lemon to support digital lexicography,
-2.  Improve application and applicability of OntoLex-Lemon in natural language processing,
-3.  Contribute to the integration of lexicography, AI and human language technology communities,
-4.  Provide a method of representing this information in a way that is compatible with the existing OntoLex-Lemon model.
+2.  Contribute to the integration of lexicography, AI and human language technology communities,
+3.  Provide a method of representing this information in a way that is compatible with the existing OntoLex-Lemon model.
 
 <section id="namespaces">
 
@@ -117,7 +116,7 @@ Other models:
 
 ### Overview of the Module
 
-The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent `rdfs:subClassOf`. Vocabulary elements introduced by this module are shaded grey (classes) or set in _italics_.
+The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty heads represent `rdfs:subClassOf`.
 
 
 <figure id="overview-figure">
@@ -137,10 +136,10 @@ The following diagram depicts the OntoLex module for frequency, attestation and 
 
 OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a language resource about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean 
 
-- any *lexical entity* that can be described with OntoLex (including, but not limited to OntoLex core classes `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense` or `ontolex:LexicalConcept`), as well as
+- any *lexical entity* that can be described with OntoLex (including, but not limited to, OntoLex core classes `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense` or `ontolex:LexicalConcept`), as well as
 - any *ontological entity* from a knowledge graph (corresponding to the object of an `ontolex:denotes`, `ontolex:reference` or `ontolex:isConceptOf` property). 
 
-The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Observation`, complemented by a designating where the observation has been `frac:observedIn`.
+The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Observation`, complemented by a property `frac:observedIn`, pointing to the URI where the observation has been made.
 
 <div class="entity">
 
@@ -161,8 +160,8 @@ Observable (Class)
 
 </figure>
 
-For OntoLex, we assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (for token frequency, etc.), `ontolex:LexicalEntry` (frequency of disambiguated lemmas), `ontolex:LexicalSense` (sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas), etc. (cf. Fig. 1). 
-In particular, we consider all these elements to be countable, annotatable/attestable. For this reason, we introduce `frac:Observable` as a top-level element within the FrAC module that is used to define the `rdfs:domain` of any properties that link lexical and corpus-derived information. 
+We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (e.g., token frequency), `ontolex:LexicalEntry` (e.g., frequency of disambiguated lemmas), `ontolex:LexicalSense` (e.g., sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas).
+In particular, we consider all these elements to be countable, annotatable/attestable. For this reason, we introduce `frac:Observable` as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
 The definition `frac:Observable` does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as `frac:Observable`. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
@@ -209,7 +208,7 @@ For a `frac:Observation`,  the property **observedIn** defines the URI of the da
 
 ## Frequency
 
-Lexicographers use (corpus) frequency and distribution information while compiling lexical entries, as a qualitative assessment of their resources. In this module, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and totals are known. Absolute frequencies are used in computational lexicography, and they are an essential piece of information for NLP and corpus linguistics.
+Lexicographers use (corpus) frequency and distribution information while compiling lexical entries, as a qualitative assessment of their resources. In this module, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and token totals are known. Absolute frequencies are used in computational lexicography and they are an essential piece of information for NLP and corpus linguistics.
 
 <div class="entity">
 
@@ -345,7 +344,7 @@ epsd:kalag_strong_v ontolex:otherForm [
 
 </aside>
 
-The example shows an orthographic variation (in the original writing system, Sumerian Cuneiform sux-Xsux, and its Latin transcription sux-Latn). 
+The example shows an orthographic variation (in the Latin transcription). 
 It is slightly simplified insofar as the ePSD2 provides individual counts for different periods and only three of six orthographical variants are given. Note that these are orthographical variants, not morphological variants (which are not given in the dictionary).
 
 <div class="entity">
@@ -366,7 +365,7 @@ The object property **total** assigns  any potential FrAC data source (i.e., `dc
 
 <div class="note">
 
-For `frac:total`, users should provide both the frequency and the segmentation/unit over which this frequency is obtained. For an observable, then, relative frequencies (for any given unit *u*) can then be calculated from the object values of `frac:frequency/rdf:value`  and `frac:frequency/frac:observedIn/frac:total/rdf:value` if (and only if) the corresponding units match.
+For `frac:total`, users should provide both the frequency and the segmentation/unit over which this frequency is obtained. For an observable, relative frequencies (for any given unit *u*) can then be calculated from the object values of `frac:frequency/rdf:value`  and `frac:frequency/frac:observedIn/frac:total/rdf:value` if (and only if) the corresponding units match.
 
 </div>
 
@@ -533,7 +532,7 @@ As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the ex
 
 ## Locus
 
-In many applications, it is desirable to specify the location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. The FrAC standard supports referencing using RFC5147 character offsets, Text Fragments, NIF URIs, or by means of Web Annotation references (see Section 6). As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as its object.
+In many applications, it is desirable to specify the precise location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. The FrAC standard supports referencing using RFC5147 character offsets, Text Fragments, NIF URIs, or by means of Web Annotation references (see Section 6). As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as its object.
 
 <div class="entity">
 
@@ -579,11 +578,11 @@ locus (ObjectProperty)
 
 A collocation is a sequence of words or terms that co-occur more often than would be expected by chance. Often, collocations are idiomatic expressions, but they can also be more general, such as "strong tea" or "heavy rain".
 
-Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in computational philology and lexicography.
+Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in this field as well as in computational philology and lexicography.
 
 Collocations are usually defined on surface-oriented criteria, i.e., as a relation between forms or lemmas (lexical entries), not between senses, but they can be analyzed on the level of word senses (the sense that gave rise to the idiom or collocation). Indeed, collocations often contain a variable part, which can be represented by a <tt>ontolex:LexicalConcept</tt>.
 
-Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observables</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
+Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observable</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
 Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus or data source used to create them (<tt>frac:observedIn</tt>). Collocations share these characteristics with other `frac:Observation`s and thus, these are inherited from the <tt>frac:Observation</tt> class.
 
@@ -594,7 +593,7 @@ Collocation (Class)
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 
-A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observables</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>frac:cScore</tt>) in a particular data source (<tt>frac:observedIn</tt>). 
+A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrence of two or more <tt>frac:Observable</tt>s within the same context window and that can be characterized by their collocation score (or weight, <tt>rdf:value</tt>) in a particular data source (<tt>frac:observedIn</tt>). 
 
 <div class="description">
 
@@ -606,13 +605,13 @@ A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrenc
 </div>
 </div>
 
-Collocations are collections of `frac:Observables`, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
+Collocations are collections of `frac:Observable`s, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
     
 By default, <tt>frac:Collocation</tt> is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in <tt>dct:description</tt>. 
 
 FrAC collocations can be used to represent collocations both in the lexicographic sense (as complex units of meaning) and in the quantitative sense (as determined by collocation metrics over a particular corpus), but that the quantitative interpretation is the preferred one in the context of FrAC. To mark collocations in the lexicographic sense as such, they can be assigned a corresponding `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of `ontolex:MultiWordExpression` and the OntoLex-Decomp module rather than `frac:Collocation`. To provide collocation scores about a `ontolex:MultiWordExpression`, it can be linked via `rdfs:member` with a `frac:Collocation`.
     
-Collocations are `frac:Observable`s, i.e., they can be ascribed `frac:frequency`, `frac:attestation`, `frac:embedding`, they can be described in terms of their (embedding) similarity, and they can be nested inside larger collocations.
+Since collocations are `frac:Observable`s, they can be ascribed `frac:frequency`, `frac:attestation`, `frac:embedding` and they can be nested inside larger collocations.
     
 Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cScore`:
 
@@ -672,7 +671,7 @@ In addition to classical collocation metrics, as established in computational le
 - `lexinfo:lift` (the *lift* or *interest* of a rule measures how many times more often *x* and *y* occur together than expected if they are statistically independent): <math><mrow><mi>l</mi><mi>i</mi><mi>f</mi><mi>t</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
 - `lexinfo:conviction` (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *x* occurs without *y*, i.e., the frequency that the rule makes an incorrect prediction, if *x* and *y* are independent divided by the observed frequency of incorrect predictions): <math><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>v</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><mn>1</mn><mo>−</mo><msub><mi>f</mi><mi>y</mi></msub><mo form="postfix" stretchy="false">)</mo><msub><mi>f</mi><mi>x</mi></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><mo>−</mo><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow></mfrac></mrow></math>
  
- <div class="note">
+<div class="note">
 As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted. However, these may be defined by the user.
 </div>
     
@@ -696,8 +695,10 @@ The **head** property identifies the element of a collocation that its scores ar
 </div>
 
 As an example, the relative frequency score is the number of occurrences of a collocation relative to the overall frequency of its head.
-    
+
+<div class="note">
 The function of the property `frac:head` is restricted to indicate the directionality of asymmetric collocation scores. It must not be confused with the notion of "head" in certain fields of linguistics, e.g., dependency syntax. 
+</div>
 
 The following example illustrates collocations as provided by the [Wortschatz](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012) portal (scores and definitions as provided for [beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=beans), [spill the beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans), etc.
 
@@ -848,7 +849,7 @@ In this example, the string "The quick brown fox jumps over the lazy dog." is an
 
 ### Other models
 
-Alternatively, the loci of attestations may be give as RFC5147 URIs or as Text Fragments. The following example illustrates the use of RFC5147 URIs:
+Alternatively, the loci of attestations may be given as RFC5147 URIs or as Text Fragments. The following example illustrates the use of RFC5147 URIs:
 
 <aside class="example" title="Example: RFC5147">
 
