@@ -160,7 +160,7 @@ Observable (Class)
 
 </figure>
 
-We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (e.g., token frequency), `ontolex:LexicalEntry` (e.g., frequency of disambiguated lemmas), `ontolex:LexicalSense` (e.g., sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas).
+We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (e.g., form frequency), `ontolex:LexicalEntry` (e.g., frequency of disambiguated lemmas), `ontolex:LexicalSense` (e.g., sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas).
 In particular, we consider all these elements to be countable, annotatable/attestable. For this reason, we introduce `frac:Observable` as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
