@@ -143,7 +143,7 @@ The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Obse
 
 <div class="entity">
 
-Observable (Class)
+<class>Observable</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Observable](http://www.w3.org/ns/lemon/frac#Observable)
 
@@ -169,7 +169,7 @@ The definition `frac:Observable` does not posit an exhaustive list of possible o
 
 <div class="entity">
 
-Observation (Class)
+<class>Observation</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Observation](http://www.w3.org/ns/lemon/frac#Observation)
 
@@ -177,7 +177,9 @@ Observation (Class)
 
 <div class="description">
 
-**SubClassOf:** exactly 1 `frac:observedIn`, min 1 `dct:description`, exactly 1 rdf:value
+<subclass>exactly 1 `frac:observedIn`</subclass>
+<subclass>min 1 `dct:description`</subclass>
+<subclass>exactly 1 rdf:value</subclass>
 
 </div>
 
@@ -187,7 +189,7 @@ Observations as understood here are **empirical** (quantitative) observations th
 
 <div class="entity">
 
-observedIn (ObjectProperty)
+<objectProperty>observedIn</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#observedIn](http://www.w3.org/ns/lemon/frac#Observation)
 
@@ -195,9 +197,9 @@ For a `frac:Observation`,  the property **observedIn** defines the URI of the da
 
 <div class="description">
 
-**Domain:** frac:Observation
+<domain>frac:Observation</domain>
 
-**Range:** anyURI
+<range>anyURI</range>
 
 </div>
 </div>
@@ -212,16 +214,18 @@ Lexicographers use (corpus) frequency and distribution information while compili
 
 <div class="entity">
 
-Frequency (Class)
+<class>Frequency</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Frequency](http://www.w3.org/ns/lemon/frac#Frequency)
 
 **Frequency** is a `frac:Observation` of the absolute number of attestations (`rdf:value`) of a particular `frac:Observable` (see `frac:frequency`) that is `frac:observedIn` in a particular data source. Using `frac:unit`, frequency objects can also identify the (segmentation) unit that their counts are based on. 
 <div class="description">
 
-**SubClassOf:** `frac:Observation`
+<subclass>`frac:Observation`</subclass>
 
-**SubClassOf:** `rdf:value` exactly 1 , `frac:observedIn` exactly 1
+<subclass>`rdf:value` exactly 1</subclass>
+
+<subclass>`frac:observedIn` exactly 1</subclass>
 
 </div>
 
@@ -232,7 +236,7 @@ A frequency should have a unit that specifies the segmentation unit of the frequ
 
 <div class="entity">
 
-unit (Property)
+<dataProperty>unit</dataProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
 
@@ -240,7 +244,7 @@ For a `frac:Frequency` object, the property **unit** provides an identifier of t
 
 <div class="description">
 
-**rdfs:range** `frac:Frequency`
+<domain>`frac:Frequency`</domain>
 
 </div>
 </div>
@@ -249,7 +253,7 @@ Examples of values of `frac:unit` include string literals such as `"tokens"`, `"
 
 <div class="entity">
 
-frequency (ObjectProperty)
+<objectProperty>frequency</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#frequency](http://www.w3.org/ns/lemon/frac#frequency)
 
@@ -257,9 +261,9 @@ The property **frequency** assigns a particular `frac:Observable` a `frac:Freque
 
 <div class="description">
 
-**rdfs:domain** `frac:Observable`
+<domain>frac:Observable</domain>
 
-**rdfs:range** `frac:Frequency`
+<range>frac:Frequency</range>
 </div>
 </div>
 
@@ -349,7 +353,7 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 <div class="entity">
 
-total (ObjectProperty)
+<objectProperty>total</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
 
@@ -357,9 +361,10 @@ The object property **total** assigns  any potential FrAC data source (i.e., `dc
 
 <div class="description">
 
-**Domain:** class that is a `dcam:memberOf` DCMI Type
+<domain>class that is a `dcam:memberOf` DCMI Type</domain>
 
-**Range:** frac:Frequency
+<range>frac:Frequency</range>
+
 </div>
 </div>
 
@@ -400,7 +405,7 @@ In scholarly dictionaries, attestations are a representative selection from the 
 
 <div class="entity">
 
-Attestation (Class)
+<class>Attestation</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Attestation](http://www.w3.org/ns/lemon/frac#Attestation)
 
@@ -409,9 +414,9 @@ For an attestation, `rdf:value` represents the text of a quotation as represente
 
 <div class="description">
 
-**SubClassOf:** `rdf:value` max 1 
+<subclass>`rdf:value` max 1</subclass>
 
-**SubClassOf:** `frac:Observation`
+<subclass>`frac:Observation`</subclass>
 </div>
 </div>
 
@@ -419,7 +424,7 @@ Attestations are linked with the `frac:attestation` property to the `frac:Observ
 
 <div class="entity">
 
-attestation (ObjectProperty)
+<objectProperty>attestation</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#attestation](http://www.w3.org/ns/lemon/frac#attestation)
 
@@ -427,11 +432,11 @@ The property **frac:attestation** associates an attestation to the frac:Observab
 
 <div class="description">
 
-**Domain:** `Observable`
+<domain>Observable</domain>
 
-**Range:** `Attestation`
+<range>Attestation</range>
 
-**SubPropertyOf:** `citation`
+<subproperty>citation</subproperty>
 </div>
 </div>
 
@@ -466,15 +471,14 @@ Citations are given with the following property:
 
 <div class="entity">
 
-citation (ObjectProperty)
+<objectProperty>citation</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#citation](http://www.w3.org/ns/lemon/frac#citation)
 
 The property **frac:citation** associates a  citation  to  the  `Observable`  citing  it.
 
 <div class="description">
-
-**Domain:**  `Observable`
+<domain>`frac:Observable`</domain>
 </div>
 </div>
 
@@ -490,7 +494,7 @@ Glosses are used to give the form of the text as used in the dictionary. This pr
 
 <div class="entity">
 
-gloss (Property)
+<dataProperty>gloss</dataProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#gloss](http://www.w3.org/ns/lemon/frac#gloss)
 
@@ -498,9 +502,9 @@ The **gloss** of an attestation contains the text content of an attestation *as 
 
 <div class="description">
 
-**Domain:** `Attestation`
+<domain>Attestation</domain>
 
-**Range:** `xsd:String`  
+<range>xsd:String</range>
 </div>
 </div>
 
@@ -536,7 +540,7 @@ In many applications, it is desirable to specify the precise location of the occ
 
 <div class="entity">
 
-locus (ObjectProperty)
+<objectProperty>locus</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#locus](http://www.w3.org/ns/lemon/frac#locus)
 
@@ -544,7 +548,7 @@ locus (ObjectProperty)
 
 <div class="description">
 
-**Domain:** `Attestation`
+<domain>Attestation</domain>
 </div>
 </div>
 
@@ -589,7 +593,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 <div class="entity">
 
-Collocation (Class)
+<class>Collocation</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 
@@ -597,11 +601,11 @@ A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrenc
 
 <div class="description">
 
-**SubClassOf:** <tt>frac:Observation, rdfs:Container, frac:Observable</tt>
-
-**rdfs:member:** only <tt>frac:Observable</tt>
-
-**SubClassOf:** `frac:head` max 1
+<subclass>rdfs:Container</subclass>
+<subclass>frac:Observation</subclass>
+<subclass>frac:Observable</subclass>
+<subclass>rdfs:member only `frac:Observable`</subclass>
+<subclass>frac:head max 1</subclass>
 </div>
 </div>
 
@@ -616,7 +620,8 @@ Since collocations are `frac:Observable`s, they can be ascribed `frac:frequency`
 Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of `frac:cScore`:
 
 <div class="entity">
-cScore (property)
+
+<dataProperty>cScore</dataProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#cScore](http://www.w3.org/ns/lemon/frac#cScore)
 
@@ -624,9 +629,9 @@ cScore (property)
 
 <div class="description">
 
-**SubPropertyOf:** <tt>rdf:value</tt>
+<subproperty>rdf:value</subproperty>
 
-**domain:** <tt>frac:Collocation</tt>
+<domain>`frac:Collocation`</domain>
 </div>
 </div>
 
@@ -679,18 +684,18 @@ Many of these metrics are asymmetric and distinguish the lexical element they ar
 
 
 <div class="entity">
-head (property)
+
+<objectProperty>head</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#head](http://www.w3.org/ns/lemon/frac#head)
-
 
 The **head** property identifies the element of a collocation that its scores are about. A collocation must not have more than one head.
 
 <div class="description">
 
-**domain:** <tt>frac:Collocation</tt>
+<domain>Collocation</domain>
 
-**range:** <tt>frac:Observable</tt>
+<range>Observable</range>
 </div>
 </div>
 
