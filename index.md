@@ -410,11 +410,10 @@ In scholarly dictionaries, attestations are a representative selection from the 
 **URI:** [http://www.w3.org/ns/lemon/frac#Attestation](http://www.w3.org/ns/lemon/frac#Attestation)
 
 An **Attestation** is a `frac:Observation` that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register. 
-For an attestation, `rdf:value` represents the text of a quotation as represented in the original source. 
 
 <div class="description">
 
-<subclass>`rdf:value` max 1</subclass>
+<subclass>`frac:quotedText` max 1</subclass>
 
 <subclass>`frac:Observation`</subclass>
 </div>
@@ -440,6 +439,26 @@ The property **frac:attestation** associates an attestation to the frac:Observab
 </div>
 </div>
 
+The value of the attestation can be give with the `frac:quotedText` property, which gives the text of the attestation as it is represented in the original source. This can be a plain text string, or a more complex representation, e.g., as an HTML fragment, or as a reference to a Web Annotation.
+
+<div class="entity">
+
+<dataProperty>quotedText</dataProperty>
+
+**URI:** [http://www.w3.org/ns/lemon/frac#quotedText](http://www.w3.org/ns/lemon/frac#quotedText)
+
+The property **frac:quotedText** provides the text of the attestation as it is represented in the original source. This can be a plain text string, or a more complex representation, e.g., as an HTML fragment, or as a reference to a Web Annotation.
+
+<div class="description">
+
+<domain>Attestation</domain>
+
+<range>xsd:String</range>
+
+</div>
+</div>
+
+
 As an example of an attestation, consider the following example from Open English Wordnet:
 
 <aside class="example" title="Example: Attestation of the word 'cat' in the WordNet Glosstag Corpus">
@@ -449,7 +468,7 @@ As an example of an attestation, consider the following example from Open Englis
  skos:definition "concerned chiefly or only with yourself and your advantage 
    to the exclusion of others"@en ;
  frac:attestation [
-   rdf:value "We're asked to see Rachel as this spoilt, self-centred woman 
+   frac:quotedText "We're asked to see Rachel as this spoilt, self-centred woman 
      but the rest of them are just as bad, if not worse."@en ;
    frac:observedIn <https://www.newstatesman.com/culture/tv/2023/10/
                     friends-comedy-humour-legacy-matthew-perry> ] .
@@ -490,7 +509,7 @@ However, note that FrAC does not formally define a general "Citation" class to d
 
 ## Glosses
 
-Glosses are used to give the form of the text as used in the dictionary. This property should not be used to provide direct quotations from the original data source, which should be represented by `rdf:value`. Instead, its recommended use is for representations that are either enriched (e.g., by annotations and metadata), amended (e.g., by expanding ligatures or omissions), simplified (e.g., by omissions from the original context, e.g., of the lexeme under consideration) or otherwise differentiated from the plain text representation of the context.
+Glosses are used to give the form of the text as used in the dictionary. This property should not be used to provide direct quotations from the original data source, which should be represented by `frac:quotedText`. Instead, its recommended use is for representations that are either enriched (e.g., by annotations and metadata), amended (e.g., by expanding ligatures or omissions), simplified (e.g., by omissions from the original context, e.g., of the lexeme under consideration) or otherwise differentiated from the plain text representation of the context.
 
 <div class="entity">
 
@@ -509,7 +528,7 @@ The **gloss** of an attestation contains the text content of an attestation *as 
 </div>
 
 <div class="note">
-With `frac:gloss` and `rdf:value`, `frac:Attestation` provides *two* different properties to represent the context of an observable in any particular data source. `rdf:value` should provide information as found in the underlying corpus, e.g., a plain text string. If the dictionary provides a different representation, or if the attestation as given in an underlying dictionary has not yet been confirmed to match the context in the underlying corpus, applications should use `frac:gloss` instead of `rdf:value`. In other words, `rdf:value` corresponds to the representation of the context in the underlying corpus, `frac:gloss` to its representation in the underlying dictionary. If both are confirmed to be equal, use `rdf:value`.
+With `frac:gloss` and `frac:quotedText`, `frac:Attestation` provides *two* different properties to represent the context of an observable in any particular data source. `frac:quotedText` should provide information as found in the underlying corpus, e.g., a plain text string. If the dictionary provides a different representation, or if the attestation as given in an underlying dictionary has not yet been confirmed to match the context in the underlying corpus, applications should use `frac:gloss` instead of `frac:quotedText`. In other words, `frac:quotedText` corresponds to the representation of the context in the underlying corpus, `frac:gloss` to its representation in the underlying dictionary. If both are confirmed to be equal, use `frac:quotedText`.
 </div>
 
 As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the example `"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ...`. In OntoLex-FrAC, this would be the `frac:gloss` because it contains additional information about spelling variation/normalized spelling not found in the quoted source (`MS. Cote.`):
@@ -520,7 +539,7 @@ As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the ex
 <https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
     frac:attestation [
         a frac:Attestation;
-        rdf:value "Ða niétenu ðonne beóþ hwæthwugununges" ;
+        frac:quotedText "Ða niétenu ðonne beóþ hwæthwugununges" ;
         frac:gloss "Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."
     ] .
 ```
@@ -561,7 +580,7 @@ In many applications, it is desirable to specify the precise location of the occ
    ontolex:writtenRep "lexical entry" ;
    frac:attestation [
      a frac:Attestation ;
-     rdf:value "lexical entry" ;
+     frac:quotedText "lexical entry" ;
      frac:locus 
     <https://www.w3.org/2016/05/ontolex/#:~:text=of%20a-,lexical%20entry,-is%20expressed> ;
      frac:observedIn <https://www.w3.org/TR/ontolex/>
