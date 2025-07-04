@@ -602,9 +602,11 @@ A **Collocation** is a <tt>frac:Observation</tt> that describes the co-occurrenc
 <div class="description">
 
 <subclass>rdfs:Container</subclass>
+
 <subclass>frac:Observation</subclass>
-<subclass>frac:Observable</subclass>
+
 <subclass>rdfs:member only `frac:Observable`</subclass>
+
 <subclass>frac:head max 1</subclass>
 </div>
 </div>
