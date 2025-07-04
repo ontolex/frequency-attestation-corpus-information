@@ -395,13 +395,13 @@ An example of the use of `frac:total` is given below:
 
 ## Attestations and Citations
 
+While frequency information is used to provide quantitative information about a lexical item, attestations and citations are used to provide qualitative information about the occurrence of a lexical item in a corpus or other linguistic data. This section introduces mechanisms for representing attestations and citations in the OntoLex-FrAC model.
+
 <section id="attestation">
 
 ## Attestations
 
-Attestations constitute a special form of citation that provide evidence for the existence of a certain lexical phenomena; they can elucidate meaning or illustrate various linguistic features.
-
-In scholarly dictionaries, attestations are a representative selection from the occurrences of a headword in a textual corpus. These citations often consist of a quotation accompanied by a reference to the source. The quoted text usually contains the occurrence of the headword.
+Attestations represent a reference to a specific occurrence of a lexical item in a corpus or other linguistic data. They are used to provide evidence for the existence of a particular lexical phenomenon, such as a word, phrase, or grammatical structure, in a specific context. Attestations can help elucidate meaning, illustrate various linguistic features, and provide examples of usage.
 
 <div class="entity">
 
