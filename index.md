@@ -591,6 +591,7 @@ In many applications, it is desirable to specify the precise location of the occ
 
 `frac:locus` denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, `frac:observedIn` can refer to a corpus of other collections of texts. `frac:locus` normally refers to a location identified by RFC5147 character offsets, NIF URIs, Open Annotation or Text Fragments references, whereas `frac:observedIn` refers to `dct:Text`s or `dct:Collection`s.
 
+While a single attestation object may be used for multiple observables, if the `frac:locus` property is used to point to the specific location of the observable in the attestation, this may mean that multiple attestations are required, each with a different `frac:locus` value. 
 
 </section>
 </section>
