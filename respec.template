@@ -97,6 +97,11 @@ $endfor$
      font-weight: bold;
  }
 
+ functional::before {
+     content: "Functional";
+     font-weight: bold;
+ }
+
 
  </style>
   </head>
