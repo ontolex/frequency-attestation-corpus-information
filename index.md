@@ -51,7 +51,7 @@ This document describes the _module for frequency, attestation and corpus inform
 *   pointers from lexical resources to corpora and other collections of text (attestations, examples), and
 *   the linking of corpora and linguistic primary data with lexical information (dictionary linking).
 
-The module tackles use cases in corpus-based lexicography and corpus linguistics, and operates in combination with the _OntoLex-Lemon_ core module (_Lemon_), as well as with other _lemon_ modules.
+The module tackles use cases in corpus-based lexicography and corpus linguistics and operates in combination with the _OntoLex-Lemon_ core module (_Lemon_), as well as with other _lemon_ modules.
 </section>
 
 <section id="sotd">
@@ -65,7 +65,6 @@ If you wish to make comments regarding this document, please send them to public
 <section id="introduction">
 
 ## Introduction
-
 
 [OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary to represent _linguistic information_ associated with ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology. The OntoLex module for Frequency, Attestations and Corpus-Based Information (OntoLex-FrAC) complements OntoLex-Lemon with the capability of including information drawn from or found in corpora and linguistic primary data.
 
@@ -161,7 +160,7 @@ The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Obse
 </figure>
 
 We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (e.g., token frequency), `ontolex:LexicalEntry` (e.g., frequency of disambiguated lemmas), `ontolex:LexicalSense` (e.g., sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas).
-In particular, we consider all these elements to be countable, annotatable/attestable. For this reason, we introduce `frac:Observable` as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
+In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce `frac:Observable` as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
 The definition `frac:Observable` does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as `frac:Observable`. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
@@ -210,7 +209,7 @@ For a `frac:Observation`,  the property **observedIn** defines the URI of the da
 
 ## Frequency
 
-Lexicographers use (corpus) frequency and distribution information while compiling lexical entries, as a qualitative assessment of their resources. In this module, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and token totals are known. Absolute frequencies are used in computational lexicography and they are an essential piece of information for NLP and corpus linguistics.
+Lexicographers use (corpus) frequency and distribution information while compiling lexical entries, as a quantitative assessment of their resources. In this module, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and token totals are known. Absolute frequencies are used in computational lexicography and they are an essential piece of information for NLP and corpus linguistics.
 
 <div class="entity">
 
@@ -308,8 +307,8 @@ A simple example of indicating the frequency of a word in a corpus is given belo
 
 <div class="note">
 
-The identifiers and data is drawn from the [Open English Wordnet](https://en-word.net)
-project, however, it is simplified for explanatory purposes.
+The identifiers and data are drawn from the [Open English Wordnet](https://en-word.net)
+project, however, they are simplified for explanatory purposes.
 
 </div>
 
@@ -399,9 +398,9 @@ An example of the use of `frac:total` is given below:
 
 ## Attestations
 
-Attestations constitute a special form of citation that provide evidence for the existence of a certain lexical phenomena; they can elucidate meaning or illustrate various linguistic features.
+Attestations constitute a special form of citation that provides evidence for the existence of certain lexical phenomena; they can elucidate meaning or illustrate various linguistic features.
 
-In scholarly dictionaries, attestations are a representative selection from the occurrences of a headword in a textual corpus. These citations often consist of a quotation accompanied by a reference to the source. The quoted text usually contains the occurrence of the headword.
+In scholarly dictionaries, attestations are a representative selection from the occurrences of a headword or sense in a textual corpus. These citations often consist of a quotation accompanied by a reference to the source. The quoted text usually contains the occurrence of the headword.
 
 <div class="entity">
 
@@ -428,7 +427,7 @@ Attestations are linked with the `frac:attestation` property to the `frac:Observ
 
 **URI:** [http://www.w3.org/ns/lemon/frac#attestation](http://www.w3.org/ns/lemon/frac#attestation)
 
-The property **frac:attestation** associates an attestation to the frac:Observable. This is a subproperty of `frac:citation` using concrete data as evidence.
+The property **frac:attestation** connects and is observable to an attestation.
 
 <div class="description">
 
@@ -449,6 +448,7 @@ As an example of an attestation, consider the following example from Open Englis
  skos:definition "concerned chiefly or only with yourself and your advantage 
    to the exclusion of others"@en ;
  frac:attestation [
+   a frac:Attestation ; 
    rdf:value "We're asked to see Rachel as this spoilt, self-centred woman 
      but the rest of them are just as bad, if not worse."@en ;
    frac:observedIn <https://www.newstatesman.com/culture/tv/2023/10/
@@ -465,7 +465,7 @@ As an example of an attestation, consider the following example from Open Englis
 
 In general, the object of a citation represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference, cf. Peroni (2012) \cite{peroni2012fabio}: 
 
-> [a Citation is] “a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference  in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web”.
+> [a Citation is] “a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web”.
 
 Citations are given with the following property:
 
@@ -475,7 +475,7 @@ Citations are given with the following property:
 
 **URI:** [http://www.w3.org/ns/lemon/frac#citation](http://www.w3.org/ns/lemon/frac#citation)
 
-The property **frac:citation** associates a  citation  to  the  `Observable`  citing  it.
+The property **frac:citation** associates a citation to the `Observable` citing  it.
 
 <div class="description">
 <domain>`frac:Observable`</domain>
@@ -536,7 +536,7 @@ As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the ex
 
 ## Locus
 
-In many applications, it is desirable to specify the precise location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. The FrAC standard supports referencing using RFC5147 character offsets, Text Fragments, NIF URIs, or by means of Web Annotation references (see Section 6). As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as its object.
+In many applications, it is desirable to specify the precise location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. The FrAC standard supports referencing using [RFC5147](https://www.rfc-editor.org/rfc/rfc5147.html) character offsets, [Text Fragments](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment/Text_fragments), [NIF](https://persistence.uni-leipzig.org/nlp2rdf/) URIs, or by means of [Web Annotation](https://www.w3.org/TR/annotation-model/) references (see Section 6). As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the <tt>locus</tt> property that links an attestation with its source takes any URI as its object.
 
 <div class="entity">
 
@@ -570,7 +570,7 @@ In many applications, it is desirable to specify the precise location of the occ
 ```
 </aside>
 
-`frac:locus` denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, `frac:observedIn` can refer to a corpus of other collections of texts. `frac:locus` normally refers to a location identified by RFC5147 character offsets, NIF URIs, Open Annotation or Text Fragments references, whereas `frac:observedIn` refers to `dct:Text`s or `dct:Collection`s.
+`frac:locus` denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, `frac:observedIn` can refer to a corpus of other collections of texts. `frac:locus` normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas `frac:observedIn` refers to `dct:Text`s or `dct:Collection`s.
 
 
 </section>
@@ -747,7 +747,7 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 [ rdfs:member wsen:beans, wsen:spill+the+beans ] a frac:Collocation;
   rdf:value "401";
   dct:description "cooccurrences in the same sentence, unordered";
-  frac:obsevedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
+  frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
 ```
 </aside>
 
