@@ -236,7 +236,7 @@ A frequency should have a unit that specifies the segmentation unit of the frequ
 
 <div class="entity">
 
-<dataProperty>unit</dataProperty>
+<objectProperty>unit</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
 
@@ -249,7 +249,7 @@ For a `frac:Frequency` object, the property **unit** provides an identifier of t
 </div>
 </div>
 
-Examples of values of `frac:unit` include string literals such as `"tokens"`, `"sentences"`, etc. If a future community standard provides reference URIs for such datatypes, `frac:unit` should be used as a datatype property. Until such a convention has been established, it is recommended to be used as a datatype property.
+Values for `frac:unit` are defined in an external ontology such as LexInfo, which defines the meaning of common elements such as "tokens", "types", "sentences". You may define custom values as required, which should be documented clearly.
 
 <div class="entity">
 
@@ -383,7 +383,7 @@ An example of the use of `frac:total` is given below:
   frac:total [
     a frac:Frequency ;
     rdf:value 1634691 ;
-    frac:unit "tokens"
+    frac:unit lexinfo:tokens
   ] .
 ```
 
