@@ -312,7 +312,7 @@ The definition above only applies to absolute frequencies. For expressing relati
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
-<aside class="example" title="Example: Frequency of the word 'cat' in the WordNet Glosstag Corpus">
+<aside class="example" title="Frequency of the word 'cat' in the WordNet Glosstag Corpus">
 
 ```turtle
 :cat-n a ontolex:LexicalEntry ;
@@ -349,7 +349,7 @@ project, however, they are simplified for explanatory purposes.
 
 The following example illustrates word and form frequencies for the Sumerian word _a_ (n.) "water" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
-<aside class="example" title="Example: Frequency of the Sumerian word _a_ 'water'">
+<aside class="example" title="Frequency of the Sumerian word _a_ 'water'">
 
 ```turtle
 # word frequency, over all form variants 
@@ -410,7 +410,7 @@ For `frac:total`, users should provide both the frequency and the segmentation/u
 
 An example of the use of `frac:total` is given below:
 
-<aside class="example" title="Example: Total number of words in the WordNet Glosstag Corpus">
+<aside class="example" title="Total number of words in the WordNet Glosstag Corpus">
 
 ```turtle
 <https://wordnetcode.princeton.edu/glosstag.shtml> a dct:Collection ;
@@ -476,7 +476,7 @@ The property **frac:attestation** connects and is observable to an attestation.
 
 As an example of an attestation, consider the following example from Open English Wordnet:
 
-<aside class="example" title="Example: Attestation of the word 'cat' in the WordNet Glosstag Corpus">
+<aside class="example" title="Attestation of the word 'cat' in the WordNet Glosstag Corpus">
 
 ```turtle
 :02105605-a a skos:Concept ;
@@ -549,7 +549,7 @@ With `frac:gloss` and `rdf:value`, `frac:Attestation` provides *two* different p
 
 As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the example `"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ...`. In OntoLex-FrAC, this would be the `frac:gloss` because it contains additional information about spelling variation/normalized spelling not found in the quoted source (`MS. Cote.`):
 
-<aside class="example" title="Example: Attestation of Old English *hwæt-hweganunges*">
+<aside class="example" title="Attestation of Old English 'hwæt-hweganunges'">
 
 ```turtle
 <https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
@@ -588,7 +588,7 @@ In many applications, it is desirable to specify the precise location of the occ
 </div>
 
 
-<aside class="example" title="Example: Locus of the term 'lexical entry' in the OntoLex specification">
+<aside class="example" title="Locus of the term 'lexical entry' in the OntoLex specification">
 
 ```turtle
 :lexical_entry a ontolex:LexicalEntry ;
@@ -744,7 +744,7 @@ The function of the property `frac:head` is restricted to indicate the direction
 
 The following example illustrates collocations as provided by the [Wortschatz](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012) portal (scores and definitions as provided for [beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=beans), [spill the beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans), etc.
 
-<aside class="example" title="Example: Wortschatz Collocation">
+<aside class="example" title="Wortschatz Collocation">
 
 ```turtle
 @prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=>
@@ -830,7 +830,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 *   [oa:XPathSelector](https://www.w3.org/TR/annotation-vocab/#xpathselector): select elements and content within a resource that supports the Document Object Model via a specified XPath value.
 *   [oa:RangeSelector](https://www.w3.org/TR/annotation-vocab/#rangeselector): identify the beginning and the end of the selection by using other Selectors.
 
-<aside class="example" title="Example: Web Annotation">
+<aside class="example" title="Web Annotation">
 
 ```turtle
 :annotation a oa:Annotation, frac:Attestation ;
@@ -868,7 +868,7 @@ The NLP Interchange Format (NIF) is a standard for the representation of text an
 
 NIF strings can be used as a locus for an attestation as follows:
 
-<aside class="example" title="Example: NIF">
+<aside class="example" title="NIF">
 
 ```turtle
 @prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
@@ -893,7 +893,7 @@ In this example, the string "The quick brown fox jumps over the lazy dog." is an
 
 Alternatively, the loci of attestations may be given as RFC5147 URIs or as Text Fragments. The following example illustrates the use of RFC5147 URIs:
 
-<aside class="example" title="Example: RFC5147">
+<aside class="example" title="RFC5147">
 
 ```turtle
 :annotation a frac:Attestation ;
