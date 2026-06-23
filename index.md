@@ -614,7 +614,33 @@ A collocation is a sequence of words or terms that co-occur more often than woul
 
 Collocation analysis is an important tool for lexicographical research and instrumental for modern NLP techniques. It has been the mainstay of 1990s corpus linguistics and continues to be an area of active research in this field as well as in computational philology and lexicography.
 
-Collocations are usually defined on surface-oriented criteria, i.e., as a relation between forms or lemmas (lexical entries), not between senses, but they can be analyzed on the level of word senses (the sense that gave rise to the idiom or collocation). Indeed, collocations often contain a variable part, which can be represented by a <tt>ontolex:LexicalConcept</tt>.
+Collocations are usually defined on surface-oriented criteria, i.e., as a 
+relation between forms or lemmas (lexical entries), not between senses, but 
+they can be analyzed on the level of word senses (the sense that gave rise to 
+the idiom or collocation). Indeed, collocations often contain a variable part, 
+which can be represented by a <tt>ontolex:LexicalConcept</tt>. For example, 
+consider the semi-fixed expression pay [a price] where the verb "pay" is paired with a 
+variable semantic slot rather than a single fixed word. By including the abstract 
+`ontolex:LexicalConcept` instead of a literal form, the collocation successfully 
+captures a wide range of corpus occurrences sharing the same underlying meaning, 
+such as pay a high price, pay a heavy toll, or pay the ultimate penalty.
+
+<aside class="example" title="Collocation with a Variable Part">
+```turtle
+ex:pay_verb a ontolex:LexicalEntry ;
+    ontolex:canonicalForm [ ontolex:writtenRep "pay"@en ] .
+
+ex:concept_price a ontolex:LexicalConcept ;
+    skos:prefLabel "cost or penalty concept"@en .
+
+ex:pay_price_collocation a frac:Collocation, rdf:Seq ;
+    rdf:_1 ex:pay_verb ;
+    rdf:_2 ex:concept_price ;
+    frac:head ex:pay_verb ;
+    frac:observedIn <http://example.org/corpora/en_modern_prose> ;
+    lexinfo:logDice "7.42"^^xsd:decimal .
+```
+</aside>
 
 Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of <tt>frac:Observable</tt>s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
