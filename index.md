@@ -213,7 +213,7 @@ The definition `frac:Observable` does not posit an exhaustive list of possible o
 <div class="description">
 
 <subclass>exactly 1 `frac:observedIn`</subclass>
-<subclass>min 1 `dct:description`</subclass>
+
 <subclass>exactly 1 rdf:value</subclass>
 
 </div>
