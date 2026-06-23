@@ -427,15 +427,15 @@ An example of the use of `frac:total` is given below:
 
 <section id="attestation-citation">
 
-## Attestations and Citations
+## Corpus Attestations
+
+While frequency information is used to provide quantitative information about a lexical item, attestations are used to provide qualitative information about the occurrence of a lexical item in a corpus or other linguistic data. This section introduces mechanisms for representing attestations in the OntoLex-FrAC model.
 
 <section id="attestation">
 
 ## Attestations
 
-Attestations constitute a special form of citation that provides evidence for the existence of certain lexical phenomena; they can elucidate meaning or illustrate various linguistic features.
-
-In scholarly dictionaries, attestations are a representative selection from the occurrences of a headword or sense in a textual corpus. These citations often consist of a quotation accompanied by a reference to the source. The quoted text usually contains the occurrence of the headword.
+Attestations represent a reference to a specific occurrence of a lexical item in a corpus or other linguistic data. They are used to provide evidence for the existence of a particular lexical phenomenon, such as a word, phrase, or grammatical structure, in a specific context. Attestations can help elucidate meaning, illustrate various linguistic features, and provide examples of usage.
 
 <div class="entity">
 
@@ -462,7 +462,7 @@ Attestations are linked with the `frac:attestation` property to the `frac:Observ
 
 **URI:** [http://www.w3.org/ns/lemon/frac#attestation](http://www.w3.org/ns/lemon/frac#attestation)
 
-The property **frac:attestation** connects and is observable to an attestation.
+The property **frac:attestation** associates an attestation to the frac:Observable. 
 
 <div class="description">
 
@@ -470,7 +470,6 @@ The property **frac:attestation** connects and is observable to an attestation.
 
 <range>Attestation</range>
 
-<subproperty>citation</subproperty>
 </div>
 </div>
 
@@ -491,33 +490,6 @@ As an example of an attestation, consider the following example from Open Englis
 ```
 
 </aside>
-
-</section>
-
-<section id="citation">
-
-## Citations
-
-In general, the object of a citation represents the successful act of citing an entity which can be referred to by a standardised bibliographic reference, cf. Peroni (2012) \cite{peroni2012fabio}: 
-
-> [a Citation is] “a conceptual directional link from a citing entity to a cited entity, created by a human performative act of making a citation, typically instantiated by the inclusion of a bibliographic reference in the reference list of the citing entity, or by the inclusion within the citing entity of a link, in the form of an HTTP Uniform Resource Locator (URL), to a resource on the World Wide Web”.
-
-Citations are given with the following property:
-
-<div class="entity">
-
-<objectProperty>citation</objectProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#citation](http://www.w3.org/ns/lemon/frac#citation)
-
-The property **frac:citation** associates a citation to the `Observable` citing  it.
-
-<div class="description">
-<domain>`frac:Observable`</domain>
-</div>
-</div>
-
-However, note that FrAC does not formally define a general "Citation" class to define the range of `citation`, but only provides `Attestation` as one specific possibility. Beyond attestations, different vocabularies have been suggested for linking bibliographical information, and we advise users of FrAC to make a consistent choice among them, adequate for their respective needs and the conventions of their users' community. `frac:citation` serves as an interface to these external vocabularies. If the [CITO vocabulary](https://sparontologies.github.io/cito/current/cito.html) is used in a particular resource, their FrAC Citations can be defined as the subclass of CITO citations having <tt>frac:Observable</tt> as citing entity and attestations would correspond to citations with the <tt>cito:hasCitationCharacterization</tt> value <tt>citesAsEvidence</tt>. Other relevant vocabularies include, for example, [BIBFRAME](https://www.loc.gov/bibframe/), [FRBR](https://www.ifla.org/node/881) and [FaBiO](https://sparontologies.github.io/fabio/current/fabio.html), but also, generic vocabularies such as [schema.org](https://schema.org/citation).
 
 </section>
 
