@@ -112,6 +112,41 @@ Other models:
 ```
 </section>
 
+<section id="glossary">
+
+### Glossary of Terms
+
+* **`Attestation`**
+  A quotation or excerpt from a source document providing evidence of a lexical feature (e.g., form, sense, spelling variation). It is a subclass of `frac:Observation`.
+* **`Citation`**
+  A general bibliographic reference from a lexical resource to a source. `frac:attestation` is a more specific form of `citation`.
+* **`Collocation`**
+  A co-occurrence of two or more lexical units in a corpus. Treated as a container (`rdf:Seq` or `rdf:Bag`) and a subclass of `frac:Observation`.
+* **Collocation Score**
+  A subproperty of `rdf:value`, used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like `lexinfo:pmi`.
+* **`Corpus`**
+  A collection of texts (e.g., `dct:Collection`, `dct:Dataset`) used as the empirical basis for observations. Referenced via `frac:observedIn`.
+* **`Frequency`**
+  An observation of how often an observable appears in a corpus (absolute count), subclass of `frac:Observation`.
+* **`head`**
+  Identifies the target element in a collocation for asymmetric metrics (e.g., relative frequency, confidence).
+* **`locus`**
+  Indicates the precise location (e.g., character offsets, URI fragments) of an attestation in a source text.
+* **`Observable`**
+  Any lexical or ontological unit about which corpus-based information (frequency, attestation) can be recorded.
+* **`Observation`**
+  An empirical claim about an observable—e.g., frequency count, collocation, attestation. Can link to a data source via `frac:observedIn`.
+* **`rdf:value`**
+  A standard RDF property used to specify the literal value of an observation (e.g., a frequency number or attestation text).
+* **`unit`**
+  Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to `frac:Frequency`.
+* **`Web Annotation`**
+  A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via `oa:hasBody`, `oa:hasTarget`, and selectors (e.g., `oa:TextPositionSelector`).
+* **`OntoLex-Lemon`**
+  A core vocabulary for linking lexical information with ontologies. FrAC extends it to cover corpus-based data.
+
+</section>
+
 <section id="overview">
 
 ### Overview of the Module
