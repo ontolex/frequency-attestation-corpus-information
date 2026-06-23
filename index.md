@@ -515,52 +515,6 @@ As an example of an attestation, consider the following example from Open Englis
 
 </section>
 
-<section id="gloss">
-
-## Glosses
-
-Glosses are used to give the form of the text as used in the dictionary. This property should not be used to provide direct quotations from the original data source, which should be represented by `frac:quotedText`. Instead, its recommended use is for representations that are either enriched (e.g., by annotations and metadata), amended (e.g., by expanding ligatures or omissions), simplified (e.g., by omissions from the original context, e.g., of the lexeme under consideration) or otherwise differentiated from the plain text representation of the context.
-
-<div class="entity">
-
-<dataProperty>gloss</dataProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#gloss](http://www.w3.org/ns/lemon/frac#gloss)
-
-The **gloss** of an attestation contains the text content of an attestation *as represented within a dictionary*.  
-
-<div class="description">
-
-<domain>Attestation</domain>
-
-<range>xsd:String</range>
-</div>
-</div>
-
-<div class="note">
-With `frac:gloss` and `frac:quotedText`, `frac:Attestation` provides *two* different properties to represent the context of an observable in any particular data source. `frac:quotedText` should provide information as found in the underlying corpus, e.g., a plain text string. If the dictionary provides a different representation, or if the attestation as given in an underlying dictionary has not yet been confirmed to match the context in the underlying corpus, applications should use `frac:gloss` instead of `frac:quotedText`. In other words, `frac:quotedText` corresponds to the representation of the context in the underlying corpus, `frac:gloss` to its representation in the underlying dictionary. If both are confirmed to be equal, use `frac:quotedText`.
-</div>
-
-As an example, for Old English *hwæt-hweganunges*, Bosworth (2014) gives the example `"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ...`. In OntoLex-FrAC, this would be the `frac:gloss` because it contains additional information about spelling variation/normalized spelling not found in the quoted source (`MS. Cote.`):
-
-<aside class="example" title="Attestation of Old English 'hwæt-hweganunges'">
-
-```turtle
-<https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
-    frac:attestation [
-        a frac:Attestation;
-        frac:quotedText "Ða niétenu ðonne beóþ hwæthwugununges" ;
-        frac:gloss "Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."
-    ] .
-```
- </aside>
-
-<div class="note">
- Bosworth, Joseph. “hwæt-hweganunges.” In _An Anglo-Saxon Dictionary Online_, edited by Thomas Northcote Toller, Christ Sean, and Ondřej Tichy. Prague: Faculty of Arts, Charles University, 2014. https://bosworthtoller.com/20070.
- </div>
-
-</section>
-
 <section id="locus">
 
 ## Locus
