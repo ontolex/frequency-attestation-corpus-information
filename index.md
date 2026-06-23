@@ -213,6 +213,8 @@ The definition `frac:Observable` does not posit an exhaustive list of possible o
 
 <subclass>exactly 1 `frac:observedIn`</subclass>
 
+<subclass>min 1 `dct:description`</subclass>
+
 <subclass>exactly 1 rdf:value</subclass>
 
 </div>
@@ -234,6 +236,8 @@ For a `frac:Observation`,  the property **observedIn** defines the URI of the da
 <domain>frac:Observation</domain>
 
 <range>anyURI</range>
+
+<functional/>
 
 </div>
 </div>
