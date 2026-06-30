@@ -168,12 +168,20 @@ The following diagram depicts the OntoLex module for frequency, attestation and 
 
 ## Observations and Observables
 
-OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a language resource about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean 
+OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a language resource about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean any element for which corpus-based observations are explicitly recorded. This includes:
 
-- any *lexical entity* that can be described with OntoLex (including, but not limited to, OntoLex core classes `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense` or `ontolex:LexicalConcept`), as well as
-- any *ontological entity* from a knowledge graph (corresponding to the object of an `ontolex:denotes`, `ontolex:reference` or `ontolex:isConceptOf` property). 
+- Any lexical entity defined within an OntoLex lexical resource (e.g., `ontolex:LexicalEntry`, `ontolex:Form`, `ontolex:LexicalSense`, or `ontolex:LexicalConcept`).  
+- Any ontological entity or concept referenced by a lexical resource via semantic mapping properties (specifically the object of an `ontolex:denotes`, `ontolex:reference`, or `ontolex:isConceptOf` property).  
 
-The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and `frac:Observation`, complemented by a property `frac:observedIn`, pointing to the URI where the observation has been made.
+While a corpus may contain various annotations (such as part-of-speech tags or 
+syntactic relations), these are only treated as `frac:Observable` when they are
+directly mapped to or quantified within the lexical resource. For the purposes of
+this document, the terms ontology and knowledge graph are used interchangeably to
+refer to the formal conceptual models that provide these semantic targets. 
+
+The top-level concepts of OntoLex-FrAC are thus `frac:Observable` and 
+`frac:Observation`, complemented by a property `frac:observedIn`, 
+pointing to the URI where the observation has been made.
 
 <div class="entity">
 
