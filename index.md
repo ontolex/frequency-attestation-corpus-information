@@ -48,7 +48,7 @@ date: 2025-01-21
 This document describes the _module for frequency, attestation and corpus information_ of the OntoLex Lexicon Model for Ontologies (_OntoLex-Lemon_) developed by the W3C Community Group Ontology-Lexica. The module is targeted at complementing dictionaries and other linguistic resources containing lexicographic data with a vocabulary to express
 
 *   corpus-derived information (frequency and cooccurrence information, collocation analysis),
-*   pointers from lexical resources to corpora and other collections of text (attestations, examples), and
+*   pointers from lexical resources to corpora and other collections of text (attestations, examples), and the linking of these resources with lexical information (dictionary linking). For simplicity, this document uses the term corpus to broadly include primary linguistic data, individual texts, or documents, and
 *   the linking of corpora and linguistic primary data with lexical information (dictionary linking).
 
 The module tackles use cases in corpus-based lexicography and corpus linguistics and operates in combination with the _OntoLex-Lemon_ core module (_Lemon_), as well as with other _lemon_ modules.
@@ -124,7 +124,7 @@ Other models:
 * **Collocation Score**
   A subproperty of `rdf:value`, used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like `lexinfo:pmi`.
 * **`Corpus`**
-  A collection of texts (e.g., `dct:Collection`, `dct:Dataset`) used as the empirical basis for observations. Referenced via `frac:observedIn`.
+  A collection of texts (e.g., `dct:Collection`, `dct:Dataset`), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via `frac:observedIn`.
 * **`Frequency`**
   An observation of how often an observable appears in a corpus (absolute count), subclass of `frac:Observation`.
 * **`head`**
