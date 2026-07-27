@@ -124,7 +124,7 @@ Other models:
 * **[=Collocation Score=]**
   A subproperty of `rdf:value`, used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like `lexinfo:pmi`.
 * **`Corpus`**
-  A collection of texts (e.g., `dct:Collection`, `dct:Dataset`), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
+  A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
 * **[=Frequency=]**
   An observation of how often an observable appears in a corpus (absolute count), subclass of [=Observation=].
 * **[=head=]**
@@ -221,7 +221,7 @@ The definition of [=observable=] does not posit an exhaustive list of possible o
 
 <subclass>exactly 1 [=observedIn=]</subclass>
 
-<subclass>min 1 `dct:description`</subclass>
+<subclass>min 1 [`dct:description`](http://purl.org/dc/terms/description)</subclass>
 
 <subclass>exactly 1 rdf:value</subclass>
 
@@ -403,7 +403,7 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 **URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
 
-The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., `dct:Collection`, `dct:Dataset`, `dct:Text` or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as a [=Frequency=] object.
+The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset), [`dct:Text`](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as a [=Frequency=] object.
 
 <div class="description">
 
@@ -561,7 +561,7 @@ In many applications, it is desirable to specify the precise location of the occ
 ```
 </aside>
 
-[=locus=] denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, [=observedIn=] can refer to a corpus of other collections of texts. [=locus=] normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas [=observedIn=] refers to `dct:Text`s or `dct:Collection`s.
+[=locus=] denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, [=observedIn=] can refer to a corpus of other collections of texts. [=locus=] normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas [=observedIn=] refers to [`dct:Text`](http://purl.org/dc/terms/Text)s or [`dct:Collection`](http://purl.org/dc/terms/Collection)s.
 
 While a single attestation object may be used for multiple observables, if the [=locus=] property is used to point to the specific location of the observable in the attestation, this may mean that multiple attestations are required, each with a different [=locus=] value. 
 
@@ -606,7 +606,7 @@ ex:pay_price_collocation a frac:Collocation, rdf:Seq ;
 
 Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of [=observable=]s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
 
-Collocations obtained by quantitative methods are characterized by their method of creation (<tt>dct:description</tt>), their collocation strength (<tt>rdf:value</tt>), and the corpus or data source used to create them ([=observedIn=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
+Collocations obtained by quantitative methods are characterized by their method of creation ([`dct:description`](http://purl.org/dc/terms/description)), their collocation strength (<tt>rdf:value</tt>), and the corpus or data source used to create them ([=observedIn=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
 
 
 <div class="entity">
@@ -631,7 +631,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 Collocations are collections of [=observable=]s, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
     
-By default, [=Collocation=] is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in <tt>dct:description</tt>. 
+By default, [=Collocation=] is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in [`dct:description`](http://purl.org/dc/terms/description). 
 
 FrAC collocations can be used to represent collocations both in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via `rdfs:member` with a [=Collocation=].
     
@@ -673,7 +673,7 @@ with
 - <math><msub><mi>f</mi><mi>y</mi></msub></math> the number of occurrences of the word *y*
 - <math><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></math> the number of co-occurrences of the words *x* and *y*
 - <math><mrow><msub><mi>R</mi><mi>y</mi></msub><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>y</mi></msub></mfrac></mrow></math> relative frequency of *y*
-- <math><mi>N</mi></math> the total number of words in the corpus, this should be documented in `dct:description`
+- <math><mi>N</mi></math> the total number of words in the corpus, this should be documented in [`dct:description`](http://purl.org/dc/terms/description)
 
 In addition to collocation scores, also statistical independence tests can be employed as collocation scores:
 
