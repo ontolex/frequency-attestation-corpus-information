@@ -120,9 +120,9 @@ Other models:
 * **[=Citation=]**
   A general bibliographic reference from a lexical resource to a source. [=Attestation property=] is a more specific form of <dfn>citation</dfn>.
 * **[=Collocation=]**
-  A co-occurrence of two or more lexical units in a corpus. Treated as a container (`rdf:Seq` or `rdf:Bag`) and a subclass of [=Observation=].
+  A co-occurrence of two or more lexical units in a corpus. Treated as a container ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)) and a subclass of [=Observation=].
 * **[=Collocation Score=]**
-  A subproperty of `rdf:value`, used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
+  A subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
 * **Corpus**
   A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
 * **[=Frequency=]**
@@ -135,7 +135,7 @@ Other models:
   Any lexical or ontological unit about which corpus-based information (frequency, attestation) can be recorded.
 * **[=Observation=]**
   An empirical claim about an observable—e.g., frequency count, collocation, attestation. Can link to a data source via [=observedIn=].
-* **`rdf:value`**
+* **[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
   A standard RDF property used to specify the literal value of an observation (e.g., a frequency number or attestation text).
 * **[=unit=]**
   Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to [=Frequency=].
@@ -150,7 +150,7 @@ Other models:
 
 ### Overview of the Module
 
-The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty diamond heads represent `rdfs:subClassOf`.
+The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty diamond heads represent [`rdfs:subClassOf`](http://www.w3.org/2000/01/rdf-schema#subClassOf).
 
 
 <figure id="overview-figure">
@@ -203,7 +203,7 @@ pointing to the URI where the observation has been made.
 </figure>
 
 We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes <a data-cite="ontolex#Form">form</a> (e.g., form frequency), <a data-cite="ontolex#LexicalEntry">lexical entry</a> (e.g., frequency of disambiguated lemmas), <a data-cite="ontolex#LexicalSense">lexical sense</a> (e.g., sense frequency), <a data-cite="ontolex#LexicalConcept">lexical concept</a> (e.g., synset frequency), [`lexicog:Entry`](http://www.w3.org/ns/lemon/lexicog#Entry) (if used for representing homonyms: frequency of non-disambiguated lemmas).
-In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce [=observable=] as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
+In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce [=observable=] as a top-level element within the FrAC module that is used to define the [`rdfs:domain`](http://www.w3.org/2000/01/rdf-schema#domain) of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
 The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., <a data-cite="decomp#component">component</a>, <a data-cite="synsem#SyntacticArgument">syntactic argument</a>, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
@@ -223,7 +223,7 @@ The definition of [=observable=] does not posit an exhaustive list of possible o
 
 <subclass>min 1 [`dct:description`](http://purl.org/dc/terms/description)</subclass>
 
-<subclass>exactly 1 rdf:value</subclass>
+<subclass>exactly 1 [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)</subclass>
 
 </div>
 
@@ -264,12 +264,12 @@ Lexicographers use (corpus) frequency and distribution information while compili
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Frequency](http://www.w3.org/ns/lemon/frac#Frequency)
 
-<dfn>Frequency</dfn> is an [=Observation=] of the absolute number of attestations (`rdf:value`) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. 
+<dfn>Frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. 
 <div class="description">
 
 <subclass>[=Observation=]</subclass>
 
-<subclass>`rdf:value` exactly 1</subclass>
+<subclass>[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) exactly 1</subclass>
 
 <subclass>[=observedIn=] exactly 1</subclass>
 
@@ -320,7 +320,7 @@ frequency value should correspond to the aggregation of sources and languages
 in that dataset.
 </div>
 
-The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=Frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=Frequency=] `rdf:value` and for the [=total=] (i.e., `100%`) of the associated corpus.
+The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=Frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=Frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
@@ -604,9 +604,9 @@ ex:pay_price_collocation a frac:Collocation, rdf:Seq ;
 ```
 </aside>
 
-Collocations can involve two or more words, they are thus modelled as an <tt>rdfs:Container</tt> of [=observable=]s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence (<tt>rdf:Seq</tt>), otherwise, the default interpretation is as an ordered set (<tt>rdf:Bag</tt>).
+Collocations can involve two or more words, they are thus modelled as an [`rdfs:Container`](http://www.w3.org/2000/01/rdf-schema#Container) of [=observable=]s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq)), otherwise, the default interpretation is as an ordered set ([`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)).
 
-Collocations obtained by quantitative methods are characterized by their method of creation ([`dct:description`](http://purl.org/dc/terms/description)), their collocation strength (<tt>rdf:value</tt>), and the corpus or data source used to create them ([=observedIn=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
+Collocations obtained by quantitative methods are characterized by their method of creation ([`dct:description`](http://purl.org/dc/terms/description)), their collocation strength ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)), and the corpus or data source used to create them ([=observedIn=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
 
 
 <div class="entity">
@@ -615,29 +615,29 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 
-<dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their collocation score (or weight, <tt>rdf:value</tt>) in a particular data source ([=observedIn=]). 
+<dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their collocation score (or weight, [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) in a particular data source ([=observedIn=]). 
 
 <div class="description">
 
-<subclass>rdfs:Container</subclass>
+<subclass>[`rdfs:Container`](http://www.w3.org/2000/01/rdf-schema#Container)</subclass>
 
 <subclass>[=Observation=]</subclass>
 
-<subclass>rdfs:member only [=observable=]</subclass>
+<subclass>[`rdfs:member`](http://www.w3.org/2000/01/rdf-schema#member) only [=observable=]</subclass>
 
 <subclass>[=head=] max 1</subclass>
 </div>
 </div>
 
-Collocations are collections of [=observable=]s, and formalized as <tt>rdfs:Container</tt>, i.e., <tt>rdf:Seq</tt> or <tt>rdf:Bag</tt>. The elements of any collocation can be accessed by `rdfs:member`. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
+Collocations are collections of [=observable=]s, and formalized as [`rdfs:Container`](http://www.w3.org/2000/01/rdf-schema#Container), i.e., [`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag). The elements of any collocation can be accessed by [`rdfs:member`](http://www.w3.org/2000/01/rdf-schema#member). In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
     
 By default, [=Collocation=] is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in [`dct:description`](http://purl.org/dc/terms/description). 
 
-FrAC collocations can be used to represent collocations both in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as [`lexinfo:termType`](http://www.lexinfo.net/ontology/3.0/lexinfo#termType), e.g., by means of [`lexinfo:idiom`](http://www.lexinfo.net/ontology/3.0/lexinfo#idiom), [`lexinfo:phraseologicalUnit`](http://www.lexinfo.net/ontology/3.0/lexinfo#phraseologicalUnit) or [`lexinfo:setPhrase`](http://www.lexinfo.net/ontology/3.0/lexinfo#setPhrase). If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via `rdfs:member` with a [=Collocation=].
+FrAC collocations can be used to represent collocations both in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as [`lexinfo:termType`](http://www.lexinfo.net/ontology/3.0/lexinfo#termType), e.g., by means of [`lexinfo:idiom`](http://www.lexinfo.net/ontology/3.0/lexinfo#idiom), [`lexinfo:phraseologicalUnit`](http://www.lexinfo.net/ontology/3.0/lexinfo#phraseologicalUnit) or [`lexinfo:setPhrase`](http://www.lexinfo.net/ontology/3.0/lexinfo#setPhrase). If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via [`rdfs:member`](http://www.w3.org/2000/01/rdf-schema#member) with a [=Collocation=].
     
 Since collocations are [=observable=]s, they can be ascribed [=frequency property=], and [=attestation property=] and they can be nested inside larger collocations.
     
-Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of [=cScore=]:
+Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) property, but a designated subproperty of [=cScore=]:
 
 <div class="entity">
 
@@ -645,11 +645,11 @@ Collocations can be described in terms of various collocation scores. If scores 
 
 **URI:** [http://www.w3.org/ns/lemon/frac#cScore](http://www.w3.org/ns/lemon/frac#cScore)
 
-<dfn data-lt="cScore">Collocation score</dfn> is a subproperty of `rdf:value` that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.
+<dfn data-lt="cScore">Collocation score</dfn> is a subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.
 
 <div class="description">
 
-<subproperty>rdf:value</subproperty>
+<subproperty>[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)</subproperty>
 
 <domain>[=Collocation=]</domain>
 </div>
