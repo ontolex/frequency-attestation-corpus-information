@@ -140,7 +140,7 @@ Other models:
 * **[=unit=]**
   Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to [=Frequency=].
 * **`Web Annotation`**
-  A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via `oa:hasBody`, `oa:hasTarget`, and selectors (e.g., `oa:TextPositionSelector`).
+  A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody), [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget), and selectors (e.g., [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector)).
 * **`OntoLex-Lemon`**
   A core vocabulary for linking lexical information with ontologies. FrAC extends it to cover corpus-based data.
 
@@ -784,34 +784,34 @@ wsen:spill+the+beans a ontolex:MultiWordExpression;
 
 The Ontolex Module for Frequency, Attestation and Corpus Information does not specify a vocabulary for annotating corpora or other data with lexical information, as this is being provided by the [Web Annotation Vocabulary](https://www.w3.org/TR/annotation-vocab/). The following description is non-normative as Web Annotation is defined in a separate W3C recommendation. The definitions below are reproduced and refined only insofar as domain and range declarations have been refined to our use case.
 
-In Web Annotation terminology, the annotated element is the ‘target’, the content of the annotation is the ‘body’, and the process and provenance of the annotation is expressed by properties of <tt>oa:Annotation</tt>.
+In Web Annotation terminology, the annotated element is the ‘target’, the content of the annotation is the ‘body’, and the process and provenance of the annotation is expressed by properties of [`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation).
 
 <figure>
 
 ![](https://www.w3.org/TR/annotation-vocab/images/examples/annotation.png)
 
-<figcaption>oa:Annotation with properties</figcaption>
+<figcaption>[`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation) with properties</figcaption>
 
 </figure>
 
-Annotation as linked with the `oa:hasBody` and `oa:hasTarget` properties:
+Annotation as linked with the [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody) and [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget) properties:
 
 <figure>
 
 ![](https://www.w3.org/TR/annotation-vocab/images/examples/hasBody.png)
 
-<figcaption>oa:hasBody</figcaption>
+<figcaption>[`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody)</figcaption>
 </figure>
 
 The Web Annotation Vocabulary supports different ways to define targets. This includes:
 
 *   plain URI: The target can be a URI defined within the corpus (e.g., if corpus data is provided as native RDF, or by means of the <tt>@about</tt> attribute in an [HTML/XML+RDFa](https://www.w3.org/TR/rdfa-primer/) document, or by means of <tt>@xml:id</tt> in a [TEI/XML](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.html) document).
 *   string URI: String URIs provide the possibility to point directly to a text fragment in a web document, using the URI schemas as provided by [RFC5147](https://tools.ietf.org/html/rfc5147) (text files only) or [NIF](http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html#introduction) (all text-based formats).
-*   [oa:TextPositionSelector](https://www.w3.org/TR/annotation-vocab/#textpositionselector): a range of text defined by the start and end positions of the selection in the stream
-*   [oa:DataPositionSelector](https://www.w3.org/TR/annotation-vocab/#datapositionselector): a range of data by recording the start and end positions of the selection in the stream
-*   [oa:TextQuoteSelector](https://www.w3.org/TR/annotation-vocab/#textquoteselector): The TextQuoteSelector describes a range of text by copying it. The TextQuoteSelector can include some of the text immediately before (a prefix) and after (a suffix) to distinguish between multiple copies of the same sequence of characters. If this does suffice for disambiguation, all matching text fragments in the document are being annotated.
-*   [oa:XPathSelector](https://www.w3.org/TR/annotation-vocab/#xpathselector): select elements and content within a resource that supports the Document Object Model via a specified XPath value.
-*   [oa:RangeSelector](https://www.w3.org/TR/annotation-vocab/#rangeselector): identify the beginning and the end of the selection by using other Selectors.
+*   [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector): a range of text defined by the start and end positions of the selection in the stream
+*   [`oa:DataPositionSelector`](https://www.w3.org/TR/annotation-vocab/#datapositionselector): a range of data by recording the start and end positions of the selection in the stream
+*   [`oa:TextQuoteSelector`](https://www.w3.org/TR/annotation-vocab/#textquoteselector): The TextQuoteSelector describes a range of text by copying it. The TextQuoteSelector can include some of the text immediately before (a prefix) and after (a suffix) to distinguish between multiple copies of the same sequence of characters. If this does suffice for disambiguation, all matching text fragments in the document are being annotated.
+*   [`oa:XPathSelector`](https://www.w3.org/TR/annotation-vocab/#xpathselector): select elements and content within a resource that supports the Document Object Model via a specified XPath value.
+*   [`oa:RangeSelector`](https://www.w3.org/TR/annotation-vocab/#rangeselector): identify the beginning and the end of the selection by using other Selectors.
 
 <aside class="example" title="Web Annotation">
 
@@ -831,7 +831,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 
 <div class="note">
 
-<tt>oa:Annotation</tt> explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every <tt>ontolex:Element</tt> to appear in one <tt>oa:hasBody</tt> statement in order to produce a full annotation of the corpus.
+[`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation) explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every <tt>ontolex:Element</tt> to appear in one [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody) statement in order to produce a full annotation of the corpus.
 
 </div>
 
