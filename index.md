@@ -831,7 +831,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 
 <div class="note">
 
-[`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation) explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every <tt>ontolex:Element</tt> to appear in one [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody) statement in order to produce a full annotation of the corpus.
+[`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation) explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every element to appear in one [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody) statement in order to produce a full annotation of the corpus.
 
 </div>
 
