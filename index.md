@@ -635,7 +635,7 @@ By default, [=Collocation=] is insensitive to word order. If a collocation is wo
 
 FrAC collocations can be used to represent collocations both in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via `rdfs:member` with a [=Collocation=].
     
-Since collocations are [=observable=]s, they can be ascribed [=frequency property=], [=attestation property=], `frac:embedding` and they can be nested inside larger collocations.
+Since collocations are [=observable=]s, they can be ascribed [=frequency property=], and [=attestation property=] and they can be nested inside larger collocations.
     
 Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic `rdf:value` property, but a designated subproperty of [=cScore=]:
 
@@ -831,7 +831,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 
 <div class="note">
 
-<tt>oa:Annotation</tt> explicitly allows _n:m_ relations between <tt>ontolex:Element</tt>s and elements in the annotated elements. It is thus sufficient for every <tt>ontolex:Element</tt> to appear in one <tt>oa:hasBody</tt> statement in order to produce a full annotation of the corpus.
+<tt>oa:Annotation</tt> explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every <tt>ontolex:Element</tt> to appear in one <tt>oa:hasBody</tt> statement in order to produce a full annotation of the corpus.
 
 </div>
 
