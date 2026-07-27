@@ -170,8 +170,8 @@ The following diagram depicts the OntoLex module for frequency, attestation and 
 
 OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a language resource about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean any element for which corpus-based observations are explicitly recorded. This includes:
 
-- Any lexical entity defined within an OntoLex lexical resource (e.g., <a data-cite="ontolex#lexical-entry">lexical entry</a>, `ontolex:Form`, `ontolex:LexicalSense`, or `ontolex:LexicalConcept`).  
-- Any ontological entity or concept referenced by a lexical resource via semantic mapping properties (specifically the object of an `ontolex:denotes`, `ontolex:reference`, or `ontolex:isConceptOf` property).  
+- Any lexical entity defined within an OntoLex lexical resource (e.g., <a data-cite="ontolex#LexicalEntry">lexical entry</a>, <a data-cite="ontolex#Form">form</a>, <a data-cite="ontolex#LexicalSense">lexical sense</a>, or <a data-cite="ontolex#LexicalConcept">lexical concept</a>).  
+- Any ontological entity or concept referenced by a lexical resource via semantic mapping properties (specifically the object of an <a data-cite="ontolex#denotes">denotes</a>, <a data-cite="ontolex#reference">reference</a>, or <a data-cite="ontolex#isConceptOf">isConceptOf</a> property).  
 
 While a corpus may contain various annotations (such as part-of-speech tags or 
 syntactic relations), these are only treated as [=observable=] when they are
@@ -189,7 +189,7 @@ pointing to the URI where the observation has been made.
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Observable](http://www.w3.org/ns/lemon/frac#Observable)
 
-<dfn>Observable</dfn> is a superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, `ontolex:LexicalEntry`, `ontolex:LexicalSense`, `ontolex:Form`, and `ontolex:LexicalConcept`. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source.
+<dfn>Observable</dfn> is a superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, <a data-cite="ontolex#LexicalEntry">lexical entry</a>, <a data-cite="ontolex#LexicalSense">lexical sense</a>, <a data-cite="ontolex#Form">form</a>, and <a data-cite="ontolex#LexicalConcept">lexical concept</a>. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source.
 </div>
 
 </div>
@@ -198,15 +198,15 @@ pointing to the URI where the observation has been made.
 
 ![](img/ontolex-element.png "frac:Observable")
 
-<figcaption>[=Observable=] as a superclass of ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense and ontolex:LexicalConcept</figcaption>
+<figcaption>[=Observable=] as a superclass of <a data-cite="ontolex#LexicalEntry">lexical entry</a>, <a data-cite="ontolex#Form">form</a>, <a data-cite="ontolex#LexicalSense">lexical sense</a> and <a data-cite="ontolex#LexicalConcept">lexical concept</a></figcaption>
 
 </figure>
 
-We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes `ontolex:Form` (e.g., form frequency), `ontolex:LexicalEntry` (e.g., frequency of disambiguated lemmas), `ontolex:LexicalSense` (e.g., sense frequency), `ontolex:LexicalConcept` (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas).
+We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes <a data-cite="ontolex#Form">form</a> (e.g., form frequency), <a data-cite="ontolex#LexicalEntry">lexical entry</a> (e.g., frequency of disambiguated lemmas), <a data-cite="ontolex#LexicalSense">lexical sense</a> (e.g., sense frequency), <a data-cite="ontolex#LexicalConcept">lexical concept</a> (e.g., synset frequency), `lexicog:Entry` (if used for representing homonyms: frequency of non-disambiguated lemmas).
 In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce [=observable=] as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
-The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, `synsem:SyntacticArgument`, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
+The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, <a data-cite="synsem#SyntacticArgument">syntactic argument</a>, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
 </div>
 
 <div class="entity">
@@ -633,7 +633,7 @@ Collocations are collections of [=observable=]s, and formalized as <tt>rdfs:Cont
     
 By default, [=Collocation=] is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in <tt>dct:description</tt>. 
 
-FrAC collocations can be used to represent collocations both in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of `ontolex:MultiWordExpression` and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a `ontolex:MultiWordExpression`, it can be linked via `rdfs:member` with a [=Collocation=].
+FrAC collocations can be used to represent collocations both in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as `lexinfo:termType`, e.g., by means of `lexinfo:idiom`, `lexinfo:phraseologicalUnit` or `lexinfo:setPhrase`. If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via `rdfs:member` with a [=Collocation=].
     
 Since collocations are [=observable=]s, they can be ascribed [=frequency property=], [=attestation property=], `frac:embedding` and they can be nested inside larger collocations.
     

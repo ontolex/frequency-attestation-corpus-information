@@ -78,6 +78,17 @@ $endfor$
             publisher: "W3C Ontology-Lexicon Community Group",
             date: "10 May 2016"
           },
+          "synsem": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
         }
       };
     </script>
