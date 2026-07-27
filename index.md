@@ -407,7 +407,7 @@ The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.
 
 <div class="description">
 
-<domain>class that is a `dcam:memberOf` DCMI Type</domain>
+<domain>class that is a [`dcam:memberOf`](http://purl.org/dc/dcam/memberOf) DCMI Type</domain>
 
 <range>[=Frequency=]</range>
 
@@ -498,7 +498,7 @@ The <dfn>quotedText</dfn> property provides the text of the attestation as it is
 
 <domain>[=Attestation=]</domain>
 
-<range>xsd:String</range>
+<range>[`xsd:string`](https://www.w3.org/TR/xmlschema-2/#string)</range>
 
 </div>
 </div>
@@ -580,10 +580,10 @@ Collocations are usually defined on surface-oriented criteria, i.e., as a
 relation between forms or lemmas (lexical entries), not between senses, but 
 they can be analyzed on the level of word senses (the sense that gave rise to 
 the idiom or collocation). Indeed, collocations often contain a variable part, 
-which can be represented by a <tt>ontolex:LexicalConcept</tt>. For example, 
+which can be represented by a <a data-cite="ontolex#LexicalConcept">lexical concept</a>. For example, 
 consider the semi-fixed expression pay [a price] where the verb "pay" is paired with a 
 variable semantic slot rather than a single fixed word. By including the abstract 
-`ontolex:LexicalConcept` instead of a literal form, the collocation successfully 
+<a data-cite="ontolex#LexicalConcept">lexical concept</a> instead of a literal form, the collocation successfully 
 captures a wide range of corpus occurrences sharing the same underlying meaning, 
 such as pay a high price, pay a heavy toll, or pay the ultimate penalty.
 
@@ -837,7 +837,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 
 <div class="note">
 
-As for frequency, embeddings, etc., resource-specific annotation classes can be defined by <tt>owl:Restriction</tt> so that modelling effort and verbosity are reduced. These should follow the same conventions.
+As for frequency, embeddings, etc., resource-specific annotation classes can be defined by [`owl:Restriction`](https://www.w3.org/TR/owl-ref/#Restriction) so that modelling effort and verbosity are reduced. These should follow the same conventions.
 
 </div>
 
