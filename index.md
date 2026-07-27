@@ -117,13 +117,13 @@ Other models:
 
 * **[=Attestation=]**
   A quotation or excerpt from a source document providing evidence of a lexical feature (e.g., form, sense, spelling variation). It is a subclass of [=Observation=].
-* **`Citation`**
-  A general bibliographic reference from a lexical resource to a source. [=attestation property=] is a more specific form of `citation`.
+* **[=Citation=]**
+  A general bibliographic reference from a lexical resource to a source. [=Attestation property=] is a more specific form of <dfn>citation</dfn>.
 * **[=Collocation=]**
   A co-occurrence of two or more lexical units in a corpus. Treated as a container (`rdf:Seq` or `rdf:Bag`) and a subclass of [=Observation=].
 * **[=Collocation Score=]**
   A subproperty of `rdf:value`, used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
-* **`Corpus`**
+* **Corpus**
   A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
 * **[=Frequency=]**
   An observation of how often an observable appears in a corpus (absolute count), subclass of [=Observation=].
