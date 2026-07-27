@@ -206,7 +206,7 @@ We assume that frequency, attestation and corpus information can be provided abo
 In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce [=observable=] as a top-level element within the FrAC module that is used to define the `rdfs:domain` of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
-The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., `decomp:Component`, <a data-cite="synsem#SyntacticArgument">syntactic argument</a>, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
+The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., <a data-cite="decomp#component">component</a>, <a data-cite="synsem#SyntacticArgument">syntactic argument</a>, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
 </div>
 
 <div class="entity">
