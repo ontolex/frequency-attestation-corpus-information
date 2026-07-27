@@ -37,7 +37,48 @@ $endfor$
         github: "ontolex/frequency-attestation-corpus-information",
         shortName: "FrAC",
         group: "ontolex",
-        latestVersion: "https://ontolex.github.io/frequency-attestation-corpus-information/"
+        latestVersion: "https://ontolex.github.io/frequency-attestation-corpus-information/",
+        externalSpecs: {
+            "ontolex": {
+                title: "Lexicon Model for Ontologies: Community Report",
+                href: "https://ontolex.github.io/ontolex/specification.html",
+            }    
+        },
+        localBiblio: {
+          "ontolex": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+          "decomp": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+          "vartrans": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+        }
       };
     </script>
     <style>
