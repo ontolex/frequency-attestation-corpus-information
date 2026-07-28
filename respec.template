@@ -1,12 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html
+  prefix="
+    frac: http://www.w3.org/ns/lemon/frac#
+    ontolex: http://www.w3.org/ns/lemon/ontolex#
+    synsem: http://www.w3.org/ns/lemon/synsem#
+    decomp: http://www.w3.org/ns/lemon/decomp#
+    vartrans: http://www.w3.org/ns/lemon/vartrans#
+    lime: http://www.w3.org/ns/lemon/lime#
+    lexicog: http://www.w3.org/ns/lemon/lexicog#
+    lexinfo: http://www.lexinfo.net/ontology/3.0/lexinfo#
+    dct: http://purl.org/dc/terms/
+    oa: http://www.w3.org/ns/oa#
+    dcam: http://purl.org/dc/dcam/
+    rdf: http://www.w3.org/1999/02/22-rdf-syntax-ns#
+    rdfs: http://www.w3.org/2000/01/rdf-schema#
+    owl: http://www.w3.org/2002/07/owl#
+    xsd: http://www.w3.org/2001/XMLSchema#
+    voaf: http://purl.org/vocommons/voaf#">
   <head>
     <meta charset="utf-8" />
     <title>$title$</title>
     <script
       src="https://www.w3.org/Tools/respec/respec-w3c"
       class="remove"
-      defer
+      defer="defer"
     ></script>
     <script class="remove">
       // All config options at https://respec.org/docs/
@@ -37,7 +54,59 @@ $endfor$
         github: "ontolex/frequency-attestation-corpus-information",
         shortName: "FrAC",
         group: "ontolex",
-        latestVersion: "https://ontolex.github.io/frequency-attestation-corpus-information/"
+        latestVersion: "https://ontolex.github.io/frequency-attestation-corpus-information/",
+        externalSpecs: {
+            "ontolex": {
+                title: "Lexicon Model for Ontologies: Community Report",
+                href: "https://ontolex.github.io/ontolex/specification.html",
+            }    
+        },
+        localBiblio: {
+          "ontolex": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+          "decomp": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+          "vartrans": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+          "synsem": {
+            title: "Lexicon Model for Ontologies (OntoLex)",
+            href: "https://ontolex.github.io/ontolex/specification.html",
+            authors: [
+              "Philipp Cimiano",
+              "John P. McCrae",
+              "Paul Buitelaar"
+            ],
+            publisher: "W3C Ontology-Lexicon Community Group",
+            date: "10 May 2016"
+          },
+        }
       };
     </script>
     <style>
