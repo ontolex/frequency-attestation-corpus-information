@@ -1,0 +1,141 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> .
+@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> .
+@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> .
+@prefix lime: <http://www.w3.org/ns/lemon/lime#> .
+@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix dcam: <http://purl.org/dc/dcam/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+
+<http://www.w3.org/ns/lemon/frac#>
+    a voaf:Vocabulary, owl:Ontology .
+
+frac:Attestation
+    a owl:Class ;
+    rdfs:comment "Attestation is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register." ;
+    rdfs:label "Attestation"@en ;
+    rdfs:subClassOf frac:Observation, [
+        a owl:Restriction ;
+        owl:maxCardinality 1 ;
+        owl:onProperty frac:quotedText
+    ] .
+
+frac:Collocation
+    a owl:Class ;
+    rdfs:comment "Collocation is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their collocation score (or weight, rdf:value) in a particular data source ([=observedIn=])." ;
+    rdfs:label "Collocation"@en ;
+    rdfs:subClassOf rdfs:Container, frac:Observation, [
+        a owl:Restriction ;
+        owl:allValuesFrom frac:Observable ;
+        owl:onProperty rdfs:member
+    ], [
+        a owl:Restriction ;
+        owl:maxCardinality 1 ;
+        owl:onProperty frac:head
+    ] .
+
+frac:Frequency
+    a owl:Class ;
+    rdfs:comment "Frequency is an [=Observation=] of the absolute number of attestations (rdf:value) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on." ;
+    rdfs:label "Frequency"@en ;
+    rdfs:subClassOf frac:Observation, [
+        a owl:Restriction ;
+        owl:cardinality 1 ;
+        owl:onProperty rdf:value
+    ], [
+        a owl:Restriction ;
+        owl:cardinality 1 ;
+        owl:onProperty frac:observedIn
+    ] .
+
+frac:Observable
+    a owl:Class ;
+    rdfs:comment "Observable is a superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, lexical entry, lexical sense, form, and lexical concept. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source." ;
+    rdfs:label "Observable"@en .
+
+frac:Observation
+    a owl:Class ;
+    rdfs:comment "Observation is a superclass for anything that can be observed in a corpus about an [=observable=]." ;
+    rdfs:label "Observation"@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:cardinality 1 ;
+        owl:onProperty frac:observedIn
+    ], [
+        a owl:Restriction ;
+        owl:minCardinality 1 ;
+        owl:onProperty dct:description
+    ], [
+        a owl:Restriction ;
+        owl:cardinality 1 ;
+        owl:onProperty rdf:value
+    ] .
+
+frac:attestation
+    a owl:ObjectProperty ;
+    rdfs:comment "The attestation property associates an attestation to the [=observable=]." ;
+    rdfs:domain frac:Observable ;
+    rdfs:label "attestation"@en ;
+    rdfs:range frac:Attestation .
+
+frac:cScore
+    a owl:DatatypeProperty ;
+    rdfs:comment "Collocation score is a subproperty of rdf:value that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type." ;
+    rdfs:domain frac:Collocation ;
+    rdfs:label "cScore"@en ;
+    rdfs:subPropertyOf rdf:value .
+
+frac:frequency
+    a owl:ObjectProperty ;
+    rdfs:comment "The frequency property assigns a particular [=observable=] a [=Frequency=]." ;
+    rdfs:domain frac:Observable ;
+    rdfs:label "frequency"@en ;
+    rdfs:range frac:Frequency .
+
+frac:head
+    a owl:ObjectProperty ;
+    rdfs:comment "The head property identifies the element of a collocation that its scores are about. A collocation must not have more than one head." ;
+    rdfs:domain frac:Collocation ;
+    rdfs:label "head"@en ;
+    rdfs:range frac:Observable .
+
+frac:locus
+    a owl:ObjectProperty ;
+    rdfs:comment "locus points to the location at which the relevant word(s) can be found." ;
+    rdfs:domain frac:Attestation ;
+    rdfs:label "locus"@en .
+
+frac:observedIn
+    a owl:FunctionalProperty, owl:ObjectProperty ;
+    rdfs:comment "For an [=Observation=], the property observedIn defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc." ;
+    rdfs:domain frac:Observation ;
+    rdfs:label "observedIn"@en ;
+    rdfs:range xsd:anyURI .
+
+frac:quotedText
+    a owl:DatatypeProperty ;
+    rdfs:comment "The quotedText property provides the text of the attestation as it is represented in the original source. This can be a plain text string, or a more complex representation, e.g., as an HTML fragment, or as a reference to a Web Annotation." ;
+    rdfs:domain frac:Attestation ;
+    rdfs:label "quotedText"@en ;
+    rdfs:range xsd:string .
+
+frac:total
+    a owl:ObjectProperty ;
+    rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as a [=Frequency=] object." ;
+    rdfs:label "total"@en ;
+    rdfs:range frac:Frequency .
+
+frac:unit
+    a owl:ObjectProperty ;
+    rdfs:comment "For a [=Frequency=] object, the property unit provides an identifier of the respective segmentation unit." ;
+    rdfs:domain frac:Frequency ;
+    rdfs:label "unit"@en .
+
