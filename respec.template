@@ -23,7 +23,7 @@
     <script
       src="https://www.w3.org/Tools/respec/respec-w3c"
       class="remove"
-      defer
+      defer="defer"
     ></script>
     <script class="remove">
       // All config options at https://respec.org/docs/
