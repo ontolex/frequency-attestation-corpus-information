@@ -240,4 +240,10 @@ if __name__ == "__main__":
         # and right before its closing `</div>`
         result = re.sub(r'(<div property="rdfs:comment">)\s*\n[ \t]*', r'\1', result)
         result = re.sub(r'\n[ \t]*(</div>)', r'\1', result)
+
+        # Strip ReSpec's [=dfn reference=] bracket syntax down to the plain text -
+        # it's meaningless (and ugly) outside the rendered HTML page. The dfn has
+        # already been resolved to its `resource=`/`rel=` URI by expand_tags() above,
+        # so this is purely a display-text cleanup, not a semantic one.
+        result = re.sub(r'\[=([^=\]]*)=\]', r'\1', result)
         file.write(result)
