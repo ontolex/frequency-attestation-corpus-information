@@ -66,13 +66,17 @@ above, because a couple of tools are involved:
   sudo apt-get install raptor2-utils
   ```
 
-### 2. Run the pipeline, in order
+### 2. Run the pipeline
 
 ```bash
-pandoc --template respec.template -f markdown-auto_identifiers --wrap=none index.md -o index.html
-python3 expand_tags.py index.html index.html
-rapper -i rdfa -o turtle index.html > frac.ttl
+./extract-ontology.sh frac.ttl
 ```
+
+[`extract-ontology.sh`](extract-ontology.sh) runs the three steps in order —
+`pandoc`, then `expand_tags.py`, then `rapper` (with a `-f xmlns:PREFIX=...`
+flag per namespace, so the output Turtle actually gets `@prefix` lines
+instead of full URIs everywhere) — and writes the result to the path you
+give it (`frac.ttl` if you don't specify one).
 
 **The `expand_tags.py` step is required, not optional** — running `rapper`
 directly on Pandoc's raw HTML output will fail. Pandoc's HTML5 output isn't
@@ -115,6 +119,7 @@ At the moment, this is done as UML diagram [edit [here](https://github.com/ontol
 - [`index.md`](index.md) — the spec source (edit this).
 - [`respec.template`](respec.template) — Pandoc template that wraps `index.md` in the ReSpec HTML shell.
 - [`expand_tags.py`](expand_tags.py) — expands the shorthand ontology tags into RDFa; see "The ontology (RDFa)" above.
+- [`extract-ontology.sh`](extract-ontology.sh) — runs the full build + extraction pipeline; see "The ontology (RDFa)" above.
 - [`owl/`](owl/) — older, separately-maintained ontology snapshot (see above).
 - [`samples/`](samples/) — example datasets modelled with FrAC.
 - [`doc/`](doc/) — slides and papers from FrAC presentations.

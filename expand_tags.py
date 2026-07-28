@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import argparse
+import re
 import sys
 
 namespaces = {
@@ -235,7 +236,8 @@ if __name__ == "__main__":
     with open(args.output_file, 'w', encoding='utf-8') as file:
         result = str(soup)
 
-        # Remove new lines after `<div property="rdfs:comment">` and the next </div>
-        result = result.replace('<div property="rdfs:comment">\n  ', '<div property="rdfs:comment">')
-        result = result.replace('\n  </div>', '</div>')
+        # Remove newlines (and any indentation) right after `<div property="rdfs:comment">`
+        # and right before its closing `</div>`
+        result = re.sub(r'(<div property="rdfs:comment">)\s*\n[ \t]*', r'\1', result)
+        result = re.sub(r'\n[ \t]*(</div>)', r'\1', result)
         file.write(result)
