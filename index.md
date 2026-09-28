@@ -223,8 +223,6 @@ The definition of [=observable=] does not posit an exhaustive list of possible o
 
 <subclass>[=observedIn=] exactly 1</subclass>
 
-<subclass>dct:description min 1</subclass>
-
 <subclass>rdf:value exactly 1</subclass>
 
 </div>
@@ -626,6 +624,8 @@ Collocations obtained by quantitative methods are characterized by their method 
 <subclass>[=Observation=]</subclass>
 
 <subclass>rdfs:member only [=observable=]</subclass>
+
+<subclass>rdfs:member min 2 [=observable=]</subclass>
 
 <subclass>[=head=] max 1</subclass>
 </div>
