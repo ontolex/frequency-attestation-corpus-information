@@ -138,6 +138,36 @@ def transform_contents(soup, contents, dfn_about):
         all_tag.append(range_contents)
         restriction.append(all_tag)
         return restriction, {}
+    elif " some " in contents:
+        parts = contents.split(" some ")
+        if len(parts) != 2:
+            raise ValueError("Invalid OWL some format: " + contents)
+        restriction = soup.new_tag('span', typeof='owl:Restriction')
+        prop_contents, prop_attrs = transform_contents(soup, parts[0], dfn_about)
+        prop_tag = soup.new_tag('span', rel="owl:onProperty", **prop_attrs)
+        prop_tag.append(prop_contents)
+        restriction.append(prop_tag)
+        restriction.append(" some ")
+        range_contents, range_attrs = transform_contents(soup, parts[1], dfn_about)
+        some_tag = soup.new_tag('span', rel="owl:someValuesFrom", **range_attrs)
+        some_tag.append(range_contents)
+        restriction.append(some_tag)
+        return restriction, {}
+    elif " value " in contents:
+        parts = contents.split(" value ")
+        if len(parts) != 2:
+            raise ValueError("Invalid OWL value format: " + contents)
+        restriction = soup.new_tag('span', typeof='owl:Restriction')
+        prop_contents, prop_attrs = transform_contents(soup, parts[0], dfn_about)
+        prop_tag = soup.new_tag('span', rel="owl:onProperty", **prop_attrs)
+        prop_tag.append(prop_contents)
+        restriction.append(prop_tag)
+        restriction.append(" value ")
+        value_contents, value_attrs = transform_contents(soup, parts[1], dfn_about)
+        value_tag = soup.new_tag('span', rel="owl:hasValue", **value_attrs)
+        value_tag.append(value_contents)
+        restriction.append(value_tag)
+        return restriction, {}
     elif " OR " in contents:
         # This generates an OWL unionOf tag
         parts_contents, parts_attrs = build_or(contents.split(" OR "), contents, soup, dfn_about)
