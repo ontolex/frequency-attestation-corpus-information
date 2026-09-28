@@ -117,7 +117,7 @@ Other models:
 
 ### Glossary of Terms
 
-* **[=Attestation=]**
+* **[=Lexical attestation=]**
   A quotation or excerpt from a source document providing evidence of a lexical feature (e.g., form, sense, spelling variation). It is a subclass of [=Observation=].
 * **[=Citation=]**
   A general bibliographic reference from a lexical resource to a source. [=Attestation property=] is a more specific form of <dfn>citation</dfn>.
@@ -127,7 +127,7 @@ Other models:
   A subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
 * **Corpus**
   A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
-* **[=Frequency=]**
+* **[=Observable frequency=]**
   An observation of how often an observable appears in a corpus (absolute count), subclass of [=Observation=].
 * **[=head=]**
   Identifies the target element in a collocation for asymmetric metrics (e.g., relative frequency, confidence).
@@ -140,7 +140,7 @@ Other models:
 * **[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
   A standard RDF property used to specify the literal value of an observation (e.g., a frequency number or attestation text).
 * **[=unit=]**
-  Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to [=Frequency=].
+  Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to [=observable frequency=].
 * **`Web Annotation`**
   A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody), [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget), and selectors (e.g., [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector)).
 * **`OntoLex-Lemon`**
@@ -260,13 +260,13 @@ Observations as understood here are **empirical** (quantitative) observations th
 
 Lexicographers use (corpus) frequency and distribution information while compiling lexical entries, as a quantitative assessment of their resources. In this module, we focus on absolute frequencies, as relative frequencies can be derived if absolute frequencies and token totals are known. Absolute frequencies are used in computational lexicography and they are an essential piece of information for NLP and corpus linguistics.
 
-<div class="entity" about="frac:Frequency" typeof="owl:Class">
+<div class="entity" about="frac:ObservableFrequency" typeof="owl:Class">
 
-<class property="rdfs:label" lang="en">Frequency</class>
+<class property="rdfs:label" lang="en">ObservableFrequency</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#Frequency](http://www.w3.org/ns/lemon/frac#Frequency)
+**URI:** [http://www.w3.org/ns/lemon/frac#ObservableFrequency](http://www.w3.org/ns/lemon/frac#ObservableFrequency)
 
-<div property="rdfs:comment"><dfn>Frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
+<div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
 <div class="description">
 
 <subclass>[=Observation=]</subclass>
@@ -288,11 +288,11 @@ A frequency should have a unit that specifies the segmentation unit of the frequ
 
 **URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
 
-<div property="rdfs:comment">For a [=Frequency=] object, the property <dfn>unit</dfn> provides an identifier of the respective segmentation unit.</div>
+<div property="rdfs:comment">For an [=observable frequency=] object, the property <dfn>unit</dfn> provides an identifier of the respective segmentation unit.</div>
 
 <div class="description">
 
-<domain>[=Frequency=]</domain>
+<domain>[=observable frequency=]</domain>
 
 </div>
 </div>
@@ -305,13 +305,13 @@ Values for [=unit=] are defined in an external ontology such as LexInfo, which d
 
 **URI:** [http://www.w3.org/ns/lemon/frac#frequency](http://www.w3.org/ns/lemon/frac#frequency)
 
-<div property="rdfs:comment">The <dfn>frequency property</dfn> assigns a particular [=observable=] a [=Frequency=].</div>
+<div property="rdfs:comment">The <dfn>frequency property</dfn> assigns a particular [=observable=] an [=observable frequency=].</div>
 
 <div class="description">
 
 <domain>[=observable=]</domain>
 
-<range>[=Frequency=]</range>
+<range>[=observable frequency=]</range>
 </div>
 </div>
 
@@ -322,7 +322,7 @@ frequency value should correspond to the aggregation of sources and languages
 in that dataset.
 </div>
 
-The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=Frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=Frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
+The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=observable frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=observable frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
@@ -336,7 +336,7 @@ A simple example of indicating the frequency of a word in a corpus is given belo
 :oewn-02124272-n ;
   skos:definition "feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats"@en ;
   frac:frequency [
-    a frac:Frequency ;
+    a frac:ObservableFrequency ;
     rdf:value 46
     frac:observedIn <https://wordnetcode.princeton.edu/glosstag.shtml> 
   ]
@@ -345,7 +345,7 @@ A simple example of indicating the frequency of a word in a corpus is given belo
 :oewn-02130460-n ;
   skos:definition "any of several large cats typically able to roar and living in the wild"@en ;
   frac:frequency [
-    a frac:Frequency ;
+    a frac:ObservableFrequency ;
     rdf:value 4
     frac:observedIn <https://wordnetcode.princeton.edu/glosstag.shtml> 
   ]
@@ -369,7 +369,7 @@ The following example illustrates word and form frequencies for the Sumerian wor
 # word frequency, over all form variants 
 epsd:kalag_strong_v a ontolex:LexicalEntry;
     frac:frequency [
-        a frac:Frequency; 
+        a frac:ObservableFrequency; 
         rdf:value "2398"^^xsd:int; 
         frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
     ] .
@@ -378,7 +378,7 @@ epsd:kalag_strong_v a ontolex:LexicalEntry;
 epsd:kalag_strong_v ontolex:canonicalForm [
     ontolex:writtenRep "kal-ga"@sux-Latn; 
     frac:frequency [
-        a frac:Frequency; 
+        a frac:ObservableFrequency; 
         rdf:value "2312"^^xsd:int; 
         frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
         ]
@@ -387,7 +387,7 @@ epsd:kalag_strong_v ontolex:canonicalForm [
 epsd:kalag_strong_v ontolex:otherForm [ 
     ontolex:writtenRep "kalag"@sux-Latn; 
     frac:frequency [ 
-        a frac:Frequency; 
+        a frac:ObservableFrequency; 
         rdf:value "70"^^xsd:int; 
         frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
         ]
@@ -405,13 +405,13 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 **URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
 
-<div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset), [`dct:Text`](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as a [=Frequency=] object.</div>
+<div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset), [`dct:Text`](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as an [=observable frequency=] object.</div>
 
 <div class="description">
 
 <domain>class that is a [`dcam:memberOf`](http://purl.org/dc/dcam/memberOf) DCMI Type</domain>
 
-<range>[=Frequency=]</range>
+<range>[=observable frequency=]</range>
 
 </div>
 </div>
@@ -429,7 +429,7 @@ An example of the use of [=total=] is given below:
 ```turtle
 <https://wordnetcode.princeton.edu/glosstag.shtml> a dct:Collection ;
   frac:total [
-    a frac:Frequency ;
+    a frac:ObservableFrequency ;
     rdf:value 1634691 ;
     frac:unit lexinfo:tokens
   ] .
@@ -451,13 +451,13 @@ While frequency information is used to provide quantitative information about a 
 
 Attestations represent a reference to a specific occurrence of a lexical item in a corpus or other linguistic data. They are used to provide evidence for the existence of a particular lexical phenomenon, such as a word, phrase, or grammatical structure, in a specific context. Attestations can help elucidate meaning, illustrate various linguistic features, and provide examples of usage.
 
-<div class="entity" about="frac:Attestation" typeof="owl:Class">
+<div class="entity" about="frac:LexicalAttestation" typeof="owl:Class">
 
-<class property="rdfs:label" lang="en">Attestation</class>
+<class property="rdfs:label" lang="en">LexicalAttestation</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#Attestation](http://www.w3.org/ns/lemon/frac#Attestation)
+**URI:** [http://www.w3.org/ns/lemon/frac#LexicalAttestation](http://www.w3.org/ns/lemon/frac#LexicalAttestation)
 
-<div property="rdfs:comment"><dfn>Attestation</dfn> is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register. </div>
+<div property="rdfs:comment"><dfn>Lexical attestation</dfn> is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register. </div>
 
 <div class="description">
 
@@ -481,7 +481,7 @@ Attestations are linked with the [=attestation property=] to the [=observable=] 
 
 <domain>[=observable=]</domain>
 
-<range>[=Attestation=]</range>
+<range>[=lexical attestation=]</range>
 
 </div>
 </div>
@@ -498,7 +498,7 @@ The value of the attestation can be give with the [=quotedText=] property, which
 
 <div class="description">
 
-<domain>[=Attestation=]</domain>
+<domain>[=lexical attestation=]</domain>
 
 <range>xsd:string</range>
 
@@ -541,7 +541,7 @@ In many applications, it is desirable to specify the precise location of the occ
 
 <div class="description">
 
-<domain>[=Attestation=]</domain>
+<domain>[=lexical attestation=]</domain>
 </div>
 </div>
 
@@ -553,7 +553,7 @@ In many applications, it is desirable to specify the precise location of the occ
  ontolex:canonicalForm [
    ontolex:writtenRep "lexical entry" ;
    frac:attestation [
-     a frac:Attestation ;
+     a frac:LexicalAttestation ;
      frac:quotedText "lexical entry" ;
      frac:locus 
     <https://www.w3.org/2016/05/ontolex/#:~:text=of%20a-,lexical%20entry,-is%20expressed> ;
@@ -818,7 +818,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 <aside class="example" title="Web Annotation">
 
 ```turtle
-:annotation a oa:Annotation, frac:Attestation ;
+:annotation a oa:Annotation, frac:LexicalAttestation ;
   oa:hasTarget :target ;
   frac:locus :target ;
   oa:hasBody :lex_entry .
@@ -858,7 +858,7 @@ NIF strings can be used as a locus for an attestation as follows:
 ```turtle
 @prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
 
-:annotation a frac:Attestation ;
+:annotation a frac:LexicalAttestation ;
   frac:locus <http://example.org/text#char=123,456> .
 
 <http://example.org/text#char=123,456> a nif:String ;
@@ -881,7 +881,7 @@ Alternatively, the loci of attestations may be given as RFC5147 URIs or as Text 
 <aside class="example" title="RFC5147">
 
 ```turtle
-:annotation a frac:Attestation ;
+:annotation a frac:LexicalAttestation ;
   frac:locus <http://example.org/text#char=123,456> .
 ```
 </aside>
