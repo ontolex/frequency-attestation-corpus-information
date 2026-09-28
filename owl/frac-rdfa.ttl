@@ -130,6 +130,15 @@ frac:quotedText
 frac:total
     a owl:ObjectProperty ;
     rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as a [=Frequency=] object." ;
+    rdfs:domain [
+        a owl:Restriction ;
+        owl:onProperty rdf:type ;
+        owl:someValuesFrom [
+            a owl:Restriction ;
+            owl:hasValue dct:DCMIType ;
+            owl:onProperty dcam:memberOf
+        ]
+    ] ;
     rdfs:label "total"@en ;
     rdfs:range frac:Frequency .
 

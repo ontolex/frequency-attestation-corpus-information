@@ -409,7 +409,7 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 <div class="description">
 
-<domain>class that is a [`dcam:memberOf`](http://purl.org/dc/dcam/memberOf) DCMI Type</domain>
+<domain>rdf:type some dcam:memberOf value dct:DCMIType</domain>
 
 <range>[=Frequency=]</range>
 

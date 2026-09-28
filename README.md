@@ -91,13 +91,6 @@ like:
 rapper: Error -  - XML parser error: Opening and ending tag mismatch: ...
 ```
 
-`rapper` will also print a `Warning: skipping <domain> tag, could not
-expand: ...` for `frac:total`'s `<domain>` — that one's expected: its
-domain is described in prose ("any potential FrAC data source ... or any
-other member of DCMI Type") that the tag's simple mini-language can't
-express, so it's deliberately left as unparsed text rather than given a
-formal (and less precise) `rdfs:domain`.
-
 ## Older ontology snapshot (`owl/`)
 
 `owl/frac.ttl` is a separate, older, hand-maintained ontology file, built by
