@@ -117,7 +117,7 @@ Other models:
 
 ### Glossary of Terms
 
-* **[=LexicalAttestation=]**
+* **[=Lexical attestation=]**
   A quotation or excerpt from a source document providing evidence of a lexical feature (e.g., form, sense, spelling variation). It is a subclass of [=Observation=].
 * **[=Citation=]**
   A general bibliographic reference from a lexical resource to a source. [=Attestation property=] is a more specific form of <dfn>citation</dfn>.
@@ -127,7 +127,7 @@ Other models:
   A subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
 * **Corpus**
   A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
-* **[=ObservableFrequency=]**
+* **[=Observable frequency=]**
   An observation of how often an observable appears in a corpus (absolute count), subclass of [=Observation=].
 * **[=head=]**
   Identifies the target element in a collocation for asymmetric metrics (e.g., relative frequency, confidence).
@@ -140,7 +140,7 @@ Other models:
 * **[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
   A standard RDF property used to specify the literal value of an observation (e.g., a frequency number or attestation text).
 * **[=unit=]**
-  Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to [=ObservableFrequency=].
+  Indicates the segmentation unit used in a frequency count (e.g., `"tokens"`, `"sentences"`). Applied to [=observable frequency=].
 * **`Web Annotation`**
   A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody), [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget), and selectors (e.g., [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector)).
 * **`OntoLex-Lemon`**
@@ -266,7 +266,7 @@ Lexicographers use (corpus) frequency and distribution information while compili
 
 **URI:** [http://www.w3.org/ns/lemon/frac#ObservableFrequency](http://www.w3.org/ns/lemon/frac#ObservableFrequency)
 
-<div property="rdfs:comment"><dfn>ObservableFrequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
+<div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
 <div class="description">
 
 <subclass>[=Observation=]</subclass>
@@ -288,11 +288,11 @@ A frequency should have a unit that specifies the segmentation unit of the frequ
 
 **URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
 
-<div property="rdfs:comment">For an [=ObservableFrequency=] object, the property <dfn>unit</dfn> provides an identifier of the respective segmentation unit.</div>
+<div property="rdfs:comment">For an [=observable frequency=] object, the property <dfn>unit</dfn> provides an identifier of the respective segmentation unit.</div>
 
 <div class="description">
 
-<domain>[=ObservableFrequency=]</domain>
+<domain>[=observable frequency=]</domain>
 
 </div>
 </div>
@@ -305,13 +305,13 @@ Values for [=unit=] are defined in an external ontology such as LexInfo, which d
 
 **URI:** [http://www.w3.org/ns/lemon/frac#frequency](http://www.w3.org/ns/lemon/frac#frequency)
 
-<div property="rdfs:comment">The <dfn>frequency property</dfn> assigns a particular [=observable=] an [=ObservableFrequency=].</div>
+<div property="rdfs:comment">The <dfn>frequency property</dfn> assigns a particular [=observable=] an [=observable frequency=].</div>
 
 <div class="description">
 
 <domain>[=observable=]</domain>
 
-<range>[=ObservableFrequency=]</range>
+<range>[=observable frequency=]</range>
 </div>
 </div>
 
@@ -322,7 +322,7 @@ frequency value should correspond to the aggregation of sources and languages
 in that dataset.
 </div>
 
-The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=ObservableFrequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=ObservableFrequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
+The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=observable frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=observable frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
@@ -405,13 +405,13 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 **URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
 
-<div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset), [`dct:Text`](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as an [=ObservableFrequency=] object.</div>
+<div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset), [`dct:Text`](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as an [=observable frequency=] object.</div>
 
 <div class="description">
 
 <domain>class that is a [`dcam:memberOf`](http://purl.org/dc/dcam/memberOf) DCMI Type</domain>
 
-<range>[=ObservableFrequency=]</range>
+<range>[=observable frequency=]</range>
 
 </div>
 </div>
@@ -457,7 +457,7 @@ Attestations represent a reference to a specific occurrence of a lexical item in
 
 **URI:** [http://www.w3.org/ns/lemon/frac#LexicalAttestation](http://www.w3.org/ns/lemon/frac#LexicalAttestation)
 
-<div property="rdfs:comment"><dfn>LexicalAttestation</dfn> is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register. </div>
+<div property="rdfs:comment"><dfn>Lexical attestation</dfn> is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register. </div>
 
 <div class="description">
 
@@ -481,7 +481,7 @@ Attestations are linked with the [=attestation property=] to the [=observable=] 
 
 <domain>[=observable=]</domain>
 
-<range>[=LexicalAttestation=]</range>
+<range>[=lexical attestation=]</range>
 
 </div>
 </div>
@@ -498,7 +498,7 @@ The value of the attestation can be give with the [=quotedText=] property, which
 
 <div class="description">
 
-<domain>[=LexicalAttestation=]</domain>
+<domain>[=lexical attestation=]</domain>
 
 <range>xsd:string</range>
 
@@ -541,7 +541,7 @@ In many applications, it is desirable to specify the precise location of the occ
 
 <div class="description">
 
-<domain>[=LexicalAttestation=]</domain>
+<domain>[=lexical attestation=]</domain>
 </div>
 </div>
 

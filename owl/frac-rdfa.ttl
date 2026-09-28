@@ -34,7 +34,7 @@ frac:Collocation
 
 frac:LexicalAttestation
     a owl:Class ;
-    rdfs:comment "LexicalAttestation is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register." ;
+    rdfs:comment "Lexical attestation is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register." ;
     rdfs:label "LexicalAttestation"@en ;
     rdfs:subClassOf frac:Observation, [
         a owl:Restriction ;
@@ -49,7 +49,7 @@ frac:Observable
 
 frac:ObservableFrequency
     a owl:Class ;
-    rdfs:comment "ObservableFrequency is an [=Observation=] of the absolute number of attestations (rdf:value) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on." ;
+    rdfs:comment "Observable frequency is an [=Observation=] of the absolute number of attestations (rdf:value) of a particular [=observable=] (see [=frequency property=]) that is [=observedIn=] in a particular data source. Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on." ;
     rdfs:label "ObservableFrequency"@en ;
     rdfs:subClassOf frac:Observation, [
         a owl:Restriction ;
@@ -95,7 +95,7 @@ frac:cScore
 
 frac:frequency
     a owl:ObjectProperty ;
-    rdfs:comment "The frequency property assigns a particular [=observable=] an [=ObservableFrequency=]." ;
+    rdfs:comment "The frequency property assigns a particular [=observable=] an [=observable frequency=]." ;
     rdfs:domain frac:Observable ;
     rdfs:label "frequency"@en ;
     rdfs:range frac:ObservableFrequency .
@@ -129,13 +129,13 @@ frac:quotedText
 
 frac:total
     a owl:ObjectProperty ;
-    rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as an [=ObservableFrequency=] object." ;
+    rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as an [=observable frequency=] object." ;
     rdfs:label "total"@en ;
     rdfs:range frac:ObservableFrequency .
 
 frac:unit
     a owl:ObjectProperty ;
-    rdfs:comment "For an [=ObservableFrequency=] object, the property unit provides an identifier of the respective segmentation unit." ;
+    rdfs:comment "For an [=observable frequency=] object, the property unit provides an identifier of the respective segmentation unit." ;
     rdfs:domain frac:ObservableFrequency ;
     rdfs:label "unit"@en .
 
