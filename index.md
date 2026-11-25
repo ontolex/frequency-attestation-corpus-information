@@ -122,10 +122,10 @@ Other models:
   A quotation or excerpt from a source document providing evidence of a lexical feature (e.g., form, sense, spelling variation). It is a subclass of [=Observation=].
 * **[=Collocation=]**
   A co-occurrence of two or more lexical units in a corpus. Treated as a container ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)) and a subclass of [=Observation=].
-* **[=Collocation Score=]**
+* **[=Collocation score=]**
   A subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
 * **Corpus**
-  A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via [=observedIn=].
+  A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via the [=observed in=] property.
 * **[=Observable frequency=]**
   An observation of how often an observable appears in a corpus (absolute count), subclass of [=Observation=].
 * **[=head=]**
@@ -135,7 +135,7 @@ Other models:
 * **[=Observable=]**
   Any lexical or ontological unit about which corpus-based information (frequency, attestation) can be recorded.
 * **[=Observation=]**
-  An empirical claim about an observable—e.g., frequency count, collocation, attestation. Linked to the data source it was made in via [=observedIn=].
+  An empirical claim about an observable—e.g., frequency count, collocation, attestation. Linked to the data source it was made in via the [=observed in=] property.
 * **[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
   A standard RDF property used to specify the literal value of an observation (e.g., a frequency count or a collocation score).
 * **[=unit=]**
@@ -181,7 +181,7 @@ this document, the terms ontology and knowledge graph are used interchangeably t
 refer to the formal conceptual models that provide these semantic targets. 
 
 The top-level concepts of OntoLex-FrAC are thus [=observable=] and 
-[=Observation=], complemented by a property [=observedIn=], 
+[=Observation=], complemented by the [=observed in=] property, 
 pointing to the URI where the observation has been made.
 
 <div class="entity" about="frac:Observable" typeof="owl:Class">
@@ -226,7 +226,7 @@ The definition of [=observable=] does not posit an exhaustive list of possible o
 
 <div class="description">
 
-<subclass>[=observedIn=] exactly 1</subclass>
+<subclass>[=observed in=] exactly 1</subclass>
 
 <subclass>rdf:value exactly 1</subclass>
 
@@ -238,11 +238,11 @@ Observations as understood here are **empirical** (quantitative) observations th
 
 <div class="entity" about="frac:observedIn" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">observedIn</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Observed In</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#observedIn](http://www.w3.org/ns/lemon/frac#observedIn)
 
-<div property="rdfs:comment">For an [=Observation=],  the property <dfn>observedIn</dfn> defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc.</div>
+<div property="rdfs:comment">For an [=Observation=], the <dfn>observed in</dfn> property defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc.</div>
 
 <div class="description">
 
@@ -263,18 +263,18 @@ Lexicographers use (corpus) frequency and distribution information while compili
 
 <div class="entity" about="frac:ObservableFrequency" typeof="owl:Class">
 
-<class property="rdfs:label" lang="en">ObservableFrequency</class>
+<class property="rdfs:label" lang="en">Observable Frequency</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#ObservableFrequency](http://www.w3.org/ns/lemon/frac#ObservableFrequency)
 
-<div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is observed in a particular data source ([=observedIn=]). Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
+<div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is observed in a particular data source ([=observed in=]). Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
 <div class="description">
 
 <subclass>[=Observation=]</subclass>
 
 <subclass>rdf:value exactly 1</subclass>
 
-<subclass>[=observedIn=] exactly 1</subclass>
+<subclass>[=observed in=] exactly 1</subclass>
 
 </div>
 
@@ -285,7 +285,7 @@ A frequency should have a unit that specifies the segmentation unit of the frequ
 
 <div class="entity" about="frac:unit" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">unit</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Unit</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
 
@@ -302,7 +302,7 @@ Values for [=unit=] are defined in an external ontology such as LexInfo, which d
 
 <div class="entity" about="frac:frequency" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">frequency</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Frequency</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#frequency](http://www.w3.org/ns/lemon/frac#frequency)
 
@@ -323,7 +323,7 @@ frequency value should correspond to the aggregation of sources and languages
 in that dataset.
 </div>
 
-The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observedIn=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=observable frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=observable frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
+The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observed in=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=observable frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=observable frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
@@ -400,7 +400,7 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 <div class="entity" about="frac:total" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">total</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Total</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
 
@@ -452,7 +452,7 @@ Attestations represent a reference to a specific occurrence of a lexical item in
 
 <div class="entity" about="frac:LexicalAttestation" typeof="owl:Class">
 
-<class property="rdfs:label" lang="en">LexicalAttestation</class>
+<class property="rdfs:label" lang="en">Lexical Attestation</class>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#LexicalAttestation](http://www.w3.org/ns/lemon/frac#LexicalAttestation)
 
@@ -460,7 +460,7 @@ Attestations represent a reference to a specific occurrence of a lexical item in
 
 <div class="description">
 
-<subclass>[=quotedText=] max 1</subclass>
+<subclass>[=quoted text=] max 1</subclass>
 
 <subclass>[=Observation=]</subclass>
 </div>
@@ -470,7 +470,7 @@ Attestations are linked with the [=attestation property=] to the [=observable=] 
 
 <div class="entity" about="frac:attestation" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">attestation</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Attestation</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#attestation](http://www.w3.org/ns/lemon/frac#attestation)
 
@@ -485,15 +485,15 @@ Attestations are linked with the [=attestation property=] to the [=observable=] 
 </div>
 </div>
 
-The value of the attestation can be given with the [=quotedText=] property, which provides the text of the attestation. This can be a plain text string, but might also contain markup, e.g. an HTML fragment.
+The value of the attestation can be given with the [=quoted text=] property, which provides the text of the attestation. This can be a plain text string, but might also contain markup, e.g. an HTML fragment.
 
 <div class="entity" about="frac:quotedText" typeof="owl:DatatypeProperty">
 
-<dataProperty property="rdfs:label" lang="en">quotedText</dataProperty>
+<dataProperty property="rdfs:label" lang="en">Quoted Text</dataProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#quotedText](http://www.w3.org/ns/lemon/frac#quotedText)
 
-<div property="rdfs:comment">The <dfn>quotedText</dfn> property provides the text of the attestation.</div>
+<div property="rdfs:comment">The <dfn>quoted text</dfn> property provides the text of the attestation.</div>
 
 <div class="description">
 
@@ -520,9 +520,9 @@ As an example of an attestation, consider the following example from Open Englis
 
 </aside>
 
-Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, `rdf:value` of the [=lexical attestation=] can be used to represent the original string verbatim, as presented in the source document, while [=quotedText=] should have the amended form, as data providers present it.
+Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, `rdf:value` of the [=lexical attestation=] can be used to represent the original string verbatim, as presented in the source document, while the [=quoted text=] should have the amended form, as data providers present it.
 
-As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dictionary Online_](https://bosworthtoller.com/20070) gives the example _"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."_. We might not want to preserve all this as [=quotedText=] since it contains a variant reading from another manuscript (_MS. Cote._), which is not the part of the quoted sentence. Instead, we can keep the full string as `rdf:value` and only the quoted sentence itself as [=quotedText=]:
+As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dictionary Online_](https://bosworthtoller.com/20070) gives the example _"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."_. We might not want to preserve all this as [=quoted text=] since it contains a variant reading from another manuscript (_MS. Cote._), which is not the part of the quoted sentence. Instead, we can keep the full string as `rdf:value` and only the quoted sentence itself as [=quoted text=]:
 
 <aside class="example" title="Attestation of the Old English word 'hwæt-hweganunges' in Bosworth's Anglo-Saxon Dictionary Online">
 
@@ -547,7 +547,7 @@ In many applications, it is desirable to specify the precise location of the occ
 
 <div class="entity" about="frac:locus" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">locus</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Locus</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#locus](http://www.w3.org/ns/lemon/frac#locus)
 
@@ -577,7 +577,7 @@ In many applications, it is desirable to specify the precise location of the occ
 ```
 </aside>
 
-[=locus=] denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, [=observedIn=] can refer to a corpus or other collections of texts. [=locus=] normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas [=observedIn=] refers to [`dct:Text`](http://purl.org/dc/terms/Text)s or [`dct:Collection`](http://purl.org/dc/terms/Collection)s.
+[=locus=] denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, the [=observed in=] property can refer to a corpus or other collections of texts. [=locus=] normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas the [=observed in=] property refers to [`dct:Text`](http://purl.org/dc/terms/Text)s or [`dct:Collection`](http://purl.org/dc/terms/Collection)s.
 
 While a single attestation object may be used for multiple observables, if the [=locus=] property is used to point to the specific location of the observable in the attestation, this may mean that multiple attestations are required, each with a different [=locus=] value. 
 
@@ -622,7 +622,7 @@ ex:pay_price_collocation a frac:Collocation, rdf:Seq ;
 
 Collocations can involve two or more words, they are thus modelled as an [`rdfs:Container`](http://www.w3.org/2000/01/rdf-schema#Container) of [=observable=]s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq)), otherwise, the default interpretation is as an unordered collection ([`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)).
 
-Collocations obtained by quantitative methods are characterized by their method of creation ([`dct:description`](http://purl.org/dc/terms/description)), their collocation strength ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)), and the corpus or data source used to create them ([=observedIn=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
+Collocations obtained by quantitative methods are characterized by their method of creation ([`dct:description`](http://purl.org/dc/terms/description)), their collocation strength ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)), and the corpus or data source used to create them ([=observed in=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
 
 
 <div class="entity" about="frac:Collocation" typeof="owl:Class">
@@ -631,7 +631,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 
-<div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their collocation score (or weight, [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) in a particular data source ([=observedIn=]). </div>
+<div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their collocation score (or weight, [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) in a particular data source ([=observed in=]). </div>
 
 <div class="description">
 
@@ -655,15 +655,15 @@ FrAC collocations are used to represent collocations in the quantitative sense (
     
 Since collocations are [=Observation=]s, they can be ascribed [=frequency property=], and [=attestation property=] and they can be nested inside larger collocations.
     
-Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) property, but a designated subproperty of [=cScore=]:
+Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) property, but a designated subproperty of [=collocation score=]:
 
 <div class="entity" about="frac:cScore" typeof="owl:DatatypeProperty">
 
-<dataProperty property="rdfs:label" lang="en">cScore</dataProperty>
+<dataProperty property="rdfs:label" lang="en">Collocation Score</dataProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#cScore](http://www.w3.org/ns/lemon/frac#cScore)
 
-<div property="rdfs:comment"><dfn data-lt="cScore">Collocation score</dfn> is a subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.</div>
+<div property="rdfs:comment"><dfn>Collocation score</dfn> is a subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.</div>
 
 <div class="description">
 
@@ -673,7 +673,7 @@ Collocations can be described in terms of various collocation scores. If scores 
 </div>
 </div>
 
-LexInfo defines a number of popular collocation metrics as sub-properties of [=cScore=]:
+LexInfo defines a number of popular collocation metrics as sub-properties of [=collocation score=]:
 
 - [`lexinfo:relFreq`](http://www.lexinfo.net/ontology/3.0/lexinfo#relFreq) (*relative frequency*): <math><mrow><mi>R</mi><mi>F</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mi>|</mi><mi>x</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>x</mi></msub></mfrac><mo form="prefix" stretchy="false">(</mo><mo>=</mo><msub><mi>R</mi><mi>x</mi></msub><mo form="postfix" stretchy="false">)</mo></mrow></math> (asymmetric, requires [=head=])
 - [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi) (*pointwise mutual information*, sometimes referred to as *MI-score* or *association ratio*, cf. [Church and Hanks 1990, via Evert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <math><mrow><mi>PMI</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
@@ -707,7 +707,7 @@ with
 - <math><mrow><msub><mi>O</mi><mn>22</mn></msub><mo>=</mo></mrow><mrow><mi>N</mi><mo>−</mo></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><mo>−</mo></mrow><mrow><msub><mi>f</mi><mi>y</mi></msub><mo>+</mo></mrow><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow></math>
 - <math><mi>N</mi></math> -  the total number of words in the corpus 
     
-In addition to classical collocation metrics, as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of [=cScore=], as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <math><mrow><mi>x</mi><mo stretchy="false">→</mo></mrow><mrow><mi>y</mi></mrow></math> means that the existence of word *x* implies the existence of word *y* 
+In addition to classical collocation metrics, as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of [=collocation score=], as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <math><mrow><mi>x</mi><mo stretchy="false">→</mo></mrow><mrow><mi>y</mi></mrow></math> means that the existence of word *x* implies the existence of word *y* 
 
 - [`lexinfo:support`](http://www.lexinfo.net/ontology/3.0/lexinfo#support) (the *support* is an indication of how frequently the rule appears in the dataset): <math><mrow><mi>s</mi><mi>u</mi><mi>p</mi><mi>p</mi><mi>o</mi><mi>r</mi><mi>t</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mfrac></mrow></math> (with *N* the total number of collocations)
 - [`lexinfo:confidence`](http://www.lexinfo.net/ontology/3.0/lexinfo#confidence) (the *confidence* is an indication of how often the rule has been found to be true): <math><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>x</mi></msub></mfrac></mrow></math>
@@ -723,7 +723,7 @@ Many of these metrics are asymmetric and distinguish the lexical element they ar
 
 <div class="entity" about="frac:head" typeof="owl:ObjectProperty">
 
-<objectProperty property="rdfs:label" lang="en">head</objectProperty>
+<objectProperty property="rdfs:label" lang="en">Head</objectProperty>
 
 **URI:** [http://www.w3.org/ns/lemon/frac#head](http://www.w3.org/ns/lemon/frac#head)
 
