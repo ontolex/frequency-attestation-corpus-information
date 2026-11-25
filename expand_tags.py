@@ -29,6 +29,7 @@ tags_to_expand = {
         "range": {"rel": "rdfs:range"},
         "domain": {"rel": "rdfs:domain"},
         "subclass": {"rel": "rdfs:subClassOf"},
+        "superclass": {"rev": "rdfs:subClassOf"},
         "subproperty": {"rel": "rdfs:subPropertyOf"},
         "inverse": {"rel": "owl:inverseOf"},
         "equivalentClass": {"rel": "owl:equivalentClass"},
@@ -38,6 +39,7 @@ tags_text = {
         "range": "Range:",
         "domain": "Domain:",
         "subclass": "Subclass:",
+        "superclass": "Superclass of:",
         "subproperty": "Subproperty:",
         "inverse": "Inverse Property:",
         "equivalentClass": "Equivalent Class:",
@@ -208,6 +210,17 @@ def transform_contents(soup, contents, dfn_about):
         raise ValueError("Could not transform contents: " + contents)
 
 
+RESPEC_XREF = re.compile(r"\[=([^=\]|]+)(?:\|([^=\]]+))?=\]")
+
+def clean_comments(soup):
+    """Make rdfs:comment literals readable outside ReSpec: replace ReSpec
+    [=term=] / [=term|text=] links with their plain text, and tag them @en."""
+    for div in soup.find_all(attrs={"property": "rdfs:comment"}):
+        if not div.has_attr("lang"):
+            div["lang"] = "en"
+        for s in div.find_all(string=RESPEC_XREF):
+            s.replace_with(RESPEC_XREF.sub(lambda m: m.group(2) or m.group(1), s))
+
 def expand_tags(soup):
     dfn_about = build_dfn_about_map(soup)
 
@@ -268,12 +281,13 @@ if __name__ == "__main__":
     soup = BeautifulSoup(content, 'html.parser')
 
     expand_tags(soup)
+    clean_comments(soup)
 
     with open(args.output_file, 'w', encoding='utf-8') as file:
         result = str(soup)
 
-        # Remove newlines (and any indentation) right after `<div property="rdfs:comment">`
+        # Remove newlines (and any indentation) right after `<div property="rdfs:comment" ...>`
         # and right before its closing `</div>`
-        result = re.sub(r'(<div property="rdfs:comment">)\s*\n[ \t]*', r'\1', result)
+        result = re.sub(r'(<div property="rdfs:comment"[^>]*>)\s*\n[ \t]*', r'\1', result)
         result = re.sub(r'\n[ \t]*(</div>)', r'\1', result)
         file.write(result)

@@ -38,7 +38,7 @@ Unlike most OntoLex modules, the `frac:` ontology itself isn't maintained as
 a separate hand-written file — it's authored as [RDFa](https://www.w3.org/TR/rdfa-primer/)
 directly inside `index.md`'s `<div class="entity" about="frac:X" typeof="owl:Class">`
 blocks (one per class/property, each with an `rdfs:label` and `rdfs:comment`,
-plus `<domain>`/`<range>`/`<subclass>`/`<subproperty>`/`<functional/>` shorthand
+plus `<domain>`/`<range>`/`<subclass>`/`<superclass>`/`<subproperty>`/`<functional/>` shorthand
 tags for axioms), following the same process used in the sister
 [`ontolex`](https://github.com/ontolex/ontolex) repository. `index.md` is the
 single source of truth — don't hand-edit an extracted ontology file and

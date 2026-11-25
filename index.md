@@ -191,6 +191,12 @@ pointing to the URI where the observation has been made.
 **URI:** [http://www.w3.org/ns/lemon/frac#Observable](http://www.w3.org/ns/lemon/frac#Observable)
 
 <div property="rdfs:comment"><dfn>Observable</dfn> is a superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, <a data-cite="ontolex#LexicalEntry">lexical entry</a>, <a data-cite="ontolex#LexicalSense">lexical sense</a>, <a data-cite="ontolex#Form">form</a>, and <a data-cite="ontolex#LexicalConcept">lexical concept</a>. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source.</div>
+
+<div class="description">
+
+<superclass>ontolex:LexicalEntry, ontolex:Form, ontolex:LexicalSense, ontolex:LexicalConcept</superclass>
+
+</div>
 </div>
 
 </div>
@@ -241,8 +247,6 @@ Observations as understood here are **empirical** (quantitative) observations th
 <div class="description">
 
 <domain>[=Observation=]</domain>
-
-<range>xsd:anyURI</range>
 
 <functional/>
 
@@ -649,7 +653,7 @@ By default, [=Collocation=] is insensitive to word order. If a collocation is wo
 
 FrAC collocations are used to represent collocations in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as [`lexinfo:termType`](http://www.lexinfo.net/ontology/3.0/lexinfo#termType), e.g., by means of [`lexinfo:idiom`](http://www.lexinfo.net/ontology/3.0/lexinfo#idiom), [`lexinfo:phraseologicalUnit`](http://www.lexinfo.net/ontology/3.0/lexinfo#phraseologicalUnit) or [`lexinfo:setPhrase`](http://www.lexinfo.net/ontology/3.0/lexinfo#setPhrase). If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via [`rdfs:member`](http://www.w3.org/2000/01/rdf-schema#member) with a [=Collocation=].
     
-Since collocations are [=observable=]s, they can be ascribed [=frequency property=], and [=attestation property=] and they can be nested inside larger collocations.
+Since collocations are [=Observation=]s, they can be ascribed [=frequency property=], and [=attestation property=] and they can be nested inside larger collocations.
     
 Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) property, but a designated subproperty of [=cScore=]:
 
