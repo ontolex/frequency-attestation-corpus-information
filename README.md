@@ -22,15 +22,48 @@ https://github.com/acoli-repo/ontolex-frac.
 ## Building the specification
 
 The specification uses [ReSpec](https://respec.org/docs/) and is generated
-from `index.md` with [Pandoc](https://pandoc.org/):
+from `index.md` with [Pandoc](https://pandoc.org/); the diagrams of the
+examples are then added by `add_diagrams.py`, which needs Python's
+[`rdflib`](https://rdflib.readthedocs.io/):
 
 ```bash
-sudo apt-get install pandoc
+sudo apt-get install pandoc python3-rdflib
 pandoc --template respec.template -f markdown-auto_identifiers --wrap=none index.md -o index.html
+python3 add_diagrams.py index.html index.html
 ```
 
 Open `index.html` in a browser (or push to `master`) to see the rendered,
-ReSpec-processed page.
+ReSpec-processed page. The GitHub Action runs the same steps, after
+`check_examples.py` (see below).
+
+## Examples and their diagrams
+
+Each example in the spec is an `<aside class="example" ... src="examples/NAME.ttl">`
+containing the Turtle listing that readers see. The same example is kept as a
+standalone file, [`examples/NAME.ttl`](examples/) (the listing plus the
+`@prefix` lines it needs), so it can be downloaded and validated, and so a
+diagram can be drawn from it:
+
+- [`add_diagrams.py`](add_diagrams.py) inserts a
+  [Mermaid](https://mermaid.js.org/) diagram, generated from `examples/NAME.ttl`
+  by [`mermaid_lib.py`](mermaid_lib.py), at the top of each example; Mermaid
+  renders it in the browser once ReSpec has finished (see `respec.template`).
+  An empty `examples/NAME.LR` file asks for a left-to-right layout, and an
+  empty `examples/NAME.elk` file for the ELK layout engine, which places edge
+  labels better in busy diagrams. `mermaid_lib.py` is copied from the
+  [OntoLex core repository](https://github.com/ontolex/ontolex) (which took it
+  from [`morph`](https://github.com/ontolex/morph)), with two small changes
+  marked in the code: blank nodes show their type, and nodes show all of
+  their types.
+- [`check_examples.py`](check_examples.py) checks that every listing in
+  `index.md` and its file describe the same RDF graph, and fails otherwise.
+  It runs before every publish, so **when you change an example, change both
+  the listing and the file** (then run `python3 check_examples.py`).
+
+To add an example, put the Turtle in a new `examples/NAME.ttl`, paste the
+same Turtle (without the `@prefix` lines the spec already declares) into a
+```` ```turtle ```` block inside a new `<aside class="example" title="..." src="examples/NAME.ttl">`,
+and run `check_examples.py`.
 
 ## The ontology (RDFa)
 
@@ -127,6 +160,7 @@ reference.
 - [`respec.template`](respec.template) — Pandoc template that wraps `index.md` in the ReSpec HTML shell.
 - [`expand_tags.py`](expand_tags.py) — expands the shorthand ontology tags into RDFa; see "The ontology (RDFa)" above.
 - [`extract-ontology.sh`](extract-ontology.sh) — runs the full build + extraction pipeline; see "The ontology (RDFa)" above.
+- [`examples/`](examples/) — the spec's examples as Turtle files; [`add_diagrams.py`](add_diagrams.py), [`mermaid_lib.py`](mermaid_lib.py) and [`check_examples.py`](check_examples.py) draw their diagrams and keep them in sync with the spec (see "Examples and their diagrams" above).
 - [`owl/frac.ttl`](owl/frac.ttl) — the ontology in Turtle, generated from `index.md` (see above).
 - [`public-review-1.md`](public-review-1.md), [`index-old.md`](index-old.md), [`archive/`](archive/) — earlier drafts, kept for reference.
 - [`samples/`](samples/) — example datasets modelled with FrAC.
