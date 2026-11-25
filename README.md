@@ -38,7 +38,7 @@ Unlike most OntoLex modules, the `frac:` ontology itself isn't maintained as
 a separate hand-written file — it's authored as [RDFa](https://www.w3.org/TR/rdfa-primer/)
 directly inside `index.md`'s `<div class="entity" about="frac:X" typeof="owl:Class">`
 blocks (one per class/property, each with an `rdfs:label` and `rdfs:comment`,
-plus `<domain>`/`<range>`/`<subclass>`/`<subproperty>`/`<functional/>` shorthand
+plus `<domain>`/`<range>`/`<subclass>`/`<superclass>`/`<subproperty>`/`<functional/>` shorthand
 tags for axioms), following the same process used in the sister
 [`ontolex`](https://github.com/ontolex/ontolex) repository. `index.md` is the
 single source of truth — don't hand-edit an extracted ontology file and
@@ -69,14 +69,27 @@ above, because a couple of tools are involved:
 ### 2. Run the pipeline
 
 ```bash
-./extract-ontology.sh frac.ttl
+make -C owl          # regenerates owl/frac.ttl
+# or, to write somewhere else:
+./extract-ontology.sh path/to/frac.ttl
 ```
 
 [`extract-ontology.sh`](extract-ontology.sh) runs the three steps in order —
 `pandoc`, then `expand_tags.py`, then `rapper` (with a `-f xmlns:PREFIX=...`
 flag per namespace, so the output Turtle actually gets `@prefix` lines
 instead of full URIs everywhere) — and writes the result to the path you
-give it (`frac.ttl` if you don't specify one).
+give it (`frac.ttl` if you don't specify one). Besides expanding the
+shorthand tags, `expand_tags.py` replaces ReSpec `[=term=]` links in
+`rdfs:comment`s with plain text and tags the comments `@en`, so the extracted
+Turtle reads cleanly outside the rendered spec.
+
+**Whenever you change an entity block in `index.md`, regenerate
+`owl/frac.ttl` and commit it in the same change**, so the published Turtle
+never drifts from the spec. A quick check that they agree:
+
+```bash
+./extract-ontology.sh /tmp/frac.ttl && diff owl/frac.ttl /tmp/frac.ttl
+```
 
 **The `expand_tags.py` step is required, not optional** — running `rapper`
 directly on Pandoc's raw HTML output will fail. Pandoc's HTML5 output isn't
@@ -91,29 +104,22 @@ like:
 rapper: Error -  - XML parser error: Opening and ending tag mismatch: ...
 ```
 
-## Older ontology snapshot (`owl/`)
+## The ontology file (`owl/frac.ttl`)
 
-`owl/frac.ttl` is a separate, hand-maintained ontology file that predates the
-RDFa-based process above; it was originally built by concatenating every
-` ``` `-fenced Turtle block in `index.md` (see `owl/md2ttl.py` /
-`owl/Makefile`), but `index.md` no longer contains hand-written Turtle
-blocks of that kind (its fenced blocks are now usage examples, not ontology
-axioms), so that pipeline is no longer run — `owl/md2ttl.py` and
-`owl/Makefile` are kept only as a record of how the file used to be
-produced. Its axioms are kept manually in sync with `index.md`/
-`owl/frac-rdfa.ttl` by hand (see [#72](https://github.com/ontolex/frequency-attestation-corpus-information/issues/72)
-for the reconciliation), with one known gap: `frac:total`'s domain
-restriction, which is present here but currently dropped by the RDFa
-extraction due to the tooling bug described above. The RDFa extraction is
-still the more accurate, lower-maintenance way to get the current ontology;
-`owl/frac.ttl` is kept for reference and for tools/consumers that expect a
-plain, hand-readable Turtle file.
+[`owl/frac.ttl`](owl/frac.ttl) is the generated output of the pipeline
+above, committed so that the ontology can be downloaded or dereferenced
+without building anything. Don't edit it by hand — edit `index.md` and
+regenerate it. (It used to be maintained by hand, most recently reconciled
+in [#72](https://github.com/ontolex/frequency-attestation-corpus-information/issues/72),
+but it drifted again with the class renames in #74, so it is now generated.)
 
 ## Diagram
 
-At the moment, this is done as UML diagram [edit [here](https://github.com/ontolex/frequency-attestation-corpus-information/edit/master/img/diagram.puml)] using the [PlantText editor](https://www.planttext.com/):
-
-![](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/ontolex/frequency-attestation-corpus-information/master/img/diagram-with-observation-compact.puml?cache=no)
+The overview diagram in the spec is [`img/FrAC.drawio.png`](img/FrAC.drawio.png)
+(vector version: [`img/FrAC.svg`](img/FrAC.svg)); both can be edited with
+[draw.io](https://app.diagrams.net/). The `img/*.puml` PlantUML files and
+other dated images in `img/` are diagrams of earlier drafts, kept for
+reference.
 
 ## Repository layout
 
@@ -121,7 +127,8 @@ At the moment, this is done as UML diagram [edit [here](https://github.com/ontol
 - [`respec.template`](respec.template) — Pandoc template that wraps `index.md` in the ReSpec HTML shell.
 - [`expand_tags.py`](expand_tags.py) — expands the shorthand ontology tags into RDFa; see "The ontology (RDFa)" above.
 - [`extract-ontology.sh`](extract-ontology.sh) — runs the full build + extraction pipeline; see "The ontology (RDFa)" above.
-- [`owl/`](owl/) — older, separately-maintained ontology snapshot (see above).
+- [`owl/frac.ttl`](owl/frac.ttl) — the ontology in Turtle, generated from `index.md` (see above).
+- [`public-review-1.md`](public-review-1.md), [`index-old.md`](index-old.md), [`archive/`](archive/) — earlier drafts, kept for reference.
 - [`samples/`](samples/) — example datasets modelled with FrAC.
 - [`doc/`](doc/) — slides and papers from FrAC presentations.
 - [`img/`](img/) — diagrams used in the spec.

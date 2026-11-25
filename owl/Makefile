@@ -1,6 +1,4 @@
-frac.ttl:
-	@# extract frac.ttl from draft spec
-	python3 md2ttl.py ../index.md > frac.ttl
-	if rapper -i turtle frac.ttl -o turtle > /dev/null; then \
-		echo frac.ttl is syntactically valid 1>&2; \
-	fi
+# Regenerate frac.ttl from the RDFa markup in ../index.md.
+# Requires pandoc, python3-bs4 and raptor2-utils (see ../README.md).
+frac.ttl: ../index.md ../respec.template ../expand_tags.py ../extract-ontology.sh
+	cd .. && ./extract-ontology.sh owl/frac.ttl
