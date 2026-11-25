@@ -40,7 +40,7 @@
 	dct:description "GloVe v.1.1, documented in Jeffrey Pennington, Richard Socher, and Christopher D. Manning. 2014. GloVe: Global Vectors for Word Representation, see https://nlp.stanford.edu/projects/glove/; uncased"@en. ].
 	
 
-# As with frac:Frequency, we recommend defining resource-specific subclasses of frac:Embedding in order to reduce redundancy in the data:
+# As with frac:ObservableFrequency, we recommend defining resource-specific subclasses of frac:Embedding in order to reduce redundancy in the data:
 		
 # resource-specific embedding class
 :GloVe6BEmbedding_50d rdfs:subClassOf frac:Embedding;

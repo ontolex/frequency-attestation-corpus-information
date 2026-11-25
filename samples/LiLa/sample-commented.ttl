@@ -127,7 +127,7 @@ lilalex:mereo_112109 frac:frequency [
 
 # Citations
 lilalex:officium_114811 frac:attestation [
-  a frac:Attestation ;
+  a frac:LexicalAttestation ;
   cito:hasCitedEntity
     # paragraph 2, chapter 6 of book 2 has is a citable entity in LiLa; all terminals are connected to it
     <http://lila-erc.eu/data/corpora/DanteSearch/id/citationUnit/b3a20019-868b-472c-b272-f00227951efd> ;

@@ -19,17 +19,17 @@
 			ontolex:sense :frestidan_sense ;
 			frac:attestation :frestidan_lemma_att_1 .
 
-:frestidan_lemma_att_1 a frac:Attestation ;
+:frestidan_lemma_att_1 a frac:LexicalAttestation ;
     frac:quotation "ud čim yazad dēn ēwāz ō ēran šahr frēstīd" ;
 	cito:hasCitedEntity :Dk5_150598 ;
 	cito:hasCitingEntity :frestidan .
 
-:frestidan_form_frested_att_1 a frac:Attestation ;
+:frestidan_form_frested_att_1 a frac:LexicalAttestation ;
 	frac:quotation "homānāg ast zōr ī ahnč’k kē xwarišnān xwārišnān andar ō kumīg ī xwēšīg kadag āhenǰēd čiyōn kār_framān kē abzār gōšt xwarišnān xrīnēd bē ō xānag frēstēd" ;
 	cito:hasCitedEntity :WZ_675759 ;
 	cito:hasCitingEntity :frestidan_form_frested .
 
-:frestidan_sense_att_1 a frac:Attestation ;
+:frestidan_sense_att_1 a frac:LexicalAttestation ;
 	frac:quotation "u =š ō wuzurg_mihr guft kū wuzurg_mihr ī amāh čē ast ān tis ī =t guft kū kunēm ō sačidarm frēstēm" ;
 	cito:hasCitedEntity :WCNA_662114 ;
 	cito:hasCitingEntity :frestidan_sense .

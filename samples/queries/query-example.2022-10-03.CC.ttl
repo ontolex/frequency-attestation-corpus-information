@@ -48,7 +48,7 @@
               # a minimalistic response would just give a frac:Cooccurrence with its frac:attestations
 
               frac:attestation 
-                [ a frac:Attestation;
+                [ a frac:LexicalAttestation;
                   frac:locus [ rdfs:label "news.mongabay.com" ] ; # frac:corpus? dc:source? 
                   # note that the query doesn't give use a proper URI, hence a blank node with label
                   # but better would be a direct pointer into the corpus match
@@ -57,7 +57,7 @@
                   # note that we don't keep the annotations, nor do we properly mark up the variables
                   # this could be done in XML markup, like the match highlighting here
                   ],
-                [ a frac:Attestation;
+                [ a frac:LexicalAttestation;
                   frac:locus [ rdfs:label "news.mongabay.com" ] ; # we should really avoid blank nodes here, as this must be the same as the last news.mongabay.com thing
                   rdf:value "surface of the Shiranui Sea . Many of the ailing <b>cats</b> <b>wandered</b> into the sea and drowned . Soon , there were"
                 ]
@@ -82,15 +82,15 @@
       ].
 
 # KWIC in NIF
-_:match1 a frac:Attestation;
+_:match1 a frac:LexicalAttestation;
   frac:corpus [ rdfs:label "dev" ] ; # frac:locus? dc:source? BUT: please not a blank node!
   rdf:value "they receive , they are not toys . maybe the  <b>cat</b> <b>needs</b>   a \" new ' home ......... Julie I am looking" ;
   frac:locus _:context1 .
-_:cat1 a frac:Attestation;
+_:cat1 a frac:LexicalAttestation;
   frac:corpus [ rdfs:label "dev" ] ;
   rdf:value "cat";
   frac:locus _:cat_match1.
-_:verb1 a frac:Attestation;
+_:verb1 a frac:LexicalAttestation;
   frac:corpus [ rdfs:label "dev" ] ;
   rdf:value "needs";
   frac:locus _:verb_match1.
