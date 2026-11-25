@@ -1,0 +1,10 @@
+@prefix : <http://example.org/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+:02105605-a a skos:Concept ;
+ skos:definition "concerned chiefly or only with yourself and your advantage to the exclusion of others"@en ;
+ frac:attestation [
+   frac:quotedText "We're asked to see Rachel as this spoilt, self-centred woman but the rest of them are just as bad, if not worse."@en ;
+   frac:observedIn <https://www.newstatesman.com/culture/tv/2023/10/friends-comedy-humour-legacy-matthew-perry>
+ ] .

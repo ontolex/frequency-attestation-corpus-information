@@ -1,0 +1,15 @@
+@prefix : <http://example.org/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+
+:lexical_entry a ontolex:LexicalEntry ;
+ ontolex:canonicalForm [
+   ontolex:writtenRep "lexical entry" ;
+   frac:attestation [
+     a frac:LexicalAttestation ;
+     frac:quotedText "lexical entry" ;
+     frac:locus 
+    <https://www.w3.org/2016/05/ontolex/#:~:text=of%20a-,lexical%20entry,-is%20expressed> ;
+     frac:observedIn <https://www.w3.org/TR/ontolex/>
+   ]
+ ] .

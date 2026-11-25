@@ -327,7 +327,7 @@ The definition above only applies to absolute frequencies. For expressing relati
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
-<aside class="example" title="Frequency of the word 'cat' in the WordNet Glosstag Corpus">
+<aside class="example" title="Frequency of the word 'cat' in the WordNet Glosstag Corpus" src="examples/frequency-cat.ttl">
 
 ```turtle
 :cat-n a ontolex:LexicalEntry ;
@@ -362,7 +362,7 @@ project, however, they are simplified for explanatory purposes.
 
 The following example illustrates word and form frequencies for the Sumerian word _kalag_ (v.) "strong" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
-<aside class="example" title="Frequency of the Sumerian word _kalag_ 'strong'">
+<aside class="example" title="Frequency of the Sumerian word _kalag_ 'strong'" src="examples/frequency-kalag.ttl">
 
 ```turtle
 # word frequency, over all form variants 
@@ -423,7 +423,7 @@ For [=total=], users should provide both the frequency and the segmentation/unit
 
 An example of the use of [=total=] is given below:
 
-<aside class="example" title="Total number of words in the WordNet Glosstag Corpus">
+<aside class="example" title="Total number of words in the WordNet Glosstag Corpus" src="examples/total-glosstag.ttl">
 
 ```turtle
 <https://wordnetcode.princeton.edu/glosstag.shtml> a dct:Collection ;
@@ -507,7 +507,7 @@ The value of the attestation can be given with the [=quotedText=] property, whic
 
 As an example of an attestation, consider the following example from Open English Wordnet:
 
-<aside class="example" title="Attestation of the synset 'self-centred' in Open English Wordnet">
+<aside class="example" title="Attestation of the synset 'self-centred' in Open English Wordnet" src="examples/attestation-self-centred.ttl">
 
 ```turtle
 :02105605-a a skos:Concept ;
@@ -524,7 +524,7 @@ Sometimes the exact string in the source document differs from what data provide
 
 As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dictionary Online_](https://bosworthtoller.com/20070) gives the example _"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."_. We might not want to preserve all this as [=quotedText=] since it contains a variant reading from another manuscript (_MS. Cote._), which is not the part of the quoted sentence. Instead, we can keep the full string as `rdf:value` and only the quoted sentence itself as [=quotedText=]:
 
-<aside class="example" title="Attestation of the Old English word 'hwæt-hweganunges' in Bosworth's Anglo-Saxon Dictionary Online">
+<aside class="example" title="Attestation of the Old English word 'hwæt-hweganunges' in Bosworth's Anglo-Saxon Dictionary Online" src="examples/attestation-bosworth.ttl">
 
 ```turtle
 <https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
@@ -560,7 +560,7 @@ In many applications, it is desirable to specify the precise location of the occ
 </div>
 
 
-<aside class="example" title="Locus of the term 'lexical entry' in the OntoLex specification">
+<aside class="example" title="Locus of the term 'lexical entry' in the OntoLex specification" src="examples/locus-lexical-entry.ttl">
 
 ```turtle
 :lexical_entry a ontolex:LexicalEntry ;
@@ -603,7 +603,7 @@ variable semantic slot rather than a single fixed word. By including the abstrac
 captures a wide range of corpus occurrences sharing the same underlying meaning, 
 such as pay a high price, pay a heavy toll, or pay the ultimate penalty.
 
-<aside class="example" title="Collocation with a Variable Part">
+<aside class="example" title="Collocation with a Variable Part" src="examples/collocation-variable-part.ttl">
 ```turtle
 ex:pay_verb a ontolex:LexicalEntry ;
     ontolex:canonicalForm [ ontolex:writtenRep "pay"@en ] .
@@ -745,7 +745,7 @@ The function of the property [=head=] is restricted to indicate the directionali
 
 The following example illustrates collocations as provided by the [Wortschatz](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012) portal (scores and definitions as provided for [beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=beans), [spill the beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans), etc.):
 
-<aside class="example" title="Wortschatz Collocation">
+<aside class="example" title="Wortschatz Collocation" src="examples/collocation-wortschatz.ttl">
 
 ```turtle
 @prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=> .
@@ -831,7 +831,7 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 *   [`oa:XPathSelector`](https://www.w3.org/TR/annotation-vocab/#xpathselector): select elements and content within a resource that supports the Document Object Model via a specified XPath value.
 *   [`oa:RangeSelector`](https://www.w3.org/TR/annotation-vocab/#rangeselector): identify the beginning and the end of the selection by using other Selectors.
 
-<aside class="example" title="Web Annotation">
+<aside class="example" title="Web Annotation" src="examples/locus-web-annotation.ttl">
 
 ```turtle
 :annotation a oa:Annotation, frac:LexicalAttestation ;
@@ -873,7 +873,7 @@ The NLP Interchange Format (NIF) is a standard for the representation of text an
 
 NIF strings can be used as a locus for an attestation as follows:
 
-<aside class="example" title="NIF">
+<aside class="example" title="NIF" src="examples/locus-nif.ttl">
 
 ```turtle
 @prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
@@ -898,7 +898,7 @@ In this example, the string "The quick brown fox jumps over the lazy dog." is an
 
 Alternatively, the loci of attestations may be given as RFC5147 URIs or as Text Fragments. The following example illustrates the use of RFC5147 URIs:
 
-<aside class="example" title="RFC5147">
+<aside class="example" title="RFC5147" src="examples/locus-rfc5147.ttl">
 
 ```turtle
 :annotation a frac:LexicalAttestation ;

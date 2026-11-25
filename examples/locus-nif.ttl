@@ -1,0 +1,13 @@
+@prefix : <http://example.org/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+
+:annotation a frac:LexicalAttestation ;
+  frac:locus <http://example.org/text#char=123,167> .
+
+<http://example.org/text#char=123,167> a nif:String ;
+  nif:beginIndex "123"^^xsd:nonNegativeInteger ;
+  nif:endIndex "167"^^xsd:nonNegativeInteger ;
+  nif:isString "The quick brown fox jumps over the lazy dog."@en .

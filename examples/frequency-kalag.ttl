@@ -1,0 +1,32 @@
+@prefix epsd: <http://oracc.museum.upenn.edu/epsd2/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# word frequency, over all form variants 
+epsd:kalag_strong_v a ontolex:LexicalEntry;
+    frac:frequency [
+        a frac:ObservableFrequency; 
+        rdf:value "2398"^^xsd:int; 
+        frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
+    ] .
+
+# form frequency for individual orthographical variants 
+epsd:kalag_strong_v ontolex:canonicalForm [
+    ontolex:writtenRep "kal-ga"@sux-Latn; 
+    frac:frequency [
+        a frac:ObservableFrequency; 
+        rdf:value "2312"^^xsd:int; 
+        frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
+        ]
+    ] .
+
+epsd:kalag_strong_v ontolex:otherForm [ 
+    ontolex:writtenRep "kalag"@sux-Latn; 
+    frac:frequency [ 
+        a frac:ObservableFrequency; 
+        rdf:value "70"^^xsd:int; 
+        frac:observedIn <http://oracc.museum.upenn.edu/epsd2/pager>
+        ]
+    ] .

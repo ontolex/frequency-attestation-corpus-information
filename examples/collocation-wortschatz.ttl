@@ -1,0 +1,45 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=> .
+# selected lexical entries
+# (we assume that every Wortschatz word is an independent lexical entry)
+wsen:beans a ontolex:LexicalEntry;
+  ontolex:canonicalForm [ ontolex:writtenRep "beans"@en ] .
+wsen:spill a ontolex:LexicalEntry;
+  ontolex:canonicalForm [ ontolex:writtenRep "spill"@en ] .
+wsen:green a ontolex:LexicalEntry;
+  ontolex:canonicalForm [ ontolex:writtenRep "green"@en ] .
+wsen:about a ontolex:LexicalEntry;
+  ontolex:canonicalForm [ ontolex:writtenRep "about"@en ] .
+
+# collocations, non-lexicalized
+[ rdfs:member wsen:spill, wsen:beans ] a frac:Collocation;
+  rdf:value "182";
+  dct:description "cooccurrences in the same sentence, unordered";
+  frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
+
+[ rdf:_1 wsen:green; rdf:_2 wsen:beans ] a frac:Collocation, rdf:Seq ;
+  rdf:value "778";
+  dct:description "left neighbor cooccurrence";
+  frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
+  lexinfo:termType lexinfo:idiom.
+
+ [ rdf:_1 wsen:beans; rdf:_2 wsen:about ] a frac:Collocation, rdf:Seq;
+  rdf:value "35";
+  dct:description "right neighbor cooccurrence";
+  frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>;
+  lexinfo:termType lexinfo:idiom.
+
+# multi-word expression, lexicalized (!)
+<http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans> a ontolex:MultiwordExpression;
+  ontolex:canonicalForm [ ontolex:writtenRep "spill the beans"@en ] .
+
+[ rdfs:member wsen:beans, <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans> ] a frac:Collocation;
+  rdf:value "401";
+  dct:description "cooccurrences in the same sentence, unordered";
+  frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
