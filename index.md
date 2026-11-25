@@ -330,23 +330,21 @@ A simple example of indicating the frequency of a word in a corpus is given belo
   ontolex:denotes :oewn-02124272-n,
     :oewn-02130460-n .
 
-:oewn-02124272-n ;
+:oewn-02124272-n
   skos:definition "feline mammal usually having thick soft fur and no ability to roar: domestic cats; wildcats"@en ;
   frac:frequency [
     a frac:ObservableFrequency ;
-    rdf:value 46
-    frac:observedIn <https://wordnetcode.princeton.edu/glosstag.shtml> 
-  ]
-] .
+    rdf:value 46 ;
+    frac:observedIn <https://wordnetcode.princeton.edu/glosstag.shtml>
+  ] .
 
-:oewn-02130460-n ;
+:oewn-02130460-n
   skos:definition "any of several large cats typically able to roar and living in the wild"@en ;
   frac:frequency [
     a frac:ObservableFrequency ;
-    rdf:value 4
-    frac:observedIn <https://wordnetcode.princeton.edu/glosstag.shtml> 
-  ]
-] .
+    rdf:value 4 ;
+    frac:observedIn <https://wordnetcode.princeton.edu/glosstag.shtml>
+  ] .
 ```
 
 </aside>
@@ -358,9 +356,9 @@ project, however, they are simplified for explanatory purposes.
 
 </div>
 
-The following example illustrates word and form frequencies for the Sumerian word _a_ (n.) "water" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
+The following example illustrates word and form frequencies for the Sumerian word _kalag_ (v.) "strong" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
-<aside class="example" title="Frequency of the Sumerian word _a_ 'water'">
+<aside class="example" title="Frequency of the Sumerian word _kalag_ 'strong'">
 
 ```turtle
 # word frequency, over all form variants 
@@ -505,17 +503,15 @@ The value of the attestation can be given with the [=quotedText=] property, whic
 
 As an example of an attestation, consider the following example from Open English Wordnet:
 
-<aside class="example" title="Attestation of the word 'self-centred' in the WordNet Glosstag Corpus">
+<aside class="example" title="Attestation of the synset 'self-centred' in Open English Wordnet">
 
 ```turtle
 :02105605-a a skos:Concept ;
- skos:definition "concerned chiefly or only with yourself and your advantage 
-   to the exclusion of others"@en ;
+ skos:definition "concerned chiefly or only with yourself and your advantage to the exclusion of others"@en ;
  frac:attestation [
-   frac:quotedText "We're asked to see Rachel as this spoilt, self-centred woman 
-     but the rest of them are just as bad, if not worse."@en ;
-   frac:observedIn <https://www.newstatesman.com/culture/tv/2023/10/
-                    friends-comedy-humour-legacy-matthew-perry> ] .
+   frac:quotedText "We're asked to see Rachel as this spoilt, self-centred woman but the rest of them are just as bad, if not worse."@en ;
+   frac:observedIn <https://www.newstatesman.com/culture/tv/2023/10/friends-comedy-humour-legacy-matthew-perry>
+ ] .
 ```
 
 </aside>
@@ -529,7 +525,7 @@ As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dic
 ```turtle
 <https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
     frac:attestation [
-        a frac:Attestation;
+        a frac:LexicalAttestation;
         frac:quotedText "Ða niétenu ðonne beóþ hwæthuguningas ..." ;
         rdf:value "Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."
     ] .
@@ -748,17 +744,17 @@ The following example illustrates collocations as provided by the [Wortschatz](h
 <aside class="example" title="Wortschatz Collocation">
 
 ```turtle
-@prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=>
+@prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=> .
 # selected lexical entries
 # (we assume that every Wortschatz word is an independent lexical entry)
 wsen:beans a ontolex:LexicalEntry;
-  ontolex:canonicalForm/ontolex:writtenRep "beans"@en.
+  ontolex:canonicalForm [ ontolex:writtenRep "beans"@en ] .
 wsen:spill a ontolex:LexicalEntry;
-  ontolex:canonicalForm/ontolex:writtenRep "spill"@en.
+  ontolex:canonicalForm [ ontolex:writtenRep "spill"@en ] .
 wsen:green a ontolex:LexicalEntry;
-  ontolex:canonicalForm/ontolex:writtenRep "green"@en.
+  ontolex:canonicalForm [ ontolex:writtenRep "green"@en ] .
 wsen:about a ontolex:LexicalEntry;
-  ontolex:canonicalForm/ontolex:writtenRep "about"@en
+  ontolex:canonicalForm [ ontolex:writtenRep "about"@en ] .
 
 # collocations, non-lexicalized
 [ rdfs:member wsen:spill, wsen:beans ] a frac:Collocation;
@@ -779,10 +775,10 @@ wsen:about a ontolex:LexicalEntry;
   lexinfo:termType lexinfo:idiom.
 
 # multi-word expression, lexicalized (!)
-wsen:spill+the+beans a ontolex:MultiWordExpression;
-  ontolex:canonicalForm/ontolex:writtenRep "spill the beans"@en.
+<http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans> a ontolex:MultiwordExpression;
+  ontolex:canonicalForm [ ontolex:writtenRep "spill the beans"@en ] .
 
-[ rdfs:member wsen:beans, wsen:spill+the+beans ] a frac:Collocation;
+[ rdfs:member wsen:beans, <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans> ] a frac:Collocation;
   rdf:value "401";
   dct:description "cooccurrences in the same sentence, unordered";
   frac:observedIn <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012>.
@@ -837,11 +833,15 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 :annotation a oa:Annotation, frac:LexicalAttestation ;
   oa:hasTarget :target ;
   frac:locus :target ;
+  frac:observedIn <http://example.org/text> ;
   oa:hasBody :lex_entry .
 
-:target a oa:TexPositionSelector ;
-  oa:start 123 ;
-  oe:end 456  .
+:target a oa:SpecificResource ;
+  oa:hasSource <http://example.org/text> ;
+  oa:hasSelector [
+    a oa:TextPositionSelector ;
+    oa:start 123 ;
+    oa:end 167 ] .
 
 :lex_entry frac:attestation :annotation .
 ```
@@ -875,16 +875,16 @@ NIF strings can be used as a locus for an attestation as follows:
 @prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
 
 :annotation a frac:LexicalAttestation ;
-  frac:locus <http://example.org/text#char=123,456> .
+  frac:locus <http://example.org/text#char=123,167> .
 
-<http://example.org/text#char=123,456> a nif:String ;
+<http://example.org/text#char=123,167> a nif:String ;
   nif:beginIndex "123"^^xsd:nonNegativeInteger ;
-  nif:endIndex "456"^^xsd:nonNegativeInteger ;
+  nif:endIndex "167"^^xsd:nonNegativeInteger ;
   nif:isString "The quick brown fox jumps over the lazy dog."@en .
 ```
 </aside>
 
-In this example, the string "The quick brown fox jumps over the lazy dog." is annotated as an attestation at character positions 123 to 456.
+In this example, the string "The quick brown fox jumps over the lazy dog." is annotated as an attestation at character positions 123 to 167.
 
 </section>
 
@@ -898,11 +898,11 @@ Alternatively, the loci of attestations may be given as RFC5147 URIs or as Text 
 
 ```turtle
 :annotation a frac:LexicalAttestation ;
-  frac:locus <http://example.org/text#char=123,456> .
+  frac:locus <http://example.org/text#char=123,167> .
 ```
 </aside>
 
-In this example, the string "The quick brown fox jumps over the lazy dog." is annotated as an attestation at character positions 123 to 456.
+In this example, the attestation is located at character positions 123 to 167 of the plain text document <http://example.org/text>.
 
 </section>
 
