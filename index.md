@@ -571,7 +571,7 @@ In many applications, it is desirable to specify the precise location of the occ
      frac:quotedText "lexical entry" ;
      frac:locus 
     <https://www.w3.org/2016/05/ontolex/#:~:text=of%20a-,lexical%20entry,-is%20expressed> ;
-     frac:observedIn <https://www.w3.org/TR/ontolex/>
+     frac:observedIn <https://www.w3.org/2016/05/ontolex/>
    ]
  ] .
 ```
