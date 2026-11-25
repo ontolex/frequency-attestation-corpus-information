@@ -28,6 +28,11 @@ frac:Collocation
         owl:onProperty rdfs:member
     ], [
         a owl:Restriction ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+        owl:onClass frac:Observable ;
+        owl:onProperty rdfs:member
+    ], [
+        a owl:Restriction ;
         owl:maxCardinality 1 ;
         owl:onProperty frac:head
     ] .
@@ -54,11 +59,11 @@ frac:ObservableFrequency
     rdfs:subClassOf frac:Observation, [
         a owl:Restriction ;
         owl:cardinality 1 ;
-        owl:onProperty rdf:value
+        owl:onProperty frac:observedIn
     ], [
         a owl:Restriction ;
         owl:cardinality 1 ;
-        owl:onProperty frac:observedIn
+        owl:onProperty rdf:value
     ] .
 
 frac:Observation
@@ -69,10 +74,6 @@ frac:Observation
         a owl:Restriction ;
         owl:cardinality 1 ;
         owl:onProperty frac:observedIn
-    ], [
-        a owl:Restriction ;
-        owl:minCardinality 1 ;
-        owl:onProperty dct:description
     ], [
         a owl:Restriction ;
         owl:cardinality 1 ;
@@ -130,6 +131,15 @@ frac:quotedText
 frac:total
     a owl:ObjectProperty ;
     rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as an [=observable frequency=] object." ;
+    rdfs:domain [
+        a owl:Restriction ;
+        owl:onProperty rdf:type ;
+        owl:someValuesFrom [
+            a owl:Restriction ;
+            owl:hasValue dct:DCMIType ;
+            owl:onProperty dcam:memberOf
+        ]
+    ] ;
     rdfs:label "total"@en ;
     rdfs:range frac:ObservableFrequency .
 

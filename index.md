@@ -223,8 +223,6 @@ The definition of [=observable=] does not posit an exhaustive list of possible o
 
 <subclass>[=observedIn=] exactly 1</subclass>
 
-<subclass>dct:description min 1</subclass>
-
 <subclass>rdf:value exactly 1</subclass>
 
 </div>
@@ -409,7 +407,7 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 <div class="description">
 
-<domain>class that is a [`dcam:memberOf`](http://purl.org/dc/dcam/memberOf) DCMI Type</domain>
+<domain>rdf:type some dcam:memberOf value dct:DCMIType</domain>
 
 <range>[=observable frequency=]</range>
 
@@ -486,7 +484,7 @@ Attestations are linked with the [=attestation property=] to the [=observable=] 
 </div>
 </div>
 
-The value of the attestation can be give with the [=quotedText=] property, which gives the text of the attestation as it is represented in the original source. This can be a plain text string, or a more complex representation, e.g., as an HTML fragment, or as a reference to a Web Annotation.
+The value of the attestation can be given with the [=quotedText=] property, which provides the text of the attestation. This can be a plain text string, but might also contain markup, e.g. an HTML fragment.
 
 <div class="entity" about="frac:quotedText" typeof="owl:DatatypeProperty">
 
@@ -494,13 +492,13 @@ The value of the attestation can be give with the [=quotedText=] property, which
 
 **URI:** [http://www.w3.org/ns/lemon/frac#quotedText](http://www.w3.org/ns/lemon/frac#quotedText)
 
-<div property="rdfs:comment">The <dfn>quotedText</dfn> property provides the text of the attestation as it is represented in the original source. This can be a plain text string, or a more complex representation, e.g., as an HTML fragment, or as a reference to a Web Annotation.</div>
+<div property="rdfs:comment">The <dfn>quotedText</dfn> property provides the text of the attestation.</div>
 
 <div class="description">
 
 <domain>[=lexical attestation=]</domain>
 
-<range>xsd:string</range>
+<range>rdf:PlainLiteral</range>
 
 </div>
 </div>
@@ -508,7 +506,7 @@ The value of the attestation can be give with the [=quotedText=] property, which
 
 As an example of an attestation, consider the following example from Open English Wordnet:
 
-<aside class="example" title="Attestation of the word 'cat' in the WordNet Glosstag Corpus">
+<aside class="example" title="Attestation of the word 'self-centred' in the WordNet Glosstag Corpus">
 
 ```turtle
 :02105605-a a skos:Concept ;
@@ -519,6 +517,23 @@ As an example of an attestation, consider the following example from Open Englis
      but the rest of them are just as bad, if not worse."@en ;
    frac:observedIn <https://www.newstatesman.com/culture/tv/2023/10/
                     friends-comedy-humour-legacy-matthew-perry> ] .
+```
+
+</aside>
+
+Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, `rdf:value` of the [=Attestation=] can be used to represent the original string verbatim, as presented in the source document, while [=quotedText=] should have the amended form, as data providers present it.
+
+As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dictionary Online_](https://bosworthtoller.com/20070) gives the example _"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."_. We might not want to preserve all this as [=quotedText=] since it contains a variant reading from another manuscript (_MS. Cote._), which is not the part of the quoted sentence. Instead, we can keep the full string as `rdf:value` and only the quoted sentence itself as [=quotedText=]:
+
+<aside class="example" title="Attestation of the Old English word 'hwæt-hweganunges' in Bosworth's Anglo-Saxon Dictionary Online">
+
+```turtle
+<https://bosworthtoller.com/20070> a ontolex:LexicalEntry;
+    frac:attestation [
+        a frac:Attestation;
+        frac:quotedText "Ða niétenu ðonne beóþ hwæthuguningas ..." ;
+        rdf:value "Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."
+    ] .
 ```
 
 </aside>
@@ -626,6 +641,8 @@ Collocations obtained by quantitative methods are characterized by their method 
 <subclass>[=Observation=]</subclass>
 
 <subclass>rdfs:member only [=observable=]</subclass>
+
+<subclass>rdfs:member min 2 [=observable=]</subclass>
 
 <subclass>[=head=] max 1</subclass>
 </div>
