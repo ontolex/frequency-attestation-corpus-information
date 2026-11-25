@@ -140,9 +140,9 @@ Other models:
   A standard RDF property used to specify the literal value of an observation (e.g., a frequency count or a collocation score).
 * **[=unit=]**
   Identifies the segmentation unit used in a frequency count (e.g., tokens, sentences). Applied to [=observable frequency=].
-* **`Web Annotation`**
+* **[Web Annotation](https://www.w3.org/TR/annotation-model/)**
   A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody), [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget), and selectors (e.g., [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector)).
-* **`OntoLex-Lemon`**
+* **[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/)**
   A core vocabulary for linking lexical information with ontologies. FrAC extends it to cover corpus-based data.
 
 </section>
@@ -520,7 +520,7 @@ As an example of an attestation, consider the following example from Open Englis
 
 </aside>
 
-Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, `rdf:value` of the [=lexical attestation=] can be used to represent the original string verbatim, as presented in the source document, while the [=quoted text=] should have the amended form, as data providers present it.
+Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) of the [=lexical attestation=] can be used to represent the original string verbatim, as presented in the source document, while the [=quoted text=] should have the amended form, as data providers present it.
 
 As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dictionary Online_](https://bosworthtoller.com/20070) gives the example _"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."_. We might not want to preserve all this as [=quoted text=] since it contains a variant reading from another manuscript (_MS. Cote._), which is not the part of the quoted sentence. Instead, we can keep the full string as `rdf:value` and only the quoted sentence itself as [=quoted text=]:
 
@@ -543,7 +543,7 @@ As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dic
 
 ## Locus
 
-In many applications, it is desirable to specify the precise location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. The FrAC standard supports referencing using [RFC5147](https://www.rfc-editor.org/rfc/rfc5147.html) character offsets, [Text Fragments](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment/Text_fragments), [NIF](https://persistence.uni-leipzig.org/nlp2rdf/) URIs, or by means of [Web Annotation](https://www.w3.org/TR/annotation-model/) references (see [Corpus Annotation](#annotation)). As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the [=locus=] property that links an attestation with its source takes any URI as its object.
+In many applications, it is desirable to specify the precise location of the occurrence of a headword in the quoted text of an attestation, for example, by means of character offsets. The FrAC standard supports referencing using [RFC5147](https://www.rfc-editor.org/rfc/rfc5147.html) character offsets, [Text Fragments](https://developer.mozilla.org/en-US/docs/Web/URI/Reference/Fragment/Text_fragments), [NIF](https://github.com/NLP2RDF/ontologies) URIs, or by means of [Web Annotation](https://www.w3.org/TR/annotation-model/) references (see [Corpus Annotation](#annotation)). As different vocabularies can be used to establish locus objects, the FrAC vocabulary is underspecified with respect to the exact nature of the locus object. Accordingly, the [=locus=] property that links an attestation with its source takes any URI as its object.
 
 <div class="entity" about="frac:locus" typeof="owl:ObjectProperty">
 
@@ -571,7 +571,7 @@ In many applications, it is desirable to specify the precise location of the occ
      frac:quotedText "lexical entry" ;
      frac:locus 
     <https://www.w3.org/2016/05/ontolex/#:~:text=of%20a-,lexical%20entry,-is%20expressed> ;
-     frac:observedIn <https://www.w3.org/TR/ontolex/>
+     frac:observedIn <https://www.w3.org/2016/05/ontolex/>
    ]
  ] .
 ```
@@ -824,7 +824,7 @@ Annotation as linked with the [`oa:hasBody`](https://www.w3.org/TR/annotation-vo
 The Web Annotation Vocabulary supports different ways to define targets. This includes:
 
 *   plain URI: The target can be a URI defined within the corpus (e.g., if corpus data is provided as native RDF, or by means of the <tt>@about</tt> attribute in an [HTML/XML+RDFa](https://www.w3.org/TR/rdfa-primer/) document, or by means of <tt>@xml:id</tt> in a [TEI/XML](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.html) document).
-*   string URI: String URIs provide the possibility to point directly to a text fragment in a web document, using the URI schemas as provided by [RFC5147](https://tools.ietf.org/html/rfc5147) (text files only) or [NIF](http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html#introduction) (all text-based formats).
+*   string URI: String URIs provide the possibility to point directly to a text fragment in a web document, using the URI schemas as provided by [RFC5147](https://tools.ietf.org/html/rfc5147) (text files only) or [NIF](https://github.com/NLP2RDF/ontologies) (all text-based formats).
 *   [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector): a range of text defined by the start and end positions of the selection in the stream
 *   [`oa:DataPositionSelector`](https://www.w3.org/TR/annotation-vocab/#datapositionselector): a range of data by recording the start and end positions of the selection in the stream
 *   [`oa:TextQuoteSelector`](https://www.w3.org/TR/annotation-vocab/#textquoteselector): The TextQuoteSelector describes a range of text by copying it. The TextQuoteSelector can include some of the text immediately before (a prefix) and after (a suffix) to distinguish between multiple copies of the same sequence of characters. If this does not suffice for disambiguation, all matching text fragments in the document are being annotated.
@@ -869,7 +869,7 @@ As for frequencies and other observations, resource-specific annotation classes 
 
 ### NLP Interchange Format
 
-The NLP Interchange Format (NIF) is a standard for the representation of text annotations. It is based on RDF and allows for the representation of text, its structure, and annotations. NIF is particularly useful for the representation of text annotations in the context of the Semantic Web. The NIF standard is defined in the [NIF 2.1 specification](http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-core.html).
+The NLP Interchange Format (NIF) is a standard for the representation of text annotations. It is based on RDF and allows for the representation of text, its structure, and annotations. NIF is particularly useful for the representation of text annotations in the context of the Semantic Web. The NIF standard is defined in the [NIF 2.1 ontologies](https://github.com/NLP2RDF/ontologies).
 
 NIF strings can be used as a locus for an attestation as follows:
 
