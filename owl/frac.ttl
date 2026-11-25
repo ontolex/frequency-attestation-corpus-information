@@ -1,211 +1,160 @@
-@prefix frac: <http://www.w3.org/ns/lemon/frac#> . 
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
 
 
-@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> . 
-@prefix synsem: <http://www.w3.org/ns/lemon/synsem#> . 
-@prefix decomp: <http://www.w3.org/ns/lemon/decomp#> . 
-@prefix vartrans: <http://www.w3.org/ns/lemon/vartrans#> . 
-@prefix lime: <http://www.w3.org/ns/lemon/lime#> . 
-@prefix lexicog: <http://www.w3.org/ns/lemon/lexicog#> . 
+##########################
+# vocabulary declaration #
+##########################
+<http://www.w3.org/ns/lemon/frac#>
+    a owl:Ontology, voaf:Vocabulary .
 
 
-@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>. 
-@prefix owl: <http://www.w3.org/2002/07/owl#>. 
-@prefix xsd: <http://www.w3.org/2001/XMLSchema#>. 
-@prefix skos: <http://www.w3.org/2004/02/skos#>. 
-@prefix dbr: <http://dbpedia.org/resource/>. 
-@prefix dbo: <http://dbpedia.org/ontology/>. 
-@prefix void: <http://rdfs.org/ns/void#>. 
-@prefix lexinfo: <http://www.lexinfo.net/ontology/2.0/lexinfo#>. 
-@prefix dct: <http://purl.org/dc/terms/>. 
-@prefix provo: <http://www.w3.org/ns/prov#>. 
-@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>. 
-@prefix oa: <http://www.w3.org/ns/oa#>. 
-@prefix aat: <http://vocab.getty.edu/aat/>. 
-@prefix voaf: <http://purl.org/vocommons/voaf#>. 
-@prefix dcam: <http://purl.org/dc/dcam/> . 
-@prefix dcterms: <http://purl.org/dc/terms/> . 
-@prefix dcmitype: <http://purl.org/dc/dcmitype/> 
+#####################
+# top-level classes #
+#####################
 
+frac:Observable
+    a owl:Class ;
+    rdfs:label "Observable"@en ;
+    rdfs:comment "Observable is a superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, lexical entry, lexical sense, form, and lexical concept. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source."@en .
 
-
-########################## 
-# vocabulary declaration # 
-########################## 
-<http://www.w3.org/ns/lemon/frac#> 
-    a owl:Ontology, voaf:Vocabulary ; 
-    # owl:imports <http://www.w3.org/ns/lemon/ontolex> 
-    . 
-######################### 
-# imported vocabularies # 
-######################### 
-rdf:Bag 
-    rdfs:subClassOf rdfs:Container . 
-rdf:Seq 
-    rdfs:subClassOf rdfs:Container . 
-rdfs:member 
-    a owl:ObjectProperty . 
-rdf:value 
-    a owl:DatatypeProperty . 
-dct:extent 
-    a owl:DatatypeProperty . 
-dct:description 
-    a owl:DatatypeProperty . 
-
-        
-##################### 
-# top-level classes # 
-##################### 
-
-
-frac:Observable 
-    a owl:Class ; 
-    skos:definition """Observable is an abstract superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, `ontolex:LexicalEntry`, `ontolex:LexicalSense`, `ontolex:Form`, and `ontolex:LexicalConcept`. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source."""@en; 
-    rdfs:label "observable"@en. 
-ontolex:Form 
-    rdfs:subClassOf frac:Observable . 
-ontolex:LexicalConcept 
-    rdfs:subClassOf frac:Observable .
-ontolex:LexicalEntry 
-    rdfs:subClassOf frac:Observable .
-ontolex:LexicalSense 
-    rdfs:subClassOf frac:Observable . 
-
-
-frac:Observation 
-    a owl:Class; 
-    rdfs:subClassOf [ 
-        a <http://www.w3.org/2002/07/owl#Restriction> ; 
-        <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
-        <http://www.w3.org/2002/07/owl#onProperty> rdf:value 
-   ] ; 
-   rdfs:subClassOf [ 
-        a <http://www.w3.org/2002/07/owl#Restriction> ; 
-        <http://www.w3.org/2002/07/owl#minCardinality> "1"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
-        <http://www.w3.org/2002/07/owl#onProperty> frac:observedIn 
-   ] ; 
-    # the following constraint is semantically empty 
-    # it is supposed to express that there should be 
-    # a human-readable description, but we don't enforce it 
-    # in order not to break validation 
-    rdfs:subClassOf [ 
-        a <http://www.w3.org/2002/07/owl#Restriction> ; 
-        <http://www.w3.org/2002/07/owl#minCardinality> "0"^^<http://www.w3.org/2001/XMLSchema#nonNegativeInteger> ; 
-        <http://www.w3.org/2002/07/owl#onProperty> dct:description 
-    ] . 
-
-
-frac:observedIn 
-    a owl:ObjectProperty ; 
-    rdfs:domain frac:Observation ; 
-    rdfs:range [ 
-        a owl:Restriction ; 
-        owl:onProperty rdf:type ; 
-        owl:someValuesFrom [ 
-            a owl:Restriction ; 
-            owl:onProperty dcam:memberOf ; 
-            owl:hasValue dcterms:DCMIType ] ] ; 
-    rdfs:comment """For an Observation, the property observedIn defines the URI of the data 
-    source (or its metadata entry) that this particular observation was made in or derived from. 
-    This can be, for example, a corpus or a text represented by its access URL, a book 
-    represented by its bibliographical metadata, etc."""@en . 
-
-                                                                                                                                                                                                                                                                                                                                        
-############# 
-# frequency # 
-############# 
-
-
-frac:Frequency 
-    a owl:Class ; 
-    rdfs:subClassOf frac:Observation ; 
-    rdfs:subClassOf [ 
-        a owl:Restriction ; 
-        owl:cardinality "1"^^xsd:nonNegativeInteger ; 
-        owl:onDataRange xsd:int ; 
-        owl:onProperty rdf:value 
+frac:Observation
+    a owl:Class ;
+    rdfs:label "Observation"@en ;
+    rdfs:comment "Observation is a superclass for anything that can be observed in a corpus about an observable."@en ;
+    rdfs:subClassOf [
+        a owl:Restriction ;
+        owl:onProperty frac:observedIn ;
+        owl:cardinality "1"^^xsd:integer
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty rdf:value ;
+        owl:cardinality "1"^^xsd:integer
     ] .
 
-
-frac:frequency 
-    a owl:ObjectProperty ; 
-    rdfs:domain frac:Observable ; 
-    rdfs:range frac:Frequency . 
-
-
-frac:total 
-    a owl:DatatypeProperty, owl:FunctionalProperty ; 
-    rdfs:domain [ 
-        a owl:Restriction ; 
-        owl:onProperty rdf:type ; 
-        owl:someValuesFrom [ 
-            a owl:Restriction ; 
-            owl:onProperty dcam:memberOf ; 
-            owl:hasValue dcterms:DCMIType ] ] ; 
-    rdfs:range xsd:int ; 
-    rdfs:label "could be renamed to frac:tokens, as different kinds of totals as possible for multi-word expressions"@en .
-
-                                                                                                                                                                                                                                                          
-############### 
-# attestation # 
-############### 
+frac:observedIn
+    a owl:ObjectProperty, owl:FunctionalProperty ;
+    rdfs:label "observedIn"@en ;
+    rdfs:domain frac:Observation ;
+    rdfs:range xsd:anyURI ;
+    rdfs:comment "For an Observation, the property observedIn defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc."@en .
 
 
-frac:Attestation 
-    rdfs:subClassOf frac:Observation .
+#############
+# frequency #
+#############
+
+frac:Frequency
+    a owl:Class ;
+    rdfs:label "Frequency"@en ;
+    rdfs:comment "Frequency is an Observation of the absolute number of attestations (rdf:value) of a particular observable (see frequency property) that is observedIn in a particular data source. Using unit, frequency objects can also identify the (segmentation) unit that their counts are based on."@en ;
+    rdfs:subClassOf frac:Observation , [
+        a owl:Restriction ;
+        owl:onProperty rdf:value ;
+        owl:cardinality "1"^^xsd:integer
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty frac:observedIn ;
+        owl:cardinality "1"^^xsd:integer
+    ] .
+
+frac:frequency
+    a owl:ObjectProperty ;
+    rdfs:label "frequency"@en ;
+    rdfs:domain frac:Observable ;
+    rdfs:range frac:Frequency ;
+    rdfs:comment "The frequency property assigns a particular observable a Frequency."@en .
+
+frac:unit
+    a owl:ObjectProperty ;
+    rdfs:label "unit"@en ;
+    rdfs:domain frac:Frequency ;
+    rdfs:comment "For a Frequency object, the property unit provides an identifier of the respective segmentation unit."@en .
+
+# NOTE: frac:total's domain is specified in index.md as a formal restriction
+# ("any class that is a dcam:memberOf DCMI Type"), but the RDFa-extraction
+# pipeline currently fails to expand that <domain> tag (see issue #71 / PR
+# #75, which fixes the extraction). Once that lands, this file should be
+# regenerated to pick up the same rdfs:domain restriction.
+frac:total
+    a owl:ObjectProperty ;
+    rdfs:label "total"@en ;
+    rdfs:range frac:Frequency ;
+    rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as a Frequency object."@en .
 
 
-frac:attestation 
-    a owl:ObjectProperty ; 
-    rdfs:domain frac:Observable ; 
-    rdfs:range frac:Attestation ; 
-    rdfs:subPropertyOf frac:citation . 
+###############
+# attestation #
+###############
+
+frac:Attestation
+    a owl:Class ;
+    rdfs:label "Attestation"@en ;
+    rdfs:comment "Attestation is an Observation that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register."@en ;
+    rdfs:subClassOf frac:Observation , [
+        a owl:Restriction ;
+        owl:onProperty frac:quotedText ;
+        owl:maxCardinality "1"^^xsd:integer
+    ] .
+
+frac:attestation
+    a owl:ObjectProperty ;
+    rdfs:label "attestation"@en ;
+    rdfs:domain frac:Observable ;
+    rdfs:range frac:Attestation ;
+    rdfs:comment "The attestation property associates an attestation to the observable."@en .
+
+frac:quotedText
+    a owl:DatatypeProperty ;
+    rdfs:label "quotedText"@en ;
+    rdfs:domain frac:Attestation ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The quotedText property provides the text of the attestation as it is represented in the original source. This can be a plain text string, or a more complex representation, e.g., as an HTML fragment, or as a reference to a Web Annotation."@en .
+
+frac:locus
+    a owl:ObjectProperty ;
+    rdfs:label "locus"@en ;
+    rdfs:domain frac:Attestation ;
+    rdfs:comment "locus points to the location at which the relevant word(s) can be found."@en .
 
 
-frac:citation 
-    a owl:ObjectProperty ; 
-    rdfs:domain frac:Observable . 
+###############
+# collocation #
+###############
 
+frac:Collocation
+    a owl:Class ;
+    rdfs:label "Collocation"@en ;
+    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their collocation score (or weight, rdf:value) in a particular data source (observedIn)."@en ;
+    rdfs:subClassOf rdfs:Container , frac:Observation , [
+        a owl:Restriction ;
+        owl:onProperty rdfs:member ;
+        owl:allValuesFrom frac:Observable
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty rdfs:member ;
+        owl:onClass frac:Observable ;
+        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger
+    ] , [
+        a owl:Restriction ;
+        owl:onProperty frac:head ;
+        owl:maxCardinality "1"^^xsd:integer
+    ] .
 
-frac:gloss 
-    a owl:DatatypeProperty ; 
-    rdfs:domain frac:Attestation ; 
-    rdfs:range xsd:string ; 
-    rdfs:comment "An attestation gloss is the representation of the attestation as provided in a lexical resource. This may contain, for example, amendments or additional comments. For the string as found in the original text, use rdf:value." .
+frac:cScore
+    a owl:DatatypeProperty ;
+    rdfs:label "cScore"@en ;
+    rdfs:domain frac:Collocation ;
+    rdfs:subPropertyOf rdf:value ;
+    rdfs:comment "Collocation score is a subproperty of rdf:value that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type."@en .
 
-                                                                    
-frac:locus 
-    a owl:ObjectProperty ; 
-    rdfs:domain frac:Attestation ; 
-    rdfs:comment """Points from an Observation to the exact location in the source material on where it is to be found. This can be, for example, a page in a book, the string URI of a passage in a text, a canonical reference to a passage in piece of literatur, or any Web Annotation selector. We have confirmed name, function and necessity of this property. 
-    When the locus is provided, it is not necessary to also refer to the source material as a whole. The existence of such a reference is nevertheless implied."""@en . 
-
-                                                                                                                                                
-############### 
-# collocation # 
-############### 
-
-
-frac:Collocation 
-    rdfs:subClassOf rdfs:Container, frac:Observable, frac:Observation, [ 
-        a owl:Restriction ; 
-        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ; 
-        owl:onClass frac:Observable ; 
-        owl:onProperty rdfs:member 
-    ] , 
-    [ 
-        a <http://www.w3.org/2002/07/owl#Restriction> ; 
-        <http://www.w3.org/2002/07/owl#allValuesFrom> <http://www.w3.org/ns/lemon/frac#Observable> ; 
-        <http://www.w3.org/2002/07/owl#onProperty> <http://www.w3.org/2000/01/rdf-schema#member> 
-    ] . 
-
-
-frac:cScore 
-    rdfs:subPropertyOf rdf:value ; 
-    rdfs:domain frac:Collocation . 
-
-frac:head 
-    a owl:ObjectProperty ; 
-    rdfs:domain frac:Collocation ; 
-    rdfs:range frac:Observable . 
-
+frac:head
+    a owl:ObjectProperty ;
+    rdfs:label "head"@en ;
+    rdfs:domain frac:Collocation ;
+    rdfs:range frac:Observable ;
+    rdfs:comment "The head property identifies the element of a collocation that its scores are about. A collocation must not have more than one head."@en .

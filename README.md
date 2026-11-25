@@ -100,13 +100,21 @@ formal (and less precise) `rdfs:domain`.
 
 ## Older ontology snapshot (`owl/`)
 
-`owl/frac.ttl` is a separate, older, hand-maintained ontology file, built by
-concatenating every ` ``` `-fenced Turtle block in `index.md` (see
-`owl/md2ttl.py` / `owl/Makefile`). It predates the RDFa-based process above
-and has drifted out of sync with the current `index.md` (e.g. it still
-references properties that have since been renamed or removed). It's kept
-for reference for now; the RDFa extraction above is the more accurate,
-lower-maintenance way to get the current ontology.
+`owl/frac.ttl` is a separate, hand-maintained ontology file that predates the
+RDFa-based process above; it was originally built by concatenating every
+` ``` `-fenced Turtle block in `index.md` (see `owl/md2ttl.py` /
+`owl/Makefile`), but `index.md` no longer contains hand-written Turtle
+blocks of that kind (its fenced blocks are now usage examples, not ontology
+axioms), so that pipeline is no longer run — `owl/md2ttl.py` and
+`owl/Makefile` are kept only as a record of how the file used to be
+produced. Its axioms are kept manually in sync with `index.md`/
+`owl/frac-rdfa.ttl` by hand (see [#72](https://github.com/ontolex/frequency-attestation-corpus-information/issues/72)
+for the reconciliation), with one known gap: `frac:total`'s domain
+restriction, which is present here but currently dropped by the RDFa
+extraction due to the tooling bug described above. The RDFa extraction is
+still the more accurate, lower-maintenance way to get the current ontology;
+`owl/frac.ttl` is kept for reference and for tools/consumers that expect a
+plain, hand-readable Turtle file.
 
 ## Diagram
 
