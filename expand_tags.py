@@ -288,6 +288,6 @@ if __name__ == "__main__":
 
         # Remove newlines (and any indentation) right after `<div property="rdfs:comment" ...>`
         # and right before its closing `</div>`
-        result = re.sub(r'(<div property="rdfs:comment"[^>]*>)\s*\n[ \t]*', r'\1', result)
+        result = re.sub(r'(<div [^>]*property="rdfs:comment"[^>]*>)\s*\n[ \t]*', r'\1', result)
         result = re.sub(r'\n[ \t]*(</div>)', r'\1', result)
         file.write(result)
