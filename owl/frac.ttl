@@ -20,7 +20,7 @@
 
 frac:Collocation
     a owl:Class ;
-    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their collocation score (or weight, rdf:value) in a particular data source (observedIn)."@en ;
+    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their collocation score (or weight, rdf:value) in a particular data source (observed in)."@en ;
     rdfs:label "Collocation"@en ;
     rdfs:subClassOf rdfs:Container, frac:Observation, [
         a owl:Restriction ;
@@ -40,7 +40,7 @@ frac:Collocation
 frac:LexicalAttestation
     a owl:Class ;
     rdfs:comment "Lexical attestation is an Observation that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register."@en ;
-    rdfs:label "LexicalAttestation"@en ;
+    rdfs:label "Lexical Attestation"@en ;
     rdfs:subClassOf frac:Observation, [
         a owl:Restriction ;
         owl:maxCardinality 1 ;
@@ -54,8 +54,8 @@ frac:Observable
 
 frac:ObservableFrequency
     a owl:Class ;
-    rdfs:comment "Observable frequency is an Observation of the absolute number of attestations (rdf:value) of a particular observable (see frequency property) that is observed in a particular data source (observedIn). Using unit, frequency objects can also identify the (segmentation) unit that their counts are based on."@en ;
-    rdfs:label "ObservableFrequency"@en ;
+    rdfs:comment "Observable frequency is an Observation of the absolute number of attestations (rdf:value) of a particular observable (see frequency property) that is observed in a particular data source (observed in). Using unit, frequency objects can also identify the (segmentation) unit that their counts are based on."@en ;
+    rdfs:label "Observable Frequency"@en ;
     rdfs:subClassOf frac:Observation, [
         a owl:Restriction ;
         owl:cardinality 1 ;
@@ -84,47 +84,47 @@ frac:attestation
     a owl:ObjectProperty ;
     rdfs:comment "The attestation property associates an attestation to the observable."@en ;
     rdfs:domain frac:Observable ;
-    rdfs:label "attestation"@en ;
+    rdfs:label "Attestation"@en ;
     rdfs:range frac:LexicalAttestation .
 
 frac:cScore
     a owl:DatatypeProperty ;
     rdfs:comment "Collocation score is a subproperty of rdf:value that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type."@en ;
     rdfs:domain frac:Collocation ;
-    rdfs:label "cScore"@en ;
+    rdfs:label "Collocation Score"@en ;
     rdfs:subPropertyOf rdf:value .
 
 frac:frequency
     a owl:ObjectProperty ;
     rdfs:comment "The frequency property assigns a particular observable an observable frequency."@en ;
     rdfs:domain frac:Observable ;
-    rdfs:label "frequency"@en ;
+    rdfs:label "Frequency"@en ;
     rdfs:range frac:ObservableFrequency .
 
 frac:head
     a owl:ObjectProperty ;
     rdfs:comment "The head property identifies the element of a collocation that its scores are about. A collocation must not have more than one head."@en ;
     rdfs:domain frac:Collocation ;
-    rdfs:label "head"@en ;
+    rdfs:label "Head"@en ;
     rdfs:range frac:Observable .
 
 frac:locus
     a owl:ObjectProperty ;
     rdfs:comment "locus points to the location at which the relevant word(s) can be found."@en ;
     rdfs:domain frac:LexicalAttestation ;
-    rdfs:label "locus"@en .
+    rdfs:label "Locus"@en .
 
 frac:observedIn
     a owl:FunctionalProperty, owl:ObjectProperty ;
-    rdfs:comment "For an Observation, the property observedIn defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc."@en ;
+    rdfs:comment "For an Observation, the observed in property defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc."@en ;
     rdfs:domain frac:Observation ;
-    rdfs:label "observedIn"@en .
+    rdfs:label "Observed In"@en .
 
 frac:quotedText
     a owl:DatatypeProperty ;
-    rdfs:comment "The quotedText property provides the text of the attestation."@en ;
+    rdfs:comment "The quoted text property provides the text of the attestation."@en ;
     rdfs:domain frac:LexicalAttestation ;
-    rdfs:label "quotedText"@en ;
+    rdfs:label "Quoted Text"@en ;
     rdfs:range rdf:PlainLiteral .
 
 frac:total
@@ -139,14 +139,14 @@ frac:total
             owl:onProperty dcam:memberOf
         ]
     ] ;
-    rdfs:label "total"@en ;
+    rdfs:label "Total"@en ;
     rdfs:range frac:ObservableFrequency .
 
 frac:unit
     a owl:ObjectProperty ;
     rdfs:comment "For an observable frequency object, the property unit provides an identifier of the respective segmentation unit."@en ;
     rdfs:domain frac:ObservableFrequency ;
-    rdfs:label "unit"@en .
+    rdfs:label "Unit"@en .
 
 ontolex:Form
     rdfs:subClassOf frac:Observable .
