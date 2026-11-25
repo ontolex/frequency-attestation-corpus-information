@@ -20,7 +20,7 @@
 
 frac:Collocation
     a owl:Class ;
-    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their collocation score (or weight, rdf:value) in a particular data source (observed in)."@en ;
+    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their weight (rdf:value) and by collocation scores in a particular data source (observed in)."@en ;
     rdfs:label "Collocation"@en ;
     rdfs:subClassOf rdfs:Container, frac:Observation, [
         a owl:Restriction ;
@@ -89,10 +89,9 @@ frac:attestation
 
 frac:cScore
     a owl:DatatypeProperty ;
-    rdfs:comment "Collocation score is a subproperty of rdf:value that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type."@en ;
+    rdfs:comment "Collocation score provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type."@en ;
     rdfs:domain frac:Collocation ;
-    rdfs:label "Collocation Score"@en ;
-    rdfs:subPropertyOf rdf:value .
+    rdfs:label "Collocation Score"@en .
 
 frac:frequency
     a owl:ObjectProperty ;
