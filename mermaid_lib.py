@@ -71,9 +71,12 @@ def natural_key(text):
     return [int(t) if t.isdigit() else t for t in re.split(r"(\d+)", text)]
 
 
-def turtle_to_mermaid(ttl_text, direction=None, elk=False):
+def turtle_to_mermaid(ttl_text, direction=None, elk=False, node_labels=None):
     """`direction` ("LR" or "TD") overrides the layout chosen from the size;
-    `elk` selects the ELK layout engine, which places edge labels better."""
+    `elk` selects the ELK layout engine, which places edge labels better.
+    `node_labels` (FrAC addition) maps IRIs to a label shown instead of the
+    node's name; `*text*` in it is set in italics."""
+    node_labels = node_labels or {}
     g = Graph()
     g.parse(data=ttl_text, format="turtle")
 
@@ -136,8 +139,15 @@ def turtle_to_mermaid(ttl_text, direction=None, elk=False):
             # As in the GraphViz diagrams, a rule separates the name and type
             # of a node from its properties.
             label = "<br/>".join(escape_label(line) for line in args)
-            if header is not None:
-                label = escape_label(header) + ("<hr/>" + label if label else "")
+            if str(s) in node_labels:
+                # "#nbsp;" after italics: Mermaid sizes boxes without the italic slant, which would clip the last letter
+                header_html = re.sub(r"\*([^*]+)\*", r"<i>\1#nbsp;</i>", escape_label(node_labels[str(s)]))
+            elif header is not None:
+                header_html = escape_label(header)
+            else:
+                header_html = None
+            if header_html is not None:
+                label = header_html + ("<hr/>" + label if label else "")
             label = label or " "
             lines_out.append("    %s[\"%s\"]" % (id, label))
         return id

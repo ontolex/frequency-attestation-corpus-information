@@ -48,9 +48,15 @@ diagram can be drawn from it:
   [Mermaid](https://mermaid.js.org/) diagram, generated from `examples/NAME.ttl`
   by [`mermaid_lib.py`](mermaid_lib.py), at the top of each example; Mermaid
   renders it in the browser once ReSpec has finished (see `respec.template`).
-  An empty `examples/NAME.LR` file asks for a left-to-right layout, and an
-  empty `examples/NAME.elk` file for the ELK layout engine, which places edge
-  labels better in busy diagrams. `mermaid_lib.py` is copied from the
+  Optional files next to `examples/NAME.ttl` adjust its diagram:
+  - `NAME.LR` (empty): left-to-right layout
+  - `NAME.elk` (empty): the ELK layout engine, which places edge labels
+    better in busy diagrams
+  - `NAME.labels`: labels to show instead of node names, one per line as
+    `<IRI> label`, with `*text*` set in italics (e.g. Example 6 shows its
+    locus as *Text Fragment identifier* rather than the long URL)
+  - `NAME.nodiagram` (empty): no diagram at all, for examples too complex to
+    draw readably (e.g. the Wortschatz collocations) `mermaid_lib.py` is copied from the
   [OntoLex core repository](https://github.com/ontolex/ontolex) (which took it
   from [`morph`](https://github.com/ontolex/morph)), with two small changes
   marked in the code: blank nodes show their type, and nodes show all of
