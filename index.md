@@ -123,7 +123,7 @@ Other models:
 * **[=Collocation=]**
   A co-occurrence of two or more lexical units in a corpus. Treated as a container ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)) and a subclass of [=Observation=].
 * **[=Collocation score=]**
-  A subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
+  A property used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
 * **Corpus**
   A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via the [=observed in=] property.
 * **[=Observable frequency=]**
@@ -137,7 +137,7 @@ Other models:
 * **[=Observation=]**
   An empirical claim about an observable—e.g., frequency count, collocation, attestation. Linked to the data source it was made in via the [=observed in=] property.
 * **[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
-  A standard RDF property used to specify the literal value of an observation (e.g., a frequency count or a collocation score).
+  A standard RDF property used to specify the literal value of an observation (e.g., a frequency count or the weight of a collocation). Specific collocation metrics use [=collocation score=] instead.
 * **[=unit=]**
   Identifies the segmentation unit used in a frequency count (e.g., tokens, sentences). Applied to [=observable frequency=].
 * **[Web Annotation](https://www.w3.org/TR/annotation-model/)**
@@ -631,7 +631,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 
-<div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their collocation score (or weight, [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) in a particular data source ([=observed in=]). </div>
+<div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their weight ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) and by [=collocation score=]s in a particular data source ([=observed in=]). </div>
 
 <div class="description">
 
@@ -663,15 +663,15 @@ Collocations can be described in terms of various collocation scores. If scores 
 
 **URI:** [http://www.w3.org/ns/lemon/frac#cScore](http://www.w3.org/ns/lemon/frac#cScore)
 
-<div property="rdfs:comment"><dfn>Collocation score</dfn> is a subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) that provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.</div>
+<div property="rdfs:comment"><dfn>Collocation score</dfn> provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.</div>
 
 <div class="description">
-
-<subproperty>rdf:value</subproperty>
 
 <domain>[=Collocation=]</domain>
 </div>
 </div>
+
+[=Collocation score=] is deliberately not a subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), in the same way that [=quoted text=] and [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) are kept apart for [=lexical attestation=]s: the [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) of a collocation gives its generic weight (e.g., the co-occurrence counts in the Wortschatz example below), while each collocation score gives the value of one specific metric. A collocation can thus have its [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and any number of collocation scores side by side.
 
 LexInfo defines a number of popular collocation metrics as sub-properties of [=collocation score=]:
 
