@@ -1,0 +1,11 @@
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+<https://wordnetcode.princeton.edu/glosstag.shtml> a dct:Collection ;
+  frac:total [
+    a frac:ObservableFrequency ;
+    rdf:value 1634691 ;
+    frac:unit lexinfo:tokens
+  ] .

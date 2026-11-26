@@ -1,0 +1,5 @@
+@prefix : <http://example.org/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+
+:annotation a frac:LexicalAttestation ;
+  frac:locus <http://example.org/text#char=123,167> .

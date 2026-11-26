@@ -1,0 +1,20 @@
+@prefix ex: <http://example.org/ex#> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:pay_verb a ontolex:LexicalEntry ;
+    ontolex:canonicalForm [ ontolex:writtenRep "pay"@en ] .
+
+ex:concept_price a ontolex:LexicalConcept ;
+    skos:prefLabel "cost or penalty concept"@en .
+
+ex:pay_price_collocation a frac:Collocation, rdf:Seq ;
+    rdf:_1 ex:pay_verb ;
+    rdf:_2 ex:concept_price ;
+    frac:head ex:pay_verb ;
+    frac:observedIn <http://example.org/corpora/en_modern_prose> ;
+    lexinfo:logDice "7.42"^^xsd:decimal .

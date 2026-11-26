@@ -1,0 +1,18 @@
+@prefix : <http://example.org/> .
+@prefix frac: <http://www.w3.org/ns/lemon/frac#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+
+:annotation a oa:Annotation, frac:LexicalAttestation ;
+  oa:hasTarget :target ;
+  frac:locus :target ;
+  frac:observedIn <http://example.org/text> ;
+  oa:hasBody :lex_entry .
+
+:target a oa:SpecificResource ;
+  oa:hasSource <http://example.org/text> ;
+  oa:hasSelector [
+    a oa:TextPositionSelector ;
+    oa:start 123 ;
+    oa:end 167 ] .
+
+:lex_entry frac:attestation :annotation .
