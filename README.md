@@ -33,9 +33,12 @@ python3 add_diagrams.py index.html index.html
 ```
 
 Open `index.html` in a browser (or push to `master`) to see the rendered,
-ReSpec-processed page. The GitHub Action runs the same steps, after
-`check_examples.py`, which checks that each example in `index.md` matches
-its file in `examples/`.
+ReSpec-processed page. The listings in `index.md` are the source of the
+examples: after changing one, run `python3 extract_examples.py`, which writes
+the files in `examples/` from them. The GitHub Action runs the same steps,
+after checking that the example files are up to date
+(`extract_examples.py --check`) and that `owl/frac.ttl` matches the
+specification; it also runs on pull requests.
 
 ## The ontology (RDFa)
 
@@ -132,7 +135,7 @@ reference.
 - [`respec.template`](respec.template) — Pandoc template that wraps `index.md` in the ReSpec HTML shell.
 - [`expand_tags.py`](expand_tags.py) — expands the shorthand ontology tags into RDFa; see "The ontology (RDFa)" above.
 - [`extract-ontology.sh`](extract-ontology.sh) — runs the full build + extraction pipeline; see "The ontology (RDFa)" above.
-- [`examples/`](examples/) — the spec's examples as Turtle files; [`add_diagrams.py`](add_diagrams.py), [`mermaid_lib.py`](mermaid_lib.py) and [`check_examples.py`](check_examples.py) draw their diagrams and keep them in sync with the spec.
+- [`examples/`](examples/) — the spec's examples as Turtle files, generated from `index.md`; [`add_diagrams.py`](add_diagrams.py), [`mermaid_lib.py`](mermaid_lib.py) draw their diagrams, and [`extract_examples.py`](extract_examples.py) writes them from the listings in the spec.
 - [`owl/frac.ttl`](owl/frac.ttl) — the ontology in Turtle, generated from `index.md` (see above).
 - [`public-review-1.md`](public-review-1.md), [`index-old.md`](index-old.md), [`archive/`](archive/) — earlier drafts, kept for reference.
 - [`samples/`](samples/) — example datasets modelled with FrAC.

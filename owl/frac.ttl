@@ -20,7 +20,7 @@
 
 frac:Collocation
     a owl:Class ;
-    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their weight (rdf:value) and by collocation scores in a particular data source (observed in)."@en ;
+    rdfs:comment "Collocation is an Observation that describes the co-occurrence of two or more observables within the same context window and that can be characterized by their weight (RDF value) and by collocation scores in a particular data source (observed in)."@en ;
     rdfs:label "Collocation"@en ;
     rdfs:subClassOf rdfs:Container, frac:Observation, [
         a owl:Restriction ;
@@ -54,7 +54,7 @@ frac:Observable
 
 frac:ObservableFrequency
     a owl:Class ;
-    rdfs:comment "Observable frequency is an Observation of the absolute number of attestations (rdf:value) of a particular observable (see frequency property) that is observed in a particular data source (observed in). Using unit, frequency objects can also identify the (segmentation) unit that their counts are based on."@en ;
+    rdfs:comment "Observable frequency is an Observation of the absolute number of attestations (RDF value) of a particular observable (see frequency property) that is observed in a particular data source (observed in). Using unit, frequency objects can also identify the (segmentation) unit that their counts are based on."@en ;
     rdfs:label "Observable Frequency"@en ;
     rdfs:subClassOf frac:Observation, [
         a owl:Restriction ;
@@ -128,7 +128,7 @@ frac:quotedText
 
 frac:total
     a owl:ObjectProperty ;
-    rdfs:comment "The object property total assigns any potential FrAC data source (i.e., dct:Collection, dct:Dataset, dct:Text or any other member of DCMI Type) the total number of elements that it contains as an observable frequency object."@en ;
+    rdfs:comment "The object property total assigns any potential FrAC data source (i.e., Dublin Core Collection, Dublin Core Dataset, Dublin Core Text or any other member of DCMI Type) the total number of elements that it contains as an observable frequency object."@en ;
     rdfs:domain [
         a owl:Restriction ;
         owl:onProperty rdf:type ;
