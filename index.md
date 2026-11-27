@@ -194,8 +194,6 @@ pointing to the URI where the observation has been made.
 
 <class property="rdfs:label" lang="en">Observable</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#Observable](http://www.w3.org/ns/lemon/frac#Observable)
-
 <div property="rdfs:comment"><dfn>Observable</dfn> is a superclass for any element of a lexical resource that frequency, attestation or corpus-derived information can be expressed about. This includes, among others, <a data-cite="ontolex#LexicalEntry">lexical entry</a>, <a data-cite="ontolex#LexicalSense">lexical sense</a>, <a data-cite="ontolex#Form">form</a>, and <a data-cite="ontolex#LexicalConcept">lexical concept</a>. Elements that FrAC properties apply to must be observable in a corpus or another linguistic data source.</div>
 
 <div class="description">
@@ -226,8 +224,6 @@ The definition of [=observable=] does not posit an exhaustive list of possible o
 
 <class property="rdfs:label" lang="en">Observation</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#Observation](http://www.w3.org/ns/lemon/frac#Observation)
-
 <div property="rdfs:comment"><dfn>Observation</dfn> is a superclass for anything that can be observed in a corpus about an [=observable=]. </div>
 
 <div class="description">
@@ -245,8 +241,6 @@ Observations as understood here are **empirical** (quantitative) observations th
 <div class="entity" about="frac:observedIn" typeof="owl:ObjectProperty">
 
 <objectProperty property="rdfs:label" lang="en">Observed In</objectProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#observedIn](http://www.w3.org/ns/lemon/frac#observedIn)
 
 <div property="rdfs:comment">For an [=Observation=], the <dfn>observed in</dfn> property defines the URI of the data source (or its metadata entry) that this particular observation was made in or derived from. This can be, for example, a corpus or a text represented by its access URL, a book represented by its bibliographical metadata, etc.</div>
 
@@ -271,8 +265,6 @@ Lexicographers use (corpus) frequency and distribution information while compili
 
 <class property="rdfs:label" lang="en">Observable Frequency</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#ObservableFrequency](http://www.w3.org/ns/lemon/frac#ObservableFrequency)
-
 <div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is observed in a particular data source ([=observed in=]). Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
 <div class="description">
 
@@ -293,8 +285,6 @@ A frequency should have a unit that specifies the segmentation unit of the frequ
 
 <objectProperty property="rdfs:label" lang="en">Unit</objectProperty>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#unit](http://www.w3.org/ns/lemon/frac#unit)
-
 <div property="rdfs:comment">For an [=observable frequency=] object, the property <dfn>unit</dfn> provides an identifier of the respective segmentation unit.</div>
 
 <div class="description">
@@ -309,8 +299,6 @@ Values for [=unit=] are defined in an external ontology such as LexInfo, which d
 <div class="entity" about="frac:frequency" typeof="owl:ObjectProperty">
 
 <objectProperty property="rdfs:label" lang="en">Frequency</objectProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#frequency](http://www.w3.org/ns/lemon/frac#frequency)
 
 <div property="rdfs:comment">The <dfn>frequency property</dfn> assigns a particular [=observable=] an [=observable frequency=].</div>
 
@@ -410,8 +398,6 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 <objectProperty property="rdfs:label" lang="en">Total</objectProperty>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
-
 <div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [Dublin Core Collection](http://purl.org/dc/terms/Collection), [Dublin Core Dataset](http://purl.org/dc/terms/Dataset), [Dublin Core Text](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as an [=observable frequency=] object.</div>
 
 <div class="description">
@@ -462,8 +448,6 @@ Attestations represent a reference to a specific occurrence of a lexical item in
 
 <class property="rdfs:label" lang="en">Lexical Attestation</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#LexicalAttestation](http://www.w3.org/ns/lemon/frac#LexicalAttestation)
-
 <div property="rdfs:comment"><dfn>Lexical attestation</dfn> is an [=Observation=] that represents one exact or normalized quotation or excerpt from a source document that illustrates a particular form, sense, lexeme or features such as spelling variation, morphology, syntax, collocation, register. </div>
 
 <div class="description">
@@ -479,8 +463,6 @@ Attestations are linked with the [=attestation property=] to the [=observable=] 
 <div class="entity" about="frac:attestation" typeof="owl:ObjectProperty">
 
 <objectProperty property="rdfs:label" lang="en">Attestation</objectProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#attestation](http://www.w3.org/ns/lemon/frac#attestation)
 
 <div property="rdfs:comment">The <dfn>attestation property</dfn> associates an attestation to the [=observable=]. </div>
 
@@ -498,8 +480,6 @@ The value of the attestation can be given with the [=quoted text=] property, whi
 <div class="entity" about="frac:quotedText" typeof="owl:DatatypeProperty">
 
 <dataProperty property="rdfs:label" lang="en">Quoted Text</dataProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#quotedText](http://www.w3.org/ns/lemon/frac#quotedText)
 
 <div property="rdfs:comment">The <dfn>quoted text</dfn> property provides the text of the attestation.</div>
 
@@ -556,8 +536,6 @@ In many applications, it is desirable to specify the precise location of the occ
 <div class="entity" about="frac:locus" typeof="owl:ObjectProperty">
 
 <objectProperty property="rdfs:label" lang="en">Locus</objectProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#locus](http://www.w3.org/ns/lemon/frac#locus)
 
 <div property="rdfs:comment"><dfn>locus</dfn> points to the location at which the relevant word(s) can be found.</div>
 
@@ -640,8 +618,6 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 <class property="rdfs:label" lang="en">Collocation</class>
 
-**URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
-
 <div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their weight ([RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) and by [=collocation score=]s in a particular data source ([=observed in=]). </div>
 
 <div class="description">
@@ -671,8 +647,6 @@ Collocations can be described in terms of various collocation scores. If scores 
 <div class="entity" about="frac:cScore" typeof="owl:DatatypeProperty">
 
 <dataProperty property="rdfs:label" lang="en">Collocation Score</dataProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#cScore](http://www.w3.org/ns/lemon/frac#cScore)
 
 <div property="rdfs:comment"><dfn>Collocation score</dfn> provides the value for one specific type of collocation score for a particular collocation in its respective corpus. Note that this property should not be used directly, but instead, its respective sub-properties for scores of a particular type.</div>
 
@@ -735,8 +709,6 @@ Many of these metrics are asymmetric and distinguish the lexical element they ar
 <div class="entity" about="frac:head" typeof="owl:ObjectProperty">
 
 <objectProperty property="rdfs:label" lang="en">Head</objectProperty>
-
-**URI:** [http://www.w3.org/ns/lemon/frac#head](http://www.w3.org/ns/lemon/frac#head)
 
 <div property="rdfs:comment">The <dfn>head</dfn> property identifies the element of a collocation that its scores are about. A collocation must not have more than one head.</div>
 
