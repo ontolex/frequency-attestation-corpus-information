@@ -1,10 +1,11 @@
-@prefix ex: <http://example.org/ex#> .
 @prefix frac: <http://www.w3.org/ns/lemon/frac#> .
-@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
 @prefix ontolex: <http://www.w3.org/ns/lemon/ontolex#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix lexinfo: <http://www.lexinfo.net/ontology/3.0/lexinfo#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix ex: <http://example.org/ex#> .
 
 ex:pay_verb a ontolex:LexicalEntry ;
     ontolex:canonicalForm [ ontolex:writtenRep "pay"@en ] .

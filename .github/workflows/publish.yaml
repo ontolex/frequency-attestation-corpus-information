@@ -4,6 +4,12 @@ on:
   push:
     branches:
       - master
+  # Build (but do not deploy) on pull requests so that out-of-date example
+  # files or an ontology that no longer matches the specification are caught
+  # before they are merged.
+  pull_request:
+    branches:
+      - master
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
@@ -12,17 +18,8 @@ permissions:
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
-# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
     steps:
       # Step 1: Check out the repository
@@ -30,37 +27,61 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Pages
+        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
 
-      # Step 2: Set up Pandoc
-      - name: Install Pandoc
+      # Step 2: Install the tools
+      - name: Install Pandoc and Rapper
         run: |
           sudo apt-get update
-          sudo apt-get install -y pandoc
+          sudo apt-get install -y pandoc raptor2-utils
 
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - name: Install Python packages
-        run: python -m pip install rdflib
+        run: python -m pip install rdflib beautifulsoup4
 
-      # Step 3: Check that each example listing matches its examples/*.ttl file
+      # Step 3: Check that the example files match their listings in index.md
       - name: Check examples
-        run: python check_examples.py index.md
+        run: python extract_examples.py --check
 
-      # Step 4: Convert index.md to index.html and add the example diagrams
+      # Step 4: Check that owl/frac.ttl matches the ontology in the specification
+      - name: Check ontology
+        run: |
+          ./extract-ontology.sh "$RUNNER_TEMP/frac.ttl"
+          diff owl/frac.ttl "$RUNNER_TEMP/frac.ttl" || {
+            echo "owl/frac.ttl is out of date: run ./extract-ontology.sh owl/frac.ttl" >&2
+            exit 1
+          }
+
+      # Step 5: Convert index.md to index.html and add the example diagrams
       - name: Convert Markdown to HTML with Pandoc
         run: pandoc --template respec.template -f markdown-auto_identifiers --wrap=none index.md -o index.html
       - name: Add example diagrams
         run: python add_diagrams.py index.html index.html
 
       - name: Upload artifact
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           path: '.'
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+    # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-

@@ -66,7 +66,7 @@ If you wish to make comments regarding this document, please send them to public
 
 ## Introduction
 
-[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/) provides a [core](https://www.w3.org/2016/05/ontolex/#core) vocabulary to represent _linguistic information_ associated with ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology. The OntoLex module for Frequency, Attestations and Corpus-Based Information (OntoLex-FrAC) complements OntoLex-Lemon with the capability of including information drawn from or found in corpora and linguistic primary data.
+[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/) provides a <a data-cite="ontolex#core">core</a> vocabulary to represent _linguistic information_ associated with ontology and vocabulary elements. The model follows the principle of _semantics by reference_ in the sense that the semantics of a [lexical entry](https://www.w3.org/2016/05/ontolex/#LexicalEntry) is expressed by reference to an individual, class or property defined in an ontology. The OntoLex module for Frequency, Attestations and Corpus-Based Information (OntoLex-FrAC) complements OntoLex-Lemon with the capability of including information drawn from or found in corpora and linguistic primary data.
 
 In particular, the model's primary motivation is to provide a means to link lexical resources to corpora and other collections of text, and to express the relationship between lexical information and the primary data from which it is derived. As such this module will:
 
@@ -112,6 +112,12 @@ Other models:
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix dcam: <http://purl.org/dc/dcam/>.
 ```
+
+The empty prefix is used in the examples for their own resources. Other namespaces are declared in the example that uses them.
+
+```turtle
+@prefix : <http://example.org/> .
+```
 </section>
 
 <section id="glossary">
@@ -121,11 +127,11 @@ Other models:
 * **[=Lexical attestation=]**
   A quotation or excerpt from a source document providing evidence of a lexical feature (e.g., form, sense, spelling variation). It is a subclass of [=Observation=].
 * **[=Collocation=]**
-  A co-occurrence of two or more lexical units in a corpus. Treated as a container ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)) and a subclass of [=Observation=].
+  A co-occurrence of two or more lexical units in a corpus. Treated as a container ([RDF sequence](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [RDF bag](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)) and a subclass of [=Observation=].
 * **[=Collocation score=]**
-  A property used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties like [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
+  A property used to represent specific statistical scores for collocations (e.g., PMI, Dice, Log-Likelihood). Not used directly—see sub-properties such as [pointwise mutual information](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi).
 * **Corpus**
-  A collection of texts (e.g., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via the [=observed in=] property.
+  A collection of texts (e.g., [Dublin Core Collection](http://purl.org/dc/terms/Collection), [Dublin Core Dataset](http://purl.org/dc/terms/Dataset)), a single text, document, or primary linguistic data used as the empirical basis for observations. In this specification, the term "corpus" is used as an umbrella term encompassing all such forms of primary linguistic data and text collections. Referenced via the [=observed in=] property.
 * **[=Observable frequency=]**
   An observation of how often an observable appears in a corpus (absolute count), subclass of [=Observation=].
 * **[=head=]**
@@ -136,12 +142,12 @@ Other models:
   Any lexical or ontological unit about which corpus-based information (frequency, attestation) can be recorded.
 * **[=Observation=]**
   An empirical claim about an observable—e.g., frequency count, collocation, attestation. Linked to the data source it was made in via the [=observed in=] property.
-* **[`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
+* **[RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)**
   A standard RDF property used to specify the literal value of an observation (e.g., a frequency count or the weight of a collocation). Specific collocation metrics use [=collocation score=] instead.
 * **[=unit=]**
   Identifies the segmentation unit used in a frequency count (e.g., tokens, sentences). Applied to [=observable frequency=].
 * **[Web Annotation](https://www.w3.org/TR/annotation-model/)**
-  A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody), [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget), and selectors (e.g., [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector)).
+  A model for linking annotations to web resources. Used in FrAC to annotate corpora with lexical info via the Web Annotation ['has body'](https://www.w3.org/TR/annotation-vocab/#hasbody) and ['has target'](https://www.w3.org/TR/annotation-vocab/#hastarget) properties and selectors (e.g., the [text position selector](https://www.w3.org/TR/annotation-vocab/#textpositionselector)).
 * **[OntoLex-Lemon](https://www.w3.org/2016/05/ontolex/)**
   A core vocabulary for linking lexical information with ontologies. FrAC extends it to cover corpus-based data.
 
@@ -151,7 +157,7 @@ Other models:
 
 ### Overview of the Module
 
-The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty diamond heads represent [`rdfs:subClassOf`](http://www.w3.org/2000/01/rdf-schema#subClassOf).
+The following diagram depicts the OntoLex module for frequency, attestation and corpus information (_OntoLex-FrAC_). Boxes represent classes of the model. Arrows with filled heads represent object properties. Arrows with empty diamond heads represent [subclass](http://www.w3.org/2000/01/rdf-schema#subClassOf) relations.
 
 
 <figure id="overview-figure">
@@ -172,7 +178,7 @@ The following diagram depicts the OntoLex module for frequency, attestation and 
 OntoLex-FrAC provides the necessary vocabulary to express *observations* obtained from a language resource about any linguistic or conceptual entity that can be observed in a corpus ("observable"). By observable, we mean any element for which corpus-based observations are explicitly recorded. This includes:
 
 - Any lexical entity defined within an OntoLex lexical resource (e.g., <a data-cite="ontolex#LexicalEntry">lexical entry</a>, <a data-cite="ontolex#Form">form</a>, <a data-cite="ontolex#LexicalSense">lexical sense</a>, or <a data-cite="ontolex#LexicalConcept">lexical concept</a>).  
-- Any ontological entity or concept referenced by a lexical resource via semantic mapping properties (specifically the object of an <a data-cite="ontolex#denotes">denotes</a>, <a data-cite="ontolex#reference">reference</a>, or <a data-cite="ontolex#isConceptOf">isConceptOf</a> property).  
+- Any ontological entity or concept referenced by a lexical resource via semantic mapping properties (specifically the object of an <a data-cite="ontolex#denotes">denotes</a>, <a data-cite="ontolex#reference">reference</a>, or <a data-cite="ontolex#concept">isConceptOf</a> property).  
 
 While a corpus may contain various annotations (such as part-of-speech tags or 
 syntactic relations), these are only treated as [=observable=] when they are
@@ -209,11 +215,11 @@ pointing to the URI where the observation has been made.
 
 </figure>
 
-We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes <a data-cite="ontolex#Form">form</a> (e.g., form frequency), <a data-cite="ontolex#LexicalEntry">lexical entry</a> (e.g., frequency of disambiguated lemmas), <a data-cite="ontolex#LexicalSense">lexical sense</a> (e.g., sense frequency), <a data-cite="ontolex#LexicalConcept">lexical concept</a> (e.g., synset frequency), [`lexicog:Entry`](http://www.w3.org/ns/lemon/lexicog#Entry) (if used for representing homonyms: frequency of non-disambiguated lemmas).
-In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce [=observable=] as a top-level element within the FrAC module that is used to define the [`rdfs:domain`](http://www.w3.org/2000/01/rdf-schema#domain) of all the properties that link lexical and corpus-derived information. 
+We assume that frequency, attestation and corpus information can be provided about _every_ linguistic content element in the OntoLex-Lemon core model and in existing or forthcoming OntoLex modules. This includes <a data-cite="ontolex#Form">form</a> (e.g., form frequency), <a data-cite="ontolex#LexicalEntry">lexical entry</a> (e.g., frequency of disambiguated lemmas), <a data-cite="ontolex#LexicalSense">lexical sense</a> (e.g., sense frequency), <a data-cite="ontolex#LexicalConcept">lexical concept</a> (e.g., synset frequency), [lexicographic entry](http://www.w3.org/ns/lemon/lexicog#Entry) (if used for representing homonyms: frequency of non-disambiguated lemmas).
+In particular, we consider all these elements to be countable, annotatable and attestable. For this reason, we introduce [=observable=] as a top-level element within the FrAC module that is used to define the [domain](http://www.w3.org/2000/01/rdf-schema#domain) of all the properties that link lexical and corpus-derived information. 
 
 <div class="note">
-The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., <a data-cite="decomp#component">component</a>, <a data-cite="synsem#SyntacticArgument">syntactic argument</a>, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
+The definition of [=observable=] does not posit an exhaustive list of possible observables. Instead, anything that can be observed in a corpus can be defined as [=observable=]. This includes elements of OntoLex modules not listed here (e.g., <a data-cite="ontolex#component">component</a>, <a data-cite="ontolex#SyntacticArgument">syntactic argument</a>, etc.) or future OntoLex vocabularies. Likewise, it can also include URIs which have no relation to OntoLex whatsoever, as these are foreseen as external elements that OntoLex-Lemon can provide information about, but only if they are based on or linked with corpus information, attested in a document, a text or its annotations.
 </div>
 
 <div class="entity" about="frac:Observation" typeof="owl:Class">
@@ -267,7 +273,7 @@ Lexicographers use (corpus) frequency and distribution information while compili
 
 **URI:** [http://www.w3.org/ns/lemon/frac#ObservableFrequency](http://www.w3.org/ns/lemon/frac#ObservableFrequency)
 
-<div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is observed in a particular data source ([=observed in=]). Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
+<div property="rdfs:comment"><dfn>Observable frequency</dfn> is an [=Observation=] of the absolute number of attestations ([RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) of a particular [=observable=] (see [=frequency property=]) that is observed in a particular data source ([=observed in=]). Using [=unit=], frequency objects can also identify the (segmentation) unit that their counts are based on. </div>
 <div class="description">
 
 <subclass>[=Observation=]</subclass>
@@ -323,7 +329,7 @@ frequency value should correspond to the aggregation of sources and languages
 in that dataset.
 </div>
 
-The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observed in=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=observable frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=observable frequency=] [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
+The definition above only applies to absolute frequencies. For expressing relative frequencies, we expect the associated data source ([=observed in=]) object to define a total of elements contained ([=total=]). In many practical applications, it is necessary to provide relative counts, and in this way, these can be easily derived from the absolute (element) frequency provided by the [=observable frequency=] class and the total defined by the underlying corpus. If the real absolute values are unknown and only relative scores are provided, data providers should use percentage values for both the [=observable frequency=] [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and for the [=total=] (i.e., `100%`) of the associated corpus.
 
 A simple example of indicating the frequency of a word in a corpus is given below:
 
@@ -362,9 +368,11 @@ project, however, they are simplified for explanatory purposes.
 
 The following example illustrates word and form frequencies for the Sumerian word _kalag_ (v.) "strong" from the [Electronic Penn Sumerian Dictionary](http://oracc.museum.upenn.edu/epsd2/sux) and the frequencies of the underlying corpus.
 
-<aside class="example" title="Frequency of the Sumerian word _kalag_ 'strong'" src="examples/frequency-kalag.ttl">
+<aside class="example" title="Frequency of the Sumerian word 'kalag' (strong)" src="examples/frequency-kalag.ttl">
 
 ```turtle
+@prefix epsd: <http://oracc.museum.upenn.edu/epsd2/> .
+
 # word frequency, over all form variants 
 epsd:kalag_strong_v a ontolex:LexicalEntry;
     frac:frequency [
@@ -404,7 +412,7 @@ It is slightly simplified insofar as the ePSD2 provides individual counts for di
 
 **URI:** [http://www.w3.org/ns/lemon/frac#total](http://www.w3.org/ns/lemon/frac#total)
 
-<div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [`dct:Collection`](http://purl.org/dc/terms/Collection), [`dct:Dataset`](http://purl.org/dc/terms/Dataset), [`dct:Text`](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as an [=observable frequency=] object.</div>
+<div property="rdfs:comment">The object property <dfn>total</dfn> assigns  any potential FrAC data source (i.e., [Dublin Core Collection](http://purl.org/dc/terms/Collection), [Dublin Core Dataset](http://purl.org/dc/terms/Dataset), [Dublin Core Text](http://purl.org/dc/terms/Text) or any other member of DCMI Type) the  total  number  of  elements  that  it  contains as an [=observable frequency=] object.</div>
 
 <div class="description">
 
@@ -520,7 +528,7 @@ As an example of an attestation, consider the following example from Open Englis
 
 </aside>
 
-Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) of the [=lexical attestation=] can be used to represent the original string verbatim, as presented in the source document, while the [=quoted text=] should have the amended form, as data providers present it.
+Sometimes the exact string in the source document differs from what data providers want to reflect as the quoted text, e.g. due to editorial notes, extra markup, or abbreviations. In these cases, [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) of the [=lexical attestation=] can be used to represent the original string verbatim, as presented in the source document, while the [=quoted text=] should have the amended form, as data providers present it.
 
 As an example, for Old English *hwæt-hweganunges*, [Bosworth's _Anglo-Saxon Dictionary Online_](https://bosworthtoller.com/20070) gives the example _"Ða niétenu ðonne beóþ hwæthuguningas [MS. Cote. -hwugununges] ..."_. We might not want to preserve all this as [=quoted text=] since it contains a variant reading from another manuscript (_MS. Cote._), which is not the part of the quoted sentence. Instead, we can keep the full string as `rdf:value` and only the quoted sentence itself as [=quoted text=]:
 
@@ -577,7 +585,7 @@ In many applications, it is desirable to specify the precise location of the occ
 ```
 </aside>
 
-[=locus=] denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, the [=observed in=] property can refer to a corpus or other collections of texts. [=locus=] normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas the [=observed in=] property refers to [`dct:Text`](http://purl.org/dc/terms/Text)s or [`dct:Collection`](http://purl.org/dc/terms/Collection)s.
+[=locus=] denotes a specific location within a text, e.g., a character offset or a URI pointing to a specific location in a text. In contrast, the [=observed in=] property can refer to a corpus or other collections of texts. [=locus=] normally refers to a location identified by RFC5147 character offsets, NIF URIs, Web Annotation or Text Fragments references, whereas the [=observed in=] property refers to texts ([Dublin Core Text](http://purl.org/dc/terms/Text)) or collections ([Dublin Core Collection](http://purl.org/dc/terms/Collection)).
 
 While a single attestation object may be used for multiple observables, if the [=locus=] property is used to point to the specific location of the observable in the attestation, this may mean that multiple attestations are required, each with a different [=locus=] value. 
 
@@ -603,8 +611,11 @@ variable semantic slot rather than a single fixed word. By including the abstrac
 captures a wide range of corpus occurrences sharing the same underlying meaning, 
 such as pay a high price, pay a heavy toll, or pay the ultimate penalty.
 
-<aside class="example" title="Collocation with a Variable Part" src="examples/collocation-variable-part.ttl">
+<aside class="example" title="A collocation with a variable part: pay a price" src="examples/collocation-variable-part.ttl">
+
 ```turtle
+@prefix ex: <http://example.org/ex#> .
+
 ex:pay_verb a ontolex:LexicalEntry ;
     ontolex:canonicalForm [ ontolex:writtenRep "pay"@en ] .
 
@@ -620,9 +631,9 @@ ex:pay_price_collocation a frac:Collocation, rdf:Seq ;
 ```
 </aside>
 
-Collocations can involve two or more words, they are thus modelled as an [`rdfs:Container`](http://www.w3.org/2000/01/rdf-schema#Container) of [=observable=]s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence ([`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq)), otherwise, the default interpretation is as an unordered collection ([`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)).
+Collocations can involve two or more words, they are thus modelled as an [RDFS container](http://www.w3.org/2000/01/rdf-schema#Container) of [=observable=]s. Collocations may have a fixed or a variable word order. Where fixed word order is required, the collocation must be defined as a sequence ([RDF sequence](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq)), otherwise, the default interpretation is as an unordered collection ([RDF bag](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag)).
 
-Collocations obtained by quantitative methods are characterized by their method of creation ([`dct:description`](http://purl.org/dc/terms/description)), their collocation strength ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)), and the corpus or data source used to create them ([=observed in=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
+Collocations obtained by quantitative methods are characterized by their method of creation ([Dublin Core description](http://purl.org/dc/terms/description)), their collocation strength ([RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)), and the corpus or data source used to create them ([=observed in=]). Collocations share these characteristics with other [=Observation=]s and thus, these are inherited from the [=Observation=] class.
 
 
 <div class="entity" about="frac:Collocation" typeof="owl:Class">
@@ -631,7 +642,7 @@ Collocations obtained by quantitative methods are characterized by their method 
 
 **URI:** [http://www.w3.org/ns/lemon/frac#Collocation](http://www.w3.org/ns/lemon/frac#Collocation)
 
-<div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their weight ([`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) and by [=collocation score=]s in a particular data source ([=observed in=]). </div>
+<div property="rdfs:comment"><dfn>Collocation</dfn> is an [=Observation=] that describes the co-occurrence of two or more [=observable=]s within the same context window and that can be characterized by their weight ([RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value)) and by [=collocation score=]s in a particular data source ([=observed in=]). </div>
 
 <div class="description">
 
@@ -647,15 +658,15 @@ Collocations obtained by quantitative methods are characterized by their method 
 </div>
 </div>
 
-Collocations are collections of [=observable=]s, and formalized as [`rdfs:Container`](http://www.w3.org/2000/01/rdf-schema#Container), i.e., [`rdf:Seq`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [`rdf:Bag`](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag). The elements of any collocation can be accessed by [`rdfs:member`](http://www.w3.org/2000/01/rdf-schema#member). In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
+Collocations are collections of [=observable=]s, and formalized as [RDFS container](http://www.w3.org/2000/01/rdf-schema#Container), i.e., [RDF sequence](http://www.w3.org/1999/02/22-rdf-syntax-ns#Seq) or [RDF bag](http://www.w3.org/1999/02/22-rdf-syntax-ns#Bag). The elements of any collocation can be accessed by the [RDFS member](http://www.w3.org/2000/01/rdf-schema#member) property. In addition, the elements of an ordered collocation (`rdfs:subClassOf rdf:Seq`) can be accessed by means of numerical indices (`rdf:_1`, `rdf:_2`, etc.). 
     
-By default, [=Collocation=] is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in [`dct:description`](http://purl.org/dc/terms/description). 
+By default, [=Collocation=] is insensitive to word order. If a collocation is word order sensitive, it should be defined as `rdfs:subClassOf rdf:Seq`. Collocation analysis typically involves additional parameters such as the size of the context window considered. Such information can be provided in human-readable form in [Dublin Core description](http://purl.org/dc/terms/description). 
 
-FrAC collocations are used to represent collocations in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the [OntoLex Decomposition Module](https://www.w3.org/community/ontolex/wiki/Final_Model_Specification#Decomposition_(decomp)) or by using a property such as [`lexinfo:termType`](http://www.lexinfo.net/ontology/3.0/lexinfo#termType), e.g., by means of [`lexinfo:idiom`](http://www.lexinfo.net/ontology/3.0/lexinfo#idiom), [`lexinfo:phraseologicalUnit`](http://www.lexinfo.net/ontology/3.0/lexinfo#phraseologicalUnit) or [`lexinfo:setPhrase`](http://www.lexinfo.net/ontology/3.0/lexinfo#setPhrase). If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via [`rdfs:member`](http://www.w3.org/2000/01/rdf-schema#member) with a [=Collocation=].
+FrAC collocations are used to represent collocations in the quantitative sense (as determined by collocation metrics over a particular corpus). Collocations in the lexicographic sense (as complex units of meaning) are represented using the *decomp* module or by using a property such as [LexInfo term type](http://www.lexinfo.net/ontology/3.0/lexinfo#termType), e.g., by means of [idiom](http://www.lexinfo.net/ontology/3.0/lexinfo#idiom), [phraseological unit](http://www.lexinfo.net/ontology/3.0/lexinfo#phraseologicalUnit) or [set phrase](http://www.lexinfo.net/ontology/3.0/lexinfo#setPhrase). If explicit sense information is being provided, the recommended modelling is by means of <a data-cite="ontolex#MultiwordExpression">multiword expression</a> and the OntoLex-Decomp module rather than [=Collocation=]. To provide collocation scores about a <a data-cite="ontolex#MultiwordExpression">multiword expression</a>, it can be linked via the [RDFS member](http://www.w3.org/2000/01/rdf-schema#member) property with a [=Collocation=].
     
 Since collocations are [=Observation=]s, they can be ascribed [=frequency property=], and [=attestation property=] and they can be nested inside larger collocations.
     
-Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) property, but a designated subproperty of [=collocation score=]:
+Collocations can be described in terms of various collocation scores. If scores for multiple metrics are being provided, these should not use the generic [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) property, but a designated subproperty of [=collocation score=]:
 
 <div class="entity" about="frac:cScore" typeof="owl:DatatypeProperty">
 
@@ -671,18 +682,18 @@ Collocations can be described in terms of various collocation scores. If scores 
 </div>
 </div>
 
-[=Collocation score=] is deliberately not a subproperty of [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), in the same way that [=quoted text=] and [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) are kept apart for [=lexical attestation=]s: the [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) of a collocation gives its generic weight (e.g., the co-occurrence counts in the Wortschatz example below), while each collocation score gives the value of one specific metric. A collocation can thus have its [`rdf:value`](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and any number of collocation scores side by side.
+[=Collocation score=] is deliberately not a subproperty of [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value), in the same way that [=quoted text=] and [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) are kept apart for [=lexical attestation=]s: the [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) of a collocation gives its generic weight (e.g., the co-occurrence counts in the Wortschatz example below), while each collocation score gives the value of one specific metric. A collocation can thus have its [RDF value](http://www.w3.org/1999/02/22-rdf-syntax-ns#value) and any number of collocation scores side by side.
 
 LexInfo defines a number of popular collocation metrics as sub-properties of [=collocation score=]:
 
-- [`lexinfo:relFreq`](http://www.lexinfo.net/ontology/3.0/lexinfo#relFreq) (*relative frequency*): <math><mrow><mi>R</mi><mi>F</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mi>|</mi><mi>x</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>x</mi></msub></mfrac><mo form="prefix" stretchy="false">(</mo><mo>=</mo><msub><mi>R</mi><mi>x</mi></msub><mo form="postfix" stretchy="false">)</mo></mrow></math> (asymmetric, requires [=head=])
-- [`lexinfo:pmi`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi) (*pointwise mutual information*, sometimes referred to as *MI-score* or *association ratio*, cf. [Church and Hanks 1990, via Evert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <math><mrow><mi>PMI</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
-- [`lexinfo:pmi2`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi2) (*PMI²-score*): <math><mrow><msup><mi>PMI</mi><mn>2</mn></msup><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msubsup><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow><mn>2</mn></msubsup><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
-- [`lexinfo:pmi3`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi3) (*PMI³-score*, cf. [Daille 1994 in Evert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <math><mrow><msup><mi>PMI</mi><mn>3</mn></msup><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msubsup><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow><mn>3</mn></msubsup><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
-- [`lexinfo:pmiLogFreq`](http://www.lexinfo.net/ontology/3.0/lexinfo#pmiLogFreq) (*PMI.log-f*, *salience*, formerly default metric in SketchEngine): <math><mrow><mi>P</mi><mi>M</mi><mi>I</mi><mi>.</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo>−</mo><mi>f</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac><mo>×</mo><mi>l</mi><mi>o</mi><mi>g</mi><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow></math>
-- [`lexinfo:dice`](http://www.lexinfo.net/ontology/3.0/lexinfo#dice) (*Dice coefficient*): <math><mrow><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>2</mn><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><mo>+</mo><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
-- [`lexinfo:logDice`](http://www.lexinfo.net/ontology/3.0/lexinfo#logDice) (default metric in SketchEngine, [Rychly 2008](https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf)): <math><mrow><mi>L</mi><mi>o</mi><mi>g</mi><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mn>14</mn><mo>+</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo></mrow></math>
-- [`lexinfo:minSensitivity`](http://www.lexinfo.net/ontology/3.0/lexinfo#minSensitivity) (*minimum sensitivity*, cf. [Pedersen 1998](https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf)): <math><mrow><mi>M</mi><mi>S</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mo form="prefix" stretchy="false">(</mo><msub><mi>R</mi><mi>x</mi></msub><mo separator="true">,</mo><msub><mi>R</mi><mi>y</mi></msub><mo form="postfix" stretchy="false">)</mo></mrow></math>
+- [relative frequency](http://www.lexinfo.net/ontology/3.0/lexinfo#relFreq): <math><mrow><mi>R</mi><mi>F</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mi>|</mi><mi>x</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>x</mi></msub></mfrac><mo form="prefix" stretchy="false">(</mo><mo>=</mo><msub><mi>R</mi><mi>x</mi></msub><mo form="postfix" stretchy="false">)</mo></mrow></math> (asymmetric, requires [=head=])
+- [pointwise mutual information](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi) (sometimes referred to as *MI-score* or *association ratio*, cf. [Church and Hanks 1990, via Evert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <math><mrow><mi>PMI</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
+- [PMI²-score](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi2): <math><mrow><msup><mi>PMI</mi><mn>2</mn></msup><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msubsup><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow><mn>2</mn></msubsup><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
+- [PMI³-score](http://www.lexinfo.net/ontology/3.0/lexinfo#pmi3) (cf. [Daille 1994 in Evert 2005, p.89](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf)): <math><mrow><msup><mi>PMI</mi><mn>3</mn></msup><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msubsup><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow><mn>3</mn></msubsup><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
+- [PMI.log-f](http://www.lexinfo.net/ontology/3.0/lexinfo#pmiLogFreq) (*salience*, formerly default metric in SketchEngine): <math><mrow><mi>P</mi><mi>M</mi><mi>I</mi><mi>.</mi><mi>l</mi><mi>o</mi><mi>g</mi><mo>−</mo><mi>f</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac><mo>×</mo><mi>l</mi><mi>o</mi><mi>g</mi><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow></math>
+- [Dice coefficient](http://www.lexinfo.net/ontology/3.0/lexinfo#dice): <math><mrow><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mfrac><mrow><mn>2</mn><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><mo>+</mo><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
+- [logDice](http://www.lexinfo.net/ontology/3.0/lexinfo#logDice) (default metric in SketchEngine, [Rychly 2008](https://www.sketchengine.eu/wp-content/uploads/2015/03/Lexicographer-Friendly_2008.pdf)): <math><mrow><mi>L</mi><mi>o</mi><mi>g</mi><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo><mn>14</mn><mo>+</mo><mi>l</mi><mi>o</mi><msub><mi>g</mi><mn>2</mn></msub><mi>D</mi><mi>i</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo></mrow></math>
+- [minimum sensitivity](http://www.lexinfo.net/ontology/3.0/lexinfo#minSensitivity) (cf. [Pedersen 1998](https://www.sketchengine.eu/wp-content/uploads/ske-statistics.pdf)): <math><mrow><mi>M</mi><mi>S</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mo form="prefix" stretchy="false">(</mo><msub><mi>R</mi><mi>x</mi></msub><mo separator="true">,</mo><msub><mi>R</mi><mi>y</mi></msub><mo form="postfix" stretchy="false">)</mo></mrow></math>
 
 with
     
@@ -691,13 +702,13 @@ with
 - <math><msub><mi>f</mi><mi>y</mi></msub></math> the number of occurrences of the word *y*
 - <math><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></math> the number of co-occurrences of the words *x* and *y*
 - <math><mrow><msub><mi>R</mi><mi>y</mi></msub><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>y</mi></msub></mfrac></mrow></math> relative frequency of *y*
-- <math><mi>N</mi></math> the total number of words in the corpus, this should be documented in [`dct:description`](http://purl.org/dc/terms/description)
+- <math><mi>N</mi></math> the total number of words in the corpus, this should be documented in [Dublin Core description](http://purl.org/dc/terms/description)
 
 In addition to collocation scores, also statistical independence tests can be employed as collocation scores:
 
-- [`lexinfo:logLikelihood`](http://www.lexinfo.net/ontology/3.0/lexinfo#logLikelihood) (*log likelihood*, *G²* [Dunning 1993, via Evert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
-- [`lexinfo:tScore`](http://www.lexinfo.net/ontology/3.0/lexinfo#tScore) (*Student's t test*, *T-score*, cf. [Church et al. 1991, via Evert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf) ): <math><mrow><mi>T</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mo>−</mo><mfrac><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub><mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo></mrow><mi>N</mi></mfrac></mrow><msqrt><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></msqrt></mfrac></mrow></math>
-- [`lexinfo:chi2`](http://www.lexinfo.net/ontology/3.0/lexinfo#chi2) (*Pearson's Chi-square test* [Manning 1999](https://nlp.stanford.edu/fsnlp/) ): <math><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mi>N</mi><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>11</mn></msub><msub><mi>O</mi><mn>22</mn></msub><mo>−</mo><msub><mi>O</mi><mn>12</mn></msub><msub><mi>O</mi><mn>21</mn></msub><msup><mo form="postfix" stretchy="false">)</mo><mn>2</mn></msup></mrow><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><msub><mi>O</mi><mn>11</mn></msub><mo>+</mo><msub><mi>O</mi><mn>12</mn></msub><mo form="postfix" stretchy="false">)</mo><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>11</mn></msub><mo>+</mo><msub><mi>O</mi><mn>21</mn></msub><mo form="postfix" stretchy="false">)</mo><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>12</mn></msub><mo>+</mo><msub><mi>O</mi><mn>22</mn></msub><mo form="postfix" stretchy="false">)</mo><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>21</mn></msub><mo>+</mo><msub><mi>O</mi><mn>22</mn></msub><mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo></mrow></mfrac></mrow></math>
+- [log likelihood](http://www.lexinfo.net/ontology/3.0/lexinfo#logLikelihood) (*G²*, [Dunning 1993, via Evert 2005](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf))
+- [Student's t test](http://www.lexinfo.net/ontology/3.0/lexinfo#tScore) (*T-score*, cf. [Church et al. 1991, via Evert 2005, p.82](https://elib.uni-stuttgart.de/bitstream/11682/2573/1/Evert2005phd.pdf) ): <math><mrow><mi>T</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mo>−</mo><mfrac><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub><mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo></mrow><mi>N</mi></mfrac></mrow><msqrt><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></msqrt></mfrac></mrow></math>
+- [Pearson's chi-square test](http://www.lexinfo.net/ontology/3.0/lexinfo#chi2) ([Manning 1999](https://nlp.stanford.edu/fsnlp/)): <math><mrow><msup><mi>χ</mi><mn>2</mn></msup><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo separator="true">,</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mi>N</mi><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>11</mn></msub><msub><mi>O</mi><mn>22</mn></msub><mo>−</mo><msub><mi>O</mi><mn>12</mn></msub><msub><mi>O</mi><mn>21</mn></msub><msup><mo form="postfix" stretchy="false">)</mo><mn>2</mn></msup></mrow><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><msub><mi>O</mi><mn>11</mn></msub><mo>+</mo><msub><mi>O</mi><mn>12</mn></msub><mo form="postfix" stretchy="false">)</mo><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>11</mn></msub><mo>+</mo><msub><mi>O</mi><mn>21</mn></msub><mo form="postfix" stretchy="false">)</mo><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>12</mn></msub><mo>+</mo><msub><mi>O</mi><mn>22</mn></msub><mo form="postfix" stretchy="false">)</mo><mo form="prefix" stretchy="false">(</mo><msub><mi>O</mi><mn>21</mn></msub><mo>+</mo><msub><mi>O</mi><mn>22</mn></msub><mo form="postfix" stretchy="false" lspace="0em" rspace="0em">)</mo></mrow></mfrac></mrow></math>
 
 with
 
@@ -709,10 +720,10 @@ with
     
 In addition to classical collocation metrics, as established in computational lexicography and corpus linguistics, related metrics can also be found in different disciplines and are represented here as subproperties of [=collocation score=], as well. This includes metrics for association rule mining. In this context, an association  rule (collocation) <math><mrow><mi>x</mi><mo stretchy="false">→</mo></mrow><mrow><mi>y</mi></mrow></math> means that the existence of word *x* implies the existence of word *y* 
 
-- [`lexinfo:support`](http://www.lexinfo.net/ontology/3.0/lexinfo#support) (the *support* is an indication of how frequently the rule appears in the dataset): <math><mrow><mi>s</mi><mi>u</mi><mi>p</mi><mi>p</mi><mi>o</mi><mi>r</mi><mi>t</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mfrac></mrow></math> (with *N* the total number of collocations)
-- [`lexinfo:confidence`](http://www.lexinfo.net/ontology/3.0/lexinfo#confidence) (the *confidence* is an indication of how often the rule has been found to be true): <math><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>x</mi></msub></mfrac></mrow></math>
-- [`lexinfo:lift`](http://www.lexinfo.net/ontology/3.0/lexinfo#lift) (the *lift* or *interest* of a rule measures how many times more often *x* and *y* occur together than expected if they are statistically independent): <math><mrow><mi>l</mi><mi>i</mi><mi>f</mi><mi>t</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mi>N</mi><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
-- [`lexinfo:conviction`](http://www.lexinfo.net/ontology/3.0/lexinfo#conviction) (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *x* occurs without *y*, i.e., the frequency that the rule makes an incorrect prediction, if *x* and *y* are independent divided by the observed frequency of incorrect predictions): <math><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>v</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><mn>1</mn><mo>−</mo><mfrac><msub><mi>f</mi><mi>y</mi></msub><mi>N</mi></mfrac><mo form="postfix" stretchy="false">)</mo><msub><mi>f</mi><mi>x</mi></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><mo>−</mo><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow></mfrac></mrow></math>
+- [support](http://www.lexinfo.net/ontology/3.0/lexinfo#support) (the *support* is an indication of how frequently the rule appears in the dataset): <math><mrow><mi>s</mi><mi>u</mi><mi>p</mi><mi>p</mi><mi>o</mi><mi>r</mi><mi>t</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><mi>N</mi></mfrac></mrow></math> (with *N* the total number of collocations)
+- [confidence](http://www.lexinfo.net/ontology/3.0/lexinfo#confidence) (the *confidence* is an indication of how often the rule has been found to be true): <math><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi>i</mi><mi>d</mi><mi>e</mi><mi>n</mi><mi>c</mi><mi>e</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub><msub><mi>f</mi><mi>x</mi></msub></mfrac></mrow></math>
+- [lift](http://www.lexinfo.net/ontology/3.0/lexinfo#lift) (the *lift* or *interest* of a rule measures how many times more often *x* and *y* occur together than expected if they are statistically independent): <math><mrow><mi>l</mi><mi>i</mi><mi>f</mi><mi>t</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mi>N</mi><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><msub><mi>f</mi><mi>y</mi></msub></mrow></mfrac></mrow></math>
+- [conviction](http://www.lexinfo.net/ontology/3.0/lexinfo#conviction) (the *conviction* of a rule is interpreted as the ratio of the expected frequency that *x* occurs without *y*, i.e., the frequency that the rule makes an incorrect prediction, if *x* and *y* are independent divided by the observed frequency of incorrect predictions): <math><mrow><mi>c</mi><mi>o</mi><mi>n</mi><mi>v</mi><mi>i</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mo form="prefix" stretchy="false">(</mo><mi>x</mi><mo stretchy="false">→</mo><mi>y</mi><mo form="postfix" stretchy="false">)</mo><mo>=</mo></mrow><mrow><mfrac><mrow><mo form="prefix" stretchy="false" lspace="0em" rspace="0em">(</mo><mn>1</mn><mo>−</mo><mfrac><msub><mi>f</mi><mi>y</mi></msub><mi>N</mi></mfrac><mo form="postfix" stretchy="false">)</mo><msub><mi>f</mi><mi>x</mi></msub></mrow><mrow><msub><mi>f</mi><mi>x</mi></msub><mo>−</mo><msub><mi>f</mi><mrow><mi>x</mi><mi>y</mi></mrow></msub></mrow></mfrac></mrow></math>
  
 <div class="note">
 As OntoLex does not provide a generic inventory for grammatical relations, scores defined for grammatical relations are omitted. However, these may be defined by the user.
@@ -745,7 +756,7 @@ The function of the property [=head=] is restricted to indicate the directionali
 
 The following example illustrates collocations as provided by the [Wortschatz](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012) portal (scores and definitions as provided for [beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=beans), [spill the beans](http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=spill+the+beans), etc.):
 
-<aside class="example" title="Wortschatz Collocation" src="examples/collocation-wortschatz.ttl">
+<aside class="example" title="Collocations of 'beans' from the Wortschatz portal" src="examples/collocation-wortschatz.ttl">
 
 ```turtle
 @prefix wsen: <http://corpora.uni-leipzig.de/en/res?corpusId=eng_news_2012&word=> .
@@ -802,36 +813,36 @@ wsen:about a ontolex:LexicalEntry;
 
 The Ontolex Module for Frequency, Attestation and Corpus Information does not specify a vocabulary for annotating corpora or other data with lexical information, as this is being provided by the [Web Annotation Vocabulary](https://www.w3.org/TR/annotation-vocab/). The following description is non-normative as Web Annotation is defined in a separate W3C recommendation. The definitions below are reproduced and refined only insofar as domain and range declarations have been refined to our use case.
 
-In Web Annotation terminology, the annotated element is the ‘target’, the content of the annotation is the ‘body’, and the process and provenance of the annotation is expressed by properties of [`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation).
+In Web Annotation terminology, the annotated element is the ‘target’, the content of the annotation is the ‘body’, and the process and provenance of the annotation is expressed by properties of the [annotation](https://www.w3.org/TR/annotation-vocab/#annotation).
 
 <figure>
 
 ![](https://www.w3.org/TR/annotation-vocab/images/examples/annotation.png)
 
-<figcaption>[`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation) with properties</figcaption>
+<figcaption>A Web Annotation [annotation](https://www.w3.org/TR/annotation-vocab/#annotation) with its properties</figcaption>
 
 </figure>
 
-Annotation as linked with the [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody) and [`oa:hasTarget`](https://www.w3.org/TR/annotation-vocab/#hastarget) properties:
+Annotation as linked with the ['has body'](https://www.w3.org/TR/annotation-vocab/#hasbody) and ['has target'](https://www.w3.org/TR/annotation-vocab/#hastarget) properties:
 
 <figure>
 
 ![](https://www.w3.org/TR/annotation-vocab/images/examples/hasBody.png)
 
-<figcaption>[`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody)</figcaption>
+<figcaption>The ['has body'](https://www.w3.org/TR/annotation-vocab/#hasbody) property</figcaption>
 </figure>
 
 The Web Annotation Vocabulary supports different ways to define targets. This includes:
 
 *   plain URI: The target can be a URI defined within the corpus (e.g., if corpus data is provided as native RDF, or by means of the <tt>@about</tt> attribute in an [HTML/XML+RDFa](https://www.w3.org/TR/rdfa-primer/) document, or by means of <tt>@xml:id</tt> in a [TEI/XML](http://www.tei-c.org/release/doc/tei-p5-doc/en/html/ref-att.global.html) document).
 *   string URI: String URIs provide the possibility to point directly to a text fragment in a web document, using the URI schemas as provided by [RFC5147](https://tools.ietf.org/html/rfc5147) (text files only) or [NIF](https://github.com/NLP2RDF/ontologies) (all text-based formats).
-*   [`oa:TextPositionSelector`](https://www.w3.org/TR/annotation-vocab/#textpositionselector): a range of text defined by the start and end positions of the selection in the stream
-*   [`oa:DataPositionSelector`](https://www.w3.org/TR/annotation-vocab/#datapositionselector): a range of data by recording the start and end positions of the selection in the stream
-*   [`oa:TextQuoteSelector`](https://www.w3.org/TR/annotation-vocab/#textquoteselector): The TextQuoteSelector describes a range of text by copying it. The TextQuoteSelector can include some of the text immediately before (a prefix) and after (a suffix) to distinguish between multiple copies of the same sequence of characters. If this does not suffice for disambiguation, all matching text fragments in the document are being annotated.
-*   [`oa:XPathSelector`](https://www.w3.org/TR/annotation-vocab/#xpathselector): select elements and content within a resource that supports the Document Object Model via a specified XPath value.
-*   [`oa:RangeSelector`](https://www.w3.org/TR/annotation-vocab/#rangeselector): identify the beginning and the end of the selection by using other Selectors.
+*   [text position selector](https://www.w3.org/TR/annotation-vocab/#textpositionselector): a range of text defined by the start and end positions of the selection in the stream
+*   [data position selector](https://www.w3.org/TR/annotation-vocab/#datapositionselector): a range of data by recording the start and end positions of the selection in the stream
+*   [text quote selector](https://www.w3.org/TR/annotation-vocab/#textquoteselector): The text quote selector describes a range of text by copying it. The text quote selector can include some of the text immediately before (a prefix) and after (a suffix) to distinguish between multiple copies of the same sequence of characters. If this does not suffice for disambiguation, all matching text fragments in the document are being annotated.
+*   [XPath selector](https://www.w3.org/TR/annotation-vocab/#xpathselector): select elements and content within a resource that supports the Document Object Model via a specified XPath value.
+*   [range selector](https://www.w3.org/TR/annotation-vocab/#rangeselector): identify the beginning and the end of the selection by using other selectors.
 
-<aside class="example" title="Web Annotation" src="examples/locus-web-annotation.ttl">
+<aside class="example" title="A lexical attestation as a Web Annotation" src="examples/locus-web-annotation.ttl">
 
 ```turtle
 :annotation a oa:Annotation, frac:LexicalAttestation ;
@@ -853,13 +864,13 @@ The Web Annotation Vocabulary supports different ways to define targets. This in
 
 <div class="note">
 
-[`oa:Annotation`](https://www.w3.org/TR/annotation-vocab/#annotation) explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every element to appear in one [`oa:hasBody`](https://www.w3.org/TR/annotation-vocab/#hasbody) statement in order to produce a full annotation of the corpus.
+The Web Annotation [annotation](https://www.w3.org/TR/annotation-vocab/#annotation) class explicitly allows _n:m_ relations between elements in OntoLex and elements in the annotated elements. It is thus sufficient for every element to appear in one ['has body'](https://www.w3.org/TR/annotation-vocab/#hasbody) statement in order to produce a full annotation of the corpus.
 
 </div>
 
 <div class="note">
 
-As for frequencies and other observations, resource-specific annotation classes can be defined by [`owl:Restriction`](https://www.w3.org/TR/owl-ref/#Restriction) so that modelling effort and verbosity are reduced. These should follow the same conventions.
+As for frequencies and other observations, resource-specific annotation classes can be defined by [OWL restriction](https://www.w3.org/TR/owl-ref/#Restriction) so that modelling effort and verbosity are reduced. These should follow the same conventions.
 
 </div>
 
@@ -873,7 +884,7 @@ The NLP Interchange Format (NIF) is a standard for the representation of text an
 
 NIF strings can be used as a locus for an attestation as follows:
 
-<aside class="example" title="NIF" src="examples/locus-nif.ttl">
+<aside class="example" title="A NIF string as the locus of an attestation" src="examples/locus-nif.ttl">
 
 ```turtle
 @prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
@@ -898,7 +909,7 @@ In this example, the string "The quick brown fox jumps over the lazy dog." is an
 
 Alternatively, the loci of attestations may be given as RFC5147 URIs or as Text Fragments. The following example illustrates the use of RFC5147 URIs:
 
-<aside class="example" title="RFC5147" src="examples/locus-rfc5147.ttl">
+<aside class="example" title="An RFC 5147 URI as the locus of an attestation" src="examples/locus-rfc5147.ttl">
 
 ```turtle
 :annotation a frac:LexicalAttestation ;

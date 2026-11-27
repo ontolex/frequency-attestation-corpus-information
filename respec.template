@@ -55,57 +55,19 @@ $endfor$
         shortName: "FrAC",
         group: "ontolex",
         latestVersion: "https://ontolex.github.io/frequency-attestation-corpus-information/",
-        externalSpecs: {
-            "ontolex": {
-                title: "Lexicon Model for Ontologies: Community Report",
-                href: "https://ontolex.github.io/ontolex/specification.html",
-            }    
-        },
         localBiblio: {
           "ontolex": {
-            title: "Lexicon Model for Ontologies (OntoLex)",
-            href: "https://ontolex.github.io/ontolex/specification.html",
+            title: "Lexicon Model for Ontologies: Community Report",
+            href: "https://www.w3.org/2016/05/ontolex/",
             authors: [
               "Philipp Cimiano",
               "John P. McCrae",
               "Paul Buitelaar"
             ],
+            status: "CG-FINAL",
             publisher: "W3C Ontology-Lexicon Community Group",
             date: "10 May 2016"
-          },
-          "decomp": {
-            title: "Lexicon Model for Ontologies (OntoLex)",
-            href: "https://ontolex.github.io/ontolex/specification.html",
-            authors: [
-              "Philipp Cimiano",
-              "John P. McCrae",
-              "Paul Buitelaar"
-            ],
-            publisher: "W3C Ontology-Lexicon Community Group",
-            date: "10 May 2016"
-          },
-          "vartrans": {
-            title: "Lexicon Model for Ontologies (OntoLex)",
-            href: "https://ontolex.github.io/ontolex/specification.html",
-            authors: [
-              "Philipp Cimiano",
-              "John P. McCrae",
-              "Paul Buitelaar"
-            ],
-            publisher: "W3C Ontology-Lexicon Community Group",
-            date: "10 May 2016"
-          },
-          "synsem": {
-            title: "Lexicon Model for Ontologies (OntoLex)",
-            href: "https://ontolex.github.io/ontolex/specification.html",
-            authors: [
-              "Philipp Cimiano",
-              "John P. McCrae",
-              "Paul Buitelaar"
-            ],
-            publisher: "W3C Ontology-Lexicon Community Group",
-            date: "10 May 2016"
-          },
+          }
         }
       };
     </script>
